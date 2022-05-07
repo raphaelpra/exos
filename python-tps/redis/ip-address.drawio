@@ -1,0 +1,44 @@
+<mxfile host="65bd71144e">
+    <diagram id="20OelOc-otBJjKzTEhFn" name="Page-1">
+        <mxGraphModel dx="625" dy="864" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="rounded=1;whiteSpace=wrap;html=1;align=left;fontSize=20;fillColor=#DBDBDB;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="300" width="270" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Pierre" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontColor=#787878;" parent="1" vertex="1">
+                    <mxGeometry x="146" y="185" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="rounded=1;whiteSpace=wrap;html=1;align=left;fontSize=20;fillColor=#DBDBDB;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="300" width="270" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="Jacques" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontColor=#787878;" parent="1" vertex="1">
+                    <mxGeometry x="450" y="185" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;letter-spacing: 0px&quot;&gt;redis&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;fontSize=20;fillColor=#FFCCE6;fontColor=#808080;" parent="1" vertex="1">
+                    <mxGeometry x="105" y="320" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;letter-spacing: 0px&quot;&gt;pygame&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;fontSize=20;fillColor=#FFCCE6;fontColor=#808080;" parent="1" vertex="1">
+                    <mxGeometry x="105" y="410" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span style=&quot;letter-spacing: 0px&quot;&gt;pygame&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;fontSize=20;fillColor=#FFCCE6;fontColor=#808080;" parent="1" vertex="1">
+                    <mxGeometry x="415" y="410" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="&lt;font color=&quot;#808080&quot;&gt;IP address&lt;/font&gt;" style="shape=process;whiteSpace=wrap;html=1;fontSize=20;align=center;fillColor=#CCFFE6;" parent="1" vertex="1">
+                    <mxGeometry x="58" y="240" width="215" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="endArrow=classic;html=1;fontSize=20;entryX=0.717;entryY=-0.033;entryPerimeter=0;fillColor=#0050ef;strokeColor=#001DBC;" parent="1" target="12" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="450" y="405" as="sourcePoint"/>
+                        <mxPoint x="500" y="355" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="420" y="280"/>
+                            <mxPoint x="310" y="210"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
