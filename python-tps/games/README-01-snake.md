@@ -109,6 +109,11 @@ while True:
     # ici pour cette démo on demande 1 image par seconde
     clock.tick(1)
 
+    # il faut traiter les événements a minima
+    # pour que la fenêtre s'affiche
+    for event in pg.event.get():
+        pass
+
     # on génère une couleur (Rouge, Vert, Bleu) au hasard
     random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
     # et on colorie l'écran avec cette couleur
