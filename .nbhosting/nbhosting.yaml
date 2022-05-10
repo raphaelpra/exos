@@ -10,6 +10,8 @@ tracks:
     - "python-exos/*.md"
   - name: sample code
     notebooks: [ "python-samples/*.py" ]
+  - name: TP - watson
+    notebooks: [ "python-tps/watson/README*.md" ]
   - name: TP - auctions
     notebooks: [ "python-tps/auctions/README*.md" ]
   - name: TP - boids
