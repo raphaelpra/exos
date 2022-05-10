@@ -71,7 +71,7 @@ POSITIVE_WORDS = ["bien", "super", "content", "contente"]
 
 +++
 
-*Indice*: faites descendre votre cellule de code pour qu'elle soit toujours près de la consigne
+*Indice*: faites descendre votre cellule de code pour qu'elle soit toujours près de la consigne; pour cela sélectionner la cellule, assurez-vous d'être en mode 'commande' (la bordure à gauche doit être bleue; tapez `Escape` si nécessaire) et tapez le caractère `'D'` pour *down* ou `'U'` pour *Up*
 
 +++
 
