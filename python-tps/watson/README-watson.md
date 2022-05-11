@@ -18,7 +18,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: "TP: ventes aux ench\xE8res"
+  title: "TP: Dr Watson"
 ---
 
 # un petit docteur
