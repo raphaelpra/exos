@@ -17,6 +17,25 @@ STYLES = {
     'regular': ("\u250f\u2501\u2513" "\u2503" "\u2517\u251b"),
 }
 
+class Box0:
+
+    def __init__(self, w, h):
+        """
+        the simplest possible box; no style, no color
+        """
+        self.w, self.h = w, h
+        if w < 2 or h < 2:
+            raise ValueError(f"box dimension must be >= 2")
+
+    def box(self):
+        result = ""
+        result += "\u250f" + (self.w-2)*"\u2501" + "\u2513" +"\n"
+        for _ in range(self.h-2):
+            result += "\u2503" + (self.w-2)*" " + "\u2503" + "\n"
+        result += "\u2517" + (self.w-2)*"\u2501" + "\u251b"
+        return result
+
+
 class Box1:
 
     def __init__(self, w, h, *, style='regular', color=None):

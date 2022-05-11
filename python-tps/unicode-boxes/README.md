@@ -125,7 +125,26 @@ well, you get the picture..
 
 +++
 
+### v0
+
++++
+
 We want to be able to write sentences like this
+
+```{code-cell} ipython3
+from boxes import Box0
+```
+
+```{code-cell} ipython3
+b0 = Box0(8, 4)
+print(b0.box())
+```
+
+### v1
+
++++
+
+or even better: add style
 
 ```{code-cell} ipython3
 from boxes import Box1
@@ -136,12 +155,18 @@ b11 = Box1(4, 3, style='thin')
 print(b11.box())
 ```
 
+and then color
+
 ```{code-cell} ipython3
-b12 = Box1(10, 4, color=Fore.BLUE, style='thin')
+b12 = Box1(10, 4, style='thin', color=Fore.BLUE)
 print(b12.box())
 ```
 
-ou encore mieux
+### v2
+
++++
+
+or better still
 
 ```{code-cell} ipython3
 from boxes import Box2
@@ -162,10 +187,10 @@ print(b22)
 +++
 
 a few suggestions about how to improve
-* accept for the width and height a **list of integers** 
-  as well as a plain integer, to build boxes with inside lines
+* accept for the width and height: either an int (like before) or a **list of integers** 
+  so we can build **grids** instead of boxes
   ```python
-  b = Box3(10, [2, 2])
+  b = Grid(10, [2, 2])
   ```
-* make it reconnectable ?
-* ...
+* make it reconnectable ? needs some thinking though ;-)
+* etc...
