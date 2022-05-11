@@ -18,15 +18,20 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: "TP: Dr Watson"
+  title: 'TP: Dr Watson'
 ---
 
-# un petit docteur
+# Dr Watson
 
 Indice: voyez la fonction `input()` pour poser une question et lire la réponse dans le terminal
 
 ```{code-cell} ipython3
-input("une question: ")
+reponse = input("une question: ")
+```
+
+```{code-cell} ipython3
+# et le retour de input() c'est la chaine qu'on a tapée - sans newline ni rien
+reponse
 ```
 
 ## v1: un coup, les mots-clé en dur
