@@ -16,8 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: Notebooks Jupyter
-  version: '3.0'
+  title: "TP: des boites en Unicode"
 ---
 
 # Unicode characters for grid-like objects on a terminal

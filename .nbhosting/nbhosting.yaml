@@ -40,12 +40,13 @@ tracks:
     notebooks:
     - "python-tps/graph-bfs-dfs/README*.md"
     - "python-tps/graph-shortest-path/README*.md"
-    - "python-tps/metro/README*.md"
+    - "python-tps/metro/README-metro.md"
     - "python-tps/pagerank-thrones/README*.md"
   - name: 'TPs visu & games'
     notebooks:
+    - "python-tps/games/README*snake.md"
     - "python-tps/boids/README*.md"
-    - "python-tps/games/README*.md"
+    - "python-tps/games/README*flappybird.md"
     - "python-tps/redis/README*.md"
   - name: sample code
     notebooks:

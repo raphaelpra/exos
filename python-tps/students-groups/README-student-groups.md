@@ -1,11 +1,30 @@
-- [synopsys](#synopsys)
-  - [read a file](#read-a-file)
-  - [indexing](#indexing)
-  - [dataframe](#dataframe)
-  - [groups](#groups)
-  - [regexps](#regexps)
+---
+jupytext:
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+  cell_metadata_json: true
+  encoding: '# -*- coding: utf-8 -*-'
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+    -language_info.file_extension, -language_info.mimetype, -toc
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
+nbhosting:
+  title: "m\xE9tro parisien"
+version: '1.0'
+---
 
-# synopsys
+# building files and building structures
+
++++
 
 ## read a file
 
@@ -22,6 +41,8 @@ works on: `list` `file` `tuple`
   ```
   for parsing this format
 * expected output a list of 4-tuples
+
++++
 
 ## indexing
 
@@ -43,6 +64,9 @@ works on hash-based types, comprehensions
   that indexes the data on the
   initial of the first name (what changes do we need to do on the resulting data
   structure ?)
+
++++
+
 ## dataframe
 
 we want to build a pandas dataframe to hold all the data
@@ -51,6 +75,8 @@ see [the documentation of
 `pd.DataFrame()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)
 
 observe that there are multiple interfaces to build a dataframe; we will xxx
+
++++
 
 ## groups
 
@@ -70,6 +96,7 @@ works on sets
     * the keys here will be the **group names**,
     * and the corresponding value is **a set of tuples** corresponding to the students in that group
 
++++
 
 ## regexps
 
@@ -85,4 +112,3 @@ works on sets
 
 NOTE. in a first approximation, use patterns like `a-z` to check for letters;
 this should outline names with accents and cedillas; then play with '\w` to see if you can overcome this problem; how safe is it ?
-
