@@ -57,7 +57,7 @@ on va partir d'un dossier avec un peu de contenu; c'est pour simuler par exemple
 ```
 
 ```{code-cell} ipython3
-from fileslist import init
+from files_sortby import init
 init()
 ```
 
@@ -81,7 +81,7 @@ Il s'agit d'écrire une fonction qui
   1. `size` soit sur la taille du fichier
 
 ```{code-cell} ipython3
-from fileslist import sort_files
+from files_sortby import sort_files
 help(sort_files)
 ```
 

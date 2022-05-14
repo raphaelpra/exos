@@ -8,7 +8,7 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 language_info:
@@ -31,8 +31,7 @@ on veut automatiser la rédaction de factures à partir d'une liste d'items et d
 
 exemple d'utilisation, imaginons qu'on a les données suivantes :
 
-```python
-
+```{code-cell} ipython3
 company_address = """Tribeca Inc.,
 Somerset House – New Wing
 Lancaster Place
@@ -43,14 +42,12 @@ thanks_message = "Thanks for shopping with us today!"
 
 currency = '€'
 
-shitems = [
+items = [
     ("Books", 25.0, 2),
     ("Monitor", 250.0, 1),
     ("Computer", 500.0, 1),
 ]
 ```
-
-+++
 
 à partir de ces données on pourrait imaginer plusieurs APIs pour produire des factures comme ceci
 
@@ -70,6 +67,46 @@ invoice = generate_invoice(
 print(invoice)
 ```
 
+```{code-cell} ipython3
+# à vous d'écrire cette fonction
+def generate_invoice():
+    pass
+```
+
+```{code-cell} ipython3
+invoice = generate_invoice(
+    items, company_address, thanks=thanks_message, currency='$')
+print(invoice)
+```
+
+#### suggestions / indices
+
+* dans un premier temps, affichez le contenu de `company_address` tel quel
+  * ensuite définissez une fontion - par exemple `center_address` qui se charge seulement de centrer l'adresse dans une certaine largeur
+* les formats de f-string ont un trait très pratique ici
+
+```{code-cell} ipython3
+texte = "tutu"
+largeur = 10
+```
+
+```{code-cell} ipython3
+# on peut utiliser une variable AUSSI pour la largeur du format
+# ici je prends 10 caractères, et je justifie mon texte à droite (le >)
+#         ↓  ↓↓↓↓↓
+f"X{texte:>{largeur}}X"
+```
+
+```{code-cell} ipython3
+# et on peut aussi centrer (le ^) ou justifier à gauche (<)
+#         ↓
+f"X{texte:^{largeur}}X"
+```
+
+#### variante
+
+est-ce que ça ne serait pas pratique que les deux derniers paramètres soient optionnels ?
+
 +++
 
 ### v1 : une classe
@@ -81,7 +118,9 @@ mais on peut aussi imaginer ceci par exemple
 +++
 
 ```python
-generator = InvoiceGenerator(address=company_address, thanks=thanks_message)
+generator = InvoiceGenerator(address=company_address, 
+                             thanks=thanks_message,
+                            currency='$')
 print(generator.invoice(items))
 ```
 
@@ -116,84 +155,7 @@ ce qui dans les deux cas produirait une sortie dans le genre de la suivante
 
 +++
 
-## une solution v1
+---
 
-```{code-cell} ipython3
-# let's take advantage of Python 3.9's new
-# type hinting capabilities
++++
 
-UnitPrice = float
-NumberItems = int
-Item = tuple[str, UnitPrice, NumberItems]
-
-class InvoiceGenerator:
-    
-    width = 50
-    
-    def __init__(self, address, thanks, currency='$'):
-        self.address = address
-        self.thanks = thanks
-        self.currency = currency
-        
-    def invoice(self, items: list[Item]):
-        """
-        items is expected to be a list of tuples of the form
-        (label, unit_price, number_items)
-        """
-        
-        result = self.width * '*' + "\n"
-
-        result += "\n".join(f"{line:^{self.width}}" 
-                            for line in company_address.strip().split("\n"))
-        
-        result += "\n" + self.width * '+' + "\n"
-        width2 = self.width // 2 - 8
-
-        # using litterals inside another litteral 
-        # thanks to the 2 kinds of quotes
-        result += f"{'Product Name':>{width2}}{'#':>6}  {'Item Price':<{width2}}\n"
-        
-        total = 0
-        for (label, unit_price, number_items) in items:
-            total += unit_price * number_items
-            result += f"{label:>{width2}}{number_items:>6}  {unit_price:<{width2}}\n"
-
-        result += self.width * '-' + "\n" 
-        result += f"{'Total':>{width2}}{' ':8}{total:.2f}{self.currency}\n"
-
-        result += self.width * '+' + "\n" 
-        result += f"{self.thanks:^{self.width}}\n"
-
-        result += self.width * '*'
-        return result
-```
-
-### essayons
-
-```{code-cell} ipython3
-company_address = """Tribeca Inc.,
-Somerset House – New Wing
-Lancaster Place
-London WC2R 1LA
-"""
-
-thanks_message = "Thanks for shopping with us today!"
-
-currency = '€'
-
-generator = InvoiceGenerator(address=company_address, thanks=thanks_message)
-
-items = [
-    ("Books", 25.0, 2),
-    ("Monitor", 250.0, 1),
-    ("Computer", 500.0, 1),
-]
-
-invoice = generator.invoice(items)
-```
-
-```{code-cell} ipython3
-print(invoice)
-```
-
-***

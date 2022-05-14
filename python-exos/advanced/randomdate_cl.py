@@ -7,7 +7,7 @@ d'un fichier contenant des dates, et la manipulation des dates
 import random
 from datetime import datetime
 
-from filedates import generate_random_date, write_random_dates_in_file
+from randomdate import generate_random_date, write_random_dates_in_file
 
 # variante commentaire random
 dictionary = """
@@ -113,7 +113,7 @@ if __name__ == '__main__':
                         help="nombre d'échantillons")
     args = parser.parse_args()
 
-    with open('datescl.txt', 'w', encoding='utf-8') as f:
+    with open('randomdate-cl.txt', 'w', encoding='utf-8') as f:
         write_random_dates_in_file(f, args.samples)
-    with open('datescl.txt', 'r', encoding='utf-8') as f:
+    with open('randomdate-cl.txt', 'r', encoding='utf-8') as f:
         sort_file_dates(f)

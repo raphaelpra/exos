@@ -16,16 +16,3 @@ def keep_only_integers(liste):
             liste.remove(x)
     # on ne retourne rien pour bien montrer à l'appelant
     # qu'on a fait un effet de bord
-
-if __name__ == '__main__':
-    inputs = [
-        [1, 2, 3, 4, 'spam', 5, 'beans'],
-        [(1, 2), 3, 4, 'spam', 5, 'beans'],
-        ]
-    for input in inputs:
-        print(10*'=')
-        print(f"input(0) = {input}")
-        print(f"integers = {all_integers(input)}")
-        print(f"input(1) = {input}")
-        keep_only_integers(input)
-        print(f"input(2) = {input}")

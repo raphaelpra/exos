@@ -4,41 +4,58 @@ tracks:
   id: python
   name: python
   sections:
-  - name: exercices
+  - name: exercices basiques
     notebooks:
-    - "python-exos/*.ipynb"
-    - "python-exos/*.md"
+    - python-exos/basic/adnpercents-readme.nb.md
+    - python-exos/basic/agenda-readme.nb.md
+    - python-exos/basic/ipaddress.nb.md
+    - python-exos/basic/invoice.nb.md
+    - python-exos/basic/files-scanext.nb.md
+    - python-exos/basic/files-sortby.nb.md
+    - python-exos/basic/skimlist-readme.nb.md
+  - name: exercices classes
+    notebooks:
+    - python-exos/classes/wordcounts-readme.nb.md
+  - name: exercices visu
+    notebooks:
+    - python-exos/visu/adnwalk-howto.md
+  - name: exercices avancés
+    notebooks:
+    - python-exos/advanced/encodings-howto.nb.md
+    - python-exos/advanced/attributes-proxy.nb.md
+    - python-exos/advanced/attributes-dynprop.nb.md
+    - python-exos/advanced/randomdate-readme.nb.md
+  - name: TP - Dr Watson
+    notebooks: [ "python-tps/watson/README*.nb.md" ]
+  - name: TP - auctions
+    notebooks: [ "python-tps/auctions/README*.nb.md" ]
+  - name: TP - boids
+    notebooks: [ "python-tps/boids/README*.nb.md" ]
+  - name: TP - expressions-lang
+    notebooks: [ "python-tps/expressions-lang/README*.nb.md" ]
+  - name: TP - games
+    notebooks: [ "python-tps/games/README*.nb.md" ]
+  - name: TP - graph-bfs-dfs
+    notebooks: [ "python-tps/graph-bfs-dfs/README*.nb.md" ]
+  - name: TP - graph-shortest-path
+    notebooks: [ "python-tps/graph-shortest-path/README*.nb.md" ]
+  - name: TP - metro
+    notebooks: [ "python-tps/metro/README*.nb.md" ]
+  - name: TP - pagerank-thrones
+    notebooks: [ "python-tps/pagerank-thrones/README*.nb.md" ]
+  - name: TP - queens
+    notebooks: [ "python-tps/queens/README*.nb.md" ]
+  - name: TP - redis
+    notebooks: [ "python-tps/redis/README*.nb.md" ]
+  - name: TP - students-grades
+    notebooks: [ "python-tps/students-grades/README*.nb.md" ]
+  - name: TP - students-groups
+    notebooks: [ "python-tps/students-groups/README*.nb.md" ]
+  - name: TP - subprocesses-howto.nb.md
+    notebooks: [ "python-tps/subprocesses-howto.nb.md/README*.nb.md" ]
+  - name: TP - unicode-boxes
+    notebooks: [ "python-tps/unicode-boxes/README*.nb.md" ]
+  - name: TP - webscraper-wip
+    notebooks: [ "python-tps/webscraper-wip/README*.nb.md" ]
   - name: sample code
     notebooks: [ "python-samples/*.py" ]
-  - name: TP - watson
-    notebooks: [ "python-tps/watson/README*.md" ]
-  - name: TP - auctions
-    notebooks: [ "python-tps/auctions/README*.md" ]
-  - name: TP - boids
-    notebooks: [ "python-tps/boids/README*.md" ]
-  - name: TP - expressions-lang
-    notebooks: [ "python-tps/expressions-lang/README*.md" ]
-  - name: TP - games
-    notebooks: [ "python-tps/games/README*.md" ]
-  - name: TP - graph-bfs-dfs
-    notebooks: [ "python-tps/graph-bfs-dfs/README*.md" ]
-  - name: TP - graph-shortest-path
-    notebooks: [ "python-tps/graph-shortest-path/README*.md" ]
-  - name: TP - metro
-    notebooks: [ "python-tps/metro/README*.md" ]
-  - name: TP - pagerank-thrones
-    notebooks: [ "python-tps/pagerank-thrones/README*.md" ]
-  - name: TP - queens
-    notebooks: [ "python-tps/queens/README*.md" ]
-  - name: TP - redis
-    notebooks: [ "python-tps/redis/README*.md" ]
-  - name: TP - students-grades
-    notebooks: [ "python-tps/students-grades/README*.md" ]
-  - name: TP - students-groups
-    notebooks: [ "python-tps/students-groups/README*.md" ]
-  - name: TP - subprocesses-howto.md
-    notebooks: [ "python-tps/subprocesses-howto.md/README*.md" ]
-  - name: TP - unicode-boxes
-    notebooks: [ "python-tps/unicode-boxes/README*.md" ]
-  - name: TP - webscraper-wip
-    notebooks: [ "python-tps/webscraper-wip/README*.md" ]

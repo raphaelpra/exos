@@ -91,7 +91,7 @@ def sort_file_dates(file_dump_dates):
     print(f"On a écrit {sorted_filename}")
 
 if __name__ == '__main__':
-    with open('dates.txt', 'w', encoding='utf-8') as f:
+    with open('randomdate.txt', 'w', encoding='utf-8') as f:
         write_random_dates_in_file(f, 5)
-    with open('dates.txt', 'r', encoding='utf-8') as f:
+    with open('randomdate.txt', 'r', encoding='utf-8') as f:
         sort_file_dates(f)

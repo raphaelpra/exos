@@ -31,7 +31,7 @@ Exo fichier / format / datetime
 # un générateur de date
 
 ```{code-cell} ipython3
-from filedates import generate_random_date
+from randomdate import generate_random_date
 ```
 
 ```{code-cell} ipython3
@@ -99,7 +99,7 @@ f"{day_after:%d %m %Y}"
 # écrire *n* échantillons dans un fichier
 
 ```{code-cell} ipython3
-from filedates import write_random_dates_in_file
+from randomdate import write_random_dates_in_file
 ```
 
 ```{code-cell} ipython3
@@ -107,18 +107,18 @@ help(write_random_dates_in_file)
 ```
 
 ```{code-cell} ipython3
-with open("dates.txt", 'w') as output:
+with open("randomdate.txt", 'w') as output:
     write_random_dates_in_file(output, 3)
 ```
 
 ```{code-cell} ipython3
-!cat dates.txt
+!cat randomdate.txt
 ```
 
 # relire le fichier et le trier
 
 ```{code-cell} ipython3
-from filedates import sort_file_dates
+from randomdate import sort_file_dates
 ```
 
 ```{code-cell} ipython3
@@ -126,12 +126,12 @@ help(sort_file_dates)
 ```
 
 ```{code-cell} ipython3
-with open("dates.txt") as input:
+with open("randomdate.txt") as input:
     sort_file_dates(input)
 ```
 
 ```{code-cell} ipython3
-!cat dates.txt.sort
+!cat randomdate.txt.sort
 ```
 
 ## Indices
@@ -142,7 +142,7 @@ with open("dates.txt") as input:
 * un objet fichier a un attribut `name` - [voir doc `io`](https://docs.python.org/3.5/library/io.html#module-io)
 
 ```{code-cell} ipython3
-with open('dates.txt') as input:
+with open('randomdate.txt') as input:
     to_sort = []
     for line in input:
         tokens = line.split()
@@ -153,35 +153,9 @@ with open('dates.txt') as input:
     print(to_sort)
 ```
 
-# Primer classes
-
-```{code-cell} ipython3
-# class définit une classe
-# comme def définit une fonction
-class Vector2D:
-
-    # ici on définit une méthode spéciale
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    # une méthode 
-    def produit_scalaire(self, vector):
-        return self.x * vector.x + \
-               self.y * vector.y
-        
-v1 = Vector2D(1, 2)
-v2 = Vector2D(3, 4)
-v1, v2
-```
-
-```{code-cell} ipython3
-v1.produit_scalaire(v2)
-```
-
 # Variantes
 
-`filedates_cl.py`
+`randomdate_cl.py`
 
 * générez un commentaire random ou lieu de 'bla', fait de 1 a 4 mots choisis dans un dictionnaire
 
@@ -191,23 +165,23 @@ v1.produit_scalaire(v2)
   et utilisez `ArgumentParser` pour paramétrer le nombre de lignes générées
 
 ```{code-cell} ipython3
-from filedates_cl import write_random_dates_in_file as write_file_dates_cl
+from randomdate_cl import write_random_dates_in_file as write_random_dates_cl
 ```
 
 ```{code-cell} ipython3
-with open("dates_cl.txt", 'w') as output:
-    write_random_dates_in_file_cl(output, 3)
+with open("randomdate-cl.txt", 'w') as output:
+    write_random_dates_cl(output, 3)
 ```
 
 ```{code-cell} ipython3
-!cat dates_cl.txt
+!cat randomdate-cl.txt
 ```
 
 ```{code-cell} ipython3
-from filedates_cl import sort_file_dates as sort_file_dates_cl
+from randomdate_cl import sort_file_dates as sort_file_dates_cl
 ```
 
 ```{code-cell} ipython3
-with open("dates_cl.txt") as input:
-    sort_file_dates(input)
+with open("randomdate-cl.txt") as input:
+    sort_file_dates_cl(input)
 ```
