@@ -15,6 +15,8 @@ language_info:
   name: python
   nbconvert_exporter: python
   pygments_lexer: ipython3
+nbhosting:
+  title: visualiser un brin d'ADN
 ---
 
 <span style="float:left;">Licence CC BY-NC-ND</span><span style="float:right;">Thierry Parmentelat&nbsp;<img src="media/inria-25.png" style="display:inline"></span><br/>

@@ -15,6 +15,8 @@ language_info:
   name: python
   nbconvert_exporter: python
   pygments_lexer: ipython3
+nbhosting:
+  title: 'trouver tous les fichiers *.truc'
 ---
 
 # parcours de fichiers

@@ -15,6 +15,8 @@ language_info:
   name: python
   nbconvert_exporter: python
   pygments_lexer: ipython3
+nbhosting:
+  title: 'aller chercher de la donnée sur Internet'
 ---
 
 <div class="licence">

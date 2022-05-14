@@ -15,6 +15,8 @@ language_info:
   name: python
   nbconvert_exporter: python
   pygments_lexer: ipython3
+nbhosting:
+  title: "cr\xE9ation dynamique de propri\xE9t\xE9s"
 ---
 
 <div class="licence">

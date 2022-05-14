@@ -47,10 +47,10 @@ tracks:
     - "python-tps/boids/README*.md"
     - "python-tps/games/README*.md"
     - "python-tps/redis/README*.md"
+  - name: sample code
+    notebooks:
+    - "python-samples/*.py"
   - name: WIP
     notebooks:
     - "python-tps/subprocesses-howto.md/README*.md"
     - "python-tps/webscraper-wip/README*.md"
-  - name: sample code
-    notebooks:
-    - "python-samples/*.py"

@@ -28,7 +28,7 @@ def output_filename(in_filename):
 def main():
     parser = ArgumentParser()
     parser.add_argument("corriges", nargs="+")
-    parser.add_argument("-v", "--verbose", default=False)
+    parser.add_argument("-v", "--verbose", default=False, action='store_true')
 
     cli_args = parser.parse_args()
     corriges = cli_args.corriges
