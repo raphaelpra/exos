@@ -1,24 +1,28 @@
 ---
 jupytext:
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.13.8
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
 ---
-
-+++ {"run_control": {"frozen": false, "read_only": false}}
 
 <div class="licence">
 <span>Licence CC BY-NC-ND</span>
 <span>Thierry Parmentelat &amp; Arnaud Legout</span>
 </div>
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 # Première partie
 
@@ -26,7 +30,7 @@ kernelspec:
 * qui répond à toutes les méthodes dont le nom  fait 3 lettres
 * et qui dans ce cas retourne le nom de la méthode concaténé 3 fois
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 ```
 >>> echo = Echo()
@@ -38,7 +42,7 @@ kernelspec:
 'sixsixsix''
 ```
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 ## Indices
 
@@ -48,9 +52,6 @@ kernelspec:
 
 ```{code-cell} ipython3
 ---
-run_control:
-  frozen: false
-  read_only: false
 slideshow:
   slide_type: slide
 ---
@@ -69,9 +70,6 @@ class Echo:
 
 ```{code-cell} ipython3
 ---
-run_control:
-  frozen: false
-  read_only: false
 slideshow:
   slide_type: slide
 ---
@@ -80,31 +78,21 @@ echo.foo()
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 echo.bar()
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 try:
     echo.foobar()
 except AttributeError as e:
     print("OOPS", e)
 ```
 
-+++ {"run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}}
 
 # Deuxième partie
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 * on veut maintenant une classe Proxy
 * qu'on crée à partir d'une instance de `Echo`
@@ -114,7 +102,7 @@ except AttributeError as e:
 * en sous-traitant à son instance de `Echo`
 * sauf pour les méthodes dans la blacklist
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 ## Indices
 
@@ -136,9 +124,6 @@ except AttributeError as e:
 
 ```{code-cell} ipython3
 ---
-run_control:
-  frozen: false
-  read_only: false
 slideshow:
   slide_type: slide
 ---
@@ -154,9 +139,6 @@ class BlacklistEcho(Echo):
 
 ```{code-cell} ipython3
 ---
-run_control:
-  frozen: false
-  read_only: false
 slideshow:
   slide_type: slide
 ---
@@ -168,11 +150,6 @@ echo2.foo()
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 try:
     echo2.six()
 except AttributeError as e:
@@ -180,11 +157,6 @@ except AttributeError as e:
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 try:
     echo2.foobar()
 except AttributeError as e:

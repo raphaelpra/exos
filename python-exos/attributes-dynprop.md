@@ -1,37 +1,36 @@
 ---
 jupytext:
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.13.8
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
 ---
-
-+++ {"run_control": {"frozen": false, "read_only": false}}
 
 <div class="licence">
 <span>Licence CC BY-NC-ND</span>
 <span>Thierry Parmentelat &amp; Arnaud Legout</span>
 </div>
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 # Création de propriétés à la volée
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 ## En s'inspirant du code:
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 class Person(object):
     def __init__(self):
         self._name = ''
@@ -48,21 +47,11 @@ class Person(object):
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 user = Person()
 user.name = 'john smith'
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 # remarquez d'ailleurs - sans rapport avec l'exercice
 # qu'ici on ne spécifie pas de deleter
 try:
@@ -70,8 +59,6 @@ try:
 except AttributeError as e:
     print("OOPS", e)
 ```
-
-+++ {"run_control": {"frozen": false, "read_only": false}}
 
 ## Écrivez 
 
@@ -81,7 +68,7 @@ except AttributeError as e:
   * et autres méthodes privées si nécessaire
 * de façon à ce qu'on puisse l'utiliser comme ceci
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 ```
 >>> user = DynamicPerson()
@@ -98,7 +85,7 @@ Getting: name
 {'_phone': '12345', '_name': 'John Smith'}
 ```
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 ## Hints
 
@@ -110,11 +97,6 @@ Getting: name
   * et non la classe `Person`
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 # une façon possible de faire
 
 class DynamicPerson(object):
@@ -139,11 +121,6 @@ class DynamicPerson(object):
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 user = DynamicPerson()
 user.addProperty('name')
 user.addProperty('phone')
@@ -152,8 +129,6 @@ user.phone = '12345'
 user.name
 user.__dict__
 ```
-
-+++ {"run_control": {"frozen": false, "read_only": false}}
 
 ## Si vous avez fini
 

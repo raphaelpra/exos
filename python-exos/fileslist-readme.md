@@ -1,24 +1,28 @@
 ---
 jupytext:
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.13.8
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
 ---
-
-+++ {"run_control": {"frozen": false, "read_only": false}}
 
 <div class="licence">
 <span>Licence CC BY-NC-ND</span>
 <span>Thierry Parmentelat &amp; Arnaud Legout</span>
 </div>
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 # La librairie `pathlib`
 
@@ -29,11 +33,6 @@ from pathlib import Path
 ## commodité
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 # à quoi ça sert ce truc ?
 
 # eh bien si par hasard vous changez un module importé
@@ -64,7 +63,7 @@ init()
 
 ## il faut faire quoi ?
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 Il s'agit d'écrire une fonction qui
 
@@ -86,8 +85,6 @@ from fileslist import sort_files
 help(sort_files)
 ```
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
-
 ### Exemples
 
 ```{code-cell} ipython3
@@ -96,42 +93,20 @@ here
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 sort_files(here, "pathlib-foo", deep=True, criteria='name')
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 sort_files(here, "pathlib-foo", deep=True, criteria='namelen')
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 sort_files(here, "pathlib-foo", deep=True, criteria='size')
 ```
-
-+++ {"run_control": {"frozen": false, "read_only": false}}
 
 ## Indices
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 from pathlib import Path
 
 x = Path("pathlib-foo", "logs", "dir100", "filecxx")
@@ -139,40 +114,20 @@ x
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 list(x.parts)
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 # pour avoir la taille
 x.stat().st_size
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 y = Path("pathlib-foo", "logs")
 list(y.glob("*"))
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 list(y.glob("**/*"))
 ```
 

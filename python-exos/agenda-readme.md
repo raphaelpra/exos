@@ -1,28 +1,32 @@
 ---
 jupytext:
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.13.8
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
 ---
-
-+++ {"run_control": {"frozen": false, "read_only": false}}
 
 <div class="licence">
 <span>Licence CC BY-NC-ND</span>
 <span>Thierry Parmentelat &amp; Arnaud Legout</span>
 </div>
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 # agenda
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 Il s'agit d'écrire
 
@@ -31,7 +35,7 @@ Il s'agit d'écrire
   * `trouver_entree`
   * `nouvelle_entree`
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 * `trouver_entree(nom, prenom, champ=None)`
 
@@ -58,66 +62,36 @@ Il s'agit d'écrire
         champ : le champ a entrer dans l'agenda (parmi la liste les champs_valides)
         valeur : la valeur du champ
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 Que l'on peut utiliser comme ceci
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 from agenda import nouvelle_entree, trouver_entree
 
 nouvelle_entree('jean', 'dupond')
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 nouvelle_entree('jean', 'dupond', 'tel', '04040404040')
 nouvelle_entree('jean', 'dupond', 'adresse', '6 rue de la gare')
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 nouvelle_entree('jean', 'francois', 'tel', '060606060')
 nouvelle_entree('jean', 'francois', 'fax', '060606061')
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 nouvelle_entree('eric', 'dupont', 'mail', 'eric.dupont@google.com')
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 trouver_entree('jean', 'dupond')
 trouver_entree('jean', 'dupond', 'tel')
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 try:
     trouver_entree('eric', 'françois')
 except KeyError as e:

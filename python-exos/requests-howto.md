@@ -1,24 +1,28 @@
 ---
 jupytext:
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.13.8
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
 ---
-
-+++ {"run_control": {"frozen": false, "read_only": false}}
 
 <div class="licence">
 <span>Licence CC BY-NC-ND</span>
 <span>Thierry Parmentelat &amp; Arnaud Legout</span>
 </div>
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 # Aller chercher une donnée simple sur Internet
 
@@ -26,7 +30,7 @@ kernelspec:
 
 ## CSV
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 Vous trouverez à cette URL un accès aux données de population par pays
 
@@ -36,7 +40,7 @@ et plus spécifiquement, le lien pour downloader la donnée
 
 `https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_TotalPopulationBySex.csv`
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 Il s'agit pour nous d'écrire
 
@@ -44,16 +48,11 @@ Il s'agit pour nous d'écrire
 * avec une autre URL vous pouvez obtenir toutes les populations de toutes les tranches d'âge de la population brésilienne en 2017
 * ou encore calculer combien de petits brésiliens seront nés entre aujourd'hui et demain
 
-+++ {"run_control": {"frozen": false, "read_only": false}}
++++
 
 ## Indices
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 import json
 
 # il faut installer requests séparément avec
@@ -146,11 +145,6 @@ URL = "https://raw.githubusercontent.com/samayo/country-json/master/src/country-
 ```
 
 ```{code-cell} ipython3
----
-run_control:
-  frozen: false
-  read_only: false
----
 def get_url_as_json(url):
     """
     Fetch a URL and decode its result as JSON

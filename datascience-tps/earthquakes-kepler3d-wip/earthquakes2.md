@@ -1,15 +1,20 @@
 ---
 jupytext:
-  cell_metadata_filter: all
-  notebook_metadata_filter: all,-language_info,-toc,-jupytext.text_representation.jupytext_version
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
 ---
 
 > inspired from https://medium.com/nightingale/how-to-create-eye-catching-maps-with-python-and-kepler-gl-e7e897eff8ac
@@ -19,8 +24,6 @@ kernelspec:
 # earthquakes
 
 ```{code-cell} ipython3
-:trusted: true
-
 import pandas as pd
 import keplergl 
 ```
@@ -28,8 +31,6 @@ import keplergl
 ## data acquisition
 
 ```{code-cell} ipython3
-:trusted: true
-
 # could not spot a direct URL to this data...
 dataset_url = "https://catalog.data.gov/dataset/global-significant-earthquake-database-2150-bc-to-present"
 
@@ -38,14 +39,10 @@ dataset_filename = "Worldwide-Earthquake-database.csv"
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 %cd raw-tps/keplergl
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 df = pd.read_csv(dataset_filename)
 df.describe()
 ```
@@ -53,23 +50,17 @@ df.describe()
 ## clean up
 
 ```{code-cell} ipython3
-:trusted: true
-
 # lat and lon to numeric, errors converted to nan
 df['LONGITUDE'] = pd.to_numeric(df.LONGITUDE, errors='coerce')
 df['LATITUDE'] = pd.to_numeric(df.LATITUDE, errors='coerce')
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 # drop rows with missing lat, lon, and intensity
 df.dropna(subset=['LONGITUDE', 'LATITUDE', 'INTENSITY'], inplace=True)
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 # convert tsunami flag from string to int
 df['FLAG_TSUNAMI'] = [1 if i=='Yes' else 0 for i in df.FLAG_TSUNAMI.values]
 ```
@@ -77,23 +68,17 @@ df['FLAG_TSUNAMI'] = [1 if i=='Yes' else 0 for i in df.FLAG_TSUNAMI.values]
 ## draw map
 
 ```{code-cell} ipython3
-:trusted: true
-
 kepler_map = keplergl.KeplerGl(height=600)
 kepler_map
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 kepler_map.add_data(data=df, name="earthquakes")
 ```
 
 ## config
 
 ```{code-cell} ipython3
-:trusted: true
-
 manual_config = {
   "version": "v1",
   "config": {
@@ -259,30 +244,22 @@ manual_config = {
 ***this part needs more work***
 
 ```{code-cell} ipython3
-:trusted: true
-
 import pandas as pd
 import geopandas as gpd
 import keplergl 
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 block_url = "https://opendata.vancouver.ca/explore/dataset/block-outlines/download/?format=geojson&timezone=Europe/Berlin&lang=en"
 block_filename = "block.geojson"
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 graffiti_url = "https://opendata.vancouver.ca/explore/dataset/graffiti/download/?format=geojson&timezone=Europe/Berlin&lang=en&use_labels_for_header=true&csv_separator=%3B"
 graffiti_filename = "graffiti.geojson"
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 import requests
 def store_url_as_filename(url, filename, force=False):
     from pathlib import Path
@@ -294,15 +271,12 @@ def store_url_as_filename(url, filename, force=False):
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 store_url_as_filename(block_url, block_filename)
 store_url_as_filename(graffiti_url, graffiti_filename)
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
-:trusted: true
 
 df_block = gpd.read_file(block_filename)
 df_block.dropna(inplace=True)
@@ -311,7 +285,6 @@ df_block.head()
 
 ```{code-cell} ipython3
 :cell_style: split
-:trusted: true
 
 df_graffiti = gpd.read_file(graffiti_filename)
 df_graffiti.dropna(inplace=True)
@@ -319,15 +292,11 @@ df_graffiti.head()
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 # join datasets
 df = gpd.sjoin(df_block, df_graffiti, how='inner', predicate='contains')
 ```
 
 ```{code-cell} ipython3
-:trusted: true
-
 # create new indexes
 df.reset_index(inplace=True)
 df.head()
