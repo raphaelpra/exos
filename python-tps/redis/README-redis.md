@@ -1,49 +1,53 @@
 ---
-jupyter:
-  celltoolbar: Slideshow
-  jupytext:
-    cell_metadata_filter: all
-    cell_metadata_json: true
-    formats: ipynb,md
-    notebook_metadata_filter: all,-language_info
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.13.8
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
-  toc:
-    base_numbering: 1
-    nav_menu: {}
-    number_sections: true
-    sideBar: true
-    skip_h1_title: false
-    title_cell: Table of Contents
-    title_sidebar: Contents
-    toc_cell: false
-    toc_position: {}
-    toc_section_display: true
-    toc_window_display: false
+celltoolbar: Slideshow
+jupytext:
+  cell_metadata_filter: all
+  cell_metadata_json: true
+  formats: ipynb,md:myst
+  notebook_metadata_filter: all,-language_info
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.13.8
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+nbhosting:
+  title: un jeu multijoueurs
+toc:
+  base_numbering: 1
+  nav_menu: {}
+  number_sections: true
+  sideBar: true
+  skip_h1_title: false
+  title_cell: Table of Contents
+  title_sidebar: Contents
+  toc_cell: false
+  toc_position: {}
+  toc_section_display: true
+  toc_window_display: false
 ---
 
-<!-- #region {"trusted": true} -->
-# un jeu multi-joueur
-<!-- #endregion -->
++++ {"trusted": true}
 
-<!-- #region {"slideshow": {"slide_type": "-"}} -->
+# un jeu multi-joueur
+
++++ {"slideshow": {"slide_type": "-"}}
+
 on se propose de réaliser un petit jeu multi joueur, et pour cela nous aurons besoin de
 
 * [redis](https://redis.io/), un système de base de données *light* et rapide, où les données sont stockées en mémoire; il ne s'agit pas d'un système traditionnel, ici pas de SQL ni de stockage sur le disque
   **attendez avant de l'installer**, les modalités ne sont pas les mêmes sur tous les OS
 
 * [pygame](www.pygame.org), pour le graphisme et autres interactions avec le jeu
-<!-- #endregion -->
+
++++
 
 # architecture
 
++++
 
 ## *process* et isolation
 
@@ -53,6 +57,7 @@ en effet on apprend pour commencer à programmer dans un monde fini et isolé - 
 
 typiquement quand vous écrivez un programme Python et que vous le lancez avec `python mon_code.py`, tout le code tourne dans un seul process (sauf si vous faites exprès d'en créer d'autres bien entendu)
 
++++
 
 ## comment partager
 
@@ -65,24 +70,30 @@ mais avec cette deuxième approche il faut trouver **un moyen d'échanger des in
 
 on va voir comment on peut s'y prendre
 
++++
 
 ## une solution centralisée
 
++++
 
 l'architecture la plus simple pour établir la communication entre tous les joueurs consiste à créer un **processus serveur**, auquel les joueurs sont connectés, selon un diagramme dit en étoile (terme qui prend tout son sens avec plusieurs joueurs: le serveur est au centre du diagramme) :
 
++++
 
 ![](processes.svg)
 
++++
 
 # prototype
 
++++
 
 ici se trouve un **prototype** hyper simple; il est multi-joueur mais sur un seul ordinateur (car il manque la possibilité d'indiquer où trouver le serveur central)
 
 pour le mettre en oeuvre :
 
-<!-- #region -->
++++
+
 ## serveur
 
 il faut pour commencer lancer un serveur redis
@@ -95,7 +106,8 @@ redis-server --protected-mode no
 bien sûr ce process **ne termine pas** (vous remarquez que le shell ne vous affiche pas le *prompt* avec le `$`)
 
 il faut le laisser tourner pendant tout le temps du jeu; donc ce terminal va être monopolisé pour ça, créez-en un autre pour lancer les autres morceaux
-<!-- #endregion -->
+
++++
 
 ## jeux
 
@@ -125,10 +137,11 @@ Pierre voit Paul apparaitre sur son écran, et Paul également;
 
 on peut lancer d'autres jeux en même temps, mais bien sûr l'espace libre sur l'écran devient rapidement
 
-
++++
 
 ## défauts
 
++++
 
 bien sûr ce prototype a des zillions de défauts :
 
@@ -138,17 +151,21 @@ bien sûr ce prototype a des zillions de défauts :
 * il manque un moyen de dire ou de chercher où est le serveur redis; du coup les joeurs doivent forcément être sur le même ordi (et donc le même écran)...
 * etc…
 
++++
 
 # le code
 
++++
 
 https://github.com/flotpython/slides/tree/master/tps/redis
 
 n'oubliez pas de lancer le serveur *redis* **d'abord**, ça ne va pas fonctionner sinon.
 
++++
 
 # plusieurs ordinateurs
 
++++
 
 jusqu'ici on a fait tourner tous les processus dans le même ordinateur
 
@@ -158,9 +175,11 @@ en vraie grandeur bien sûr, on veut faire tourner ça sur plusieurs ordinateurs
 
 pour que ça puisse fonctionner dans ce type de configuration il faut que Jacques lance le jeu en lui indiquant sur quel ordinateur se trouve le serveur redis
 
++++
 
 ## trouver son IP address
 
++++
 
 selon les systèmes, lancez dans un terminal la commande suivante
 * Windows `ipconfig`
@@ -169,10 +188,12 @@ selon les systèmes, lancez dans un terminal la commande suivante
 
 et cherchez une adresse parmi les intervalles réservés aux adresses privées
 
++++
 
 ![](private-ranges.png)
 
-<!-- #region {"slideshow": {"slide_type": "-"}} -->
++++ {"slideshow": {"slide_type": "-"}}
+
 ## pour lancer le jeu
 
 dans notre configuration, si Pierre est sur l'adresse disons `192.168.200.20`, il suffit aux autres joueurs qui veulent le rejoindre de lancer par exemple
@@ -180,7 +201,8 @@ dans notre configuration, si Pierre est sur l'adresse disons `192.168.200.20`, i
 ```
 multi-game.py --server 192.168.200.20 Jacques
 ```
-<!-- #endregion -->
+
++++
 
 # Notes
 
