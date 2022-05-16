@@ -31,8 +31,8 @@ tracks:
   - name: TPs basiques
     notebooks:
     - "python-tps/watson/README*.md"
-    - "python-tps/queens/README*.md"
     - "python-tps/students-groups/README*.md"
+    - "python-tps/queens/README*.md"
   - name: TPs classes
     notebooks:
     - "python-tps/students-grades/README*.md"
