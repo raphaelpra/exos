@@ -3,6 +3,13 @@
 tracks-filter: [ python ]
 
 tracks:
+- description: Tous premiers pas
+  id: 101
+  name: 101
+  sections:
+  - name: premiers pas
+    notebooks:
+    - 101/0*.md
 - description: Python - activités
   id: python
   name: Python

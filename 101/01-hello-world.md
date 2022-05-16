@@ -17,6 +17,8 @@ language_info:
   pygments_lexer: ipython3
 nbhosting:
   title: hello world
+rise:
+  scroll: true
 ---
 
 # premiers pas
@@ -61,6 +63,9 @@ hello world
 
 on s'enhardit, on dit bonjour à plusieurs personnes; pour cela on modifie notre code pour y mettre
 ```
+# on peut écrire des commentaires
+# après le signe #
+# qui ne seront pas exécutés
 print("hello Alice")
 print("hello Bob")
 print("hello Charlie")
@@ -77,6 +82,7 @@ on le fait tourner:
 ### que retenir ?
 
 * quand on exécute un fichier `.py` avec Python, toutes les instructions qui y sont présentes sont exécutées dans l'ordre, jusqu'à ce qu'on rencontre la fin du fichier, et à ce moment-là python s'arrête (et on dit qu'il *rend la main* au terminal)
+* après le signe `#` le texte du programme est considéré comme un commentaire
 
 +++
 
@@ -239,7 +245,7 @@ et cette foi ça fonctionne
 
 * il y a des fonction prédéfinies (comme `print`)
 * on peut aussi utiliser des fonctions qui sont écrites dans d'autres fichiers, il faut alors les **importer** en indiquant dans quel fichier (on parle de module) elles se trouvent
-* lorsqu'on écrit `import 
+* lorsqu'on écrit `import
 
 +++
 
@@ -309,3 +315,85 @@ for name in ["Alice", "Bob", "Charlie"]:
 * l'intérêt étant que l'instance `person` a capturé le nom, on n'a plus besoin de le repasser à `hello()`  
 * imaginez que l'on ajoute aussi d'autres détails dans la classe (le prénom, l'^age...)  
   le type `Person` va nous permettre de manipuler des groupes de données (nom, prenom, age) qui vont ensemble, mais qu'on va passer en paramètre à toutes les fonction comme *un seul paramètre* compposite qui contient tout cela
+
++++
+
+## une classe un peu plus riche
+
+dans l'exemple précédent, on a utilisé une classe pour ranger une donnée (le nom)  
+du coup l'intérêt n'est peut-être pas très manifeste  
+
+mais on peut aussi bien sûr utiliser cela pour "grouper" plusieurs données qui "vont ensemble"  
+
+```python
+# dans separate.py
+
+class Person:
+
+    # le constructeur, pour initialiser
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        
+    def hello(self):
+       print(f"Hello {self.name}, tu as {self.age} ans")
+```
+
+```python
+# dans hello.py
+
+persons = []
+
+person.append(Person("Alice", 25))
+person.append(Person("Bob", 22))
+person.append(Person("Charlie", 20))
+
+for person in persons:
+    person.hello()
+    
+# et ensuite si on voulait par exemple calculer 
+# la moyenne d'âge de cette micro-classe
+
+total = 0
+for person in persons:
+    total = total + person.age
+print(f"moyenne d'âge: {total / len(persons}")
+```
+
++++
+
+### que retenir ?
+
+* une classe sert souvent à regrouper plusieurs données qui décrivent une entité
+* ces "morceaux" (ici `name` et `age`) sont rangés dans l'objet (`self`) sous la forme d'**attributs**
+* on accède à un attribut par la notation **`objet.attribut`**
+* un attribut peut désigner une donnée (`self.name`) ou une méthode (`person.hello`)
+
++++
+
+## conclusion
+
+on a vu des exemples de
+
+* fonction - prédéfinie ou pas
+* module - fourni par Python ou pas
+* classe - ici seulement une classe définie par nos soins, mais il y en a plein la librairie standard
+
+ces 3 notions sont centrales pour la réutilisabilité du code Python
+
+on a aussi vu des exemples de
+
+* chaine de caractère (aussi appelée *string*)
+* nombre - des entiers et des flottants
+* liste, et on a pu construire
+  * des listes de chaines
+  * des listes mélangées (chaines et nombres); les listes en Python peuvent être complètement hétérogènes
+  * des objets
+  * dans tous les cas on a écrit nos boucles comme faisant  
+    ```
+    for item in iterable:
+       bla
+       bla
+    ```
+    et c'est comme ça comme fait la plupart du temps  
+    (plutôt que d'itérer sur un index qui ensuite sert à aller chercher dans la liste)
