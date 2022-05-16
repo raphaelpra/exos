@@ -16,7 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: comptage dans un brin d'ADN
+  title: calcul de % dans un brin d'ADN
 ---
 
 <div class="licence">
