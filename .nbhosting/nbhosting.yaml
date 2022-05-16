@@ -48,10 +48,10 @@ tracks:
     - "python-tps/expressions-lang/README*.md"
   - name: TPs graphes
     notebooks:
-    - "python-tps/graph-bfs-dfs/README*.md"
+    - "python-tps/graph-bfs-dfs/README*.py"
     - "python-tps/graph-shortest-path/README*.md"
     - "python-tps/metro/README-metro.md"
-    - "python-tps/pagerank-thrones/README*.md"
+    - "python-tps/pagerank-thrones/README*.py"
   - name: 'TPs visu & games'
     notebooks:
     - "python-tps/games/README*snake.md"

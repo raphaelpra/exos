@@ -18,7 +18,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: "m\xE9tro parisien"
+  title: "students and groups"
 version: '1.0'
 ---
 
