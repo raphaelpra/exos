@@ -1,4 +1,0 @@
-prénom;nom;age
-Alice;Rivest;12
-Bob;Shamir;25
-Charlie;Adleman;36
