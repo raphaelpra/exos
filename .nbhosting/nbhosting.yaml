@@ -22,12 +22,6 @@ tracks:
   - name: exercices visu
     notebooks:
     - python-exos/visu/adnwalk-howto.md
-  - name: exercices avancés
-    notebooks:
-    - python-exos/advanced/encodings-howto.md
-    - python-exos/advanced/attributes-proxy.md
-    - python-exos/advanced/attributes-dynprop.md
-    - python-exos/advanced/randomdate-readme.md
   - name: TPs basiques
     notebooks:
     - "python-tps/watson/README*.md"
@@ -51,6 +45,18 @@ tracks:
     - "python-tps/boids/README*.md"
     - "python-tps/games/README*flappybird.md"
     - "python-tps/redis/README*.md"
+  - name: howtos
+    notebooks:
+      - python-howtos/requests-howto.md
+  - name: lecture de code
+    notebooks:
+      - python-reading/snake/snake.py
+  - name: exercices avancés
+    notebooks:
+    - python-exos/advanced/encodings-howto.md
+    - python-exos/advanced/attributes-proxy.md
+    - python-exos/advanced/attributes-dynprop.md
+    - python-exos/advanced/randomdate-readme.md
   - name: sample code
     notebooks:
     - "python-samples/*.py"
