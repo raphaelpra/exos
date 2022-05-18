@@ -16,7 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: 'aller chercher de la donnée sur Internet'
+  title: "aller chercher de la donn\xE9e sur Internet"
 ---
 
 <div class="licence">
@@ -30,29 +30,28 @@ nbhosting:
 
 +++
 
-## CSV
+## JSON
 
 +++
 
-Vous trouverez à cette URL un accès aux données de population par pays
+commençons par une donnée en JSON
 
-<https://population.un.org/wpp/Download/Standard/CSV/>
+par exemple ceci
 
-et plus spécifiquement, le lien pour downloader la donnée
+<https://github.com/samayo/country-json/blob/master/src/country-by-population.json>
 
-`https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_TotalPopulationBySex.csv`
+pour trouver le bon lien, je clique sur 'Raw' et je copie ici
+
+```{code-cell} ipython3
+URL1 = "https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-population.json"
+```
+
+Il s'agit pour nous d'écrire un code qui va chercher ces données et les traduit en une structure Python 
+(à base de `list` et `dict`) - la structure en question est déjà présente dans le JSON.
 
 +++
 
-Il s'agit pour nous d'écrire
-
-* un code qui va chercher ces données et les traduit en une structure python (donc dans ce cas précis une simple liste de strings)
-* avec une autre URL vous pouvez obtenir toutes les populations de toutes les tranches d'âge de la population brésilienne en 2017
-* ou encore calculer combien de petits brésiliens seront nés entre aujourd'hui et demain
-
-+++
-
-## Indices
+### Indices (sur la lib. requests)
 
 ```{code-cell} ipython3
 import json
@@ -64,22 +63,20 @@ import requests
 ```
 
 ```{code-cell} ipython3
-# ici j'ai fait un 'Copy Link Address' depuis chrome, l'espace s'est fait remplacer par un %20
-# 20 en hexa = 32 en décimal, c'est le codepoint de Espace
-URL = "https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_TotalPopulationBySex.csv"
-
 # il faut être un peu patient
-response = requests.get(URL)
+response = requests.get(URL1)
 ```
+
+#### les attributs de l'objet response
 
 ```{code-cell} ipython3
 # dans ce genre de cas dir() est utile
 # sauf que c'est un peu trop bavard
-dir(response)
+# dir(response)
 ```
 
 ```{code-cell} ipython3
-# mais ça vaut le coup de filter un peu
+# du coup ça vaut le coup de filter un peu
 [symbol for symbol in dir(response) if not symbol.startswith('_')]
 ```
 
@@ -106,13 +103,124 @@ response.headers['Content-Length']
 type(response.text), response.text[:100]
 ```
 
+### indices (sur la lib. json)
+
++++
+
+Les deux méthodes intéressantes sont 
+
+* `json.loads(json_string)` qui décode une chaine JSON en un objet Python, et
+* `json.dumps(object)` qui encode un object Python en une chaine JSON
+
++++
+
+### le code
+
++++
+
+du coup le code que je dois écrire pour faire le job est simplement 
+
+```{code-cell} ipython3
+def get_url_as_json(url):
+    """
+    Fetch a URL and decode its result as JSON
+    """
+
+    with requests.get(url) as response:
+        return json.loads(response.text)
+```
+
+```{code-cell} ipython3
+python_friendly = get_url_as_json(URL1)
+
+# on obtient quoi comme type ?
+type(python_friendly)
+```
+
+```{code-cell} ipython3
+python_friendly[:3]
+```
+
+```{code-cell} ipython3
+python_friendly[-3:]
+```
+
+```{code-cell} ipython3
+len(python_friendly)
+```
+
+### transformer la structure 
+
+```{code-cell} ipython3
+# et ici par exemple je pourrais décider que c'est plus pratique
+# sous la forme d'un dictionnaire name -> population
+
+population = {d['country']: d['population'] for d in python_friendly}
+```
+
+```{code-cell} ipython3
+# de sorte que je peux faire simplement
+population['France']
+```
+
+## CSV
+
++++
+
+Vous trouverez à cette URL un accès aux données de population par pays
+
+<https://population.un.org/wpp/Download/Standard/CSV/>
+
+et plus spécifiquement, le lien pour downloader la donnée
+
+`https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_TotalPopulationBySex.csv`
+
++++
+
+*Attention* ce ne sont pas les mêmes données exactement, celles-ci sont beaucoup plus détaillées...
+
+```{code-cell} ipython3
+# ici j'ai fait un 'Copy Link Address' depuis chrome, l'espace s'est fait remplacer par un %20
+# 20 en hexa = 32 en décimal, c'est le codepoint de Espace
+URL2 = "https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_TotalPopulationBySex.csv"
+```
+
+```{code-cell} ipython3
+# il faut être un peu patient car c'est bcp + gros que tout à l'heure
+response = requests.get(URL2)
+```
+
+### Indice (sur la lib. csv)
+
 ```{code-cell} ipython3
 # il semble donc qu'on ait affaire à un csv classique
 # qu'on peut décortiquer avec object csv.reader
 # https://docs.python.org/3/library/csv.html
 
 import csv
+```
 
+il se trouve que la librairie `csv` fournit un objet `csv.reader` qui prend en paramètre de type `file` (c'est-à-dire comme le résultat de `open()`)
+
++++
+
+### option 1 - pas beau !
+
++++
+
+Très inélégant, mais qui marche: j'ai une chaine, je l'écris dans un fichier, que je peux ensuite rouvrir en lecture pour le passer à `csv.reader`; une viable en dernier recours, mais on ne va pas le faire
+
++++
+
+### option 2 - mieux
+
++++
+
+Exactement pour contourner ce genre de cas, il y a une classe `io.StringIO` qui, en partant d'une chaine en mémoire, se comporte comme un fichier ! 
+
+Et donc on va utiliser cela:
+
+```{code-cell} ipython3
 # mais pour ça il nous faut un objet de type fichier (file-like object)
 # et c'est là que StringIO est super pratique
 
@@ -132,56 +240,34 @@ mais on va s'arrêter là, parce qu'en pratique ça c'est vraiment un exercice q
 
 +++
 
-## JSON
-
-+++
-
-même exercice mais cette fois on cherche du JSON; je tombe en premier sur ceci
-
-<https://github.com/samayo/country-json/blob/master/src/country-by-population.json>
-
-pour trouver le bon lien, je clique sur 'Raw' et je copie ici
+### un aperçu de pandas
 
 ```{code-cell} ipython3
-URL = "https://raw.githubusercontent.com/samayo/country-json/master/src/country-by-population.json"
+# en vrai on fait comme ça: être patient .. à nouveau
+# et du coup il faut
+import pandas as pd
+
+df = pd.read_csv(URL2)
 ```
 
 ```{code-cell} ipython3
-def get_url_as_json(url):
-    """
-    Fetch a URL and decode its result as JSON
-    """
-
-    with requests.get(url) as response:
-        return json.loads(response.text)
+df.head()
 ```
 
 ```{code-cell} ipython3
-python_friendly = get_url_as_json(URL)
+# conversion en date
+df.Time = pd.to_datetime(df.Time, format="%Y")
 
-type(python_friendly)
+begin, end = pd.to_datetime('1950', format='%Y'), pd.to_datetime('2021', format='%Y')
 ```
 
 ```{code-cell} ipython3
-python_friendly[:3]
+df_france = df[(df.Location == 'France') & (df.Time >= begin) & (df.Time <= end)]
+df_france
 ```
 
 ```{code-cell} ipython3
-# et ici par exemple je pourrais décider que c'est plus pratique
-# sous la forme d'un dictionnaire name -> population
+df_france = df_france.set_index('Time')
 
-population = {d['country']: d['population'] for d in python_friendly}
-```
-
-```{code-cell} ipython3
-# de sorte que je peux faire simplement
-population['France']
-```
-
-```{code-cell} ipython3
-population
-```
-
-```{code-cell} ipython3
-
+df_france[['PopMale', 'PopFemale']].plot();
 ```
