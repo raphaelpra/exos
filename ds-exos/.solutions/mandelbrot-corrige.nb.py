@@ -31,16 +31,14 @@
 # %% {"run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}, "trusted": true}
 import numpy as np
 import matplotlib.pyplot as plt
-# %pylab inline
-plt.ion()
-
+# %matplotlib notebook
 
 # %% [markdown] {"run_control": {"frozen": false, "read_only": false}}
 # ## exercice
 #
-# calculer l'image de la convergence de mandelbrot:
+# il s'agit de calculer l'image de la convergence de mandelbrot:
 #
-# <img src="media/mandelbrot.png" width="2000px">
+# <img src="../media/mandelbrot.png" width="2000px">
 
 # %% [markdown] {"cell_style": "split", "run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
 # * dans l'espace complexe où
@@ -63,8 +61,21 @@ plt.ion()
 
 # %% [markdown] {"run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
 # * une adaptation libre de l'[implementation proposée dans le tutorial scipy](https://docs.scipy.org/doc/numpy/user/quickstart.html#indexing-with-boolean-arrays)
-# * surtout pour remplacer `ogrid` 
-# * par une combinaison de `linspace` et `ix_`
+
+# %% [markdown] {"run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
+# *indices*
+#
+# * pour fabriquer la grille des points de départ, 
+#   on pourra regarder `np.linspace` et `np.meshgrid`
+
+# %% {"trusted": true}
+# à vous de jouer
+
+# %% {"trusted": true}
+# prune-begin
+
+# %% [markdown]
+# # solution
 
 # %% {"run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}, "trusted": true}
 # it's a little confusing that 
