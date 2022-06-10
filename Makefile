@@ -9,5 +9,12 @@ all: prune
 prune:
 	nbprune $(FLAGS) $(SOLUTIONS)
 
-list:
+list-in:
 	@ls -1 $(SOLUTIONS)
+
+list-all-out:
+	@nbprune -l $(SOLUTIONS)
+list-out:
+	@nbprune -L $(SOLUTIONS)
+diff-commands:
+	@nbprune -d $(SOLUTIONS)
