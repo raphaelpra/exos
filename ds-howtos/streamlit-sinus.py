@@ -1,3 +1,10 @@
+# WARNING
+#
+# this code won't work from a notebook server
+# you need to kick it off locally using
+#
+# streamlit run streamlit-sinus.py
+
 import numpy as np
 import matplotlib.pyplot as plt
 

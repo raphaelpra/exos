@@ -79,8 +79,8 @@ tracks:
     - ds-exos/pandas/television.nb.md
     - ds-exos/pandas/marathon.nb.md
     - ds-exos/pandas/pupils.nb.md
-    - ds-exos/pandas/mosaique.nb.md
     - ds-exos/pandas/bornes.nb.md
+    - ds-exos/pandas/mosaique.nb.md
   - name: exercices dataviz
     notebooks:
     - ds-exos/dataviz/groupby-draw.nb.md

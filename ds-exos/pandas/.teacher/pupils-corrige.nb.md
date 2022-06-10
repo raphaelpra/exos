@@ -18,7 +18,7 @@ language_info:
   pygments_lexer: ipython3
 nbhosting:
   show_up_down_buttons: true
-  title: exo marathon
+  title: exo pupils
 ---
 
 # collages

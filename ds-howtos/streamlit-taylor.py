@@ -1,3 +1,10 @@
+# WARNING
+#
+# this code won't work from a notebook server
+# you need to kick it off locally using
+#
+# streamlit run streamlit-taylor.py
+
 from math import factorial
 
 import autograd

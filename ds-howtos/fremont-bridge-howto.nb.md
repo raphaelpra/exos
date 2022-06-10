@@ -16,6 +16,8 @@ language_info:
   name: python
   nbconvert_exporter: python
   pygments_lexer: ipython3
+nbhosting:
+  title: "les vélos sur le pont de Fremont"
 ---
 
 # Les vélos sur le pont de Fremont
