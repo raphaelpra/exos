@@ -70,6 +70,7 @@ tracks:
   sections:
   - name: exercices numpy
     notebooks:
+    - ds-exos/numpy/indices-nb.py
     - ds-exos/numpy/mandelbrot-nb.py
   - name: exercices pandas
     notebooks:
