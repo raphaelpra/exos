@@ -90,3 +90,6 @@ tracks:
     - ds-howtos/timeseries-clean-smooth-howto-nb.md
     - ds-howtos/streamlit-sinus.py
     - ds-howtos/streamlit-taylor.py
+  - name: TP sounds
+    notebooks:
+    - ds-tps/sounds/README-sounds-nb.md
