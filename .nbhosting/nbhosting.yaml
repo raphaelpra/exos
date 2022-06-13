@@ -78,6 +78,8 @@ tracks:
     - ds-exos/pandas/marathon-nb.md
     - ds-exos/pandas/pupils-nb.md
     - ds-exos/pandas/bornes-nb.md
+    - ds-exos/pandas/stack-simple-nb.md
+    - ds-exos/pandas/stack-multicol-nb.md
     - ds-exos/pandas/mosaique-nb.md
   - name: exercices dataviz
     notebooks:
