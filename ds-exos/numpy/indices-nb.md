@@ -15,6 +15,8 @@ language_info:
   name: python
   nbconvert_exporter: python
   pygments_lexer: ipython3
+nbhosting:
+  title: utiliser les indices
 ---
 
 ```{code-cell} ipython3
@@ -40,7 +42,7 @@ I, J
 
 +++
 
-### base
+### base - v1
 
 +++
 
@@ -60,19 +62,37 @@ ex. avec `checkers(3, 4)`
 # à vous
 
 def checkers():
+    """
+    vous avez le droit d'écrire le docstring :)
+    """
     ...
 ```
 
 ```{code-cell} ipython3
 # ceci doit afficher True
 
-checkers(3, 4).dtype == bool
+np.all(checkers(3, 4) == np.array([[0,1,0,1],[1,0,1,0],[0,1,0,1]]))
+```
+
+### v2 - pareil, mais doit retourner des booléens
+
+```{code-cell} ipython3
+# à vous
+
+def checkers():
+    ...
 ```
 
 ```{code-cell} ipython3
 # ceci doit afficher True
 
 np.all(checkers(3, 4) == np.array([[0,1,0,1],[1,0,1,0],[0,1,0,1]]))
+```
+
+```{code-cell} ipython3
+# ceci doit afficher True
+
+checkers(3, 4).dtype == bool
 ```
 
 ### affichage
@@ -137,7 +157,7 @@ checkers(3, 4, True)
 On veut maintenant tester que si on ajoute ces deux formes on n'obtient que des 1
 
 ```{code-cell} ipython3
-# à vous
+# à vous d'écrire le code qui vous permettra de vous en assurer
 ```
 
 ## escaliers
@@ -158,9 +178,13 @@ si le paramètre est 2, on retourne un tableau de taille $2*n+1$
 |1|2|3|2|1|
 |0|1|2|1|0|
 
-```{code-cell} ipython3
-xxxx
-```
++++
+
+### quelques indices
+
++++
+
+toujours pour le cas où n=2, voici quelques phrases que je vous laisse lire
 
 ```{code-cell} ipython3
 I, J = np.indices((5, 5))
@@ -182,29 +206,23 @@ abs(2-I) + abs(2-J)
 ```
 
 ```{code-cell} ipython3
-# hence
+# à vous de mettre tout cela ensemble
 
-def stairs(taille):
-    """
-    la pyramide en escaliers telle que décrite dans l'énoncé
-    """
-    total = 2 * taille + 1
-    I, J = np.indices((total, total))
-    # on décale et déforme avec valeur absolue, pour obtenir
-    # deux formes déjà plus propices
-    I2, J2 = np.abs(I-taille), np.abs(J-taille)
-    # si ajoute on obtient un négatif,
-    # avec 0 au centre et taille aux 4 coins
-    negatif = I2 + J2
-    # ne reste plus qu'à renverser
-    return 2 * taille - negatif    
+def stairs(n):
+    ...
 ```
 
 ```{code-cell} ipython3
+# pour inspection visuelle
+
 S2 = stairs(2); S2
 ```
 
 ```{code-cell} ipython3
-# ce qui donne avec imshow
-plt.imshow(S2);
+# comment feriez-vous pour afficher le résultat visuellement ?
+
+# à vous
+...
 ```
+
+***
