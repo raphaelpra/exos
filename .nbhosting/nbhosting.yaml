@@ -72,7 +72,16 @@ tracks:
     notebooks:
     - ds-exos/numpy/indices-nb.md
     - ds-exos/numpy/mandelbrot-nb.md
-  - name: exercices pandas
+  - name: TP sounds
+    notebooks:
+    - ds-tps/sounds/README-sounds-nb.md
+  - name: TP images
+    notebooks:
+    - ds-tps/images/README-images1-nb.md
+  - name: TP Taylor
+    notebooks:
+    - ds-tps/taylor/taylor-*.md
+- name: exercices pandas
     notebooks:
     - ds-exos/pandas/television-nb.md
     - ds-exos/pandas/marathon-nb.md
@@ -93,12 +102,4 @@ tracks:
     - ds-howtos/timeseries-clean-smooth-howto-nb.md
     - ds-howtos/streamlit-sinus.py
     - ds-howtos/streamlit-taylor.py
-  - name: TP sounds
-    notebooks:
-    - ds-tps/sounds/README-sounds-nb.md
-  - name: TP images
-    notebooks:
-    - ds-tps/images/README-images1-nb.md
-  - name: TP Taylor
-    notebooks:
-    - ds-tps/taylor/taylor-*.md
+  
