@@ -16,6 +16,8 @@ language_info:
   name: python
   nbconvert_exporter: python
   pygments_lexer: ipython3
+nbhosting:
+  title: manipuler du son
 ---
 
 <div class="licence">
