@@ -70,8 +70,8 @@ tracks:
   sections:
   - name: exercices numpy
     notebooks:
-    - ds-exos/numpy/indices-nb.py
-    - ds-exos/numpy/mandelbrot-nb.py
+    - ds-exos/numpy/indices-nb.md
+    - ds-exos/numpy/mandelbrot-nb.md
   - name: exercices pandas
     notebooks:
     - ds-exos/pandas/television-nb.md
