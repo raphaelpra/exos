@@ -82,7 +82,7 @@ sns.set(rc={'figure.figsize': (12, 4)})
 ## lire
 
 ```{code-cell} ipython3
-dfs = pd.read_excel("../data/groupby-draw.xlsx", sheet_name=None)
+dfs = pd.read_excel("data/groupby-draw.xlsx", sheet_name=None)
 ```
 
 ```{code-cell} ipython3

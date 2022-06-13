@@ -54,7 +54,7 @@ l'idée est de se mettre en vraie situation; les données qu'on trouve ici ou l�
 ```{code-cell} ipython3
 # de prime abord ça a l'air pas trop mal
 
-head("../data/television.txt", 10)
+head("data/television.txt", 10)
 ```
 
 ```{code-cell} ipython3

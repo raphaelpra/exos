@@ -49,7 +49,7 @@ pour cela le point d'entrée c'est `pd.read_excel`, mais il faut savoir que cela
 # Missing optional dependency 'openpyxl'
 
 try:
-    df = pd.read_excel("../data/DB_Galion.xlsx")
+    df = pd.read_excel("data/DB_Galion.xlsx")
 except Exception as exc:
     print(f"OOPS {type(exc)} {exc=}")
 ```
@@ -66,7 +66,7 @@ du coup si nécessaire, faites l'installation de `openpyxl` comme indiqué, par 
 # c'est un peu long - sans doute à cause du format des dates
 # aussi on va ranger ça dans un coin 
 # et si nécessaire, on copiera ça au lieu de recharger
-df_original = pd.read_excel("../data/DB_Galion.xlsx")
+df_original = pd.read_excel("data/DB_Galion.xlsx")
 ```
 
 ```{code-cell} ipython3

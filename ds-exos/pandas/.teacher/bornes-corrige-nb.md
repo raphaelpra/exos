@@ -38,9 +38,9 @@ from head import head
 on a trois tables comme ceci
 
 ```{code-cell} ipython3
-df1 = pd.read_csv('../data/bornes.csv', sep=';')
-df2 = pd.read_csv('../data/bornes2.csv', sep=';')
-df3 = pd.read_csv('../data/bornes3.csv', sep=';')
+df1 = pd.read_csv('data/bornes.csv', sep=';')
+df2 = pd.read_csv('data/bornes2.csv', sep=';')
+df3 = pd.read_csv('data/bornes3.csv', sep=';')
 ```
 
 ```{code-cell} ipython3

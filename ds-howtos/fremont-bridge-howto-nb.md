@@ -43,7 +43,7 @@ import pandas as pd
 
 ```{code-cell} ipython3
 # on a déja le fichier en local
-local_file = "../data/fremont.csv"
+local_file = "data/fremont.csv"
 ```
 
 ```{code-cell} ipython3
