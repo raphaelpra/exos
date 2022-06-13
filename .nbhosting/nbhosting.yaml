@@ -90,9 +90,6 @@ tracks:
     - ds-exos/pandas/stack-simple-nb.md
     - ds-exos/pandas/stack-multicol-nb.md
     - ds-exos/pandas/mosaique-nb.md
-  - name: exercices dataviz
-    notebooks:
-    - ds-exos/dataviz/groupby-draw-nb.md
   - name: miscell howtos
     notebooks:
     - ds-howtos/coronavirus-howto-nb.md
@@ -102,3 +99,6 @@ tracks:
     - ds-howtos/timeseries-clean-smooth-howto-nb.md
     - ds-howtos/streamlit-sinus.py
     - ds-howtos/streamlit-taylor.py
+  - name: exercices dataviz
+    notebooks:
+    - ds-exos/dataviz/groupby-draw-nb.md
