@@ -81,8 +81,8 @@ tracks:
   - name: TP Taylor
     notebooks:
     - ds-tps/taylor/taylor-*.md
-- name: exercices pandas
     notebooks:
+  - name: exercices pandas
     - ds-exos/pandas/television-nb.md
     - ds-exos/pandas/marathon-nb.md
     - ds-exos/pandas/pupils-nb.md
@@ -102,4 +102,3 @@ tracks:
     - ds-howtos/timeseries-clean-smooth-howto-nb.md
     - ds-howtos/streamlit-sinus.py
     - ds-howtos/streamlit-taylor.py
-  
