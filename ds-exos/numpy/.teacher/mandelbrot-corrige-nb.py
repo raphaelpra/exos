@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 #
 # il s'agit de calculer l'image de la convergence de mandelbrot:
 #
-# <img src="../media/mandelbrot.png" width="2000px">
+# <img src="media/mandelbrot.png" width="2000px">
 
 # %% [markdown] {"cell_style": "split", "run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
 # * dans l'espace complexe où
