@@ -94,3 +94,6 @@ tracks:
   - name: TP sounds
     notebooks:
     - ds-tps/sounds/README-sounds-nb.md
+  - name: TP images
+    notebooks:
+    - ds-tps/images/README-images1-nb.md
