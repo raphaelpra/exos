@@ -31,6 +31,18 @@ from IPython.display import HTML
 HTML('<link rel="stylesheet" href="slides-notebook.css" />')
 ```
 
++++ {"tags": ["level_advanced"]}
+
+pas fait par manque de temps, mais ce TP aurait besoin d'être retravaillé comme la partie 1, i.e.
+
+* utiliser %matplotlib notebook
+  * et donc faire des plt.figure(); pas besoin par contre du `plt.show()`
+* utiliser nbprune et notamment marquer les cellules à enlever avec `# prune-cell`
+* couper les énoncés en petits morceaux + digestes
+* l'insérer ensuite dans `nbhosting.yaml` pour l'exposer une fois prêt
+
++++
+
 # suite du TP simple avec des images
 
 merci à Wikipedia et à stackoverflow

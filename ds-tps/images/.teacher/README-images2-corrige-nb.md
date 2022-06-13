@@ -31,6 +31,18 @@ from IPython.display import HTML
 HTML('<link rel="stylesheet" href="slides-notebook.css" />')
 ```
 
++++ {"tags": ["level_advanced"]}
+
+pas fait par manque de temps, mais ce TP aurait besoin d'être retravaillé comme la partie 1, i.e.
+
+* utiliser %matplotlib notebook
+  * et donc faire des plt.figure(); pas besoin par contre du `plt.show()`
+* utiliser nbprune et notamment marquer les cellules à enlever avec `# prune-cell`
+* couper les énoncés en petits morceaux + digestes
+* l'insérer ensuite dans `nbhosting.yaml` pour l'exposer une fois prêt
+
++++
+
 # suite du TP simple avec des images
 
 merci à Wikipedia et à stackoverflow
@@ -119,7 +131,6 @@ vous devriez obtenir quelque chose comme ceci
 ```
 
 ```{code-cell} ipython3
-
 # prune-cell
 
 # correction 1.
@@ -356,7 +367,6 @@ plt.show()
 
 # correction 8.
 print(np.unique(gr3))
-
 ```
 
 ## Image en sépia
@@ -385,7 +395,7 @@ la fonction `numpy.dot` doit être utilisée (si besoin, voir l'exemple ci-desso
 
 1. Passez votre patchwork de couleurs en sépia  
 Lisez le fichier `patchwork-all.jpg` si vous n'avez pas de fichier perso
-2. Passez l'image `les-mines.jpg` en sépia  
+2. Passez l'image `les-mines.jpg` en sépia
 
 ```{code-cell} ipython3
 # votre code
@@ -513,7 +523,7 @@ l'image lue par `Image.open` avec `save` et une `quality=100`
 5. Quelles sont les tailles de ces deux fichiers sur votre disque ?  
 Que constatez-vous ?
 
-6. Relisez les deux fichiers créés et affichez avec `plt.imshow` leur différence  
+6. Relisez les deux fichiers créés et affichez avec `plt.imshow` leur différence
 
 ```{code-cell} ipython3
 # votre code
