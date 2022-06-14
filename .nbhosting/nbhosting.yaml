@@ -98,6 +98,7 @@ tracks:
     - ds-howtos/groupby-ratings-howto-nb.md
     - ds-howtos/coronavirus-howto-nb.md
     - ds-howtos/fremont-bridge-howto-nb.md
+    - ds-howtos/numpy-meshgrid-howto-nb.md
     - ds-howtos/dashboard-with-dash-howto-nb.md
     - ds-howtos/streamlit-sinus.py
     - ds-howtos/streamlit-taylor.py
