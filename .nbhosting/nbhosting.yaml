@@ -89,6 +89,7 @@ tracks:
     - ds-exos/pandas/bornes-nb.md
     - ds-exos/pandas/stack-simple-nb.md
     - ds-exos/pandas/stack-multicol-nb.md
+    - ds-exos/pandas/titanic-nb.md
     - ds-exos/pandas/mosaique-nb.md
   - name: miscell howtos
     notebooks:
