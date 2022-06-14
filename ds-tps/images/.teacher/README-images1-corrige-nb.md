@@ -443,6 +443,8 @@ affichez-le pour `(lig, col) = (10, 20)` puis `(lig, col) = (100, 200)`
 ```{code-cell} ipython3
 :tags: [level_basic]
 
+# prune-cell
+
 for (lig, col) in ((10, 20), (100, 200)):
     print(f"centre de taille {lig} x {col}")
     ml = img.shape[0] // 2 - lig//2
@@ -720,6 +722,8 @@ img = plt.imread(filename)
 
 ```{code-cell} ipython3
 :tags: [level_basic]
+
+# prune-cell
 
 plt.title('q2: flottant entre 0 et 1')
 imgf = img/255
