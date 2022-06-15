@@ -101,7 +101,7 @@ tracks:
     - ds-howtos/numpy-meshgrid-howto-nb.md
   - name: miscell dashboards
     notebooks:
-    - ds-howtos/dashboard-with-dash-howto.py
+    - ds-howtos/dashboard-with-dash.py
     - ds-howtos/streamlit-sinus.py
     - ds-howtos/streamlit-taylor.py
   - name: exercices dataviz
