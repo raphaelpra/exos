@@ -100,6 +100,7 @@ tracks:
     - ds-howtos/fremont-bridge-howto-nb.md
     - ds-howtos/numpy-meshgrid-howto-nb.md
   - name: miscell dashboards
+    notebooks:
     - ds-howtos/dashboard-with-dash-howto.py
     - ds-howtos/streamlit-sinus.py
     - ds-howtos/streamlit-taylor.py
