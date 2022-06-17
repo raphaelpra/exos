@@ -64,6 +64,12 @@ on peut envisager deux versions de l'exercice, selon qu'on choisit ou non d'inde
 
 ## avec index
 
++++
+
+dans un premier temps, pour chacune des trois tables, adoptez la colonne `name` comme index;
+
+puis recollez les morceaux comme dans le premier exercice
+
 ```{code-cell} ipython3
 # à vous
 ```

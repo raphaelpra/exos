@@ -76,6 +76,12 @@ df123
 
 ## avec index
 
++++
+
+dans un premier temps, pour chacune des trois tables, adoptez la colonne `name` comme index;
+
+puis recollez les morceaux comme dans le premier exercice
+
 ```{code-cell} ipython3
 # à vous
 ```
