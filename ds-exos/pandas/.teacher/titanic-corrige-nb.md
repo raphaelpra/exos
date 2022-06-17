@@ -29,17 +29,18 @@ import pandas as pd
 ## les données
 
 ```{code-cell} ipython3
-df_raw = pd.read_csv('../data/titanic.csv', index_col='PassengerId')
+df_raw = pd.read_csv('data/titanic.csv', index_col='PassengerId')
+```
+
+**remarquez** *que vous pouvez aussi charger les même données via `seaborn`*
+```python
+import seaborn as sns
+ti = sns.load_dataset('titanic')
 ```
 
 ```{code-cell} ipython3
 df_raw.head()
 ```
-
-## ce qu'il faut faire
-
-
-+++
 
 ----
 
@@ -49,7 +50,7 @@ df_raw.head()
 
 +++
 
-**[consigne]** simplifier la table, ne gardez que les colonnes qui après renommage s'appellent `survived`, `class`, `sex`, et `age`
+**[consigne]** simplifier la table, ne gardez que les colonnes qui après renommage s'appellent `survived`, `class`, `sex`, `age`, et `harbour` (pour `Embarked`)
 
 ```{code-cell} ipython3
 # à vous
@@ -63,8 +64,8 @@ df = ...
 
 # v0 - not too nice but works
 
-df = df_raw[['Survived', 'Pclass', 'Sex', 'Age']]
-df.columns = ['survived', 'class', 'sex', 'age']
+df = df_raw[['Survived', 'Pclass', 'Sex', 'Age', 'Embarked']]
+df.columns = ['survived', 'class', 'sex', 'age', 'harbour']
 ```
 
 ```{code-cell} ipython3
@@ -73,7 +74,7 @@ df.columns = ['survived', 'class', 'sex', 'age']
 # prune-cell 
 
 columns = {'Survived': 'survived', 'Pclass': 'class', 
-           'Sex': 'sex', 'Age': 'age'}
+           'Sex': 'sex', 'Age': 'age', 'Embarked': 'harbour'}
 
 df = df_raw[columns.keys()].rename(columns=columns)
 ```
@@ -136,22 +137,20 @@ type(M), M
 # prune-end
 ```
 
-## survie selon deux critères
+## survie selon deux critères (méthode manuelle)
 
 +++
 
 **[consigne]** calculez le taux de survie par sexe et classe (6 valeurs)
-* faites ce dernier calcul de deux façons, à base de de `pivot_table()` et de `groupby()`
-* dans les deux versions, envisagez aussi de calculer le **nombre** de survivants plutôt que le taux
-* comment choisir dans quel ordre on présente les résultats (sexe en ligne ou en colonne)
+
+dans un premier temps, on va utiliser `groupby()` et produire une `Series`
 
 +++
 
-### moyenne avec groupby
+en une formule relativement simple, vous pouvez créer à base de `groupby` une série des 6 valeurs représentant le taux de survie du groupe
 
 ```{code-cell} ipython3
-# à vous - pour produire un tableau de 6 valeurs 
-# 2 lignes (female / male) et 3 colonnes pour les classes
+# à vous
 ```
 
 ```{code-cell} ipython3
@@ -163,44 +162,14 @@ mean = df.groupby(['sex', 'class'])['survived'].mean()
 mean
 ```
 
-```{code-cell} ipython3
-# prune-cell
+## moyenne avec pivot_table()
 
-# nicer when unstacked
++++
 
-mean.unstack()
-```
-
-### pareil dans l'autre sens (sexe en colonne)
+**[consigne]]** utilisez à présent `pivot_table()` pour produire les mêmes résultats mais dans una table de dimension 2 lignes x 3 colonnes; puis 3 lignes et 2 colonnes
 
 ```{code-cell} ipython3
-# à vous - pour produire un tableau de 6 valeurs 
-# 2 lignes (female / male) et 3 colonnes pour les classes
-```
-
-```{code-cell} ipython3
-:tags: [level_basic]
-
-# prune-cell
-
-# I can either select the level to unstack
-
-df.groupby(by=['sex', 'class'])['survived'].mean().unstack(0)
-```
-
-```{code-cell} ipython3
-:tags: [level_basic]
-
-# prune-cell
-
-# or change the order of the initial multiindex
-
-df.groupby(by=['class', 'sex'])['survived'].mean().unstack()
-```
-
-### moyenne avec pivot_table()
-
-```{code-cell} ipython3
+# 2 lignes x 3 colonnes
 # à vous
 ```
 
@@ -213,9 +182,8 @@ df.groupby(by=['class', 'sex'])['survived'].mean().unstack()
 df.pivot_table('survived', index='sex', columns='class')
 ```
 
-### idem mais dans l'autre sens
-
 ```{code-cell} ipython3
+# 3 lignes x 2 colonnes
 # à vous
 ```
 
@@ -224,14 +192,15 @@ df.pivot_table('survived', index='sex', columns='class')
 
 # prune-cell
 
+# the 'aggfunc' parameter defaults to 'mean'
 df.pivot_table('survived', index='class', columns='sex')
 ```
 
-### nombre de survivants avec pivot_table()
+## nombre de survivants avec pivot_table()
 
-```{code-cell} ipython3
-# à vous
-```
++++
+
+**[consigne]** toujours avec `pivot_table()` produisez dans une table 2x3 le **nombre** de survivants
 
 ```{code-cell} ipython3
 :tags: [level_basic]
@@ -244,6 +213,12 @@ S = df.pivot_table('survived', index='sex', columns='class', aggfunc='sum')
 S
 ```
 
+### double-check
+
++++
+
+**[consigne]** vérifiez que la somme des nombres dans cette table coincide bien avec le nombre de survivants dans la donnée de départ
+
 ```{code-cell} ipython3
 :tags: [level_basic]
 
@@ -252,4 +227,128 @@ S
 # check consistency
 
 S.sum().sum() == df.survived.sum()
+```
+
+## pivot_table multi-colonnes
+
++++
+
+## afficher le taux de survie et la moyenne d'âge
+
++++
+
+maintenant on va aussi prendre en compte l'âge
+
+**[consigne]** produisez une table avec 12 valeurs, avec pour chacun des 6 groupes le **taux de survie** et la **moyenne d'âge**  
+  visez de présenter les données
+  * sur deux lignes (selon le sexe)
+  * et sur chaque ligne, 3 valeurs (selon la classe) pour le taux de survie, et 3 valeurs pour la moyenne d'âge
+
+```{code-cell} ipython3
+# 2 lignes
+# sur chaque ligne, d'abord 3 taux de survie, puis 3 moyennes d'âge
+
+# à vous
+...
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# prune-cell 
+df1 = df.pivot_table(['survived', 'age'], columns="class", index="sex")
+df1
+```
+
+### afficher la moyenne d'âge entre survivants et entre disparus
+
++++
+
+**[consigne]** on veut produire une table qui a 12 valeurs aussi, mais qui modélise seulement la moyenne d'âge selon les mêmes groupes, et selon que les gens ont survécu ou non
+
+**[attention]** il y a toujours 12 chiffres à afficher, mais bien entendu 
+ce ne sont plus les mêmes chiffres que l'on doit obtenir ici
+
+```{code-cell} ipython3
+# à vous
+...
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# prune-cell 
+df1 = df.pivot_table('age', columns=["class", "survived"], index="sex")
+df1
+```
+
+## groupements en *bins*
+
++++
+
+**[consigne]** on répartit arbitrairement les individus en 5 classes d'âge: les enfants de moins de 10 ans, les adolescents de moins de 20ans, les jeunes adultes de moins de 40 ans, les adultes en dessous de 60 ans, et les seniors au delà.
+
+affichez maintenant le taux de survie selon 10 groupes, liés à 
+  * le sexe
+  * la classe d'âge
+
+```{code-cell} ipython3
+# à vous
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# prune-begin
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+series_with_names = pd.cut(df.age, [0, 10, 20, 40, 60, 100], 
+                labels=['child', 'teen', 'young', 'adult', 'senior'])
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+series_with_names.value_counts()
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+df.pivot_table('survived', columns=series_with_names, index='sex')
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# prune-end
+```
+
+## pivot sur données catégorielles
+
++++
+
+**[consigne]** selon toujours les 2 critères `sex` et `class`, indiquez pour chacun des 6 groupes quelle est la classe d'âge majoritaire
+
+**[indice]** `Series.mode()`
+
+```{code-cell} ipython3
+# à vous
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# prune-cell
+
+# jusqu'ici on n'avait pas eu de nécessité à insérer le groupe d'aâge 
+# comme une colonne en propre dans df, mais maintenant oui
+df['age-group'] = series_with_names
+
+# maintenant on peut faire un simple pivot
+
+df.pivot_table('age-group', columns='class', index='sex', aggfunc=pd.Series.mode)
 ```
