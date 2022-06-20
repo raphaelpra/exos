@@ -233,17 +233,6 @@ affichez-le pour `(lig, col) = (10, 20)` puis `(lig, col) = (100, 200)`
 # votre code
 ```
 
-```{code-cell} ipython3
-:tags: [level_basic]
-
-for (lig, col) in ((10, 20), (100, 200)):
-    print(f"centre de taille {lig} x {col}")
-    ml = img.shape[0] // 2 - lig//2
-    mc = img.shape[1] // 2 - col//2
-    plt.figure()
-    plt.imshow(img[ml:ml+lig, mc:mc+col, :])
-```
-
 4. Affichez le dernier pixel de l'image
 
 ```{code-cell} ipython3
@@ -352,15 +341,6 @@ Corrigez vos affichages si besoin
 
 ```{code-cell} ipython3
 # votre code
-```
-
-```{code-cell} ipython3
-:tags: [level_basic]
-
-plt.title('q2: flottant entre 0 et 1')
-imgf = img/255
-plt.figure()
-plt.imshow(imgf);
 ```
 
 3. Transformer l'image en deux images en niveaux de gris :   
