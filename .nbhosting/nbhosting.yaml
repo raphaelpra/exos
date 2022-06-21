@@ -91,6 +91,9 @@ tracks:
     - ds-exos/pandas/stack-multicol-nb.md
     - ds-exos/pandas/titanic-nb.md
     - ds-exos/pandas/mosaique-nb.md
+  - name: quizzes pandas
+    notebooks:
+    - ds-quizzes/[0-9]*-nb.py
   - name: miscell howtos
     notebooks:
     - ds-howtos/split-count-into-columns-howto-nb.md
