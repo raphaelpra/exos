@@ -23,6 +23,61 @@ nbhosting:
 import numpy as np
 ```
 
+on va commencer par quelques astuces / rappels
+
++++
+
+# broadcasting
+
++++
+
+un trait qui sera abordé en cours, mais qu'on peut mettre en évidence facilement
+
+```{code-cell} ipython3
+# un tableau en ligne
+row = np.array([0, 1000, 2000, 3000])
+# un tableau en colonne
+col = np.array([[0], [10], [20]])
+```
+
+```{code-cell} ipython3
+row
+```
+
+```{code-cell} ipython3
+col
+```
+
+eh bien ces deux tableaux, bien que n'ayant pas la même forme, peuvent s'ajouter !
+
+```{code-cell} ipython3
+row + col
+```
+
+# reshaping
+
++++
+
+pour fabriquer le tableau `col` ci dessus, on aurait pu procéder de plein d'autres façons
+
+```{code-cell} ipython3
+# en partant des données 'à plat'
+raw = np.array([0, 10, 20])
+```
+
+```{code-cell} ipython3
+# on aurait pu produire la forme de `col` comme ceci
+# dans un reshape, le -1 est calculé pour boucher le trou
+col1 = raw.reshape((-1, 1))
+col1
+```
+
+```{code-cell} ipython3
+# avec newaxis
+col2 = raw[:, np.newaxis]
+col2
+```
+
 # indices
 
 +++
@@ -36,6 +91,48 @@ I, J = np.indices((3, 4))
 
 ```{code-cell} ipython3
 I, J
+```
+
+# exercices
+
++++
+
+Voici maintenant de quoi mettre ces astuces en pratique
+
++++
+
+## table de multiplication
+
++++
+
+Produisez le tableau de la table de multiplication des entiers entre 1 et n
+
+On peut le faire de au moins 3 façons (cf les 3 premières sections ci-dessus)
+
+```{code-cell} ipython3
+N = 5
+
+# à vous
+```
+
+```{code-cell} ipython3
+# prune-cell - v1 
+I = np.arange(1, N+1)
+J = I.reshape((-1, 1))
+I * J
+```
+
+```{code-cell} ipython3
+# prune-cell - v2
+I = np.arange(N)
+J = I[:, np.newaxis]
+(I+1) * (J+1)
+```
+
+```{code-cell} ipython3
+# prune-cell - v3
+I, J = np.indices((N, N))
+(I+1) * (J+1)
 ```
 
 ## échiquier
