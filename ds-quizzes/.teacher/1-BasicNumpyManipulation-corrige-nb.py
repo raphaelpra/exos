@@ -159,12 +159,17 @@ print(f"{mean_jan_rainy=:.2f}mm")
 s = pd.Series(rainfall)
 
 # then we convert the index to the real dates
-s.index = pd.to_datetime(s.index, unit='D',                                                                                                           			     origin=pd.Timestamp('1/1/2004'))
+s.index = pd.to_datetime(s.index, unit='D',
+                         origin=pd.Timestamp('1/1/2004'))
 
 # possibly resample per month to get the total monthly rain
 s = s.resample('m').max()
 
+# %%
 # then plot
+
+# %matplotlib notebook
+
 s.plot.bar()
 plt.xlabel('month')
 plt.ylabel('mm')
@@ -172,3 +177,6 @@ plt.title('Rainy days in 2014 at Seattle')
 fig = plt.gcf()
 fig.autofmt_xdate()
 # plt.show() # if in a terminal
+
+# %% [markdown]
+# ***
