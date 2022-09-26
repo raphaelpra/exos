@@ -16,7 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: 'création de facture'
+  title: "cr\xE9ation de facture"
 ---
 
 # génération de facture
@@ -158,6 +158,3 @@ ce qui dans les deux cas produirait une sortie dans le genre de la suivante
 +++
 
 ---
-
-+++
-

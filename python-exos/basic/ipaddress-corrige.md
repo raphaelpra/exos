@@ -16,7 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: 'manipulation simple sur une adresse IP'
+  title: manipulation simple sur une adresse IP
 ---
 
 # analyse adresse IP
@@ -90,7 +90,7 @@ ip_v1(IP_1) == 0xc0a80009
 ip_v1(IP_2) == 0x8a601301
 ```
 
-## astuce 
+## astuce
 
 +++
 
@@ -104,6 +104,12 @@ hex(192), hex(168), hex(0), hex(9)
 ```{code-cell} ipython3
 # ça veut dire que le résultat final doit être ceci
 0xc0a80009
+```
+
+---
+
+```{code-cell} ipython3
+# prune-begin
 ```
 
 # solutions

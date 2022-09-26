@@ -1,37 +1,44 @@
 ---
 jupytext:
-  formats: md:myst
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.13.8
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
+nbhosting:
+  title: encoding howto
 ---
 
 # ASCII
 
-```{code-cell}
+```{code-cell} ipython3
 text1 = "abcd\nefgh\n"
 ```
 
 <https://www.man7.org/linux/man-pages/man7/ascii.7.html>
 
-```{code-cell}
+```{code-cell} ipython3
 for c in text1:
     print(f"{c} -> {ord(c)}")
 ```
 
 ## write into a text file
 
-```{code-cell}
+```{code-cell} ipython3
 from pathlib import Path
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 with Path('encodings1-utf8').open('w') as f:
     f.write(text1)
 ```
@@ -44,50 +51,50 @@ you will see that with ASCII-only characters your file has exactly one byte ber 
 
 # non-ASCII & UTF-8
 
-```{code-cell}
+```{code-cell} ipython3
 text2 = "abçd\néfgh\n"
 ```
 
 ## inspection
 
-```{code-cell}
+```{code-cell} ipython3
 for c in text2:
     print(f"{c} -> {ord(c)}")
 ```
 
 we have 2 characters whose encoding is > 127
 
-```{code-cell}
+```{code-cell} ipython3
 hex(231), hex(233)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 bin(231), bin(233)
 ```
 
 note that `chr()` and `ord()` are the inverse of one another
 
-```{code-cell}
+```{code-cell} ipython3
 chr(231), ord('ç')
 ```
 
 ## write into a text file
 
-```{code-cell}
+```{code-cell} ipython3
 with Path('encodings2-utf8').open('w') as f:
     f.write(text2)
 ```
 
 ## read back
 
-```{code-cell}
+```{code-cell} ipython3
 with Path('encodings2-utf8').open('rb') as f:
     raw = f.read()
 ```
 
 **NOTE** we read bytes here, and we have more than the initial text had characters
 
-```{code-cell}
+```{code-cell} ipython3
 len(raw), len(text2)
 ```
 
@@ -109,17 +116,17 @@ remember the logic of the UTF-8 encoding
 
 let's check that
 
-```{code-cell}
+```{code-cell} ipython3
 ccedilla = raw[2:4]
 eaccent = raw[6:8]
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 for b in ccedilla:
     print(f"byte {b} {hex(b)} {bin(b)}")
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 for b in eaccent:
     print(f"byte {b} {hex(b)} {bin(b)}")
 ```
@@ -130,7 +137,7 @@ sounds good
 
 ## decode manually ?
 
-```{code-cell}
+```{code-cell} ipython3
 # we want 5 bits from the first byte and 6 from the second byte
 on2bytes_0_len = 5
 on2bytes_1_len = 6
@@ -139,7 +146,7 @@ on2bytes_0_pad = 0b110
 on2bytes_1_pad = 0b10
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 def mask_from_len(length):
     """
     for e.g. len == 5, we compute a mask that has
@@ -148,7 +155,7 @@ def mask_from_len(length):
     return 2**8 - 2**length
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # e.g. for byte0
 # the result allows to separate 
 # the (3-bits) padding from 
@@ -156,7 +163,7 @@ def mask_from_len(length):
 bin(mask_from_len(5))
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # with that we can manually decode 2-bytes UTF-8 !
 
 on2bytes_0_mask = mask_from_len(on2bytes_0_len)
@@ -180,7 +187,7 @@ def decode(on2bytes):
     return chr(codepoint)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # and indeed 
 decode(eaccent), decode(ccedilla)
 ```
@@ -201,19 +208,19 @@ use this table to write a complete UTF-8 decoder
 
 ## write with UTF-32
 
-```{code-cell}
+```{code-cell} ipython3
 with Path("encodings2-utf32").open('w', encoding='utf-32') as f:
     f.write(text2)
 ```
 
 ## size and BOM
 
-```{code-cell}
+```{code-cell} ipython3
 with Path("encodings2-utf32") as p:
     print(f"file has {p.stat().st_size} bytes")
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 len(text2)
 ```
 
@@ -222,12 +229,12 @@ len(text2)
 * 4 * 10 chars = 40 bytes
 * *plus* 4 bytes for the BOM located in the first 4 bytes
 
-```{code-cell}
+```{code-cell} ipython3
 with Path("encodings2-utf32").open('rb') as f:
     raw = f.read()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 raw[:4]
 ```
 
@@ -248,14 +255,14 @@ with that in mind it is easier to
 
 for example: decode the `ç` in our initial string
 
-```{code-cell}
+```{code-cell} ipython3
 text2[2]
 ```
 
 so this means it gets encoded in the file on 4 bytes starting at offset 
 4 + 4 * 2
 
-```{code-cell}
+```{code-cell} ipython3
 offset = 4 + 4*2
 
 b4 = raw[offset:offset+4]
@@ -263,10 +270,10 @@ b4 = raw[offset:offset+4]
 
 because it is little endian - see <https://en.wikipedia.org/wiki/Endianness> - it means we have to mirror the data bytes to get the actual value
 
-```{code-cell}
+```{code-cell} ipython3
 int.from_bytes(b4, 'little')
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 chr(231)
 ```
