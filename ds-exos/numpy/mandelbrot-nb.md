@@ -44,13 +44,17 @@ import matplotlib.pyplot as plt
 
 +++ {"run_control": {"frozen": false, "read_only": false}}
 
-## exercice
+# l'ensemble de Mandelbrot
 
 il s'agit de calculer l'image de la convergence de mandelbrot:
 
-<img src="media/mandelbrot.png" width="2000px">
+<img src="media/mandelbrot.svg">
 
-+++ {"cell_style": "split", "run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
++++
+
+## comment ça marche ?
+
++++ {"cell_style": "center", "run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
 
 * dans l'espace complexe où
    * $re \in [-2, 0.8]$
@@ -61,19 +65,18 @@ il s'agit de calculer l'image de la convergence de mandelbrot:
 * on démontre que 
   * lorsque $|z_n|>2$, la suite diverge
 
-+++ {"cell_style": "split", "run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "-"}}
++++ {"cell_style": "center", "run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "-"}}
 
 il s'agit pour nous de 
 
-* découper ce pavé 
-  * en un maillage de $w$ x $h$ points
-* pour chacun, calculer si la suite diverge
-  * avant un nombre d'itérations fixe
+* découper ce pavé en un maillage de $w$ x $h$ points
+* on se fixe un nombre maximal `max` d'itérations (disons 20)
+  * pour chaque point du maillage, on va calculer si la suite diverge avant `max` itérations
+* c'est-à-dire plus spécifiquement on calcule un tableau `diverge`
+  * pour chaque point `z`, on calcule les `max` premiers termes de la suite
+  * et à la première itération `n` où la suite diverge (son module est supérieur à 2)  
+    alors on affecte `diverge[z] = n`
 * afficher l'image obtenue avec `plt.imshow`
-
-+++ {"run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
-
-* une adaptation libre de l'[implementation proposée dans le tutorial scipy](https://docs.scipy.org/doc/numpy/user/quickstart.html#indexing-with-boolean-arrays)
 
 +++ {"run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
 
@@ -86,4 +89,16 @@ il s'agit pour nous de
 :trusted: true
 
 # à vous de jouer
+def mandelbrot(w, h):
+    pass
 ```
+
+## bonus
+
+* on peut passer en paramètre à la fonction
+  * le domaine en x et en y
+  * le nombre maximum d'itérations
+* on veut pouvoir produire une image (pour l'insérer dans l'énoncé par exemple)
+  * quels formats sont disponibles ?
+  * sauvez votre image dans un format bitmap, puis dans un format vectoriel
+  * affichez les images depuis votre notebook
