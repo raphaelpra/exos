@@ -78,6 +78,7 @@ tracks:
   - name: TP images
     notebooks:
     - ds-tps/images/README-images1-nb.md
+    - ds-tps/images/README-images2-nb.md
   - name: TP Taylor
     notebooks:
     - ds-tps/taylor/taylor-*.md
