@@ -21,6 +21,18 @@ nbhosting:
   title: exo marathon
 ---
 
+# propos
+
++++
+
+un petit TP pour travailler
+
+* le chargement et la sélection
+* un peu de groupby
+* un peu de gestion du temps et des durées
+
++++
+
 # outils
 
 ```{code-cell} ipython3
@@ -76,6 +88,8 @@ il faut donc bien regarder la doc
 # pd.read_csv?
 ```
 
++++ {"tags": ["level_basic"]}
+
 et pour commencer je vous invite à préciser le séparateur:
 
 ```{code-cell} ipython3
@@ -104,8 +118,12 @@ en effet par défaut, `read_csv` utilise la première ligne pour déterminer les
 or dans le fichier texte il n'y a pas le nom des colonnes !
 
 ```{code-cell} ipython3
+# NOTE: si vous n'avez pas le module head, ouvrez le fichier dans votre éditeur favori
+
 head("data/marathon.txt", 5)
 ```
+
++++ {"tags": ["level_basic"]}
 
 du coup ce serait pertinent de donner un nom aux colonnes
 
@@ -115,7 +133,7 @@ NAMES = ["city", "year", "duration", "seconds"]
 
 ```{code-cell} ipython3
 # à vous de créer une donnée bien propre
-df = pd.read_csv(URL)
+df = ... # pd.read_csv(URL)
 ```
 
 ```{code-cell} ipython3
@@ -208,7 +226,7 @@ df_london_1981.shape == (1, 4) and df_london_1981.iloc[0].seconds == 7908
 
 ### trouver toutes les villes
 
-+++
++++ {"tags": ["level_basic"]}
 
 on veut construire une collection de toutes les villes qui apparaissent au moins une fois
 
@@ -399,10 +417,6 @@ formatted_average == "2h 12' 13''"
 si maintenant je veux produire une série qui compte par année combien il y a eu de marathons
 
 ```{code-cell} ipython3
-
-```
-
-```{code-cell} ipython3
 # à vous
 
 count_by_year = ...
@@ -411,12 +425,29 @@ count_by_year = ...
 ```{code-cell} ipython3
 # prune-cell
 
+count_by_year = df.groupby(by='year').size()
+```
+
+```{code-cell} ipython3
+# prune-cell
+
 # toutes les colonnes vont contenir les mêmes infos, on peut en prendre une au hasard
 count_by_year = df.groupby(by='year').count().city
+```
+
+```{code-cell} ipython3
+# prune-cell 
 
 # il y a plein de variantes, on peut inverser le count() et le city
+count_by_year = df.groupby(by='year').city.count()
+```
+
+```{code-cell} ipython3
+# prune-cell
+
 # on peut appeler .agg('count')
-# ...
+count_by_year = df.groupby(by='year').agg('count')['city']
+count_by_year
 ```
 
 ```{code-cell} ipython3
@@ -430,11 +461,28 @@ count_by_year = df.groupby(by='year').count().city
 
 ## les durées
 
++++ {"tags": ["level_intermediate"]}
+
+dans cette partie, notre but est de simplement vérifier que la colonne `seconds` contient bien le nombre de secondes correspondant à la colonne `duration`
+
++++
+
+pour cela on va commencer par convertir la colonne `duration` en quelque chose d'un peu plus utilisable
+
+`numpy` expose deux types particulièrement bien adaptés à la gestion du temps
+
+* `datetime64` pour modéliser un instant particulier
+* `timedelta64` pour modéliser une durée entre deux instants
+
+voir plus de détails si nécessaire ici: <https://numpy.org/doc/stable/reference/arrays.datetime.html>
+
 +++
 
 ### `read_csv(parse_dates=)`
 
 +++
+
+commençons par écarter une fausse bonne idée
 
 dans `read_csv` il y a une option `parse_dates`; mais regardez ce que ça donne
 
@@ -455,98 +503,92 @@ le truc c'est que ici, on n'a **pas une date** mais c'est une **durée**
 df.dtypes
 ```
 
-non, pour fabriquer un objet `datetime64` on va utiliser `pd.to_timedelta`
++++ {"tags": ["level_basic"]}
+
+non, pour convertir la colonne en `datetime64` on va utiliser `pd.to_timedelta`
+
+voyez la documentation de cette fonction, et modifiez la dataframe `df` pour que la colonne `duration` soit maintenant du type `timedelta64`
 
 ```{code-cell} ipython3
+# à vous
+```
+
+```{code-cell} ipython3
+# prune-cell
+
 df.duration = pd.to_timedelta(df.duration)
 ```
 
 ```{code-cell} ipython3
-df.head(5)
+# pour vérifier - doit retourner True
+df.duration.dtype == 'timedelta64[ns]'
 ```
 
 ```{code-cell} ipython3
-# et cette fois-ci
-df.dtypes
+# et effectivement c'est beaucoup mieux
+
+df.head(2)
 ```
 
 ### duration == seconds ?
 
 +++
 
-on va simplement vérifier que la colonne `seconds` correspond bien à ce qu'on croit
+à présent qu'on a converti `duration` dans le bon type, on peut utiliser toutes les fonctions disponibles sur ce type.  
+en pratique ça se fait en deux temps
+
+* sur l'objet `Series` on applique l'attribut `dt` pour, en quelque sorte, se projeter dans l'espace des 'date-time', exactement comme on l'a vu déjà avec le `.str` lorsqu'on a besoin d'appliquer des méthodes comme `.lower()`  
+  plus de détails ici <https://pandas.pydata.org/docs/reference/api/pandas.Series.dt.html>
+* de là on peut appeler toutes les méthodes disponibles sur les objets `timedelta` - on pourra en particulier s'intéresser à `total_seconds`
+
++++ {"tags": ["level_basic"]}
+
+du coup pour vérifier que la colonne `seconds` correspond bien à `duration`, on écrirait quoi comme code (qui doit afficher `True`)
 
 ```{code-cell} ipython3
-total_seconds = df.duration.dt.total_seconds()
+# à vous
 ```
 
 ```{code-cell} ipython3
-# ça matche presque
-total_seconds.head(5), df.seconds.head(5)
+# prune-cell 
+
+# il faut convertir en int parce que total_seconds retourne des flottants
+total_seconds = df.duration.dt.total_seconds().astype(int)
+np.all(total_seconds == df.seconds)
+```
+
++++ {"tags": ["level_basic"]}
+
+on se propose maintenant de rajouter des colonnes `hour` `minute` et `second` - qui doivent être de type entier
+
+**indices**
+* on peut calculer le quotient et le reste entre deux objets `timedelta` avec les opérateurs usuels `//` et `%`
+* on peut construire un objet `timedelta` comme par exemple `timedelta(hours=1)`
+
+```{code-cell} ipython3
+from datetime import timedelta
 ```
 
 ```{code-cell} ipython3
-# mais on ne peut pas faire juste == à cause des types
-(df.duration.dt.total_seconds() == df.seconds).head(5)
-```
-
-***
-***
-***
-
-+++
-
-**DIGRESSION**
-
-+++
-
-ce qui d'ailleurs est particulièrement bizarre car on peut en général comparer deux types distincts et ça fonctionne
-
-```{code-cell} ipython3
-import numpy as np
-
-# ----
-df1 = pd.DataFrame([{'a': 1}, {'a': 2}])
-df2 = pd.DataFrame({'a': df1.a.astype(np.float64)})
-
-df1.dtypes, df2.dtypes
-```
-
-```{code-cell} ipython3
-df1 == df2
-```
-
-**FIN DIGRESSION**
-
-+++
-
-***
-***
-***
-
-+++
-
-**MAIS REPRENONS**
-
-+++
-
-comme souvent dans ces cas-là le réflexe est d'utiliser isclose
-
-```{code-cell} ipython3
-import numpy as np
-np.isclose(df.duration.dt.total_seconds(), df.seconds)
-```
-
-```{code-cell} ipython3
-# du coup comment feriez-vous pour vérifier
-# l'égalité sur toute la dataframe
-
-# ...
+# à vous
 ```
 
 ```{code-cell} ipython3
 # prune-cell
-np.all(np.isclose(df.duration.dt.total_seconds(), df.seconds))
+
+df['hour'] = df.duration // timedelta(hours=1)
+df['minute'] = df.duration % timedelta(hours = 1) // timedelta(minutes=1)
+df['second'] = df.duration % timedelta(minutes=1) // timedelta(seconds=1)
+
+df.head()
 ```
 
-****
+```{code-cell} ipython3
+# pour vérifier
+(    np.all(df.loc[0, ['hour', 'minute', 'second']] == [2, 6, 29])
+ and df.hour.dtype == int
+ and df.minute.dtype == int 
+ and df.second.dtype == int)
+```
+
+***

@@ -54,6 +54,8 @@ l'idée est de se mettre en vraie situation; les données qu'on trouve ici ou l�
 ```{code-cell} ipython3
 # de prime abord ça a l'air pas trop mal
 
+# NOTE: si vous n'avez pas le module head, ouvrez le fichier dans votre éditeur favori
+
 head("data/television.txt", 10)
 ```
 
@@ -65,31 +67,37 @@ df
 ```
 
 ```{code-cell} ipython3
+# et en particulier, ceci n'est pas du tout ce qu'on veut
+
 df.shape
 ```
 
-## ce qu'il faut faire
+## survol de ce qu'il faut faire
 
-* enlever les colonnes pleines de vide; dans le corrigé on va voir deux méthodes
+le TP comporte plusieurs étapes
+
+1. enlever les colonnes pleines de vide; pour fixer les idées, nous nettoyons **les colonnes qui contiennent seulement des n/a ou des 0**
+ 
+   dans le corrigé on va voir deux méthodes
   * rapide
   * manuelle: comment on ferait si le nettoyage devait être fait sur un critère plus spécifique; on verra comment faire sur la base d'une fonction qui, pour une colonne, indique si elle doit être gardée ou pas
-  
-  pour fixer les idées, nettoyons les colonnes qui contiennent seulement des n/a ou des 0.
-  
-* calculer les valeurs uniques de la colonne `cLT2FREQ`; le texte de l'exercice suggère qu'on doit trouver une poignée de valeurs
 
-* à ce stade, combien de lignes ont leur `cLT2FREQ` non renseignée ?  
+1. calculer les valeurs uniques de la colonne `cLT2FREQ`; le texte de l'exercice suggère qu'on doit trouver une poignée de valeurs
+
+1. à ce stade, combien de lignes ont leur `cLT2FREQ` non renseignée ?  
   combien doit-on avoir de lignes si on nettoie sur cette base ?  
   (i.e. si on enlève toutes les lignes qui n'ont pas cette colonne renseignée)
   faites ce nettoyage et vérifiez votre résultat
 
-* sauver le résultat dans un fichier excel
+1. sauver le résultat dans un fichier excel
 
-vous devez trouver à la fin une dataframe qui a une forme de `7386, 4)`
+toujours pour fixer les idées, on doit trouver à la fin une dataframe qui a une forme de `(7386, 4)`
 
 +++
 
 ### indices
+
+quelques indices valides pour tout le TP
 
 ```{code-cell} ipython3
 # df.dropna?
@@ -119,7 +127,7 @@ df.shape
 
 ### la méthode rapide
 
-+++
++++ {"tags": ["level_basic"]}
 
 le mieux c'est d'utiliser `dropna`
 
@@ -157,6 +165,8 @@ donc voyons comment on peut faire le même nettoyage, mais de manière plus fine
 df = pd.read_csv("data/television.txt", sep="\t")
 ```
 
++++ {"tags": ["level_basic"]}
+
 en deux étapes:
 
 d'abord comment feriez-vous, étant donné le nom d'une colonne, pour savoir si elle est pleine de vide ?
@@ -174,7 +184,7 @@ def is_empty_column(df, colname):
 
 # on teste
 col1 = 'POIDLOG'
-not is_empty_column_prof(df, col1)
+not is_empty_column(df, col1)
 ```
 
 ```{code-cell} ipython3
@@ -183,10 +193,10 @@ not is_empty_column_prof(df, col1)
 # ceci doit afficher True
 
 col5 = 'Unnamed: 4'
-is_empty_column_prof(df, col5)
+is_empty_column(df, col5)
 ```
 
-+++ {"hide_input": true}
++++ {"hide_input": true, "tags": ["level_basic"]}
 
 ensuite il ne reste qu'à calculer la liste des colonnes vides, pour la passer à `df.drop()`
 
@@ -196,7 +206,7 @@ ensuite il ne reste qu'à calculer la liste des colonnes vides, pour la passer �
 # calculez la liste des colonnes vides
 empty_columns = ...
 
-# utilisez df.drop
+# puis utilisez df.drop
 ```
 
 ```{code-cell} ipython3
@@ -204,16 +214,13 @@ empty_columns = ...
 df.shape == (8403, 4)
 ```
 
-```{code-cell} ipython3
-df.shape
-```
-
 Bien sûr on a découpé le problème en deux mais en fait ça peut se récrire en une seule ligne
 
 ```{code-cell} ipython3
+# en option
+
 # à vous
 
-# en option:
 # récrire tout ceci en une seule passe
 ```
 
@@ -239,7 +246,7 @@ et une inspection visuelle rapide vous le confirme, plus la présence de pas mal
 
 ### un `ndarray`
 
-+++
++++ {"tags": ["level_basic"]}
 
 la méthode la plus simple consiste à utiliser [`Series.unique`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.unique.html)
 
@@ -249,13 +256,21 @@ unique1 = ...
 ```
 
 ```{code-cell} ipython3
+unique1
+```
+
+```{code-cell} ipython3
 # ceci doit afficher True
 unique1.sort()
 np.all(unique1[:-1] == np.arange(1, 4)) and np.isnan(unique1[-1])
 ```
 
 ```{code-cell} ipython3
-np.arange(1, 3)
+:tags: [level_basic]
+
+# point de réflexion : pourquoi ceci ne renvoie-t-il pas True ?
+unique1.sort()
+np.all(unique1 == np.array([1., 2., 3., np.nan]))
 ```
 
 ### un ensemble
@@ -268,7 +283,11 @@ np.arange(1, 3)
 
 **attention** on rappelle - ou on apprend - que deux objets `nan` ne sont pas considérés comme identiques; ça surprend au début :
 
-+++
+```{code-cell} ipython3
+np.nan == np.nan
+```
+
++++ {"tags": ["level_basic"]}
 
 comment feriez-vous pour traduire 'brutalement' la colonne `cLT2FREQ` en un ensemble
 
@@ -287,7 +306,7 @@ len(unique2) == 1020
 
 ## compter les lignes à nettoyer
 
-+++
++++ {"tags": ["level_basic"]}
 
 on veut maintenant nettoyer les données en enlevant les lignes qui n'ont pas la colonne `cLT2FREQ` renseignée
 
@@ -305,7 +324,7 @@ nb_lines_to_clean == 1017
 ```
 
 ```{code-cell} ipython3
-# ce qui signifie qu'à la fin on doit avoir
+# ce qui signifie qu'à la fin on doit avoir ce nombre de lignes
 8403-1017
 ```
 
@@ -335,6 +354,8 @@ remarquez que `df.drop` prend un paramètre optionnel `inplace` qui peut être s
 #df.drop?
 ```
 
++++ {"tags": ["level_basic"]}
+
 option 1: on peut utiliser `df.drop()`, l'avantage étant qu'on peut faire l'opération en place
 
 ```{code-cell} ipython3
@@ -360,7 +381,9 @@ df = pd.read_csv("data/television.txt", sep="\t").dropna(axis='columns', how='al
 print(df.shape)
 ```
 
-il y a plein d'autres façons de faire, on peut aussi utiliser tout simplement un masque
++++ {"tags": ["level_basic"]}
+
+option 2: il y a plein d'autres façons de faire, on peut aussi utiliser tout simplement un masque
 
 ```{code-cell} ipython3
 # à vous
