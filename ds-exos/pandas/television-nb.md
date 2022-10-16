@@ -97,7 +97,7 @@ toujours pour fixer les idées, on doit trouver à la fin une dataframe qui a un
 
 ### indices
 
-quelques indices valides pour tout le TP
+je vous signale des fonctions utiles dans tout le TP:
 
 ```{code-cell} ipython3
 # df.dropna?
@@ -235,73 +235,36 @@ df.shape == (8403, 4)
 
 comment obtenir les valeurs distinctes de la colonne `cLT2FREQ`
 
-* sous la forme d'un `numpy.ndarray`
-
 +++
 
 le texte de l'exercice initial nous apprend qu'on ne devrait avoir que 3 valeurs; 
 et une inspection visuelle rapide vous le confirme, plus la présence de pas mal de vide dans cette colonne
 
-+++
-
-### un `ndarray`
-
 +++ {"tags": ["level_basic"]}
 
-la méthode la plus simple consiste à utiliser [`Series.unique`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.unique.html)
+la méthode la plus simple consiste à utiliser [`Series.unique`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.unique.html) qui renvoie le résultat sous la forme d'un `numpy.ndarray`
 
 ```{code-cell} ipython3
 # à vous
-unique1 = ...
+uniques = ...
 ```
 
 ```{code-cell} ipython3
-unique1
+uniques
 ```
 
 ```{code-cell} ipython3
 # ceci doit afficher True
-unique1.sort()
-np.all(unique1[:-1] == np.arange(1, 4)) and np.isnan(unique1[-1])
+uniques.sort()
+np.all(uniques[:-1] == np.arange(1, 4)) and np.isnan(uniques[-1])
 ```
 
 ```{code-cell} ipython3
 :tags: [level_basic]
 
 # point de réflexion : pourquoi ceci ne renvoie-t-il pas True ?
-unique1.sort()
-np.all(unique1 == np.array([1., 2., 3., np.nan]))
-```
-
-### un ensemble
-
-+++ {"tags": ["level_intermediate"]}
-
-**optionnel** pour ceux qui sont confortables en Pythone "de base"
-
-+++
-
-**attention** on rappelle - ou on apprend - que deux objets `nan` ne sont pas considérés comme identiques; ça surprend au début :
-
-```{code-cell} ipython3
-np.nan == np.nan
-```
-
-+++ {"tags": ["level_basic"]}
-
-comment feriez-vous pour traduire 'brutalement' la colonne `cLT2FREQ` en un ensemble
-
-```{code-cell} ipython3
-# à vous
-unique2 = ...
-```
-
-```{code-cell} ipython3
-# ceci doit afficher True
-
-# on s'attend à avoir quelque chose de l'ordre de 3 ou 4
-# mais surprise
-len(unique2) == 1020
+uniques.sort()
+np.all(uniques == np.array([1., 2., 3., np.nan]))
 ```
 
 ## compter les lignes à nettoyer
