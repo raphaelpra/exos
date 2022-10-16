@@ -9,7 +9,7 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 language_info:
@@ -17,7 +17,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: "les vélos sur le pont de Fremont"
+  title: "les v\xE9los sur le pont de Fremont"
 ---
 
 # Les vélos sur le pont de Fremont
@@ -46,22 +46,30 @@ import pandas as pd
 local_file = "data/fremont.csv"
 ```
 
+pour information, voici le code qu'on a utilisé pour aller chercher la donnée
+
 ```{code-cell} ipython3
-"""
-# on peut utiliser par exemple ceci pour aller chercher la donnée
+# ceci nécessite alors
+# %pip install requests
+```
 
-# !pip install requests
-import requests
+```{code-cell} ipython3
+from pathlib import Path
 
-req = requests.get(URL)
+if Path(local_file).exists():
+    print(f"le fichier {local_file} est déjà là")
+else:
+    print(f"allons chercher le fichier {local_file}")
 
-# doit afficher 200
-print(req.status_code)
+    import requests
+    req = requests.get(URL)
 
-# on sauve tel quel dans le fichier local
-with open(local_file, 'w') as writer:
-    writer.write(req.text)
-""";
+    # doit afficher 200
+    print(req.status_code)
+
+    # on sauve tel quel dans le fichier local
+    with open(local_file, 'w') as writer:
+        writer.write(req.text)
 ```
 
 ```{code-cell} ipython3
@@ -69,6 +77,10 @@ with open(local_file, 'w') as writer:
 ```
 
 ## chargement
+
+```{code-cell} ipython3
+%pip install seaborn
+```
 
 ```{code-cell} ipython3
 import pandas as pd
