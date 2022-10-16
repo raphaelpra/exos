@@ -56,10 +56,7 @@ il s'agit de calculer l'image de la convergence de mandelbrot:
 
 +++ {"cell_style": "center", "run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
 
-* dans l'espace complexe où
-   * $re \in [-2, 0.8]$
-   * $im \in [-1.4, 1.4]$
-* on définit pour chaque $c\in\mathbb{C}$ la suite
+* dans l'espace complexe, on définit pour chaque $c\in\mathbb{C}$ la suite
    * $z_0 = c$
    * $z_{n+1} = z_n^2 + c$
 * on démontre que 
@@ -69,14 +66,18 @@ il s'agit de calculer l'image de la convergence de mandelbrot:
 
 il s'agit pour nous de 
 
-* découper ce pavé en un maillage de $w$ x $h$ points
+* partir d'un pavé rectangulaire  
+  par exemple sur la figure, on a pris l'habituel  
+  $re \in [-2, 0.8]$ et  $im \in [-1.4, 1.4]$
+* découper ce pavé en un maillage de $w \times h$ points  
+  (sur la figure, 1000 x 1000)
 * on se fixe un nombre maximal `max` d'itérations (disons 20)
-  * pour chaque point du maillage, on va calculer si la suite diverge avant `max` itérations
-* c'est-à-dire plus spécifiquement on calcule un tableau `diverge`
+  * et pour chaque point du maillage, on va calculer si la suite diverge avant `max` itérations
+* c'est-à-dire plus spécifiquement on calcule un tableau `diverge` de la taille du maillage
   * pour chaque point `z`, on calcule les `max` premiers termes de la suite
   * et à la première itération `n` où la suite diverge (son module est supérieur à 2)  
     alors on affecte `diverge[z] = n`
-* afficher l'image obtenue avec `plt.imshow`
+* on n'a plus qu'à afficher ensuite l'image obtenue avec `plt.imshow`
 
 +++ {"run_control": {"frozen": false, "read_only": false}, "slideshow": {"slide_type": "slide"}}
 
@@ -93,12 +94,12 @@ def mandelbrot(w, h):
     pass
 ```
 
-## bonus
+## v2
 
 * on peut passer en paramètre à la fonction
   * le domaine en x et en y
   * le nombre maximum d'itérations
 * on veut pouvoir produire une image (pour l'insérer dans l'énoncé par exemple)
   * quels formats sont disponibles ?
-  * sauvez votre image dans un format bitmap, puis dans un format vectoriel
-  * affichez les images depuis votre notebook
+  * sauvez votre image dans un format vectoriel
+  * affichez cette depuis votre notebook
