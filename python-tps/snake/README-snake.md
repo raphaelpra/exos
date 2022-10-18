@@ -1,39 +1,22 @@
----
-jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
-  encoding: '# -*- coding: utf-8 -*-'
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
-  text_representation:
-    extension: .md
-    format_name: myst
-kernelspec:
-  display_name: Python 3 (ipykernel)
-  language: python
-  name: python3
-language_info:
-  name: python
-  nbconvert_exporter: python
-  pygments_lexer: ipython3
-nbhosting:
-  title: 'jeu: le snake'
----
-
 # Le snake
 
 Le but de ce TP est de réaliser un petit jeu en Python.
 L'objectif est de vous apprendre à concevoir et réaliser un programme complet, et non de réaliser le nouveau best-seller.
 
-Gardez ainsi en tête que votre objectif est de réaliser un **programme qui marche** et pas un programme parfait.
+## Objectifs et démarche
 
-+++
+Gardez en tête que votre objectif est de réaliser un **programme qui marche** et pas un programme parfait.
 
-## Prérequis
+Aussi on va commencer par se créer un dossier vierge, et l'initialiser comme un dépôt `git` (on fait comment déjà ?)
+
+Et ensuite, on va bien faire attention de ***committer chaque fois qu'on aura une version qui marche***;
+c'est-à-dire dans ce TP très guidé, un commit par étape en gros !
+
+Mais avant de pouvoir commencer, un peu de préparation...
+
+## On s'installe (optionnel)
 
 _Ce qui suit suppose que vous avez installé Python avec `conda` et que vous avez un terminal `bash` fonctionnel sur votre ordinateur._
-
-+++
 
 Commencez par créer et activer un environnement dédié au TP:
 
@@ -46,15 +29,13 @@ Commencez par créer et activer un environnement dédié au TP:
 (snake) $
 ```
 
-+++
-
-**NOTE** Si vous ne voyez pas, comme montré ici, le `(snake)` affiché dans le prompt de bash pour vous rappeler en permanence dans quel environnement on se trouve, il vous faut taper ceci avant de relancer un terminal
+**NOTE** si vous ne voyez pas, comme montré ici, le `(snake)` affiché dans le prompt de bash pour vous rappeler en permanence dans quel environnement on se trouve, il vous faut taper ceci avant de relancer un terminal
 
 ```bash
 $ conda init bash
 ```
 
-+++
+## Prérequis
 
 Installez ensuite la dernière version du module `pygame` avec `pip`:
 
@@ -62,19 +43,13 @@ Installez ensuite la dernière version du module `pygame` avec `pip`:
 (snake) $ pip install pygame
 ```
 
-+++
-
 Pour tester votre installation, vous pouvez lancer le programme d'exemple comme suit:
 
 ```bash
 (snake) $ python -m pygame.examples.aliens
 ```
 
-+++
-
 soyez patient lors du premier lancement, la librairie initialise des tas de choses...
-
-+++
 
 ## Code de démarrage
 
@@ -82,7 +57,7 @@ Un premier code très simple est le suivant, écrivez-le dans un fichier `snake.
 
 **ATTENTION** je vous recommande de **ne pas essayer d'exécuter ce code depuis un notebook**, car vous allez rencontrer des problèmes mystérieux de kernel qui meurt, si vous essayez.
 
-```{code-cell} ipython3
+```python
 # v0 : on repeint l'écran à une période de 1 seconde
 # et on a du mal à sortir du programme
 
@@ -118,14 +93,11 @@ while True:
 
 Vous pouvez désormais exécuter le programme avec:
 
-```{code-cell} ipython3
-%%sh
+```bash
 (snake) $ python snake.py
 ```
 
 **Attention** : vous verrez que vous ne pouvez pas _fermer_ la fenêtre normalement, pour quitter votre programme vous devez saisir **CONTROL+C** dans le terminal.
-
-+++
 
 ## Rappels vs-code
 
@@ -135,16 +107,16 @@ Vous pouvez désormais exécuter le programme avec:
 du coup il est opportun d'indiquer à vs-code qu'il faut utiliser `snake` - plutôt que `base`   
 pour cela cliquer dans la bannière du bas la zone qui indique le Python courant
 
+![](media/vscode-which-python.png)
+
 **Rappel #3** : pour lancer le programme directement depuis vs-code :
 
 - ouvrir la palette
   * `⇧ ⌘ P` Shift-Command-P (mac)
   * `⇧ ⌃ P` Shift-Control-P (windows)
-- chercher la fonction *Toggle Integrated Terminal*
+- chercher la fonction *Python: Create Terminal*
   - mémoriser le raccourci clavier
   - qui est Control-backtick sur Mac (le backtick c'est `)
-
-+++
 
 ## Un petit détail
 
@@ -152,15 +124,13 @@ Il faut savoir que c'est l'appel à `pg.display.update()` qui produit réellemen
 
 En fait, tous les autres calculs se produisent en mémoire (c'est très rapide), mais à un moment il faut bien parler à la carte vidéo pour l'affichage, et ça c'est beaucoup plus lent (+ieurs centaines de fois plus lent).
 
-Du coup même si ce `display` reste dans l'ordre de grandeur de la milliseconde, il faut s'efforcer, pour une bonne fluidité du jeu, de n'appeler `update()` que le minimum, pour nous ici **une fois par itération de la boucle**.
-
-+++
+Du coup, même si ce `display` reste dans l'ordre de grandeur de la milliseconde, il faut s'efforcer, pour une bonne fluidité du jeu, de n'appeler `update()` que le minimum, pour nous ici **une fois par itération de la boucle**.
 
 ## Continuons
 
 Afin d'avoir un comportement plus "normal", nous devons instruire Pygame en lui disant comment réagir aux clicks sur le clavier ou sur la fenêtre:
 
-```{code-cell} ipython3
+```python
 # v1 : pareil mais au moins on peut sortir du programme
 # avec la touche 'q', ou avec la souris en fermant la fenêtre
 
@@ -212,7 +182,7 @@ Pour valider le bon fonctionnement de ce plateau de jeu, écrivez un programme q
 
 pour cela, vous pouvez utiliser la méthode [`pg.draw.rect()`](https://www.pygame.org/media/ref/draw.html#pygame.draw.rect) qui dessine un rectangle:
 
-```{code-cell} ipython3
+```python
 # les coordonnées de rectangle que l'on dessine
 x = 100 # coordonnée x (colonnes) en pixels
 y = 100 # coordonnée y (lignes) en pixels
@@ -229,7 +199,7 @@ pg.draw.rect(screen, color, rect)
 L'étape suivante est de dessiner le serpent. Le serpent est simplement une suite de blocks de couleurs.
 On veut dessiner le serpent aux coordonnées suivantes:
 
-```{code-cell} ipython3
+```python
 # les coordonnées du corps du serpent
 snake = [
     (10, 15),
@@ -242,8 +212,6 @@ pour obtenir un schéma comme suit; disons pour fixer les idées que dans ce cas
 `(10,15)` est la queue, et `(12, 15)` est la tête (mais c'est totalement arbitraire et pas du tout imposé) :
 
 ![](media/serpent.png)
-
-+++
 
 ## Un serpent qui bouge
 
@@ -263,8 +231,6 @@ Aussi on peut commencer à envisager d'accélérer un peu le jeu à ce stade...
 
   ![](media/serpent-bouge.gif)
 
-+++
-
 ## Le fruit
 
 Il faut maintenant faire manger notre serpent.
@@ -279,8 +245,6 @@ On va procéder comme suit:
 - quand la tête du serpent mange le fruit, on place un nouveau fruit à une position aléatoire et on allonge le serpent d'une case
 
 ![](media/manger.gif)
-
-+++
 
 ## Épilogue
 
@@ -304,7 +268,15 @@ Fin de la partie obligatoire
 
 Pour les rapides, je vous invite à aborder les sujets suivants :
 
-+++
+## Variables globales
+
+De manière générale, les variables globales sont considérées comme néfastes à la réutilisabilité du code; retouchez votre code pour minimiser le nombre de variables globales.
+
+## Ligne de commande
+
+On aimerait pouvoir passer sur la ligne de commande les paramètres du jeu; par exemple, le nombre de cases du tableau en hauteur et largeur, la taille d'une case en pixels, ...
+
+Indice: cherchez le module `argparse` dans la documentation Python.
 
 ## Asynchronisme
 
@@ -316,21 +288,3 @@ Modifiez votre code pour pouvoir paramétrer deux fréquences séparément :
 
 * la fréquence de rafraichissement de l'écran (en frame / seconde)
 * la fréquence de déplacement du serpent (en case / seconde)
-
-+++
-
-## Variables globales
-
-De manière générale, les variables globales sont considérées comme néfastes à la réutilisabilité du code; retouchez votre code pour minimiser le nombre de variables globales.
-
-+++
-
-## Ligne de commande
-
-On aimerait pouvoir passer sur la ligne de commande les paramètres du jeu; par exemple, le nombre de cases du tableau en hauteur et largeur, la taille d'une case en pixels, ...
-
-Indice: cherchez le module `argparse` dans la documentation Python.
-
-```{code-cell} ipython3
-
-```
