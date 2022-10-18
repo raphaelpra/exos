@@ -27,17 +27,19 @@ L'objectif est de vous apprendre à concevoir et réaliser un programme complet,
 
 Gardez ainsi en tête que votre objectif est de réaliser un **programme qui marche** et pas un programme parfait.
 
++++
+
 ## Prérequis
 
 _Ce qui suit suppose que vous avez installé Python avec `conda` et que vous avez un terminal `bash` fonctionnel sur votre ordinateur._
 
-Commencez par créer et activer un environnement dédié au TP:
-
 +++
+
+Commencez par créer et activer un environnement dédié au TP:
 
 ```bash
 # on commence par créer un environnement "snake"
-(base) $ conda create -n snake python=3.9
+(base) $ conda create -n snake python=3.10
 # puis on l'active
 (base) $ conda activate snake
 # votre terminal doit indiquer le nom d'environnement:
@@ -48,8 +50,6 @@ Commencez par créer et activer un environnement dédié au TP:
 
 **NOTE** Si vous ne voyez pas, comme montré ici, le `(snake)` affiché dans le prompt de bash pour vous rappeler en permanence dans quel environnement on se trouve, il vous faut taper ceci avant de relancer un terminal
 
-+++
-
 ```bash
 $ conda init bash
 ```
@@ -58,8 +58,6 @@ $ conda init bash
 
 Installez ensuite la dernière version du module `pygame` avec `pip`:
 
-+++
-
 ```bash
 (snake) $ pip install pygame
 ```
@@ -67,8 +65,6 @@ Installez ensuite la dernière version du module `pygame` avec `pip`:
 +++
 
 Pour tester votre installation, vous pouvez lancer le programme d'exemple comme suit:
-
-+++
 
 ```bash
 (snake) $ python -m pygame.examples.aliens
@@ -84,10 +80,7 @@ soyez patient lors du premier lancement, la librairie initialise des tas de chos
 
 Un premier code très simple est le suivant, écrivez-le dans un fichier `snake.py` et lancez-le avec la commande `python` :
 
-**ATTENTION** je vous recommande de **ne pas essayer d'exécuter ce code depuis un notebook** :
-
-* ni depuis nbhosting, ça ne marchera pas du tout, car `pygame` n'y est pas installé;
-* ni depuis votre ordinateur personnel, car vous allez rencontrer des problèmes mystérieux de kernel qui meurt, si vous essayez.
+**ATTENTION** je vous recommande de **ne pas essayer d'exécuter ce code depuis un notebook**, car vous allez rencontrer des problèmes mystérieux de kernel qui meurt, si vous essayez.
 
 ```{code-cell} ipython3
 # v0 : on repeint l'écran à une période de 1 seconde
@@ -321,7 +314,7 @@ Mais en fait on triche complètement; que se passerait-il si on avait par exempl
 
 Modifiez votre code pour pouvoir paramétrer deux fréquences séparément :
 
-* la fréquence de rafraichissement de l'écran
+* la fréquence de rafraichissement de l'écran (en frame / seconde)
 * la fréquence de déplacement du serpent (en case / seconde)
 
 +++
@@ -337,3 +330,7 @@ De manière générale, les variables globales sont considérées comme néfaste
 On aimerait pouvoir passer sur la ligne de commande les paramètres du jeu; par exemple, le nombre de cases du tableau en hauteur et largeur, la taille d'une case en pixels, ...
 
 Indice: cherchez le module `argparse` dans la documentation Python.
+
+```{code-cell} ipython3
+
+```
