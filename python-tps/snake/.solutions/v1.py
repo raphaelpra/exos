@@ -1,5 +1,8 @@
-import pygame as pg
+# v1 : pareil mais au moins on peut sortir du programme
+# avec la touche 'q', ou avec la souris en fermant la fenêtre
+
 from random import randint
+import pygame as pg
 
 pg.init()
 screen = pg.display.set_mode((400, 300))
@@ -8,6 +11,8 @@ clock = pg.time.Clock()
 # on rajoute une condition à la boucle: si on la passe à False le programme s'arrête
 running = True
 while running:
+
+    clock.tick(1)
 
     random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
     screen.fill(random_color)
@@ -26,7 +31,6 @@ while running:
             if event.key == pg.K_q:
                 running = False
 
-    clock.tick(1)
 
 # Enfin on rajoute un appel à pg.quit()
 # Cet appel va permettre à Pygame de "bien s'éteindre" et éviter des bugs sous Windows

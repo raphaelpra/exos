@@ -1,7 +1,8 @@
 # on ajoute un carré fixe - le début du serpent
+# historique - ne correspond plus à aucune étape de l'énoncé
 
-import pygame as pg
 from random import randint
+import pygame as pg
 
 pg.init()
 screen = pg.display.set_mode((400, 300))

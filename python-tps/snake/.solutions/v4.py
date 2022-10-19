@@ -1,7 +1,7 @@
 # le fond d'écran, et le serpent peut contenir plusieurs cases
 
-import pygame as pg
 from random import randint
+import pygame as pg
 
 W, H = 20, 20
 X, Y = 30, 30

@@ -2,8 +2,8 @@
 # les mouvements hors du cadre sont admis
 # on ressort de l'autre coté de la grille
 
-import pygame as pg
 from random import randint
+import pygame as pg
 
 W, H = 20, 20
 X, Y = 30, 30

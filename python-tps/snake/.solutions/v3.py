@@ -1,7 +1,7 @@
 # le fond d'écran en damier
 
-import pygame as pg
 from random import randint
+import pygame as pg
 
 # in pixels
 W, H = 20, 20

@@ -1,22 +1,27 @@
 # Le snake
 
-Le but de ce TP est de réaliser un petit jeu en Python.
-L'objectif est de vous apprendre à concevoir et réaliser un programme complet, et non de réaliser le nouveau best-seller.
+Le but de ce TP est de réaliser un petit jeu en Python. L'objectif est de vous
+apprendre à concevoir et réaliser un programme complet, et non de réaliser le
+nouveau best-seller.
 
 ## Objectifs et démarche
 
-Gardez en tête que votre objectif est de réaliser un **programme qui marche** et pas un programme parfait.
+Gardez en tête que votre objectif est de réaliser un **programme qui marche** et
+pas un programme parfait.
 
-Aussi on va commencer par se créer un dossier vierge, et l'initialiser comme un dépôt `git` (on fait comment déjà ?)
+Aussi on va commencer par se créer un dossier vierge, et l'initialiser comme un
+dépôt `git` (on fait comment déjà ?)
 
-Et ensuite, on va bien faire attention de ***committer chaque fois qu'on aura une version qui marche***;
-c'est-à-dire dans ce TP très guidé, un commit par étape en gros !
+Et ensuite, on va bien faire attention de ***committer chaque fois qu'on aura
+une version qui marche***; c'est-à-dire dans ce TP très guidé, un commit par
+étape en gros !
 
 Mais avant de pouvoir commencer, un peu de préparation...
 
 ## On s'installe (optionnel)
 
-_Ce qui suit suppose que vous avez installé Python avec `conda` et que vous avez un terminal `bash` fonctionnel sur votre ordinateur._
+_Ce qui suit suppose que vous avez installé Python avec `conda` et que vous avez
+un terminal `bash` fonctionnel sur votre ordinateur._
 
 Commencez par créer et activer un environnement dédié au TP:
 
@@ -29,7 +34,9 @@ Commencez par créer et activer un environnement dédié au TP:
 (snake) $
 ```
 
-**NOTE** si vous ne voyez pas, comme montré ici, le `(snake)` affiché dans le prompt de bash pour vous rappeler en permanence dans quel environnement on se trouve, il vous faut taper ceci avant de relancer un terminal
+**NOTE** si vous ne voyez pas, comme montré ici, le `(snake)` affiché dans le
+prompt de bash pour vous rappeler en permanence dans quel environnement on se
+trouve, il vous faut taper ceci avant de relancer un terminal
 
 ```bash
 $ conda init bash
@@ -51,18 +58,23 @@ Pour tester votre installation, vous pouvez lancer le programme d'exemple comme 
 
 soyez patient lors du premier lancement, la librairie initialise des tas de choses...
 
-## Code de démarrage
+## Code de démarrage (v0)
 
-Un premier code très simple est le suivant, écrivez-le dans un fichier `snake.py` et lancez-le avec la commande `python` :
+Un premier code très simple est le suivant, écrivez-le dans un fichier
+`snake.py` et lancez-le avec la commande `python` :
 
-**ATTENTION** je vous recommande de **ne pas essayer d'exécuter ce code depuis un notebook**, car vous allez rencontrer des problèmes mystérieux de kernel qui meurt, si vous essayez.
+**ATTENTION** je vous recommande de **ne pas essayer d'exécuter ce code depuis
+un notebook**, car vous allez rencontrer des problèmes mystérieux de kernel qui
+meurt, si vous essayez.
 
 ```python
 # v0 : on repeint l'écran à une période de 1 seconde
 # et on a du mal à sortir du programme
 
-import pygame as pg
+# les imports standard en premier
 from random import randint
+
+import pygame as pg
 
 # on initialise pygame et on crée une fenêtre de 400x300 pixels
 pg.init()
@@ -97,19 +109,27 @@ Vous pouvez désormais exécuter le programme avec:
 (snake) $ python snake.py
 ```
 
-**Attention** : vous verrez que vous ne pouvez pas _fermer_ la fenêtre normalement, pour quitter votre programme vous devez saisir **CONTROL+C** dans le terminal.
+**Attention** : vous verrez que vous ne pouvez pas _fermer_ la fenêtre
+normalement, pour quitter votre programme vous devez saisir **CONTROL+C** dans
+le terminal.
 
-## Rappels vs-code
+Nous avons une version qui marchouille; du coup on en fait quoi ?
+> un commit bien sûr
 
-**Rappel #1** : il est **fortement recommandé** d'installer l'extension de vs-code pour Python
+## Astuces vs-code
 
-**Rappel #2** : on a créé un environnement virtuel;  
-du coup il est opportun d'indiquer à vs-code qu'il faut utiliser `snake` - plutôt que `base`   
+**Astuce #1** : il est **fortement recommandé** d'installer l'extension de
+vs-code pour Python
+
+**Astuce #2** : on a créé un environnement virtuel;
+du coup il est opportun d'indiquer à vs-code qu'il faut utiliser `snake` -
+plutôt que `base`
 pour cela cliquer dans la bannière du bas la zone qui indique le Python courant
 
 ![](media/vscode-which-python.png)
 
-**Rappel #3** : pour lancer le programme directement depuis vs-code :
+**Astuce #3** : une fois que c'est fait, pour lancer le programme directement
+depuis vs-code :
 
 - ouvrir la palette
   * `⇧ ⌘ P` Shift-Command-P (mac)
@@ -118,24 +138,36 @@ pour cela cliquer dans la bannière du bas la zone qui indique le Python courant
   - mémoriser le raccourci clavier
   - qui est Control-backtick sur Mac (le backtick c'est `)
 
+**Astuce #4** : si vous voulez avoir en permanence une indication
+sur la qualité de votre code, regardez la zone en bas à gauche
+
+![](media/vscode-problems.png)
+
 ## Un petit détail
 
-Il faut savoir que c'est l'appel à `pg.display.update()` qui produit réellement l'affichage.
+Il faut savoir que c'est l'appel à `pg.display.update()` qui produit réellement
+l'affichage.
 
-En fait, tous les autres calculs se produisent en mémoire (c'est très rapide), mais à un moment il faut bien parler à la carte vidéo pour l'affichage, et ça c'est beaucoup plus lent (+ieurs centaines de fois plus lent).
+En fait, tous les autres calculs se produisent en mémoire (c'est très rapide),
+mais à un moment il faut bien parler à la carte vidéo pour l'affichage, et ça
+c'est **beaucoup plus lent** (+ieurs centaines de fois plus lent).
 
-Du coup, même si ce `display` reste dans l'ordre de grandeur de la milliseconde, il faut s'efforcer, pour une bonne fluidité du jeu, de n'appeler `update()` que le minimum, pour nous ici **une fois par itération de la boucle**.
+Du coup, même si ce `display.update()` reste dans l'ordre de grandeur de la
+milliseconde, il faut s'efforcer, pour une bonne fluidité du jeu, de n'appeler
+`update()` que le minimum, pour nous ici **une fois par itération de la
+boucle** (une fois par frame, quoi)
 
-## Continuons
+## Continuons (v1)
 
-Afin d'avoir un comportement plus "normal", nous devons instruire Pygame en lui disant comment réagir aux clicks sur le clavier ou sur la fenêtre:
+Afin d'avoir un comportement plus "normal", nous devons instruire Pygame en lui
+disant comment réagir aux clicks sur le clavier ou sur la fenêtre:
 
 ```python
 # v1 : pareil mais au moins on peut sortir du programme
 # avec la touche 'q', ou avec la souris en fermant la fenêtre
 
-import pygame as pg
 from random import randint
+import pygame as pg
 
 pg.init()
 screen = pg.display.set_mode((400, 300))
@@ -144,7 +176,12 @@ clock = pg.time.Clock()
 # on rajoute une condition à la boucle: si on la passe à False le programme s'arrête
 running = True
 while running:
+
     clock.tick(1)
+
+    random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
+    screen.fill(random_color)
+    pg.display.update()
 
     # on itère sur tous les évênements qui ont eu lieu depuis le précédent appel
     # ici donc tous les évènements survenus durant la seconde précédente
@@ -159,15 +196,13 @@ while running:
             if event.key == pg.K_q:
                 running = False
 
-    random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
-    screen.fill(random_color)
-
-    pg.display.update()
 
 # Enfin on rajoute un appel à pg.quit()
 # Cet appel va permettre à Pygame de "bien s'éteindre" et éviter des bugs sous Windows
 pg.quit()
 ```
+
+et on n'oublie pas de faire un commit...
 
 ## Le damier
 
@@ -176,11 +211,14 @@ Nous allons commencer par construire notre plateau de jeu ainsi:
 - le plateau de jeu est découpé en 30x30 cases
 - chaque case fait 20 pixels de côté
 
-Pour valider le bon fonctionnement de ce plateau de jeu, écrivez un programme qui dessine un grille:
+Pour valider le bon fonctionnement de ce plateau de jeu, écrivez un programme
+qui dessine un grille (vous pouvez ben sûr choisir d'autres couleurs):
 
 ![](media/damier.png)
 
-pour cela, vous pouvez utiliser la méthode [`pg.draw.rect()`](https://www.pygame.org/media/ref/draw.html#pygame.draw.rect) qui dessine un rectangle:
+pour cela, vous pouvez utiliser la méthode
+[`pg.draw.rect()`](https://www.pygame.org/media/ref/draw.html#pygame.draw.rect)
+qui dessine un rectangle:
 
 ```python
 # les coordonnées de rectangle que l'on dessine
@@ -194,10 +232,15 @@ color = (255, 0, 0) # couleur rouge
 pg.draw.rect(screen, color, rect)
 ```
 
+une fois que ça marche, vous faites quoi ?
+
 ## Un serpent fixe
 
-L'étape suivante est de dessiner le serpent. Le serpent est simplement une suite de blocks de couleurs.
-On veut dessiner le serpent aux coordonnées suivantes:
+À partir de maintenant, on va garder le damier comme fond d'écran (même si les
+illustrations ne le montrent pas)
+
+L'étape suivante est de dessiner le serpent. Le serpent est simplement une suite
+de blocs de couleurs. On veut dessiner le serpent aux coordonnées suivantes:
 
 ```python
 # les coordonnées du corps du serpent
@@ -208,8 +251,9 @@ snake = [
 ]
 ```
 
-pour obtenir un schéma comme suit; disons pour fixer les idées que dans ce cas de figure
-`(10,15)` est la queue, et `(12, 15)` est la tête (mais c'est totalement arbitraire et pas du tout imposé) :
+pour obtenir un schéma comme suit; disons pour fixer les idées que dans ce cas
+de figure `(10,15)` est la queue, et `(12, 15)` est la tête (mais c'est
+totalement arbitraire et pas du tout imposé) :
 
 ![](media/serpent.png)
 
@@ -221,11 +265,14 @@ C'est en fait très simple:
   ```python
   direction = (1, 0)
   ```
-- à chaque itération de la boucle, nous pouvons déplacer le serpent dans cette direction en "ajoutant" ce vecteur à la position de la tête du serpent
+- à chaque itération de la boucle, nous pouvons déplacer le serpent dans cette
+  direction en "ajoutant" ce vecteur à la position de la tête du serpent
 
-Une fois que le serpent bouge, ajouter les commandes pour se déplacer dans les 4 directions, en cliquant sur les flèches (par exemple le code renvoyé par la flêche vers le haut est `pg.K_UP`)
+Une fois que le serpent bouge, ajouter les commandes pour se déplacer dans les 4
+directions, en cliquant sur les flèches (par exemple le code renvoyé par la
+flêche vers le haut est `pg.K_UP`)
 
-Aussi on peut commencer à envisager d'accélérer un peu le jeu à ce stade... 
+Aussi on peut commencer à envisager d'accélérer un peu le jeu à ce stade...
 
 **BONUS** faites en sorte que le serpent ne puisse pas faire "demi tour"
 
@@ -242,7 +289,8 @@ On va procéder comme suit:
   # exemple de fruit en position 10, 10 sur le plateau
   fruit = (10, 10)
   ```
-- quand la tête du serpent mange le fruit, on place un nouveau fruit à une position aléatoire et on allonge le serpent d'une case
+- quand la tête du serpent mange le fruit, on place un nouveau fruit à une
+  position aléatoire et on allonge le serpent d'une case
 
 ![](media/manger.gif)
 
@@ -250,9 +298,10 @@ On va procéder comme suit:
 
 Il nous reste deux petits changements pour avoir un serpent complètement fonctionnel:
 
-- tout d'abord il faut détecter si le serpent se mord la queue, ce qui est une condition d'échec
-- enfin on peut afficher le score.
-  La façon la plus simple de procéder est de changer le titre de la fenêtre, avec la fonction `set_caption()`:
+- tout d'abord il faut détecter si le serpent se mord la queue, ce qui est une
+  condition d'échec
+- enfin on peut afficher le score. La façon la plus simple de procéder est de
+  changer le titre de la fenêtre, avec la fonction `set_caption()`:
   ```python
   score = 0
   pg.display.set_caption(f"Score: {score}")
@@ -266,23 +315,45 @@ Fin de la partie obligatoire
 ***
 ***
 
-Pour les rapides, je vous invite à aborder les sujets suivants :
+Pour les rapides, je vous invite à aborder les sujets suivants (dans l'ordre qui
+vous inspire le plus):
 
 ## Variables globales
 
-De manière générale, les variables globales sont considérées comme néfastes à la réutilisabilité du code; retouchez votre code pour minimiser le nombre de variables globales.
+De manière générale, les variables globales sont considérées comme néfastes à la
+réutilisabilité du code; retouchez votre code pour minimiser le nombre de
+variables globales.
 
 ## Ligne de commande
 
-On aimerait pouvoir passer sur la ligne de commande les paramètres du jeu; par exemple, le nombre de cases du tableau en hauteur et largeur, la taille d'une case en pixels, ...
+On aimerait pouvoir passer sur la ligne de commande les paramètres du jeu; par
+exemple, le nombre de cases du tableau en hauteur et largeur, la taille d'une
+case en pixels, ...
 
 Indice: cherchez le module `argparse` dans la documentation Python.
 
+## Vitesse de réaction
+
+Ralentissez le jeu à 4 images/secondes; êtes-vous satisfait de la vitesse de
+réaction ? dit autrement, est-ce qu'il arrive que le serpent tourne trop tard ?
+si oui modifiez votre code pour une bonne synchronisation
+
+De la même façon, si vous revenez artificiellement à une image par seconde ou
+moins, et que vous quittez le jeu avec 'q', est-ce que ça fonctionne
+immédiatement ? si non, comment améliorer le code pour que ce soit plus réactif ?
+
+Toujours à cette vitesse lente, que constatez-vous au tout début du jeu ? est-ce
+que c'est grave ? si on voulait vraiment le corriger (pas forcément utile en
+pratique hein), comment on pourrait faire ?
+
 ## Asynchronisme
 
-À ce stade nous avons un jeu à une seule vitesse; la boucle principale est entièrement cadencée par le `clock.tick(n)`, et la vitesse du serpent est entièrement fixée par ce moyen-là.
+À ce stade nous avons un jeu à une seule vitesse; la boucle principale est
+entièrement cadencée par le `clock.tick(n)`, et la vitesse du serpent est
+entièrement fixée par ce moyen-là.
 
-Mais en fait on triche complètement; que se passerait-il si on avait par exemple deux objets à animer à des vitesses différentes ?
+Mais en fait on triche complètement; que se passerait-il si on avait par exemple
+deux objets à animer à des vitesses différentes ?
 
 Modifiez votre code pour pouvoir paramétrer deux fréquences séparément :
 

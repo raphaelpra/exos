@@ -1,8 +1,8 @@
 # on ajoute le fruit
 # il change de place quand il est mangé
 
-import pygame as pg
 from random import randint
+import pygame as pg
 
 W, H = 20, 20
 X, Y = 30, 30

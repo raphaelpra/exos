@@ -2,8 +2,8 @@
 # game over si le serpent se marche dessus
 # game over si on sort du cadre
 
-import pygame as pg
 from random import randint
+import pygame as pg
 
 W, H = 20, 20
 X, Y = 30, 30

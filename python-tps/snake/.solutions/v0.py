@@ -1,5 +1,10 @@
-import pygame as pg
+# v0 : on repeint l'écran à une période de 1 seconde
+# et on a du mal à sortir du programme
+
+# les imports standard en premier
 from random import randint
+
+import pygame as pg
 
 # on initialise pygame et on crée une fenêtre de 400x300 pixels
 pg.init()
@@ -13,6 +18,11 @@ while True:
     # l'objet "clock" permet de limiter le nombre d'images par secondes
     # ici pour cette démo on demande 1 image par seconde
     clock.tick(1)
+
+    # il faut traiter les événements a minima
+    # pour que la fenêtre s'affiche
+    for event in pg.event.get():
+        pass
 
     # on génère une couleur (Rouge, Vert, Bleu) au hasard
     random_color = (randint(0, 255), randint(0, 255), randint(0, 255))

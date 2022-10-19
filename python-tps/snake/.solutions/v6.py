@@ -1,7 +1,7 @@
 # on peut changer la direction du serpent avec les fleches
 
-import pygame as pg
 from random import randint
+import pygame as pg
 
 W, H = 20, 20
 X, Y = 30, 30
