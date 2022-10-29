@@ -16,8 +16,8 @@ Aussi on va commencer par se créer un dossier vierge, et l'initialiser **comme 
 dépôt `git`** (on fait comment déjà ?)
 
 ```bash
-$ mkdir mycode
-$ cd mycode
+$ mkdir mysnake
+$ cd mysnake
 $ # et là on crée un dépôt git avec ??
 ```
 
