@@ -1,20 +1,61 @@
-# this is a manually-written rough attempt
-# but it won't build, so let's put it in standby
-# if/once it does build, it would make sense to
-# extract this from .nbhosting/nbhosting.yaml
-
 format: jb-book
-root: README
 parts:
-- caption: "TPs basiques"
+- caption: exercices basiques
+  chapters:
+  - file: python-exos/basic/adnpercents-readme
+  - file: python-exos/basic/agenda-readme
+  - file: python-exos/basic/ipaddress
+  - file: python-exos/basic/invoice
+  - file: python-exos/basic/files-scanext
+  - file: python-exos/basic/files-sortby
+  - file: python-exos/basic/skimlist-readme
+- caption: exercices classes
+  chapters:
+  - file: python-exos/classes/wordcounts-readme
+- caption: exercices visu
+  chapters:
+  - file: python-exos/visu/adnwalk-howto
+- caption: TPs basiques
   chapters:
   - glob: python-tps/watson/README*
   - glob: python-tps/students-groups/README*
   - glob: python-tps/queens/README*
   - glob: python-tps/file-formats/README*
-- caption: "TPs classes"
+- caption: TPs classes
   chapters:
-  - glob: "python-tps/students-grades/README*"
-  - glob: "python-tps/unicode-boxes/README*"
-  - glob: "python-tps/auctions/README*"
-  - glob: "python-tps/expressions-lang/README*"
+  - glob: python-tps/students-grades/README*
+  - glob: python-tps/unicode-boxes/README*
+  - glob: python-tps/auctions/README*
+  - glob: python-tps/expressions-lang/README*
+- caption: TPs graphes
+  chapters:
+  - glob: python-tps/graph-bfs-dfs/README*
+  - glob: python-tps/graph-shortest-path/README*
+  - file: python-tps/metro/README-metro
+  - glob: python-tps/pagerank-thrones/README*
+- caption: TPs visu & games
+  chapters:
+  - glob: python-tps/games/README*snake
+  - glob: python-tps/boids/README*
+  - glob: python-tps/games/README*flappybird
+  - glob: python-tps/redis/README*
+- caption: howtos
+  chapters:
+  - file: python-howtos/requests-howto
+- caption: lecture de code
+  chapters:
+  - file: python-reading/snake/snake
+- caption: "exercices avanc\xE9s"
+  chapters:
+  - file: python-exos/advanced/encodings-howto
+  - file: python-exos/advanced/attributes-proxy
+  - file: python-exos/advanced/attributes-dynprop
+  - file: python-exos/advanced/randomdate-readme
+- caption: sample code
+  chapters:
+  - glob: python-samples/*
+- caption: WIP
+  chapters:
+  - glob: python-tps/subprocesses-howto.md/README*
+  - glob: python-tps/webscraper-wip/README*
+root: README

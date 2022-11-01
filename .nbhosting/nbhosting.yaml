@@ -113,3 +113,12 @@ tracks:
   - name: exercices dataviz
     notebooks:
     - ds-exos/dataviz/groupby-draw-nb.md
+
+builds:
+  - id: python
+    name: format HTML
+    description: exos Python
+    directory: .
+    script: |
+      pip install jupyter-book
+      jupyter-book build .
