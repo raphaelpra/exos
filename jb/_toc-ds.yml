@@ -1,0 +1,47 @@
+format: jb-book
+parts:
+- caption: exercices numpy
+  chapters:
+  - file: ds-exos/numpy/indices-nb
+  - file: ds-exos/numpy/mandelbrot-nb
+- caption: TP sounds
+  chapters:
+  - file: ds-tps/sounds/README-sounds-nb
+- caption: TP images
+  chapters:
+  - file: ds-tps/images/README-images1-nb
+  - file: ds-tps/images/README-images2-nb
+- caption: TP Taylor
+  chapters:
+  - glob: ds-tps/taylor/taylor-*
+- caption: exercices pandas
+  chapters:
+  - file: ds-exos/pandas/television-nb
+  - file: ds-exos/pandas/marathon-nb
+  - file: ds-exos/pandas/pupils-nb
+  - file: ds-exos/pandas/bornes-nb
+  - file: ds-exos/pandas/stack-simple-nb
+  - file: ds-exos/pandas/stack-multicol-nb
+  - file: ds-exos/pandas/titanic-nb
+  - file: ds-exos/pandas/mosaique-nb
+- caption: quizzes pandas
+  chapters:
+  - glob: ds-quizzes/[0-9]*-nb
+- caption: miscell howtos
+  chapters:
+  - file: ds-howtos/split-count-into-columns-howto-nb
+  - file: ds-howtos/timeseries-clean-smooth-howto-nb
+  - file: ds-howtos/groupby-ratings-howto-nb
+  - file: ds-howtos/pivot-vs-stack-unstack-howto-nb
+  - file: ds-howtos/coronavirus-howto-nb
+  - file: ds-howtos/fremont-bridge-howto-nb
+  - file: ds-howtos/numpy-meshgrid-howto-nb
+- caption: miscell dashboards
+  chapters:
+  - file: ds-howtos/dashboard-with-dash
+  - file: ds-howtos/streamlit-sinus
+  - file: ds-howtos/streamlit-taylor
+- caption: exercices dataviz
+  chapters:
+  - file: ds-exos/dataviz/groupby-draw-nb
+root: README

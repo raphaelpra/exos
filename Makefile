@@ -30,3 +30,11 @@ diff-commands:
 
 requirements:
 	pip install nbprune
+
+tocs: jb/_toc-python.yml jb/_toc-ds.yml
+
+jb/_toc-python.yml: .nbhosting/nbhosting.yaml
+	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t python
+
+jb/_toc-ds.yml: .nbhosting/nbhosting.yaml
+	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t data-science

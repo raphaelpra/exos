@@ -116,9 +116,16 @@ tracks:
 
 builds:
   - id: python
-    name: format HTML
-    description: exos Python
+    name: Python
+    description: core Python
     directory: .
     script: |
       pip install jupyter-book
-      jupyter-book build .
+      jupyter-book build --toc jb/_toc-python.yml --config jb/_config.yml .
+  - id: data-science
+    name: Data Science
+    description: numpy, pandas, dataviz
+    directory: .
+    script: |
+      pip install jupyter-book
+      jupyter-book build --toc jb/_toc-ds.yml --config jb/_config.yml .
