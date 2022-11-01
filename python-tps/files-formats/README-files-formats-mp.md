@@ -37,13 +37,14 @@ section::after {
 
 ---
 ## on va faire quoi ?
+<!-- fontSize: smaller -->
 
-- les fichiers et l'OS
-- comment ouvrir, pourquoi fermer ?
+- les fichiers et l'OS; comment ouvrir, pourquoi fermer ?
 - différents formats de fichier
   - pickle (ouille ça pique, c'est du binaire)
   - json (on se sent un peu mieux)
   - csv (ah là on parle)
+  - yaml (de plus en plus populaire)
 - parser un nouveau format de fichier
 
 ---
@@ -120,26 +121,30 @@ ou encore `print(line, end="")`
 quelles autres formules connaissiez-vous pour faire ça ?
 
 ---
-# fichiers binaires
+# fichiers texte - contenu
 
-- installez l'extension vsoce *Hex Editor*
+- installez l'extension vscode *Hex Editor*
 - regarder le contenu de `hello.txt` avec vscode
   - utilisez *clic droit* -> *Open With* -> *Hex Editor*
-- comparez avec <https://www.rapidtables.com/code/text/ascii-table.html>
+- comparez avec  
+  <https://www.rapidtables.com/code/text/ascii-table.html>
 
 ---
-# fichiers binaires (2)
+# fichiers texte - contenu (2)
 
-- pareil avec `tiny.pickle`
-- ouvrez-les "normalement"
+- pareil avec `bonjour.txt`
 - que constatez-vous ?
+- voyez aussi  
+  <https://www.utf8-chartable.de/>
 
 ---
-# fichiers binaires (3)
+# fichiers binaires
 
-- adaptez votre programme de tout à l'heure
-- pour lire `tiny.pickle` plutôt que `hello.txt`
-- que constatez-vous ?
+- pareil avec `tiny.pickle`  
+- ouvrez-le "normalement"
+  (pour l'instant sans utiliser la librairie `pickle`)
+- comment faut-il adapter le code ?
+- que constatez-vous ? (indice: les types !)
 
 ---
 # à retenir
@@ -161,7 +166,7 @@ Tout le monde ne crée pas sa propre structure de fichier !
 Il existe des formats ***standard*** qui permettent une interaction entre les programmes et même différents langages de programmation
 
 ---
-# <!-- fit --> pickle
+# <!-- fit --> le format pickle
 
 <!-- _backgroundImage: url("pexels-eva-bronzini-5503189.jpg") -->
 <!-- #_color: yellow -->
@@ -196,7 +201,17 @@ c'est le format *intégré* de Python
 - est-ce qu'on peut y mettre un ensemble ?
 
 ---
-# <!-- fit --> les csv
+# <!-- fit --> encore un: yaml
+
+---
+## yet again
+
+- trouvez la doc de PyYAML
+- lisez le fichier `tiny.yaml`
+- comment peut-on comparer avec JSON ?
+
+---
+# <!-- fit --> et aussi: les csv
 
 (les mêmes que ceux qu'on a vus dans le cours pandas)
 
@@ -206,5 +221,94 @@ c'est le format *intégré* de Python
 - lisez la documentation du module csv  
   google `python module csv`
 - essayez de lire le fichier `pokemon.csv`
+- sauriez-vous créer une dataframe ?  
+  (sans utiliser `pd.read_csv` évidemment)
 
 ---
+# <!-- fit --> formats custom
+
+---
+* comment peut-on lire (on dit *parse*) des formats de fichiers inconnus ?
+* pour cela, 2 armes
+  * le type `str` fournit plein de méthodes  
+    notamment `strip()` `split()` et `join()`
+  * le module `re` (pour *regular expressions*)  
+    peut également être utile
+
+---
+# exercice
+
+* sans importer de module additionnel,
+* lisez le fichier `notes.txt`
+* créez et affichez un dictionnaire  
+  *nom élève* → note
+
+---
+# un mot sur `print()`
+
+* l'opération la plus simple pour sauver un résultat
+* mais pas très utile en réalité
+* car le plus souvent limitée à un lecteur humain
+* on peut écrire dans un fichier `f` (ouvert en écriture)  
+  avec `print(des, trucs, file=f)`
+
+---
+# les redirections de `bash` (pour info)
+
+* quand il est lancé, votre programme a un `stdin` et un `stdout` (et un `stderr` mais c'est plus anecdotique)
+* qui sont créés par bash (et sont branchés sur le terminal)
+* vous pouvez les rediriger en faisant
+  ```bash
+  python myhack.py < the-input > the-output
+  ```
+
+---
+# exercice: écrivez un programme
+
+* qui lit sans fin le texte entré dans le terminal
+* regarde si le texte commence par un `q`
+* si oui c'est la fin du programme
+* sinon affiche le nombre de mots dans la ligne  
+  et recommence
+
+voir consigne et indices slide suivant
+
+---
+## consigne
+
+ne pas utiliser `input()`, mais plutôt `sys.stdin`
+
+## indices
+
+* de quel type est `sys.stdin` ?
+* si vous voulez ajouter un *prompt*  
+  (un peu comme les `>>>` de python)  
+  lancez votre programme avec `python -u mycode.py`
+
+---
+# regexps, en deux mots
+
+* l'idée est de décrire une *famille* de chaines
+* à partir d'une autre chaine (la *regexp*)
+* qui utilise des opérateurs
+  * comme p.e. `*`
+  * pour indiquer 'un nombre quelconque de fois' telle ou telle autre *regexp*
+
+---
+# regexp exemple
+
+`ab((cd)|(ef))*` décrit un ensemble qui
+
+* ne contient que des mots qui commencent par `ab`
+* contient `abcd` et aussi `abef`
+* ou encore `abcdcdefcd`
+* mais pas `abce` ni `abcde`
+
+---
+# avertissement
+
+> Some people, when confronted with a problem, think
+“I know, I'll use regular expressions.”   Now they have two problems.
+
+
+<http://regex.info/blog/2006-09-15/247>
