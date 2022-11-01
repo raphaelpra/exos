@@ -20,7 +20,7 @@ parts:
   - glob: python-tps/watson/README*
   - glob: python-tps/students-groups/README*
   - glob: python-tps/queens/README*
-  - glob: python-tps/file-formats/README*
+  - glob: python-tps/files-formats/README*
 - caption: TPs classes
   chapters:
   - glob: python-tps/students-grades/README*
