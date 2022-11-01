@@ -4,11 +4,16 @@ jupytext:
   encoding: '# -*- coding: utf-8 -*-'
   main_language: python
   notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
+    -jupytext.custom_cell_magics, -language_info.version, -language_info.codemirror_mode.version,
+    -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
+    -toc, -vscode
   text_representation:
     extension: .md
     format_name: myst
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
 language_info:
   name: python
   nbconvert_exporter: python
