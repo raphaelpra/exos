@@ -9,13 +9,20 @@ tracks:
   sections:
   - name: exercices basiques
     notebooks:
-    - python-exos/basic/adnpercents-readme.md
-    - python-exos/basic/agenda-readme.md
+    # str, ints, binary computations
     - python-exos/basic/ipaddress.md
-    - python-exos/basic/invoice.md
-    - python-exos/basic/files-scanext.md
-    - python-exos/basic/files-sortby.md
+    # lists, side effects
     - python-exos/basic/skimlist-readme.md
+    # strs and formatting
+    - python-exos/basic/invoice.md
+    # dicts
+    - python-exos/basic/agenda-readme.md
+    # basic counts, requires dicts
+    - python-exos/basic/adnpercents-readme.md
+    # filesystem
+    - python-exos/basic/files-scanext.md
+    # filesystem too, requires files_sortby.py
+    - python-exos/basic/files-sortby.md
   - name: exercices classes
     notebooks:
     - python-exos/classes/wordcounts-readme.md

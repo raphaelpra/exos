@@ -2,13 +2,13 @@ format: jb-book
 parts:
 - caption: exercices basiques
   chapters:
-  - file: python-exos/basic/adnpercents-readme
-  - file: python-exos/basic/agenda-readme
   - file: python-exos/basic/ipaddress
+  - file: python-exos/basic/skimlist-readme
   - file: python-exos/basic/invoice
+  - file: python-exos/basic/agenda-readme
+  - file: python-exos/basic/adnpercents-readme
   - file: python-exos/basic/files-scanext
   - file: python-exos/basic/files-sortby
-  - file: python-exos/basic/skimlist-readme
 - caption: exercices classes
   chapters:
   - file: python-exos/classes/wordcounts-readme

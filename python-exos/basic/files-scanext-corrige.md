@@ -16,10 +16,10 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: trouver tous les fichiers *.truc
+  title: lister les fichiers *.truc
 ---
 
-# parcours de fichiers
+# lister les fichiers *.truc
 
 +++
 
@@ -36,12 +36,47 @@ from pathlib import Path
 ## exercice v1
 
 * écrire une fonction qui prend en paramètre un nom de dossier (une str)
-* qui liste tous les fichiers avec **une** certaine extension dans le dossier
-* afficher pour chacun d'eux
-  * le nom complet, sa taille et la date/heure de dernière modification
+* et une extension (une str aussi), par exemple `truc`
+* parcourt tous les fichiers dans ce dossier (ou ses sous-dossiers) avec cette extension (i.e. de la forme `*.truc`)
+* et qui affiche (avec print) pour chacun d'eux
+  * le nom complet (à partir de la racine du disque dur), sa taille et la date/heure de dernière modification
   * la première ligne
 
-* en option, on peut avoir envie de trier les fichiers par nom
+* **en option**, on peut avoir envie de trier les fichiers par nom
+
++++
+
+### exemples
+
++++
+
+```bash
+# exemple d'appel
+In [11]: scanv1("/Users/Jean Dupont/cours-python/", "py")
+File /Users/Jean Dupont/cours-python/notebooks/bidule.py
+  2663 B last modified on 2022-05-15 15:06:22
+  first line: def bidule(arg1, arg2):
+File /Users/Jean Dupont/cours-python/notebooks/machin.py
+  2663 B last modified on 2022-08-21 21:09:12
+  first line: # la fonction machin doit faire un tri
+<etc...>
+```
+
++++
+
+```bash
+# un autre exemple: on cherche dans le dossier courant
+# qui ici se trouve être le même; on affiche quand même
+# les chemins complets
+In [12]: scanv1(".", "py")
+File /Users/Jean Dupont/cours-python/notebooks/bidule.py
+  2663 B last modified on 2022-05-15 15:06:22
+  first line: def bidule(arg1, arg2):
+File /Users/Jean Dupont/cours-python/notebooks/machin.py
+  2663 B last modified on 2022-08-21 21:09:12
+  first line: # la fonction machin doit faire un tri
+<etc...>
+```
 
 +++
 
@@ -52,23 +87,37 @@ from pathlib import Path
 certains traits qu'on peut avoir envie d'utiliser:
 
 ```{code-cell} ipython3
-# le dossier courant
-x = Path(".")
-
-# un fichier dans un dossier
-myself = x / "filescanner.nb.md"
-
-# avec resolve() je peux calculer le chemin complet pour arriver
-# à un objet Path
-x.resolve()
-
-# les méta données
-#              taille
-#                                   date de dernière modification
-myself.stat().st_size, myself.stat().st_mtime
+# créer une instance de Path
+# qui correspond au dossier courant
+p = Path(".")
 ```
 
-### à vous
+```{code-cell} ipython3
+# avec resolve() je peux calculer le chemin complet pour arriver
+# à un objet Path (en partant de la racine des fichiers)
+p.resolve()
+```
+
+```{code-cell} ipython3
+# les méta données
+#        taille
+#                      date de dernière modification
+p.stat().st_size,   p.stat().st_mtime
+```
+
+```{code-cell} ipython3
+# st_mtime retourne un 'epoch' 
+# c'est-à-dire un nombre de secondes 
+# depuis le 1er janvier 1970
+
+# pour traduire ça en date 'lisible'
+from datetime import datetime as DateTime
+
+dt = DateTime.fromtimestamp(p.stat().st_mtime)
+f"la date est {dt}"
+```
+
+vous aurez aussi besoin de voir la documentation du module `pathlib` pour la méthode `Path.glob()`
 
 ```{code-cell} ipython3
 # à vous de jouer
@@ -77,79 +126,28 @@ def scanv1():
 ```
 
 ```{code-cell} ipython3
-# exemple d'appel
-"""
-scanv1("/Users/Jean Dupont/cours-python/", "py")
-""";
-```
+# prune-cell
 
-```{code-cell} ipython3
-# ou encore
-"""
-scanv1("../..", "md")
-""";
-```
+from pathlib import Path
+from datetime import datetime as DateTime
 
-## exercice v2
-
-idem mais
-
-* on peut passer le dossier sous la forme d'une str **ou** d'un objet Path
-* on a plus de choix pour décrire la ou les extensions qui nous intéressent; le paramètre extension peut maintenant être
-  * vide (tous les fichiers)
-  * ou une chaine simple
-  * ou une liste d'extensions (ou même plus généralement un *itérable* d'extensions)
-* on peut passer un paramètre optionnel `recursive=False` qui indique
-  * si la recherche se fait dans tout le contenu du dossier,
-  * ou si au contraire seuls les fichiers placés directement sous le dossier sont concernés
-
-```{code-cell} ipython3
-# à vous de jouer
-def scanv2():
-    pass
-```
-
-```{code-cell} ipython3
-# exemple d'appel
-"""
-scanv2(Path.home() / "flotpython-exos/", ("py", "md", recursive=True)
-""";
-```
-
-## variantes
-
-vous pouvez par exemple
-
-* décider que le premier paramètre est optionnel, et dans ce cas on travaille sur le dossier courant
-* ...
-
-+++
-
----
-
-```{code-cell} ipython3
-# prune-begin
-```
-
-# solutions
-
-+++
-
-## solution v1
-
-```{code-cell} ipython3
 # comme toujours c'est juste *une* façon de faire hein...
 def scanv1(folder, extension):
     # on convertit la chaine en Path
     # pour pouvoir utiliser la librairie
     path = Path(folder)
-    # on scanne
-    for child in path.glob(f"*.{extension}"):
+    # pour la variante il suffit d'ajouter:
+    #              ↓↓↓↓↓↓↓
+    # for child in sorted(path.glob(f"**/*.{extension}")):
+    for child in path.glob(f"**/*.{extension}"):
         # avec resolve() on obtient le chemin canonique
         print(f"File {child.resolve()}")
         # la taille et l'heure de modification sont accessibles au travers
         # de la méthode stat()
-        print(f"  {child.stat().st_size} B last modified on {child.stat().st_mtime}")
+        # on arrondit à la seconde
+        modif_timestamp = int(child.stat().st_mtime)
+        human_readable = DateTime.fromtimestamp(modif_timestamp)
+        print(f"  {child.stat().st_size} B last modified on {human_readable}")
         # pour lire seulement la première ligne
         # on pourrait faire un for + break
         # mais c'est plus élégant comme ceci
@@ -157,50 +155,69 @@ def scanv1(folder, extension):
             print("  first line:", next(feed), end="")
 ```
 
+## exercice v2
+
+vous insérez le code de la v1 dans un programme python `scan.py` qu'on peut lancer depuis le terminal, par exemple comme ceci
+
+```bash
+$ python scan.py /Users/Jean Dupont/cours-python py
+File /Users/Jean Dupont/cours-python/notebooks/bidule.py
+  2663 B last modified on 2022-05-15 15:06:22
+  first line: def bidule(arg1, arg2):
+File /Users/Jean Dupont/cours-python/notebooks/machin.py
+  2663 B last modified on 2022-08-21 21:09:12
+  first line: # la fonction machin doit faire un tri
+<etc...>
+```
+
++++
+
+prune-cell
+
+dans le fichier `scan.py`, ajouter les lignes
+
+```python
+# le lanceur
+from argparse import ArgumentParser
+parser = ArgumentParser()
+parser.add_argument("path")
+parser.add_argument("ext")
+args = parser.parse_args()
+
+scanv1(args.path, args.ext)
+```
+
++++
+
+## exercice v3
+
+idem mais on a plus de choix pour décrire la ou les extensions qui nous intéressent; le paramètre extension peut maintenant être
+  * vide (tous les fichiers)
+  * ou une chaine simple
+  * ou une liste d'extensions (ou même plus généralement un *itérable* d'extensions)
+
 ```{code-cell} ipython3
-# scanv1("../slides", "md")
+# à vous de jouer
+def scanv3():
+    pass
+```
+
+```python
+# exemple d'appel
+scanv3(Path.home() / "flotpython-exos/", 
+       ("py", "md"), recursive=True)
 ```
 
 ```{code-cell} ipython3
-# si on veut trier, il suffit de rajouter un sorted()
-# remarquez que ça signifie que path.glob()
-# sait se faire trier
-def scanv1_sorted(folder, extension):
-    path = Path(folder)
-    #            ↓↓↓↓↓↓↓
-    for child in sorted(path.glob(f"*.{extension}")):
-        print(f"File {child.resolve()}")
-        print(f"  {child.stat().st_size} B last modified on {child.stat().st_mtime}")
-        with child.open() as feed:
-            print("  first line:", next(feed), end="")
-```
+:tags: [raises-exception]
 
-```{code-cell} ipython3
-# scanv1_sorted("../slides", "md")
-```
+# prune-begin
 
-## solution v2
-
-```{code-cell} ipython3
-# en fait la v1 accepte déjà les objets de type Path
-
-def scanv2(folder, extensions=None, recursive=False):
-    # optionnel mais si on veut éviter la création
-    # d'objets inutiles
-    if isinstance(folder, Path):
-        # déjà un Path
-        path = folder
-    if isinstance(folder, str):
-        # une chaine: on convertit
-        path = Path(folder)
-    else:
-        raise TypeError(f"{folder} neither str nor Path")
-    # pour faire un parcours récursif, il suffit d'utiliser
-    # le pattern "**"
-    pattern = "**/*" if recursive else "*"
-    # la gestion des extensions est du coup sasez différente
+def scanv3(folder, extensions=None):
+    pattern = "**/*"
+    # la gestion des extensions est du coup assez différente
     for child in path.glob(pattern):
-        # à ce stade, child est .. un Path aussi
+        # à ce stade, child est un Path aussi
         ext = child.suffix[1:]
         # on regarde s'il y a lieu d'ignorer ce fichier
         if extensions is not None:
@@ -215,10 +232,6 @@ def scanv2(folder, extensions=None, recursive=False):
         print(f"  {child.stat().st_size} B last modified on {child.stat().st_mtime}")
         with child.open() as feed:
             print("  first line:", next(feed), end="")
-```
-
-```{code-cell} ipython3
-# scanv2("..", ('md', 'txt'), recursive=True)
 ```
 
 je vous laisse à titre d'exercice corriger quelques défauts résiduels:
