@@ -116,27 +116,104 @@ parse_text("data-small.txt")
 * `first_names.txt`  
   (dérivé de <https://fr.wikipedia.org/wiki/Liste_des_pr%C3%A9noms_les_plus_donn%C3%A9s_en_France>)
 
-* fabriquez un jeu de données aléatoires contenant 5000 personnes  
+* fabriquez un jeu de données aléatoires contenant 10000 personnes  
   avec la contrainte qu'il y ait en sortie **unicité du nom x prénom**  
 * pour les dates de naissance tirez au sort une date entre le 01/01/2000 et le 31/12/2004
 * rangez cela dans le fichier `data-big.txt`
+* vous devez produire ce fichier dans un temps de l'ordre de 50-100ms
 
 ```{code-cell} ipython3
-# prune-cell
+# prune-begin
+```
 
-# todo
+```{code-cell} ipython3
+from random import randrange, choice
+from datetime import date as Date, timedelta as TimeDelta
+
+def random_date(start, end):
+    """
+    This function will return a random datetime between two datetime 
+    objects.
+    """
+    delta = end - start
+    # compute number of seconds between the 2
+    int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
+    random_second = randrange(int_delta)
+    return start + TimeDelta(seconds=random_second)
+
+BEG = Date(year=2000, month=1, day=1)
+END = Date(year=2004, month=12, day=31)
+
+with open("last_names.txt") as last, open("first_names.txt") as first:
+    LAST_NAMES = [x for line in last for x in line.strip().split()]
+    FIRST_NAMES = [x for line in first for x in line.strip().split()]
+    
+def random_person():
+    # we could return a dict here too
+    # or more simply a 5-tuple
+    birthday = random_date(BEG, END)
+    return (choice(FIRST_NAMES), choice(LAST_NAMES),
+            birthday.year, birthday.month, birthday.day)
+
+def generate_data(filename, how_many):
+    counter = 0
+    seen = set()
+    with open(filename, 'w') as w:
+        while counter < how_many:
+            f, l, y, m, d = random_person()
+            if (f, l) in seen:
+                continue
+            w.write(f"{f} {l} {y} {m} {d}\n")
+            counter += 1
+```
+
+```{code-cell} ipython3
+%%timeit
+generate_data("data-big.txt", 10_000)
+```
+
+```{code-cell} ipython3
+# prune-end
 ```
 
 ## accélération des recherches
 
-* utilisez `%%timeit` pour mesurer le temps moyen qu'il faut pour chercher une personne dans la liste à partir de son nom et prénom
-* comment pourrait-on faire pour accélérer ce travail? 
+* utilisez `%%timeit` pour mesurer le temps moyen qu'il faut pour chercher
+  une personne dans la liste à partir de son nom et prénom
+* on prévoit ue notre code aura besoin de faire cette recherche plusieurs millions de fois;
+  comment pourrait-on faire pour accélérer cette recherche ? 
 * écrivez le code qui va bien et mesurez le gain de performance pour la recherche
 
 ```{code-cell} ipython3
-# prune-cell
+# prune-begin
+```
 
-# todo
+```{code-cell} ipython3
+L = parse_text("data-big.txt")
+```
+
+```{code-cell} ipython3
+%timeit ('Henri', 'Vincent') in L
+```
+
+```{code-cell} ipython3
+# v1
+index = {}
+for p in L:
+    index[(p['first_name'], p['last_name'])] = p
+```
+
+```{code-cell} ipython3
+# v2
+index = { (p['first_name'], p['last_name']): p for p in L}
+```
+
+```{code-cell} ipython3
+%timeit ('Henri', 'Vincent') in index
+```
+
+```{code-cell} ipython3
+# prune-end
 ```
 
 ## calcul du nombre de prénoms distincts
@@ -146,9 +223,25 @@ parse_text("data-small.txt")
 * calculez le nombre de prénoms distincts présents dans les données
 
 ```{code-cell} ipython3
-# prune-cell
+# prune-begin
+```
 
-# todo
+```{code-cell} ipython3
+# v1
+
+S = set()
+for (f, l) in index:
+    S.add(f)
+print(len(S))
+```
+
+```{code-cell} ipython3
+# v2
+print(len({f for (f, l) in index}))
+```
+
+```{code-cell} ipython3
+# prune-end
 ```
 
 ***
