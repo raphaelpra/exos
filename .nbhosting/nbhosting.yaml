@@ -22,6 +22,7 @@ tracks:
     # filesystem
     - python-exos/basic/files-scanext.md
     # filesystem too, requires files_sortby.py
+    # probably a duplicate of the previous one
     - python-exos/basic/files-sortby.md
   - name: exercices classes
     notebooks:
@@ -33,6 +34,8 @@ tracks:
     notebooks:
     - "python-tps/watson/README*.md"
     - "python-tps/students-groups/README*.md"
+    # using dicts for structs and for indexing
+    - python-tps/indexing-structs/README-indexing-structs.md
     - "python-tps/queens/README*.md"
     - "python-tps/files-formats/README*.md"
   - name: TPs classes
