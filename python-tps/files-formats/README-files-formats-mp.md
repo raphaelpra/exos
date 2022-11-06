@@ -8,7 +8,6 @@ class: invert
 header: un TP sur les fichiers
 #footer: 'cours Python ![height:40px](media/logo-python.svg)'
 footer: 'cours Python
-# tmp
 paginate: true
 ---
 
@@ -30,7 +29,7 @@ section::after {
 
 </style>
 
-# <!-- fit -->les fichiers
+# <!-- fit -->fichiers et formats
 
 <!-- _backgroundImage: url("pexels-mike-1181772.jpg") -->
 <!-- _color: #229 -->

@@ -44,6 +44,14 @@ version: '1.0'
 
 +++
 
+## discussion
+
+in the whole TP we will model a person as a 4-tuple  
+however we could just as well have decided to use instead a dictionary with 4 keys  
+discuss the pros and cons of each approach
+
++++
+
 ## indexing
 
 **works on**: hash-based types, comprehensions

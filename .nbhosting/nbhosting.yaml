@@ -32,12 +32,16 @@ tracks:
     - python-exos/visu/adnwalk-howto.md
   - name: TPs basiques
     notebooks:
-    - "python-tps/watson/README*.md"
-    - "python-tps/students-groups/README*.md"
+    - "python-tps/watson/README-watson.md"
+    # using dicts for indexing and sets for creating groups
+    - "python-tps/students-groups/README-students-groups.md"
     # using dicts for structs and for indexing
     - python-tps/indexing-structs/README-indexing-structs.md
-    - "python-tps/queens/README*.md"
-    - "python-tps/files-formats/README*.md"
+    # itertools
+    - "python-tps/queens/README-queens.md"
+    # ascii, utf8, binary, as well as various file formats
+    # like pickle, json, yaml, csv
+    - "python-tps/files-formats/README-files-formats-mp.md"
   - name: TPs classes
     notebooks:
     - "python-tps/students-grades/README*.md"
