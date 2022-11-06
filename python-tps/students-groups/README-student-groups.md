@@ -18,7 +18,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: "students and groups"
+  title: students and groups
 version: '1.0'
 ---
 
@@ -28,7 +28,7 @@ version: '1.0'
 
 ## read a file
 
-works on: `list` `file` `tuple`
+**works on**: `list` `file` `tuple`
 
 * the input file contains lines like
   ```
@@ -46,7 +46,7 @@ works on: `list` `file` `tuple`
 
 ## indexing
 
-works on hash-based types, comprehensions
+**works on**: hash-based types, comprehensions
 
 * we need a fast way to
   * check whether an email is in the file
@@ -67,25 +67,28 @@ works on hash-based types, comprehensions
 
 +++
 
-## dataframe
+## dataframe (optional)
 
-we want to build a pandas dataframe to hold all the data
+**works on**: dataframes
 
-see [the documentation of
-`pd.DataFrame()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)
+build a pandas dataframe to hold all the data
 
-observe that there are multiple interfaces to build a dataframe; we will xxx
+(see [the documentation of
+`pd.DataFrame()`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html)  
+and observe that there are multiple interfaces to build a dataframe)
 
 +++
 
 ## groups
 
-works on sets
+**works on**: sets
 
 * the file now contains optional fields
   ```
   first_name last_name email phone [group1 .. groupn]
   ```
+  where the part between `[]` is **optional**  
+  i.e there can be **0 or more** groupnames mentioned on each student line
 * we want to tweak `parse` and write
   ```python
   def group_parse(filename):
@@ -98,7 +101,9 @@ works on sets
 
 +++
 
-## regexps
+## regexps (optional)
+
+**works on**: regexps
 
 * we now want to check the format for the input file:
   * first_name and last_name may contain letters and `-` and `_`
@@ -110,5 +115,11 @@ works on sets
   ```
   that expects as an input the output of `parse` and that outlines ill-formed input
 
-NOTE. in a first approximation, use patterns like `a-z` to check for letters;
-this should outline names with accents and cedillas; then play with '\w` to see if you can overcome this problem; how safe is it ?
+NOTE. 
+* in a first approximation, use patterns like `a-z` to check for letters;  
+* how does this behave with respect to names with accents and cedillas
+* then play with `\w` to see if you can overcome this problem
+
++++ {"slideshow": {"slide_type": ""}}
+
+***
