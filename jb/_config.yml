@@ -16,6 +16,11 @@ html:
 
 only_build_toc_files: true
 
+exclude_patterns:
+  - .teacher/*
+  - .solutions/*
+  - snake/.solutions/*
+
 execute:
   execute_notebooks: cache
   exclude_patterns: [ "*-corrige*" ]
