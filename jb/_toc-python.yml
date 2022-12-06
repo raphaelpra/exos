@@ -17,11 +17,11 @@ parts:
   - file: python-exos/visu/adnwalk-howto
 - caption: TPs basiques
   chapters:
+  - file: python-tps/files-formats/README-files-formats-mp
   - file: python-tps/watson/README-watson
   - file: python-tps/students-groups/README-students-groups
   - file: python-tps/indexing-structs/README-indexing-structs
   - file: python-tps/queens/README-queens
-  - file: python-tps/files-formats/README-files-formats-mp
 - caption: TPs classes
   chapters:
   - glob: python-tps/students-grades/README*
