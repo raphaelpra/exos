@@ -135,11 +135,19 @@ def shortest_distance1(graph, v1, v2):
 
     visited = {v1: 0}
 
+    # border_edges is the set of edges that connect:
+    # * any of the nodes already visited
+    # to any of the nodes not yet visited
+
     while True:
+        # in a first and admittedly rough version, we compute
+        # this by brute-force scanning all the edges
+        # this is possibly (very) costly on big graphs
+        # so: see below for better alternatives
         border_edges = set()
-        for (s, adj) in graph.items():
-            for (d, w) in adj.items():
-                if s in visited and d not in visited:
+        for s in visited:
+            for d in graph[s].keys():
+                if d not in visited:
                     border_edges.add((s, d))
 
         # out of luck, no path can be found
@@ -174,7 +182,7 @@ def shortest_path1(graph, v1, v2):
     same, but also computes shortest path
     in addition to shortest distance
 
-    * use a comprehension to compute fitting edges
+    * use a comprehension to compute border edges
     * returns a tuple (distance, path)
     """
 
@@ -182,9 +190,9 @@ def shortest_path1(graph, v1, v2):
 
     while True:
         border_edges = {(s, d)
-                 for s, adj in graph.items()
-                 for (d, w) in adj.items()
-                 if s in visited and d not in visited}
+                 for s in visited
+                 for d in graph[s].keys()
+                 if d not in visited}
 
         # print(f"{border_edges=}")
 
@@ -219,7 +227,7 @@ def shortest_path1(graph, v1, v2):
 
 
 #
-# shortest distance but a little more optimized
+# optimized version
 #
 
 def shortest_path2(graph, v1, v2):

@@ -885,14 +885,16 @@ with open("data/thrones.csv") as feed:
 # une fois que le fichier local est OK, on peut utiliser notre
 # code pour faire des calculs dans ce graphe
 
+from graphs import number_vertices1
+
 thrones = parse_graph1("data/thrones.csv")
 
-len(thrones)
+len(thrones), number_vertices1(thrones)
 ```
 
 +++ {"cell_style": "split"}
 
-mais attention, comme on l'a vu plus haut ça signifie qu'il y a **au moins** 71 personnages, mais ça peut être plus en fait...
+comme on l'a vu plus haut, ça signifie qu'il y a **au moins** 71 personnages, mais ça c'est plus en fait...
 
 ```{code-cell} ipython3
 :cell_style: split
@@ -1017,7 +1019,7 @@ planar1(4)
 
 +++
 
-### `%timeit` 
+### `%timeit`
 
 +++
 
