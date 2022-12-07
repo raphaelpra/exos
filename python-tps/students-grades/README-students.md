@@ -33,22 +33,25 @@ rise:
 
 ***NOTES IMPORTANTES :***  
 
-* notez pour commencer que dans ce TP nous **utilisons les *type hints***, que nous avons rencontré brièvement au cours 3; c'est-à-dire qu'on a fréquemment indiqué le type des paramètres des méthodes, en écrivant par exemple  
+* notez pour commencer que dans ce TP nous **utilisons les *type hints***; c'est-à-dire qu'on a fréquemment indiqué le type des paramètres des méthodes, en écrivant par exemple  
 `add_grade(topic: str, grade: float)` au lieu de simplement  
-`add_grade(topic, grade)`
+`add_grade(topic, grade)`  
+ou encore  
+`def foo(s: str) -> bool:` au lieu de simplement  
+`def foo(s):`
 * dans ce TP nous allons nous définir deux classes `Student` et `Class`. Comme vous l'avez vu en cours une classe est définie (entre autres) par une série d'attributs et de méthodes. Il faut voir les méthodes comme des fonctions écrites spécialement pour s'appliquer à une instance de la classe. Les méthodes sont des fonctions qui, vous avez l'habitude de voir maintenant, ont généralement `self` comme premier argument; cela permet une utilisation `instance.methode(autre, arguments)`  
-  Ainsi, lorsqu'il vous est demandé d'implémenter la méthode `add_grade(topic: str, grade: float)` à la classe `Student`, n'oubliez pas que cela se traduit dans votre cellule par quelque chose comme : 
+  Ainsi, lorsqu'il vous est demandé d'implémenter la méthode `add_grade(topic: str, grade: float)` à la classe `Student`, n'oubliez pas que cela se traduit dans votre cellule par quelque chose comme :
 ```python
 class Student:
     ...
-    
+
     def add_grade(self, topic: str, grade: float):
         # Votre code ici
         pass
 
     ...
 ```
-  
+
   Notez l'apparition du `self` comme premier argument ! Bon courage ! ;)
 
 +++
@@ -63,12 +66,20 @@ from collections import defaultdict
 class Student:
     def __init__(self, first_name: str, last_name: str):
         pass
-        
+
     def __repr__(self):
         pass
 ```
 
-Dans la suite du TP, vous allez devoir ajouter des fonctionnalités à la classe `Student`. Pour ce faire, vous devez revenir à **chaque fois** à cette cellule, implémenter votre code et **ré-évaluer** la cellule pour que les changements soient pris en compte.
+Dans la suite du TP, vous allez devoir ajouter des fonctionnalités à la classe
+`Student`. Pour ce faire, vous devez revenir à **chaque fois** à cette cellule,
+implémenter votre code et **ré-évaluer** la cellule pour que les changements
+soient pris en compte.
+
+Aussi on vous receommande de "faire descendre" cette cellule au fur et à mesure
+que vous ajoutez les fonctionnalités et que vous passez le test correspondant,
+de sorte d'avoir toujours la cellule de code juste au dessus de la cellule de
+test; on peut utiliser pour cela les touches de raccourci (`d`) ou le bouton `↓`
 
 +++
 
@@ -89,7 +100,7 @@ else:
 
 ### Gestion des notes
 #### `add_grade`
-Nous souhaitons maintenant ajouter des notes à cet élève. Implémentez la méthode `add_grade(topic: str; grade: float)` dans la classe `Student` pour que le code suivant s'exécute sans erreur :  
+Nous souhaitons maintenant ajouter des notes à cet élève. Implémentez la méthode `add_grade(topic: str; grade: float)` dans la classe `Student` pour que le code suivant s'exécute sans erreur :
 
 **Note :** Pour stocker les notes de l'élève vous allez devoir ajouter un attribut à la classe `Student`. Prenez le temps de réfléchir au conteneur le plus approprié.
 
