@@ -24,15 +24,6 @@ nbhosting:
 
 +++
 
-## les testeurs
-
-Vous pourrez utiliser `pytest` pour tester votre code avec les deux tests unitaires suivants
-
-* v1: https://github.com/ue12-p21/python-advanced/blob/main/tps/expressions-lang/test_expressions.py
-* v2: https://github.com/ue12-p21/python-advanced/blob/main/tps/expressions-lang/test_expressionsv2.py
-
-+++
-
 ## rappel
 
 On rappelle qu'en programmation, on distingue entre :
@@ -61,7 +52,7 @@ en fait, seulement la seconde moitié, c'est-à-dire qu'on veut :
 
 ## AST (abstract syntax trees)
 
-Une façon de représenter un programme consiste à définir ce qu'on appelle une sytaxe abstraite, c'est à dire un ensemble de symboles qui permettent d'étiqueter les noeuds d'un arbre, lui même représentant fidèlement le programme.
+Une façon de représenter un programme consiste à définir ce qu'on appelle une syntaxe abstraite, c'est à dire un ensemble de symboles qui permettent d'étiqueter les noeuds d'un arbre, lui même représentant fidèlement le programme.
 
 Quelques exemples :
 
@@ -151,14 +142,20 @@ L'objectif est d'obtenir un code maintenable, dans lequel on puisse facilement a
 
 +++
 
-Malheureusement cet exercice est trop complexe pour la mécanique d'auto-évaluation et les modalités habituelles de colonnes rouges et vertes.
 Pour vous convaincre que vous avez bien répondu à la question, nous fournissons quelques cellules de test.
+
+En option vous pourrez aussi utiliser `pytest` pour tester votre code avec les deux tests unitaires suivants
+
+* v1: https://github.com/flotpython/exos/blob/main/python-tps/expressions-lang/test_expressionsv1.py
+* v2: https://github.com/flotpython/exos/blob/main/python-tps/expressions-lang/test_expressionsv2.py
+
++++
 
 Parmi ce qui est attendu, à la construction des objets vous êtes censés vérifier qu'on **appelle** le **constructeur** avec un **nombre d'arguments correct**, et lancer une **exception `TypeError` sinon**.
 
 ```{code-cell} ipython3
-# assurez-vous aussi de bien avoir "oublié"
-# les classes que nous venons d'importer pour illustrer l'exemple
+# ceci pour "oublier" les classes
+# que nous venons d'importer pour illustrer l'exemple
 del Integer, Float, Negative, Plus, Minus, Multiply, Divide
 ```
 
