@@ -72,7 +72,7 @@ def number_vertices1(graph):
         # if we had a complete dictionary
         # (and BTW in that case we could even
         #  build vertices by a set comprehension)
-        for d, w in adj.items():
+        for d in adj:
             vertices.add(d)
     return len(vertices)
 
@@ -99,7 +99,7 @@ def reachables1(graph, s):
             # beware that not all vertices have a key in the dict
             # --xx-- with a complete graph,
             # these 2 would not be necessary either
-            if  v not in graph:
+            if v not in graph:
                 continue
             adj = graph[v]
             for next in adj:
@@ -165,7 +165,7 @@ def shortest_distance1(graph, v1, v2):
                 shortest_edge = (s, d)
 
         # mark newly selected vertex
-        best_src, best_dst = shortest_edge
+        _, best_dst = shortest_edge
         visited[best_dst] = shortest_length
 
         # are we done ?
@@ -251,7 +251,7 @@ def shortest_path2(graph, v1, v2):
         # to unvisited
         # print(f"{selected_vertex=}")
         adj = graph.get(selected_vertex, {})
-        for (dest, weight) in adj.items():
+        for dest in adj:
             if dest not in visited:
                 border_edges.add((selected_vertex, dest))
         # remove from the border any edge that would
