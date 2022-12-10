@@ -208,7 +208,7 @@ Nous allons maintenant gérer un ensemble d'élèves dans l'objet `Class`.
 class Class:
     def __init__(self, classname: str):
         pass
-        
+
     def add_student(self, student: Student):
         pass
 
@@ -290,7 +290,7 @@ Nous allons maintenant rentrer les notes des élèves pour les différentes mati
 !head -5 grades.csv
 ```
 
-Il est à noter d'une part que le nombre de notes dépend de la matière et d'autre part que tous les élèves ne suivent pas les mêmes cours. Implémentez la méthode `load_grades_from_file(filename: str)` qui permet d'affecter à chaque étudiant ses notes. 
+Il est à noter d'une part que le nombre de notes dépend de la matière et d'autre part que tous les élèves ne suivent pas les mêmes cours. Implémentez la méthode `load_grades_from_file(filename: str)` qui permet d'affecter à chaque étudiant ses notes.
 
 **Note :** Dans le cas où l'on souhaiterait attribuer une note à un étudiant qui n'est pas dans la classe, il ne faut pas lever d'exception, mais seulement imprimer un message d'avertissement.
 
@@ -336,13 +336,13 @@ try:
     classe = Class("P1920")
     classe.load_students_from_file('class.csv')
     classe.load_grades_from_file('grades.csv')
-    true_averages = {'Physics': 12.036111111111111, 
-                     'Mathematics': 12.082222222222223, 
-                     'Chemistry': 11.996296296296292, 
+    true_averages = {'Physics': 12.036111111111111,
+                     'Mathematics': 12.082222222222223,
+                     'Chemistry': 11.996296296296292,
                      'English': 12.414285714285715,
-                     'French': 11.683333333333334, 
-                     'Scubadiving': 11.7, 
-                     'Horse-riding': 11.366666666666667, 
+                     'French': 11.683333333333334,
+                     'Scubadiving': 11.7,
+                     'Horse-riding': 11.366666666666667,
                      'Sailing': 14.0}
     avgs = classe.compute_averages()
     assert all(math.isclose(avgs[top], true_averages[top]) for top in true_averages)
