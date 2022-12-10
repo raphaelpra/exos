@@ -33,7 +33,10 @@ version: '1.0'
 <span><img src="media/inria-25-alpha.png" /></span>
 </div>
 
-+++
+```{code-cell} ipython3
+from IPython.display import HTML
+HTML(filename="../../_static/style.html")
+```
 
 # TP - algos de base sur les graphes
 
@@ -360,7 +363,15 @@ le premier algorithme que nous allons voir consiste à calculer l'ensemble des s
 
 commençons par voir un exemple
 
-**attention** la deuxième cellule (qui appelle `to_graphviz`) peut ne pas fonctionner si vous utilisez votre ordi perso et que vous n'avez pas installé le module `graphviz`
+<div class=note>
+    
+quelques précisions
+
+* dans le contexte de l'étudiant, le module `graphs.py` n'existe pas encore, c'est à vous de l'écrire évidemment !
+    
+* **attention** la deuxième cellule (qui appelle `to_graphviz`) peut ne pas fonctionner si vous utilisez votre ordi perso et que vous n'avez pas installé le module `graphviz`
+
+</div>
 
 ```{code-cell} ipython3
 :cell_style: center
