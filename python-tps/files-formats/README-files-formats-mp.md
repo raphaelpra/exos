@@ -7,7 +7,7 @@ class: invert
 # color: #44f
 header: un TP sur les fichiers
 #footer: 'cours Python ![height:40px](media/logo-python.svg)'
-footer: 'cours Python
+footer: 'cours Python'
 paginate: true
 ---
 
