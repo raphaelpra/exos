@@ -215,6 +215,10 @@ pour éviter les inconvénients des listes et des matrices, on va représenter u
   * où chaque clé est un sommet (d'arrivée)
   * et où chaque valeur est un poids
 
++++ {"cell_style": "split"}
+
+<img src="media/graph.png" width="300px" />
+
 ```{code-cell} ipython3
 :cell_style: split
 
@@ -226,14 +230,22 @@ G = {'a': {'b': 7, 'd': 9, 'c': 14},
      'e': {'f': 6}}
 ```
 
-+++ {"cell_style": "split"}
+```{code-cell} ipython3
+:cell_style: split
 
-<img src="media/graph.png" width="300px" />
+# ou encore, si on veut
+G = {'a': {'b': 7, 'd': 9, 'c': 14},
+     'b': {'d': 10, 'e': 15},
+     'c': {'d': 2, 'f': 9},
+     'd': {'e': 11},
+     'e': {'f': 6},
+     'f' : {}}
+```
 
-+++
+**indices en vrac**
 
-**indices**
-
+* quel est l'avantage de la deuxième représentation
+ (celle où `'f'` apparait comme clé de G) par rapport à la première ?
 * pour découper une chaine selon un séparateur, voyez `str.split()`, et notamment ici `split(',')` 
 * pour transformer la chaine '12' en entier, on peut appeler `int('12')`  
 * lorsqu'on lit un fichier ligne à ligne, on utilise souvent `str.strip()` pour la "nettoyer" c'est-à-dire enlever les espaces et autres fin de ligne au début et à la fin de la ligne
@@ -247,11 +259,20 @@ G = {'a': {'b': 7, 'd': 9, 'c': 14},
 ```{code-cell} ipython3
 :cell_style: split
 
+int('12 ')
+```
+
+```{code-cell} ipython3
+:cell_style: split
+
 ' a,b,12\n'.strip()
 ```
 
 ```{code-cell} ipython3
-int('12 ')
+:cell_style: split
+
+# ou si on préfère
+' a,b,12\n'.rstrip()
 ```
 
 ### exo #1
