@@ -16,9 +16,8 @@ def parse_graph1(filename: str):
     Notes:
       - we strip all tokens to support for a loose syntax
         with additional spaces in the input
-      - we do not ensure all the nodes present
+      - we do ensure all the nodes present
         have a key in the dict
-        although that would be a great idea
         search for --xx-- below for comments on this matter
     """
     g = dict()
@@ -35,8 +34,8 @@ def parse_graph1(filename: str):
             g[src][dst] = weight
             # --xx-- to ensure all nodes are present,
             # we would need to add these lines
-            # if dst not in g:
-            #     g[dst] = {}
+            if dst not in g:
+                 g[dst] = {}
     return g
 
 
@@ -55,8 +54,8 @@ def parse_graph2(filename):
             weight = int(weight.strip())
             g[src][dst] = weight
             # --xx-- in this version, ensuring all destination nodes
-            # are in the graph would be achieved with simply this line
-            # g[dst]
+            # are in the graph is achieved with simply this line
+            g[dst]
     return g
 
 
@@ -65,16 +64,15 @@ def parse_graph2(filename):
 #
 
 def number_vertices1(graph):
-    vertices = set()
-    for s, adj in graph.items():
-        vertices.add(s)
-        # --xx-- these 2 lines would be useless
-        # if we had a complete dictionary
-        # (and BTW in that case we could even
-        #  build vertices by a set comprehension)
-        for d in adj:
-            vertices.add(d)
-    return len(vertices)
+    # --xx-- with a complete dict this is trivial
+    return len(graph)
+    # --xx-- otherwise things would be .. more awkward
+    # vertices = set()
+    # for s, adj in graph.items():
+    #     vertices.add(s)
+    #     for d in adj:
+    #         vertices.add(d)
+    # return len(vertices)
 
 
 #
@@ -97,10 +95,10 @@ def reachables1(graph, s):
         news = set()
         for v in reached:
             # beware that not all vertices have a key in the dict
-            # --xx-- with a complete graph,
-            # these 2 would not be necessary either
-            if v not in graph:
-                continue
+            # --xx-- with a not-complete graph,
+            # we would need to add these 2 lines
+            # if v not in graph:
+            #    continue
             adj = graph[v]
             for next in adj:
                 if next not in reached:
