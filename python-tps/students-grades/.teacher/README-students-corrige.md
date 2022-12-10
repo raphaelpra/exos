@@ -174,6 +174,47 @@ Report for student Albert Einstein
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
+# prune-cell
+
+from collections import defaultdict
+
+class Student:
+    def __init__(self, first_name: str, last_name: str):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.grades = defaultdict(list) # {}
+
+    def __repr__(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def add_grade(self, topic, grade):
+        self.grades[topic].append(grade)
+
+    def followed_topics(self):
+        return self.grades.keys()
+
+    def compute_average(self, topic):
+        if topic not in self.followed_topics():
+            return -1
+        return sum(self.grades[topic]) / len(self.grades[topic])
+
+    def report(self):
+        LINE1 = f"+{15*'='}+{15*'='}+\n"
+        LINE2 = f"+{15*'-'}+{15*'-'}+\n"
+        text = ""
+        text += f"Report for student {self}\n"
+        text += LINE1
+        text += f"|{'Topic':^15}|{'Average':^15}|\n"
+        text += LINE1
+        for topic in self.followed_topics():
+            text += f"|{topic:^15}|{self.compute_average(topic):^15.2f}|\n"
+            text += LINE2
+        return text
+```
+
+```{code-cell} ipython3
 try:
     reference_lines = ['Report for student Albert Einstein',
                        '+===============+===============+',
@@ -329,6 +370,64 @@ else:
 
 ### Calcul des moyennes par matière
 Nous allons maintenant nous intéresser à calculer des moyennes de la classe par matière. Codez la méthode `compute_averages()`. Cette dernière doit retourner un dictionnaire dont les clés sont des matières et les valeurs les moyennes de la classe.
+
+```{code-cell} ipython3
+# prune-cell
+
+class Class:
+    def __init__(self, classname: str):
+        self.classname = classname
+        self.students = {}
+
+    def add_student(self, student: Student):
+        self.students[(student.first_name, student.last_name)] = student
+
+    def __len__(self):
+        return len(self.students)
+
+    def __repr__(self):
+        return f"Class {self.classname} - {len(self)} student(s)"
+
+    def get_student(self, f, l):
+        key = (f, l)
+        if key not in self.students:
+            return None
+        return self.students[key]
+
+    def get_student(self, f, l):
+        return self.students.get((f, l), None)
+
+    def load_students_from_file(self, filename):
+        with open(filename) as feed:
+            for line in feed:
+                first, last = line.rstrip().split(',')
+                self.add_student(Student(first, last))
+
+    def load_grades_from_file(self, filename):
+        with open(filename) as feed:
+            for line in feed:
+                first, last, topic, *grades = line.rstrip().split(',')
+                student = self.get_student(first, last)
+                if student is None:
+                    print(f"student {first}, {last} not found")
+                    continue
+                for grade in grades:
+                    student.add_grade(topic, float(grade))
+
+    def catalog(self) -> dict:
+        result = defaultdict(int)
+        for student in self.students.values():
+            for topic in student.followed_topics():
+                result[topic] += 1
+        return result
+
+    def compute_averages(self):
+        grades_per_topic = defaultdict(list)
+        for student in self.students.values():
+            for topic in student.followed_topics():
+                grades_per_topic[topic].append(student.compute_average(topic))
+        return {topic: sum(grades_list)/len(grades_list) for topic, grades_list in grades_per_topic.items()}
+```
 
 ```{code-cell} ipython3
 try:
