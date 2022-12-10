@@ -17,11 +17,11 @@ language_info:
   pygments_lexer: ipython3
 ---
 
-# fetch one web page
+# fetch one web page (WIP)
 
 +++
 
-https://docs.python-requests.org/en/master/
+<https://docs.python-requests.org/en/master/>
 
 ```{code-cell} ipython3
 import requests
@@ -49,7 +49,7 @@ len(html_text)
 
 +++
 
-https://www.crummy.com/software/BeautifulSoup/bs4/doc/
+<https://www.crummy.com/software/BeautifulSoup/bs4/doc/>
 
 ```{code-cell} ipython3
 !pip install bs4
@@ -73,7 +73,7 @@ the logic that allows to build the actual URL to fetch when seeing a `href` insi
 
 fortunately for us, it is already the purpose of this function in the standard library
 
-https://docs.python.org/3/library/urllib.parse.html#urllib.parse.urljoin
+<https://docs.python.org/3/library/urllib.parse.html#urllib.parse.urljoin>
 
 ```{code-cell} ipython3
 from urllib.parse import urljoin
@@ -174,7 +174,7 @@ canonical_url(url_with_fragment)
 
 ```{code-cell} ipython3
 class Scraper:
-    
+
     def __init__(self, url0):
         self.url0 = url0
 
@@ -185,15 +185,15 @@ class Scraper:
         soup = BeautifulSoup(html_text, 'html.parser')
         return [
             canonical_url(urljoin(url, link.get("href"))) for link in soup.find_all('a')
-        ]        
-    
+        ]
+
     def scan(self, max_pages=100):
         """
         recursively scan pages until that many different pages have been found
         """
         to_scan = [canonical_url(self.url0)]
         scanned = set()
-        
+
         while to_scan and len(scanned) < max_pages:
             current_page = to_scan.pop()
             scanned.add(current_page)
@@ -203,13 +203,12 @@ class Scraper:
                 to_scan.append(next_page)
                 print(f"{len(scanned):3d} down - {len(to_scan):3d} to go - {current_page} → {next_page}")
             print(f"--- {current_page} DONE")
-            
+
         # print(f"------{len(to_scan)} unfinished business")
-        
 ```
 
 ```{code-cell} ipython3
-s = Scraper("https://r2lab.inria.fr")    
+s = Scraper("https://r2lab.inria.fr")
 
 s.scan(3)
 ```

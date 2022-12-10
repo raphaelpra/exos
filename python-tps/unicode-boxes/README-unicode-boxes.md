@@ -29,7 +29,7 @@ Unicode comes with a few characters that can be used to draw squares or rectangl
 
 See e.g. this page for a list 
 
-https://en.wikipedia.org/wiki/Box-drawing_character
+<https://en.wikipedia.org/wiki/Box-drawing_character>
 
 +++
 
