@@ -548,7 +548,7 @@ et du coup si/quand on arrive au sommet d'arrivée, on a forcément trouvé le p
 voici une illustration de cet algorithme, sur notre graphe témoin  
 **entre les noeuds `a` et `f`**
 
-<video width="800px" controls src="media/shortest-paths.mp4" type="video/mp4"></video>
+<video width="800px" controls src="../../_static/shortest-paths.mp4" type="video/mp4"></video>
 
 +++
 
