@@ -118,7 +118,7 @@ Les deux méthodes intéressantes sont
 
 +++
 
-du coup le code que je dois écrire pour faire le job est simplement 
+du coup le code que je dois écrire pour faire le job est simplement
 
 ```{code-cell} ipython3
 def get_url_as_json(url):
@@ -149,7 +149,7 @@ python_friendly[-3:]
 len(python_friendly)
 ```
 
-### transformer la structure 
+### transformer la structure
 
 ```{code-cell} ipython3
 # et ici par exemple je pourrais décider que c'est plus pratique
@@ -186,6 +186,8 @@ URL2 = "https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/C
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # il faut être un peu patient car c'est bcp + gros que tout à l'heure
 response = requests.get(URL2)
 ```
