@@ -16,7 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: lancer un sous-process
+  title: 'lancer un sous-process'
 ---
 
 # gestion de sous-processus
