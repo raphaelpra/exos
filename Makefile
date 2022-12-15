@@ -9,7 +9,7 @@
 
 SOLUTIONS = $(shell find . -name '*.py' -o -name '*.md' \
   | egrep -- '-corrige\.|-howto\.|\.teacher' \
-  | grep -v .ipynb_checkpoints)
+  | egrep -v '.ipynb_checkpoints|_build')
 
 FLAGS = -v
 
