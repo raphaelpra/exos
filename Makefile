@@ -7,6 +7,9 @@
 # 	pip install nbprune
 #
 
+
+# PRUNE
+
 SOLUTIONS = $(shell find . -name '*.py' -o -name '*.md' \
   | egrep -- '-corrige\.|\.teacher' \
   | egrep -v '.ipynb_checkpoints|_build')
@@ -31,6 +34,16 @@ diff-commands:
 requirements:
 	pip install nbprune
 
+
+# EXEC
+exec:
+	./execute-all-notebooks.sh -v
+
+exec-clean:
+	./execute-all-notebooks.sh -x -c -v
+
+
+# BOOKS
 
 tocs: jb/_toc-python.yml jb/_toc-ds.yml
 
