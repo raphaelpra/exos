@@ -25,7 +25,7 @@ nbhosting:
 
 +++
 
-# imports
+# mosaique (un peu de tout)
 
 +++
 

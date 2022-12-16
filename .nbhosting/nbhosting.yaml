@@ -101,11 +101,11 @@ tracks:
     notebooks:
     - ds-exos/pandas/television-nb.md
     - ds-exos/pandas/marathon-nb.md
+    - ds-exos/pandas/titanic-nb.md
     - ds-exos/pandas/pupils-nb.md
     - ds-exos/pandas/bornes-nb.md
     - ds-exos/pandas/stack-simple-nb.md
     - ds-exos/pandas/stack-multicol-nb.md
-    - ds-exos/pandas/titanic-nb.md
     - ds-exos/pandas/mosaique-nb.md
   - name: quizzes pandas
     notebooks:

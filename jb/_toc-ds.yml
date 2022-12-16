@@ -18,11 +18,11 @@ parts:
   chapters:
   - file: ds-exos/pandas/television-nb
   - file: ds-exos/pandas/marathon-nb
+  - file: ds-exos/pandas/titanic-nb
   - file: ds-exos/pandas/pupils-nb
   - file: ds-exos/pandas/bornes-nb
   - file: ds-exos/pandas/stack-simple-nb
   - file: ds-exos/pandas/stack-multicol-nb
-  - file: ds-exos/pandas/titanic-nb
   - file: ds-exos/pandas/mosaique-nb
 - caption: quizzes pandas
   chapters:

@@ -21,13 +21,13 @@ nbhosting:
   title: exo nettoyage
 ---
 
-# nettoyage
+# television (nettoyage)
 
 +++
 
 cet exercice est originellement proposé ici:
 
-http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/notebooks/td1a_cenonce_session_10.html#exercice-1-creer-un-fichier-excel
+<http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/notebooks/td1a_cenonce_session_10.html#exercice-1-creer-un-fichier-excel>
 
 +++
 
