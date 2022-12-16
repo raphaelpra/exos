@@ -8,7 +8,7 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 language_info:
@@ -16,7 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: données coronavirus
+  title: "donn\xE9es coronavirus"
 ---
 
 # les données coronavirus
@@ -122,8 +122,6 @@ df_france
 ## on consolide
 
 ```{code-cell} ipython3
-:tags: []
-
 # on va faire comme ça avec tous les pays
 # mais attention if faut ajouter une colonne 'country' 
 # sinon l'info est perdue
@@ -403,8 +401,6 @@ def display_corona(df,
 ```
 
 ```{code-cell} ipython3
-:tags: []
-
 from ipywidgets import interact, fixed, Checkbox, Dropdown, SelectMultiple
 
 countries_chooser = SelectMultiple(
@@ -444,16 +440,12 @@ on ajoute des boutons pour pouvoir choisir la date de début et la date de fin
 ### les types impliqués
 
 ```{code-cell} ipython3
-:tags: []
-
 from ipywidgets import interact, fixed, Checkbox, Dropdown, SelectMultiple, DatePicker
 ```
 
 juste pour voir le type retourné par DatePicker
 
 ```{code-cell} ipython3
-:tags: []
-
 def display_date(chosen_date):
     print(f"{type(chosen_date)=}")
     print(f"{chosen_date=}")
@@ -471,8 +463,6 @@ et dans la dateframe on a des `pd.Timestamp`
 ### ce qui donne
 
 ```{code-cell} ipython3
-:tags: []
-
 def display_corona_dates(
         df, countries: List[str],
         confirmed: bool, deaths, recovered,
@@ -505,8 +495,6 @@ def display_corona_dates(
 ```
 
 ```{code-cell} ipython3
-:tags: []
-
 from ipywidgets import interact, fixed, Checkbox, Dropdown, SelectMultiple
 
 def multi_countries_dates(df):
@@ -586,6 +574,4 @@ display(dashboard)
 interactive_output(display_corona_dates_diff, bindings)
 ```
 
-```{code-cell} ipython3
-
-```
+***
