@@ -38,7 +38,7 @@ function main() {
     if [[ -n "$@" ]]; then
         focus="$@"
     elif [[ -n "$EXTENDED" ]]; then
-        focus=$(find . -name '*-nb.py' -o -name '*-nb.md' | egrep -v '_build|ipynb_checkpoints')
+        focus=$(find . -name '*-nb.py' -o -name '*-nb.md' | egrep -v '_build|ipynb_checkpoints' | sort)
     else
         # this does not capture hidden folders
         focus=$(ls **/*-nb.{md,py} | grep -v _build/)
