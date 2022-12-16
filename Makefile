@@ -8,7 +8,7 @@
 #
 
 SOLUTIONS = $(shell find . -name '*.py' -o -name '*.md' \
-  | egrep -- '-corrige\.|-howto\.|\.teacher' \
+  | egrep -- '-corrige\.|\.teacher' \
   | egrep -v '.ipynb_checkpoints|_build')
 
 FLAGS = -v
@@ -31,6 +31,7 @@ diff-commands:
 requirements:
 	pip install nbprune
 
+
 tocs: jb/_toc-python.yml jb/_toc-ds.yml
 
 jb/_toc-python.yml: .nbhosting/nbhosting.yaml
@@ -43,3 +44,9 @@ book-python:
 	jupyter-book build --toc jb/_toc-python.yml --config jb/_config.yml .
 book-ds:
 	jupyter-book build --toc jb/_toc-ds.yml --config jb/_config.yml .
+
+book:
+	@echo choose the book you want to build
+	@echo make book-python
+	@echo or
+	@echo make book-ds
