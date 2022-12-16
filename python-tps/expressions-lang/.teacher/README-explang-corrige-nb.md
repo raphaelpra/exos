@@ -175,6 +175,14 @@ class Divide:
     pass
 ```
 
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# prune-cell
+
+from expressionsv1 import *
+```
+
 ### quelques tests
 
 +++
@@ -373,7 +381,7 @@ pour réaliser cette deuxième partie:
   * `Assignment`: qui fait dans notre langage office à la fois de déclaration et d'affectation d'une variable
   * `Expressions`: qui va nous permettre de grouper plusieurs expressions en une suite logique
   
-voyez les quelques exemples ci-dessous pour une illustration
+voyez les quelques exemples ci-dessous pour une illustration  
 
 ```{code-cell} ipython3
 # copiez votre code de la v1 ici, et modifiez-le 
@@ -389,6 +397,11 @@ class Assignment:
 
 class Expressions:
     pass
+```
+
+```{code-cell} ipython3
+# prune-cell
+from expressionsv2 import *
 ```
 
 et si tout marche bien vous pouvez exécuter la suite sans erreur:

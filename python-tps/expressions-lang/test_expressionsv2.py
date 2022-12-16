@@ -5,7 +5,7 @@
 # are considered test cases
 
 # the code to test
-from expressions2 import (
+from expressionsv2 import (
     Integer, Float, Negative, Plus, Minus, Multiply, Divide,
     Expressions, Assignment, Variable
     )
@@ -24,31 +24,31 @@ def test_001():
         Plus(Multiply(Integer(10), Integer(2)), Integer(30)),
         Multiply(Negative(Integer(4)), Integer(25)))
 
-    assert tree.eval() == -5000
+    assert tree.eval({}) == -5000
 
 def test_002():
     tree = Plus(Multiply(Integer(10), Integer(2)),
                 Negative(Negative(Integer(30))),
                 Minus(Integer(100), Integer(50)))
 
-    assert tree.eval() == 100
+    assert tree.eval({}) == 100
 
 def test_003():
     tree = Multiply(
         Plus(Integer(30), Integer(40), Integer(50)),
             Minus(Integer(20), Integer(15)))
 
-    assert tree.eval() == 600
+    assert tree.eval({}) == 600
 
 def test_004():
     tree = Negative(
         Plus(Float(10), Negative(Integer(20))))
 
-    assert tree.eval() == 10.
+    assert tree.eval({}) == 10.
 
 def test_005():
     tree = Divide(Integer(10), Integer(4))
-    assert tree.eval() == 2.5
+    assert tree.eval({}) == 2.5
 
 def test_006():
     ########
@@ -88,7 +88,7 @@ def test_100():
         Plus(Variable("a"), Variable("b")),
     )
 
-    assert program.eval() == 30
+    assert program.eval({}) == 30
 
 
 def test_101():
@@ -104,7 +104,7 @@ def test_101():
         Multiply(Variable("b"), Variable("b")),
     )
 
-    assert program.eval() == 64
+    assert program.eval({}) == 64
 
 
 
