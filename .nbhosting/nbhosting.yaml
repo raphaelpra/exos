@@ -10,38 +10,38 @@ tracks:
   - name: exercices basiques
     notebooks:
     # str, ints, binary computations
-    - python-exos/basic/ipaddress.md
+    - python-exos/basic/ipaddress-nb.md
     # lists, side effects
-    - python-exos/basic/skimlist-readme.md
+    - python-exos/basic/skimlist-readme-nb.md
     # strs and formatting
-    - python-exos/basic/invoice.md
+    - python-exos/basic/invoice-nb.md
     # dicts
-    - python-exos/basic/agenda-readme.md
+    - python-exos/basic/agenda-readme-nb.md
     # basic counts, requires dicts
-    - python-exos/basic/adnpercents-readme.md
+    - python-exos/basic/adnpercents-readme-nb.md
     # filesystem
-    - python-exos/basic/files-scanext.md
+    - python-exos/basic/files-scanext-nb.md
     # filesystem too, requires files_sortby.py
     # probably a duplicate of the previous one
-    - python-exos/basic/files-sortby.md
+    - python-exos/basic/files-sortby-nb.md
   - name: exercices classes
     notebooks:
-    - python-exos/classes/wordcounts-readme.md
+    - python-exos/classes/wordcounts-readme-nb.md
   - name: exercices visu
     notebooks:
-    - python-exos/visu/adnwalk-howto.md
+    - python-exos/visu/adnwalk-howto-nb.md
   - name: TPs basiques
     notebooks:
     # ascii, utf8, binary, as well as various file formats
     # like pickle, json, yaml, csv
     - "python-tps/files-formats/README-files-formats-mp.md"
-    - "python-tps/watson/README-watson.md"
+    - "python-tps/watson/README-watson-nb.md"
     # using dicts for indexing and sets for creating groups
     - "python-tps/students-groups/README-students-groups.md"
     # using dicts for structs and for indexing
-    - python-tps/indexing-structs/README-indexing-structs.md
+    - python-tps/indexing-structs/README-indexing-structs-nb.md
     # itertools
-    - "python-tps/queens/README-queens.md"
+    - "python-tps/queens/README-queens-nb.md"
   - name: TPs classes
     notebooks:
     - "python-tps/students-grades/README*.md"
@@ -52,7 +52,7 @@ tracks:
     notebooks:
     - "python-tps/graph-bfs-dfs/README*.py"
     - "python-tps/graph-shortest-path/README*.md"
-    - "python-tps/metro/README-metro.md"
+    - "python-tps/metro/README-metro-nb.md"
     - "python-tps/pagerank-thrones/README*.py"
   - name: 'TPs visu & games'
     notebooks:
@@ -62,16 +62,16 @@ tracks:
     - "python-tps/redis/README*.md"
   - name: howtos
     notebooks:
-      - python-howtos/requests-howto.md
+      - python-howtos/requests-howto-nb.md
   - name: lecture de code
     notebooks:
       - python-reading/snake/snake.py
   - name: exercices avancés
     notebooks:
-    - python-exos/advanced/encodings-howto.md
-    - python-exos/advanced/attributes-proxy.md
-    - python-exos/advanced/attributes-dynprop.md
-    - python-exos/advanced/randomdate-readme.md
+    - python-exos/advanced/encodings-howto-nb.md
+    - python-exos/advanced/attributes-proxy-nb.md
+    - python-exos/advanced/attributes-dynprop-nb.md
+    - python-exos/advanced/randomdate-readme-nb.md
   - name: sample code
     notebooks:
     - "python-samples/*.py"

@@ -2,26 +2,26 @@ format: jb-book
 parts:
 - caption: exercices basiques
   chapters:
-  - file: python-exos/basic/ipaddress
-  - file: python-exos/basic/skimlist-readme
-  - file: python-exos/basic/invoice
-  - file: python-exos/basic/agenda-readme
-  - file: python-exos/basic/adnpercents-readme
-  - file: python-exos/basic/files-scanext
-  - file: python-exos/basic/files-sortby
+  - file: python-exos/basic/ipaddress-nb
+  - file: python-exos/basic/skimlist-readme-nb
+  - file: python-exos/basic/invoice-nb
+  - file: python-exos/basic/agenda-readme-nb
+  - file: python-exos/basic/adnpercents-readme-nb
+  - file: python-exos/basic/files-scanext-nb
+  - file: python-exos/basic/files-sortby-nb
 - caption: exercices classes
   chapters:
-  - file: python-exos/classes/wordcounts-readme
+  - file: python-exos/classes/wordcounts-readme-nb
 - caption: exercices visu
   chapters:
-  - file: python-exos/visu/adnwalk-howto
+  - file: python-exos/visu/adnwalk-howto-nb
 - caption: TPs basiques
   chapters:
   - file: python-tps/files-formats/README-files-formats-mp
-  - file: python-tps/watson/README-watson
+  - file: python-tps/watson/README-watson-nb
   - file: python-tps/students-groups/README-students-groups
-  - file: python-tps/indexing-structs/README-indexing-structs
-  - file: python-tps/queens/README-queens
+  - file: python-tps/indexing-structs/README-indexing-structs-nb
+  - file: python-tps/queens/README-queens-nb
 - caption: TPs classes
   chapters:
   - glob: python-tps/students-grades/README*
@@ -32,7 +32,7 @@ parts:
   chapters:
   - glob: python-tps/graph-bfs-dfs/README*
   - glob: python-tps/graph-shortest-path/README*
-  - file: python-tps/metro/README-metro
+  - file: python-tps/metro/README-metro-nb
   - glob: python-tps/pagerank-thrones/README*
 - caption: TPs visu & games
   chapters:
@@ -42,16 +42,16 @@ parts:
   - glob: python-tps/redis/README*
 - caption: howtos
   chapters:
-  - file: python-howtos/requests-howto
+  - file: python-howtos/requests-howto-nb
 - caption: lecture de code
   chapters:
   - file: python-reading/snake/snake
 - caption: "exercices avanc\xE9s"
   chapters:
-  - file: python-exos/advanced/encodings-howto
-  - file: python-exos/advanced/attributes-proxy
-  - file: python-exos/advanced/attributes-dynprop
-  - file: python-exos/advanced/randomdate-readme
+  - file: python-exos/advanced/encodings-howto-nb
+  - file: python-exos/advanced/attributes-proxy-nb
+  - file: python-exos/advanced/attributes-dynprop-nb
+  - file: python-exos/advanced/randomdate-readme-nb
 - caption: sample code
   chapters:
   - glob: python-samples/*
