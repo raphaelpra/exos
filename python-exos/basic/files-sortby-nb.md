@@ -26,7 +26,7 @@ nbhosting:
 
 +++
 
-# La librairie `pathlib`
+# la librairie `pathlib`
 
 ```{code-cell} ipython3
 from pathlib import Path
