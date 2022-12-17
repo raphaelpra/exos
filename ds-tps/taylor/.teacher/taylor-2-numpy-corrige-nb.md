@@ -19,7 +19,7 @@ nbhosting:
   title: Taylor et numpy
 ---
 
-# Taylor
+# Taylor (2/3)
 
 +++
 

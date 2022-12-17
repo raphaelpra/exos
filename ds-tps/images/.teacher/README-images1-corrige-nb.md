@@ -28,7 +28,7 @@ notebookname: indexation & slicing
 
 +++
 
-# TP simple avec des images
+# TP images (1/2)
 
 merci à Wikipedia et à stackoverflow
 
@@ -407,7 +407,7 @@ img = plt.imread(filename)
 2. Slicer et afficher l'image en ne gardant qu'une ligne et qu'une colonne sur 2, 5, 10 et 20  
 (ne dupliquez pas le code)
 
-**[indices]]**
+**[indices]**
 * vous pouvez créer plusieurs figures depuis une seule cellule
 * vous pouvez ensuite choisir de 'replier' ou non la zone *output* en hauteur;  
   c'est-à-dire d'afficher soit toute la hauteur, soit une zone de taille fixe avec une scrollbar pour naviguer  

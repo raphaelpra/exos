@@ -19,7 +19,7 @@ nbhosting:
   title: Taylor interactif
 ---
 
-# Taylor - exo #3 - un dashboard
+# Taylor (3/3) un dashboard
 
 +++
 

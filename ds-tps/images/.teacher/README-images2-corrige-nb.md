@@ -43,7 +43,7 @@ pas fait par manque de temps, mais ce TP aurait besoin d'être retravaillé comm
 
 +++
 
-# suite du TP simple avec des images
+# TP images (2/2)
 
 merci à Wikipedia et à stackoverflow
 
