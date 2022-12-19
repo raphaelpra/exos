@@ -67,4 +67,10 @@ ici par exemple notre figure c'est principalement deux courbes (la fonction, et 
 
 +++
 
+le but du jeu est d'obtenir un matplotlib interactif de ce genre
+
+![](taylor-3-example.png)
+
++++
+
 ***

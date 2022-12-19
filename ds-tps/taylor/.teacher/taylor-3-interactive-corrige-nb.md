@@ -94,30 +94,30 @@ import ipywidgets as widgets
 
 from ipywidgets import Dropdown, IntSlider, fixed
 
-def interactive_taylor(functions, domain, yrange, nrange):
+def interactive_taylor(functions, domain, yrange, degree_widget):
     """
-    e.g. functions = (np,sin, np.cos)
-    e.g. domain = np.linspace(0, 2*pi)
-    e.g. yrange = (-1, 1)
-    e.g. nrange = IntSlider(...)
+    e.g. functions     = (np,sin, np.cos)
+    e.g. domain        = np.linspace(0, 2*pi)
+    e.g. yrange        = (-1, 1)
+    e.g. degree_widget = IntSlider(...)
     """
     fig, ax = plt.subplots(figsize=(8, 4))
     ax.set_ylim(yrange)
 
     # start with the first function
     f = functions[0]
-    n = nrange.value
+    n = degree_widget.value
     ax.set_title(f"Taylor approx for {f.__name__} at degree {n}")
     plain_line = ax.plot(domain, f(domain))
     approx_line = ax.plot(domain, taylor2(domain, f, n))
 
     # [(label, value), ...]
     fun_options = [(f.__name__, f) for f in functions]
-    @widgets.interact(f=Dropdown(options=fun_options), n=nrange)
-    def update_figure(f, n):
+    @widgets.interact(function=Dropdown(options=fun_options), degree=degree_widget)
+    def update_figure(function, degree):
         ax.lines[0].set_data(domain, f(domain))
         ax.lines[1].set_data(domain, taylor2(domain, f, n))
-        ax.set_title(f"Taylor approx for {f.__name__} at degree {n}")
+        ax.set_title(f"Taylor approx for {f.__name__} at degree {degree}")
 
 interactive_taylor(
     (np.sin, np.cos),
@@ -129,5 +129,11 @@ interactive_taylor(
 ```{code-cell} ipython3
 # prune-end
 ```
+
+le but du jeu est d'obtenir un matplotlib interactif de ce genre
+
+![](taylor-3-example.png)
+
++++
 
 ***
