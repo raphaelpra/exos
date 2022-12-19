@@ -65,6 +65,69 @@ ce qui change fondamentalement entre le premier mode (`inline`) et les deux autr
 
 ici par exemple notre figure c'est principalement deux courbes (la fonction, et son approximation), plus les décorations (axes, titres, etc..) et au changement de paramètre on va changer seulement la courbe de l'approximation - et éventuellement le titre si on veut
 
-+++
+```{code-cell} ipython3
+# prune-begin
+```
+
+```{code-cell} ipython3
+# from v2
+
+from autograd import grad
+
+def taylor1(X, derivatives):
+    shape = X.size,                                    # prune-line
+    Y = np.zeros(shape)                                # prune-line
+    for degree, derivative in enumerate(derivatives):  # prune-line
+        Y += X**degree * derivative/factorial(degree)  # prune-line
+    return Y                                           # prune-line
+
+def taylor2(X, f, n):
+    derivatives = []                                      # prune-line
+    for degree in range(n):                               # prune-line
+        derivatives.append(f(0.))                         # prune-line
+        f = grad(f)                                       # prune-line
+    return taylor1(X, derivatives)                        # prune-line
+```
+
+```{code-cell} ipython3
+import ipywidgets as widgets
+
+from ipywidgets import Dropdown, IntSlider, fixed
+
+def interactive_taylor(functions, domain, yrange, nrange):
+    """
+    e.g. functions = (np,sin, np.cos)
+    e.g. domain = np.linspace(0, 2*pi)
+    e.g. yrange = (-1, 1)
+    e.g. nrange = IntSlider(...)
+    """
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.set_ylim(yrange)
+
+    # start with the first function
+    f = functions[0]
+    n = nrange.value
+    ax.set_title(f"Taylor approx for {f.__name__} at degree {n}")
+    plain_line = ax.plot(domain, f(domain))
+    approx_line = ax.plot(domain, taylor2(domain, f, n))
+
+    # [(label, value), ...]
+    fun_options = [(f.__name__, f) for f in functions]
+    @widgets.interact(f=Dropdown(options=fun_options), n=nrange)
+    def update_figure(f, n):
+        ax.lines[0].set_data(domain, f(domain))
+        ax.lines[1].set_data(domain, taylor2(domain, f, n))
+        ax.set_title(f"Taylor approx for {f.__name__} at degree {n}")
+
+interactive_taylor(
+    (np.sin, np.cos),
+    np.linspace(-3*np.pi, 3*np.pi, 100),
+    (-1, 1),
+    IntSlider(min=0, max=10, step=1, value=0))
+```
+
+```{code-cell} ipython3
+# prune-end
+```
 
 ***

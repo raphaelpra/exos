@@ -19,7 +19,7 @@ nbhosting:
   title: Taylor et numpy
 ---
 
-# Taylor
+# Taylor (2/3)
 
 +++
 
@@ -131,8 +131,6 @@ avec sinus
 avec une fonction custom
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
-
 # à vous
 
 def custom(X):
@@ -144,16 +142,12 @@ def custom(X):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
-
 # calculez Y3 l'image de X par custom
 
 Y3 = custom(X)                            # prune-line
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
-
 # calculez Y4 l'image de X par l'approx. de custom d'ordre 20
 
 Y4 = taylor2(X, custom, 20)                # prune-line

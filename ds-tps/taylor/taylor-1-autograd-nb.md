@@ -19,7 +19,7 @@ nbhosting:
   title: Taylor et autograd
 ---
 
-# intro à autograd
+# Taylor (1/3): intro à autograd
 
 +++
 
