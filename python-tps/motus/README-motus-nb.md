@@ -74,23 +74,21 @@ puis on donne ensuite autant de jaunes que possible, et à chaque fois les lettr
 
 +++
 
-c'est  ainsi que par exemple
-![](motus-multiple-1.png)
+c'est  ainsi que par exemple, avec le mot caché `addition` on obtient la correction suivante (la dernière ligne est uniquement explicatoire)
+![](example-addition.svg)
 
 vous remarquez que la réponse contient un `d` bleu, alors qu'il y a deux `d` dans le mot à deviner, mais comme ils ont déjà été 'consommés' pour les deux `d` rouges, le troisième `d` est considéré comme absent.
 
 +++
 
-autre exemple
-![](motus-multiple-2.png)
+autre exemple:
+![](example-escarcelle.svg)
 
-vous remarquez que la réponse contient un `p` rouge en 3ème position, et un `p` jaune en première position qui correspond à la deuxième position du mot caché; si notre essai avait contenu un troisième `p`, il aurait été corrigé en bleu.
+vous remarquez que la réponse contient un `e` rouge en 1ème position, et un `e` jaune en 5-ième position qui correspond à la 6-ème position du mot caché, en aussi un `e` bleu en 9-ème position, malgré le fait que le mot caché contient .. plein de `e` !
 
-```{code-cell} ipython3
++++
 
-```
-
-## une librarie utile `colorama`
+## une librarie utile: `colorama`
 
 +++
 
