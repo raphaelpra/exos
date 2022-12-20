@@ -17,7 +17,7 @@ class Color(Enum):
 
     RED = auto()     # full match
     YELLOW = auto()  # exists in another location
-    WHITE = auto()   # not in word at all
+    BLUE = auto()   # not in word at all
 
     def outline(self, message: str):
         """
@@ -28,14 +28,14 @@ class Color(Enum):
         elif self.name == "YELLOW":
             beg, end = Back.YELLOW, Style.RESET_ALL
         else:
-            beg, end = Back.WHITE, Style.RESET_ALL
+            beg, end = Back.BLUE, Style.RESET_ALL
         return f"{beg} {message} {end} "
     def __eq__(self, other):
         # surprisingly this is required...
         return self.name == other.name
 
 # shortcuts
-R, Y, W = Color.RED, Color.YELLOW, Color.WHITE
+R, Y, B = Color.RED, Color.YELLOW, Color.BLUE
 
 
 class Answer:
@@ -52,7 +52,7 @@ class Answer:
     def __iter__(self):
         return iter(self.colors)
 
-    def red(self):
+    def right(self):
         """
         is it a right answer ?
         """
@@ -68,7 +68,7 @@ class Attempt:
         self.answer = answer
 
     def __repr__(self):
-        return "".join(color.outline(f" {char} ")
+        return "".join(color.outline(f"{char}")
                        for char, color in zip(self.word, self.answer))
 
     def __iter__(self):
@@ -87,17 +87,17 @@ class Attempt:
 
     def absent_chars(self):
         """
-        returns a set of chars that are only marked WHITE
+        returns a set of chars that are only marked BLUE
         so we know they are not in the hidden word
         """
         # but of course we must be a little careful
         definitely_there = {
             char for char, color in zip(self.word, self.answer)
-            if color != Color.WHITE
+            if color != Color.BLUE
         }
         apparently_not_there = {
             char for char, color in zip(self.word, self.answer)
-            if color == Color.WHITE
+            if color == Color.BLUE
         }
         return apparently_not_there - definitely_there
 
@@ -126,9 +126,9 @@ class Hidden:
         so a few examples:
 
         | hidden | typed | result | comment |
-        | ABC    | AAA   | RWW    | a single match |
-        | ABCA   | AAAA  | RWWR   | two matches    |
-        | ABCA   | AAAY  | RWYW   | one exact match and one partial |
+        | ABC    | AAA   | RBB    | a single match |
+        | ABCA   | AAAA  | RBBR   | two matches    |
+        | ABCA   | AAAY  | RBYB   | one exact match and one partial |
         """
         if len(self) != len(typed):
             raise ValueError(f"length mismatch {len(self)} != {len(typed)}")
@@ -149,7 +149,7 @@ class Hidden:
             try:
                 remaining.remove(c)
                 yellow_indices.add(index)
-            # if not, it's OK, we'll fill this index with WHITE later
+            # if not, it's OK, we'll fill this index with BLUE later
             except ValueError:
                 pass
         # fill the result
@@ -160,7 +160,7 @@ class Hidden:
             elif i in yellow_indices:
                 result.append(Color.YELLOW)
             else:
-                result.append(Color.WHITE)
+                result.append(Color.BLUE)
         return Attempt(typed, Answer(*result))
 
 
@@ -235,3 +235,20 @@ class Dictionary:
                 for attempt in attempts)
 
         return { word for word in comb if match(word) }
+
+def _hidden(hidden) -> str:
+    """
+    helper function to display a hidden word with the same spacing
+    as the attempts
+    """
+    return "".join(
+        Color.RED.outline(x) for x in hidden
+    )
+
+def show_example(hidden, word) -> None:
+    """
+    print the explanation of the results obtained with these words
+    """
+    print(f"with hidden word : {_hidden(hidden)}")
+    print(f"   you would get : {Hidden(hidden).attempt(word)}")
+    print(f"         because : {Hidden(word).attempt(hidden)}")

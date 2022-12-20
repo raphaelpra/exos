@@ -13,18 +13,18 @@ class Tests(TestCase):
         self.assertEqual(h.attempt("ABC").answer, Answer(R, R, R))
         self.assertEqual(h.attempt("BCA").answer, Answer(Y, Y, Y))
         self.assertEqual(h.attempt("ACB").answer, Answer(R, Y, Y))
-        self.assertEqual(h.attempt("ABA").answer, Answer(R, R, W))
+        self.assertEqual(h.attempt("ABA").answer, Answer(R, R, B))
 
     def test_matches2(self):
 
         h = Hidden("ABCABC")
 
         self.assertEqual(h.attempt("ABCABC").answer, Answer(R, R, R, R, R, R))
-        self.assertEqual(h.attempt("ABCXYZ").answer, Answer(R, R, R, W, W, W))
+        self.assertEqual(h.attempt("ABCXYZ").answer, Answer(R, R, R, B, B, B))
         self.assertEqual(h.attempt("ABCBCA").answer, Answer(R, R, R, Y, Y, Y))
-        self.assertEqual(h.attempt("BCA---").answer, Answer(Y, Y, Y, W, W, W))
-        self.assertEqual(h.attempt("ACB---").answer, Answer(R, Y, Y, W, W, W))
-        self.assertEqual(h.attempt("A-B-A-").answer, Answer(R, W, Y, W, Y, W))
+        self.assertEqual(h.attempt("BCA---").answer, Answer(Y, Y, Y, B, B, B))
+        self.assertEqual(h.attempt("ACB---").answer, Answer(R, Y, Y, B, B, B))
+        self.assertEqual(h.attempt("A-B-A-").answer, Answer(R, B, Y, B, Y, B))
 
 
     # run massively on all words of a certain length
@@ -38,7 +38,7 @@ class Tests(TestCase):
             if len(word) == len(hidden)
         ]
         if expect_exactly_one:
-            all_red = [a for a in answers if a.red()]
+            all_red = [a for a in answers if a.right()]
             self.assertEqual(len(all_red), 1)
 
     def check_length(self, length):
