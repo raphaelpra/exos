@@ -81,14 +81,20 @@ vous remarquez que la réponse contient un `d` bleu, alors qu'il y a deux `d` da
 
 +++
 
-autre exemple:
+autre exemple, le mot caché est `escarcelle`
 ![](example-escarcelle.svg)
 
-vous remarquez que la réponse contient un `e` rouge en 1ème position, et un `e` jaune en 5-ième position qui correspond à la 6-ème position du mot caché, en aussi un `e` bleu en 9-ème position, malgré le fait que le mot caché contient .. plein de `e` !
+vous remarquez que la réponse contient
+
+* un `e` rouge en 1ème position, 
+* un `e` jaune en 6-ième position qui correspond à la 7-ème position du mot caché, 
+* et aussi un `e` bleu en 9-ème position, malgré le fait que le mot caché contient .. plein de `e` !
+
+ce qui signifie entre autres qu'il ne suffit pas trouver une lettre en bleu dans la réponse pour en déduire qu'elle n'est pas présente dans le mot, comme ce contrexemple nous le montre bien
 
 +++
 
-## une librarie utile: `colorama`
+## une librairie utile: `colorama`
 
 +++
 
@@ -99,12 +105,16 @@ from colorama import Back, Style
 ```
 
 ```{code-cell} ipython3
+# on peut l'utiliser comme ceci
 print(f"{Back.RED} C  I {Back.YELLOW} N {Back.BLUE} E M A {Style.RESET_ALL}")
 ```
 
 ```{code-cell} ipython3
+# ou encore
 from colorama import Back, Style
 print(f"{Back.RED} C {Style.RESET_ALL} {Back.RED} I {Style.RESET_ALL} "
       f"{Back.YELLOW} N {Style.RESET_ALL} {Back.BLUE} E {Style.RESET_ALL} "
       f"{Back.YELLOW} M {Style.RESET_ALL} {Back.YELLOW} A {Style.RESET_ALL}")
 ```
+
+xxx à suivre
