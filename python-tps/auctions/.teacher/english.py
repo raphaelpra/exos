@@ -3,14 +3,14 @@ from itertools import count
 from utils import Cli
 
 
-class BlindAuction():
+class EnglishAuction():
 
     def __init__(self, cli=None):
         self.cli = cli if cli else Cli()
 
     def play(self):
         # Input opening bid
-        self.cli.display('Started auction of type: Blind')
+        self.cli.display('Started auction of type: English')
         opening_bid = self.cli.prompt('Please enter the amount for the opening bid:')
         opening_bid = int(opening_bid)
         self.cli.display(f"Opening bid is: {opening_bid}")
@@ -29,14 +29,20 @@ class BlindAuction():
         # Collect bids
         standing_bid = opening_bid
         winner = None
-        for bidder in bidders:
-            bid = self.cli.prompt(
-                f"Opening bid is {opening_bid}. {bidder} bids:"
-            )
-            bid = int(bid)
-            if bid > standing_bid:
-                standing_bid = bid
+        while True:
+            still_alive = False
+            for bidder in bidders:
+                bid = self.cli.prompt(
+                    f"Standing bid is {standing_bid}. {bidder} bids:"
+                )
+                if not bid:
+                    continue
+                standing_bid = int(bid)
                 winner = bidder
+                # this is where we should check bid is higher
+                still_alive = True
+            if not still_alive:
+                break
 
         # Display winner
         self.cli.display("\n~~~~~~~~\n")
@@ -44,5 +50,5 @@ class BlindAuction():
 
 
 if __name__ == "__main__":
-    auction = BlindAuction()
+    auction = EnglishAuction()
     auction.play()

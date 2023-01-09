@@ -10,7 +10,7 @@ class TestVickrey(unittest.TestCase):
         self.assertEqual(
             [
                 'Started auction of type: Vickrey',
-                'Please enter the opening bid:'
+                'Please enter the amount for the opening bid:'
             ],
             cli.get_displayed()
         )
@@ -20,21 +20,21 @@ class TestVickrey(unittest.TestCase):
     def test_players(self):
         cli = make_auction(VickreyAuction)
         cli.type('30')
-        self.assertIn('Enter bidder (enter nothing to move on):',
+        self.assertIn('Enter name for bidder 1 (enter nothing to move on):',
                       cli.get_displayed())
         cli.type('alice')
         self.assertEqual(
-            ['Enter bidder (enter nothing to move on):'],
+            ['Enter name for bidder 2 (enter nothing to move on):'],
             cli.get_displayed()
         )
         cli.type('bob')
         self.assertEqual(
-            ['Enter bidder (enter nothing to move on):'],
+            ['Enter name for bidder 3 (enter nothing to move on):'],
             cli.get_displayed()
         )
         cli.type('carol')
         self.assertEqual(
-            ['Enter bidder (enter nothing to move on):'],
+            ['Enter name for bidder 4 (enter nothing to move on):'],
             cli.get_displayed()
         )
         cli.type(None)

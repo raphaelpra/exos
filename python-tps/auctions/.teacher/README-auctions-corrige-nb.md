@@ -22,9 +22,18 @@ nbhosting:
   title: "TP: ventes aux ench\xE8res"
 ---
 
-# python-inheritance
+# ventes aux enchères
 
 OOP and inheritance ... in Python!
+
+Les intérêts de ce TP
+
+* utiliser l'héritage pour factoriser du code
+* utiliser des tests automatisés  
+  (c'est une pratique hyper-courante dans la vraie vie: 
+   comme ça on détecte tout de suite les régressions sur le code)
+
++++
 
 ## Instructions
 
@@ -46,7 +55,13 @@ Votre but va être d'implémenter d'autres types d'enchères. Pour chaque type d
 Il y a également un certain nombre d'utilitaires dans le projet (`utils.py`, `testing_utils.py`), mais pour ce TP, vous n'avez pas besoin de les regarder.
 Je vous déconseille fortement de les modifier 🙃
 
-### Avant toute chose
++++
+
+## Avant toute chose
+
++++
+
+### Consignes générales
 
 - Chacune des enchères a déjà un constructeur. Vous pouvez ajouter des choses dans ce constructeur, mais **pas en supprimer**.
 - Pour intéragir avec la ligne de commande, vous devez **impérativement** utiliser l'utilitaire `self.cli` qui est dans les enchères.
@@ -58,51 +73,72 @@ Je vous déconseille fortement de les modifier 🙃
   - Par exemple, quand on leur demande d'enchérir, ils tapent "10" ou "115", mais ils ne tapent pas "toto 1234 %&@# 💣💩🤮"
   - Par exemple, quand on leur demande de sur-enchérir sur une enchère de 30, ils tapent "45" ou une chaîne vide pour passer leur tour, mais pas "12"
   - Le but n'est pas de tester toutes les possibilités !
-- Les exemples sont écrits avec en gris le texte affiché par le programme, et en orange pour le texte saisi par l'utilisateur (sur Github, ca peut varier selon les éditeurs de code). Ignorez les `#` et les `!`, qui ne sont là que pour le formattage:
 
-```diff
-# Le programme affiche ceci.
-# Veuillez saisir une valeur:
-! 30
-# Vous avez saisi: 30
++++
+
+### Comment exécuter les tests 
+
+Dans ce TP on vous fournit des tests unitaires, ce qui vous permet de savoir rapidement si vous avez bien respecté les consignes ou non (enfin c'est l'idée, mais il se peut que les tests soient un peu superficiels ici..)
+
++++
+
+#### depuis le terminal
+
+Vous pouvez tester le code de `blind.py` (normalement le test est OK) en faisant depuis le terminal
+
+```shell
+$ python test_blind.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.306s
+
+OK
 ```
 
-### Comment exécuter les tests dans VSCode
+ou encore, si vous avez installé avec `pip install pytest`
+
+```shell
+$ pytest test_blind.py
+================================ test session starts ================================
+platform darwin -- Python 3.10.8, pytest-7.2.0, pluggy-1.0.0
+rootdir: /Users/tparment/git/flotpython-exos/python-tps/auctions
+plugins: anyio-3.6.2
+collected 3 items
+
+test_blind.py ...                                                             [100%]
+
+================================= 3 passed in 0.39s =================================
+```
+
++++
+
+#### depuis VSCode
 
 1. Ouvrez tout le dossier dans VSCode
-2. Dans le menu View, ouvrez la Command Palette (Ctrl + Shift + P / Cmd + Shift + P)
+2. Choisissez sur la gauche l'onglet 'Testing', et configurez les tests Python pour utiliser `unittest`
 
-![one](https://raw.githubusercontent.com/Kehrlann/python-inheritance/master/images/one.png)
+![](images/vscode-test-configure.png)
 
-3. Tapez "python test" et sélectionnez "Python: Run all tests"
+et aux questions suivantes, répondez:
 
-![two](https://raw.githubusercontent.com/Kehrlann/python-inheritance/master/images/two.png)
+* Q: `Select the directory containing the tests:`  
+  A: `. Root directory`
+* Q: `Select the pattern to identify test files:`  
+  A: `test_*.py` (vous devez avoir des fichiers de ce genre, comme `test_blind.py`)
 
-4. Cliquez sur la pop-up en bas à droite
+3. À ce stade vous devriez voir les testeurs, toujours dans l'onglet gauche `Testing`
 
-![three](https://raw.githubusercontent.com/Kehrlann/python-inheritance/master/images/three.png)
+![](images/vscode-test-explore.png)
 
-5. Dans le menu, sélectionnez `unittest` (c'est l'outil qu'on utilise pour cet exercice)
-
-![four](https://raw.githubusercontent.com/Kehrlann/python-inheritance/master/images/four.png)
-
-6. Puis sélectionnez `. Root directory`
-
-![five](https://raw.githubusercontent.com/Kehrlann/python-inheritance/master/images/five.png)
-
-7. Puis `test_*.py` (c'est comme ca que s'appellent nos fichiers de test):
-
-![six](https://raw.githubusercontent.com/Kehrlann/python-inheritance/master/images/six.png)
-
-8. Ca vous donnera accès à un nouvel onglet (1). Dans cet onglet faites le 2 pour "découvrir" les fichiers de test, "3" pour les exécuter et "4" pour ouvrir une console. Vous pouvez aussi exécuter les tests un par un:
-
-![seven](https://raw.githubusercontent.com/Kehrlann/python-inheritance/master/images/seven.png)
++++
 
 ---
 
-Passons au TP, enfin !
+Mais passons au TP, enfin !
 
-### 1. Blind auction: les règles
++++
+
+## 1. Blind auction: les règles
 
 Voici les règles des enchères à l'aveugle, ou [Blind auction](https://en.wikipedia.org/wiki/First-price_sealed-bid_auction):
 
@@ -115,30 +151,25 @@ Voici les règles des enchères à l'aveugle, ou [Blind auction](https://en.wiki
 
 Exemple:
 
-```diff
-# Started auction of type: Blind
-# Please enter the opening bid:
-! 30
-# Opening bid is: 30
-# Enter bidder (enter nothing to move on):
-! alice
-# Enter bidder (enter nothing to move on):
-! bob
-# Enter bidder (enter nothing to move on):
-! carol
-# Enter bidder (enter nothing to move on):
-!
-# Bidders are: alice, bob, carol
-#
-# Opening bid is 30. alice bids:
-! 35
-# Opening bid is 30. bob bids:
-! 50
-# Opening bid is 30. carol bids:
-! 40
-# ~~~~~~~~
-#
-# Winner is bob. Winning bid is 50.
+```shell
+$ python blind.py
+Started auction of type: Blind
+Please enter the amount for the opening bid: 50
+Opening bid is: 50
+Enter name for bidder 1 (enter nothing to move on): alice
+Enter name for bidder 2 (enter nothing to move on): bob
+Enter name for bidder 3 (enter nothing to move on): carol
+Enter name for bidder 4 (enter nothing to move on):
+
+Bidders are: alice, bob, carol
+
+Opening bid is 50. alice bids: 60
+Opening bid is 50. bob bids: 80
+Opening bid is 50. carol bids: 70
+
+~~~~~~~~
+
+Winner is bob. Winning bid is 80.
 ```
 
 ### 2. Blind auction: le code
@@ -147,87 +178,80 @@ Exemple:
 
 Vous pouvez également regarder `test_blind.py` pour avoir une idée de comment les tests sont écrits, si vous êtes curieux.
 
-🚀 Exécutez `test_blind.py`, de préférence avec VS Code. Si vous exécutez dans le terminal, vous devriez avoir ce genre de résultat:
+🚀 Exécutez `test_blind.py`, de préférence avec VS Code. C'est important, parce que vous allez, plus tard dans le TP, modifier `blind.py`.
 
-```
-$ python test_auctions.py
++++
 
-...
-----------------------------------------------------------------------
-Ran 3 tests in 0.303s
-
-OK
-```
-
-Les 3 points indiquent 3 tests qui fonctionnent, et le "OK" indique que tous les tests passent. C'est important, parce que vous allez, plus tard dans le TP, modifier `blind.py`.
-
-### 3. English auction: les règles
+## 3. English auction: les règles
 
 Vous allez maintenant implémenter des enchères anglaises, ou [English auction](https://en.wikipedia.org/wiki/English_auction). Voici les règles:
 
 - Les enchères démarrent avec un prix minimum
+- Les enchérisseurs voient cette fois la plus haute enchère en cours
 - Les enchérisseurs doivent sur-enchérir par rapport à la meilleure enchère en cours
-- Les enchérisseurs voient la plus haute enchère en cours
 - Il y a plusieurs tours
 - L'enchère est finie lorsque tous les participants passent leur tour (ne tapent rien dans le terminal)
 - Le gagnant est celui qui a proposé le prix le plus haut
 - Le prix final est le prix le plus haut proposé
 
+**NOTES**
+
+- un participant qui passe n'est pas éliminé, il peut encore parler au tour suivant s'il y en a un
+- du coup la vente s'arrête sur un tour où tous les participants passent
+
+
 Exemple:
 
-```diff
-# Started auction of type: English
-# Please enter the opening bid:
-! 50
-# Opening bid is: 30
-# Enter bidder (enter nothing to move on):
-! alice
-# Enter bidder (enter nothing to move on):
-! bob
-# Enter bidder (enter nothing to move on):
-! carol
-# Enter bidder (enter nothing to move on):
-!
-# Bidders are: alice, bob, carol
-#
-# Standing bid is 30. alice bids:
-! 35
-# Standing bid is 35. bob bids:
-! 40
-# Standing bid is 40. carol bids:
-!
-# Standing bid is 40. alice bids:
-! 45
-# Standing bid is 45. bob bids:
-!
-# Standing bid is 45. carol bids:
-!
-# Standing bid is 45. alice bids:
-!
-# Standing bid is 45. bob bids:
-!
-# Standing bid is 45. carol bids:
-!
-# ~~~~~~~~
-#
-# Winner is alice. Winning bid is 45.
+```shell
+$ python english.py
+Started auction of type: English
+Please enter the amount for the opening bid: 30
+Opening bid is: 30
+Enter name for bidder 1 (enter nothing to move on): alice
+Enter name for bidder 2 (enter nothing to move on): bob
+Enter name for bidder 3 (enter nothing to move on): carol
+Enter name for bidder 4 (enter nothing to move on):
+
+Bidders are: alice, bob, carol
+
+Standing bid is 30. alice bids: 35
+Standing bid is 35. bob bids: 40
+Standing bid is 40. carol bids:
+Standing bid is 40. alice bids: 45
+Standing bid is 45. bob bids:
+Standing bid is 45. carol bids:
+Standing bid is 45. alice bids:
+Standing bid is 45. bob bids:
+Standing bid is 45. carol bids:
+
+~~~~~~~~
+
+Winner is alice. Winning bid is 45.
 ```
 
 🚀 Implémentez l'English auction dans `english.py`. Vous avez le droit de tout copier-coller depuis `blind.py` pour commencer! Vous devez exécuter les tests jusqu'à ce que `test_english.py` fonctionne à 100%.
 
-### 4. Mise en commun: le facile
++++
+
+## 4. Mise en commun: le facile
 
 Remarquez maintenant les similitudes entre `blind` et `english`.
 
-🚀 Introduisez une classe de base, par exemple `Auction` dans le fichier `auction.py`, et mutualisez les étapes en commun dans `blind` et `english`, par exemple en introduisant des fonctions spécifiques.
+🚀 Introduisez une classe de base, par exemple `Auction` dans le fichier `auction.py`, et mutualisez les étapes en commun dans `blind` et `english`, par exemple en introduisant des méthodes ou fonctions spécifiques.
 
 N'oubliez pas d'exécuter les tests de `blind` et `english` pour être sûrs que vous n'avez rien cassé!
 
-### 5. Mise en commun: un peu plus intéressant
++++
+
+## 5. Mise en commun: un peu plus intéressant
 
 🚀 Essayez de ne définir la méthode "play" que dans la classe de base, `auction`. Comment s'y prendre ?
 
-### 6. Vickrey auction
+Dans tous les cas, essayez de factoriser au maximum entre les deux modes que l'on a vus jusqu'ici, de façon à minimiser le code qui va être nécessaire pour la 3éme variante que nous allons voir tout de suite.
+
++++
+
+## 6. Vickrey auction
 
 Il devrait être facile d'implémenter une nouvelle enchère!
 
@@ -235,7 +259,7 @@ Voici les règles des enchères en plis cachetés à un tour au second prix, ou 
 
 - Les enchères démarrent avec un prix minimum
 - Les enchérisseurs doivent sur-enchérir par rapport au prix minimum
-- Les enchérisseur ne savent pas quel est la plus haute enchère (on estime qu'ils ne peuvent pas lire ce que les autres on saisi dans le terminal)
+- Les enchérisseur ne savent pas quel est la plus haute enchère (on estime qu'ils ne peuvent pas lire ce que les autres ont saisi dans le terminal)
 - Il n'y a qu'un seul tour
 - Le gagnant est celui qui a proposé le prix le plus haut
 - Le prix final est la _deuxième enchère la plus haute_
@@ -243,33 +267,33 @@ Voici les règles des enchères en plis cachetés à un tour au second prix, ou 
 Exemple:
 
 ```diff
-# Started auction of type: Vickrey
-# Please enter the opening bid:
-! 30
-# Opening bid is: 30
-# Enter bidder (enter nothing to move on):
-! alice
-# Enter bidder (enter nothing to move on):
-! bob
-# Enter bidder (enter nothing to move on):
-! carol
-# Enter bidder (enter nothing to move on):
-!
-# Bidders are: alice, bob, carol
-#
-# Opening bid is 30. alice bids:
-! 35
-# Opening bid is 30. bob bids:
-! 50
-# Opening bid is 30. carol bids:
-! 40
-# ~~~~~~~~
-#
-# Winner is bob. Winning bid is 40.
+Started auction of type: Vickrey
+Please enter the amount for the opening bid: 50
+Opening bid is: 50
+Enter name for bidder 1 (enter nothing to move on): alice
+Enter name for bidder 2 (enter nothing to move on): bob
+Enter name for bidder 3 (enter nothing to move on): carol
+Enter name for bidder 4 (enter nothing to move on):
+
+Bidders are: alice, bob, carol
+
+Opening bid is 50. alice bids: 60
+Opening bid is 50. bob bids: 80
+Opening bid is 50. carol bids: 70
+
+~~~~~~~~
+
+Winner is bob. Winning bid is 70.
 ```
 
 🚀 A vous de jouer, comme d'habitude vous avez un fichier de test `test_vickrey.py`. Le cas ci-dessus est intéressant pour votre implémentation.
 
-### 7. Jeu libre
++++
+
+## 7. Jeu libre
 
 Si vous avez encore le temps, n'hésitez pas à modifier votre programme pour mettre une méthode qui représente "un tour" d'enchères dans la classe de base, et voir comment modifier vos classes filles pour l'utiliser. Pas de test particulier pour ça, mais, comme d'habitude, il ne faut rien casser !
+
++++
+
+***
