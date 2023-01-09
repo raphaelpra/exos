@@ -2,8 +2,6 @@
 celltoolbar: Slideshow
 jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
-  cell_metadata_json: true
-  formats: ipynb,md:myst
   notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
     -jupytext.custom_cell_magics, -language_info.version, -language_info.codemirror_mode.version,
     -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
