@@ -1,36 +1,27 @@
 ---
 celltoolbar: Slideshow
 jupytext:
-  cell_metadata_filter: all
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   cell_metadata_json: true
   formats: ipynb,md:myst
-  notebook_metadata_filter: all,-language_info
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -jupytext.custom_cell_magics, -language_info.version, -language_info.codemirror_mode.version,
+    -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
+    -toc, -vscode
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.13.8
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
 nbhosting:
   title: un jeu multijoueurs
-toc:
-  base_numbering: 1
-  nav_menu: {}
-  number_sections: true
-  sideBar: true
-  skip_h1_title: false
-  title_cell: Table of Contents
-  title_sidebar: Contents
-  toc_cell: false
-  toc_position: {}
-  toc_section_display: true
-  toc_window_display: false
 ---
-
-+++ {"trusted": true}
 
 # un jeu multi-joueur
 
