@@ -28,6 +28,15 @@ version: '1.0'
 
 <img src="media/metro-map.png" width="600px" />
 
++++
+
+intérêts de ce TP
+
+* découvrir deux algos hyper classiques de parcours de graphes (simples, élégants, et très utiles!)
+* utiliser des données hybrides pandas et Python 
+* utiliser les properties
+* mettre en oeuvre une librairie de rendu géographique (folium)
+
 ```{code-cell} ipython3
 from pathlib import Path
 import numpy as np
@@ -102,32 +111,53 @@ Il y a deux algorithmes standard pour parcourir un graphe à partir de l'un de s
 * DFS (depth-first-scan)
 * BFS (breadth-first scan)
 
+```{code-cell} ipython3
+# prune-cell
+
+import graphviz
+
+graph = graphviz.Digraph(engine='dot', format='svg')
+graph.edge('v', 'v1')
+graph.edge('v1', 'v11')
+graph.edge('v1', 'v12')
+graph.edge('v11', 'v111')
+graph.edge('v11', 'v112')
+graph.edge('v12', 'v112')
+graph.edge('v12', 'v113')
+graph.edge('v', 'v2')
+graph.edge('v2', 'v21')
+graph.edge('v2', 'v22')
+graph.edge('v21', 'v211')
+graph.edge('v21', 'v212')
+graph.edge('v22', 'v212')
+graph.edge('v22', 'v213')
+
+graph.render(filename='example')
+
+graph
+```
+
 intuitivement, en partant de cet échantillon (ici un simple arbre) :
 
-```{code-cell} ipython3
-from simpletree import tree
-
-tree
-```
+![](example.svg)
 
 +++ {"cell_style": "split"}
 
 DFS donnerait l'énumération suivante (les sauts de ligne ne sont pas significatifs) :
 ```
-v v1 v11 v111 v112
-v12 v121 v122
+v v1 v11 v111 v112 
+v12 v113
 v2 v21 v211 v212
-v22 v221 v222
+v22 v213
 ```
 
 +++ {"cell_style": "split"}
 
 alors que BFS verrait au contraire :
 ```
-v
-v1 v2
+v v1 v2
 v11 v12 v21 v22
-v111 v112 v121 v122 v211 v212 v221 v222
+v111 v121 v122 v211 v212 v222
 ```
 
 +++
@@ -386,7 +416,7 @@ la première idée consisterait à garder dans un attribut `self.neighbours` un 
 mais il se trouve que dans `hops.txt` on nous donne aussi le numéro de la ligne de métro qui connecte deux stations, on va donc vouloir attacher à chaque lien ce numéro de ligne, et du coup un ensemble n'est sans doute pas ce qu'il y a de mieux...
 
 ```{code-cell} ipython3
-# version étudiant : à vous de compléter le code
+# à vous de compléter le code
 
 class Node:
     """
@@ -396,35 +426,40 @@ class Node:
     finally it has an optional 'label' attribute that we will use when
     drawing the graph on a map
     """
-    def __init__(self, station: Station):
-        # xxx ...
+    def __init__(self, station: "Station"):
+        pass # votre code ..
+        # prune-line-begin
         self.station = station
         # use a dictionary to attach a value to each link (here the line number)
         self.line_by_neighbour = dict() # type: Dict[Node -> str]
         self.label = None
+        # prune-line-end
 
-    # xxx remove
+    # prune-line-begin
     def __repr__(self):
         return str(f"[Node {self.station.name}]")
+    # prune-line-end
 
     def add_edge(self, neighbour: "Node", line):
-        # xxx ...
-        self.line_by_neighbour[neighbour] = line
+        pass # votre code ..
+        self.line_by_neighbour[neighbour] = line     # prune-line
 
     def nb_edges(self):
-        # xxx ...
-        return len(self.line_by_neighbour)
+        pass # votre code ..
+        return len(self.line_by_neighbour)           # prune-line
 
     def iter_neighbours(self):
         "iterates (neighbour, line) over neighbours"
-        # xxx ...
+        pass # votre code ..
+        # prune-line-begin
         for neighbour, line in self.line_by_neighbour.items():
             yield neighbour, line
+        # prune-line-end
 
-    # we also need to be able to use
+    # we will also need these 2 attributes (so, refer to: properties)
     # node.latitude
     # node.longitude
-    # xxx remove
+    # prune-line-begin
     @property
     def latitude(self):
         return float(self.station['latitude'])
@@ -432,6 +467,7 @@ class Node:
     @property
     def longitude(self):
         return float(self.station['longitude'])
+    # prune-line-end    
 ```
 
 ```{code-cell} ipython3
@@ -447,16 +483,19 @@ class Graph:
     as essentially a set of nodes (thus of stations)
     """
     def __init__(self):
-        # xxx ...
+        pass # votre code ..
+        # prune-line-begin
         self.nodes = set()
         # for efficiency we also maintain an index of those hashed by station_id
         self.nodes_by_station_id = {}
+        # prune-line-end
 
     def add_node(self, station):
         """
         insert a station in graph; duplicates are simply ignored
         """
-        # xxx ...
+        pass # votre code ..
+        # prune-line-begin
         # this is how to retrieve the 'index' column
         # in an indexed dataframe (must not be indexed with inplace=True)
         station_id = station.name
@@ -467,19 +506,21 @@ class Graph:
         node = Node(station)
         self.nodes.add(node)
         self.nodes_by_station_id[station_id] = node
+        # prune-line-end
 
     def find_node_from_station_id(self, station_id):
         """
         spot a node from a specific station id
         """
-        # xxx ...
-        return self.nodes_by_station_id[station_id]
+        pass # votre code ..
+        return self.nodes_by_station_id[station_id]    # prune-line
 
     def add_edge(self, from_station_id, to_station_id, line):
         """
         insert an edge - both ends must exist already
         """
-        # xxx ...
+        pass # votre code ..
+        # prune-line-begin
         # locate both ends that MUST be present already
         node_from = self.find_node_from_station_id(from_station_id)
         node_to = self.find_node_from_station_id(to_station_id)
@@ -487,23 +528,28 @@ class Graph:
             print(f"OOPS - cannot add edge {from_station_id}->{to_station_id}")
             return
         node_from.add_edge(node_to, line)
+        # prune-line-end
 
     def iter_nodes(self):
         """
         an iterator on nodes
         """
-        # xxx ...
-        return iter(self.nodes)
+        pass # votre code ..
+        return iter(self.nodes)                        # prune-line
 
     def iter_edges(self):
         """
         iterates over triples (node_from, node_to, line)
         """
-        # xxx ...
+        pass # votre code ..
+        # prune-line-begin
         for node in self.iter_nodes():
             for neighbour, line in node.iter_neighbours():
                 yield node, neighbour, line
+        # prune-line-end
 
+    # ... ajoutez ce dont vous avez besoin
+    # prune-line-begin
     # optionnel
     def __len__(self):
         # xxx ...
@@ -512,6 +558,7 @@ class Graph:
     def nb_edges(self):
         # xxx ...
         return sum(node.nb_edges() for node in self.nodes)
+    # prune-line-end
 ```
 
 ## construction du graphe
@@ -528,9 +575,11 @@ print(f"notre graphe a {len(metro)} stations et {metro.nb_edges()} liens")
 
 ```{code-cell} ipython3
 # exercice: calculer le nombre de lignes
-# xxx nb_lines = ...
+nb_lines = ...
+# prune-line-begin
 lines = {line for node, neighbour, line in metro.iter_edges()}
 nb_lines = len(lines)
+# prune-line-end
 
 print(nb_lines)
 ```
@@ -676,25 +725,31 @@ nous avons simplement besoin dans les deux cas d'un objet `Storage` qui impléme
 
 ### FIFO / FILO
 
++++
+
+à vous d'implémenter les deux classes suivantes
+
 ```{code-cell} ipython3
 :cell_style: split
 
 from collections import deque
 class Fifo:
     def __init__(self):
-        # xxx ...
-        self.line = deque()
+        pass
+        self.line = deque()      # prune-line
     def store(self, item):
-        # xxx ...
-        self.line.append(item)
+        pass
+        self.line.append(item)   # prune-line
     def retrieve(self):
-        # xxx ...
+        pass
+        # prune-line-begin
         if self.line:
             return self.line.popleft()
+        # prune-line-end
     # pour 'while storage:'
     def __len__(self):
-        # xxx ...
-        return len(self.line)
+        pass
+        return len(self.line)    # prune-line
 ```
 
 ```{code-cell} ipython3
@@ -703,23 +758,26 @@ class Fifo:
 from collections import deque
 class Filo:
     def __init__(self):
-        # xxx ...
-        self.line = deque()
+        pass
+        self.line = deque()         # prune-line
     def store(self, item):
-        # xxx ...
-        self.line.append(item)
+        pass
+        self.line.append(item)      # prune-line
     def retrieve(self):
-        # xxx ...
+        pass
+        # prune-line-begin
         if self.line:
             return self.line.pop()
+        # prune-line-end
     # ditto
     def __len__(self):
-        # xxx ...
-        return len(self.line)
+        pass
+        return len(self.line)       # prune-line
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 # pour vérifier
 fifo = Fifo()
@@ -731,6 +789,7 @@ while fifo:
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 # pour vérifier
 filo = Filo()
@@ -742,24 +801,33 @@ while filo:
 
 ### parcours générique
 
++++
+
+vous avez à présent toutes les informations pour écrire vous-même la fonction suivante, qui va nous servir ensuite à implémenter les deux parcours (voyez les cellules suivantes)
+
 ```{code-cell} ipython3
 # avec nos spécifications, on peut écrire le parcours
 # en utilisant principalement
 # for neighbour, line in node.iter_neighbours():
-#
+
+
 def scan(start_node, storage):
     """
     scan all vertices reachable from start vertex
     in an order that is DF or BF depending on the
     storage policy (fifo or filo)
+    
     storage should have store() and retrieve() methods
     and be testable for emptiness (if storage: ...)
+    
     also it should be empty when entering the scan
     """
 
+    pass # your code here
+
+    # prune-line-begin
     storage.store(start_node)
     # keep track of what we've seen
-    # xxx ...
     scanned = set()
 
     while storage:
@@ -774,11 +842,14 @@ def scan(start_node, storage):
         scanned.add(current_node.station.name)
         for neighbour, line in current_node.iter_neighbours():
             storage.store(neighbour)
+    # prune-line-end
 ```
 
 ### les deux parcours spécifiques
 
 ```{code-cell} ipython3
+# depth first search becomes just this:
+
 def DFS(metro, station):
     node = metro.find_node_from_station_id(station.name)
     storage = Filo()
@@ -786,6 +857,8 @@ def DFS(metro, station):
 ```
 
 ```{code-cell} ipython3
+# and likewise for breadth first search
+
 def BFS(metro, station):
     node = metro.find_node_from_station_id(station.name)
     storage = Fifo()
@@ -798,11 +871,15 @@ def BFS(metro, station):
 
 pour illustrer les deux parcours, on va simplement utiliser l'attribut `label` des noeuds, et y ranger l'ordre dans lequel se fait le parcours
 
+si tout se passe bien vous allez voir le réseau du métro parisien, avec les stations numérotées selon ces deux algorithmes
+
 +++
 
 #### depth-first scan
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # labelling all stations according to a DFS scan
 for index, node in enumerate(DFS(metro, chatelet_station)):
     node.label = str(index)
@@ -813,9 +890,29 @@ build_map(metro)
 #### breadth-first scan
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # same with a BFS
 for index, node in enumerate(BFS(metro, chatelet_station)):
     node.label = str(index)
 print(f"index={index}")
 build_map(metro)
 ```
+
+### un dernier mot : instances hashables
+
++++
+
+vous avez peut-être utilisé un ensemble pour mémoriser dans la fonction `scan()` les sommets parcourus; en tous cas c'est assez logique d'y penser.
+
+je signale à ce sujet que par défaut, les instances de classe peuvent effectivement être insérée dans un ensemble; ce qui peut sembler un peu contredire ce qu'on a pu dire au sujet des types prédéfinis, à savoir qu'un ensemble ne peut contenir que des objets immutables
+
+en fait par défaut, lorsqu'on insère une instance dans un ensemble, ce qui sert de clé pour le hachage c'est le résultat de `id()`, c'est-à-dire en gros l'adresse de l'instance
+
+dans le cas qui nous intéresse ici, on a créé des instances de `Node`, on peut effectivement les mettre dans un ensemble sans trop de précaution, il y a des chances pour que ça fonctionne tout seul (typiquement si on crée une seule instance de `Node` par station de métro)
+
+mais bon, si on veut être propre, il est intéressant de redéfinir 2 dunder (sur la classe `Node` donc) pour que les recherches dans l'ensemble soient pertinentes; [il s'agit des dunder `__hash__` et `__eq__` ](https://docs.python.org/3/glossary.html#term-hashable) que je vous invite à implémenter si vous ne l'avez pas fait.
+
++++
+
+***

@@ -10,7 +10,7 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 language_info:
@@ -27,6 +27,15 @@ version: '1.0'
 +++
 
 <img src="media/metro-map.png" width="600px" />
+
++++
+
+intérêts de ce TP
+
+* découvrir deux algos hyper classiques de parcours de graphes (simples, élégants, et très utiles!)
+* utiliser des données hybrides pandas et Python 
+* utiliser les properties
+* mettre en oeuvre une librairie de rendu géographique (folium)
 
 ```{code-cell} ipython3
 from pathlib import Path
@@ -102,32 +111,29 @@ Il y a deux algorithmes standard pour parcourir un graphe à partir de l'un de s
 * DFS (depth-first-scan)
 * BFS (breadth-first scan)
 
++++
+
 intuitivement, en partant de cet échantillon (ici un simple arbre) :
 
-```{code-cell} ipython3
-from simpletree import tree
-
-tree
-```
+![](example.svg)
 
 +++ {"cell_style": "split"}
 
 DFS donnerait l'énumération suivante (les sauts de ligne ne sont pas significatifs) :
 ```
-v v1 v11 v111 v112
-v12 v121 v122
+v v1 v11 v111 v112 
+v12 v113
 v2 v21 v211 v212
-v22 v221 v222
+v22 v213
 ```
 
 +++ {"cell_style": "split"}
 
 alors que BFS verrait au contraire :
 ```
-v
-v1 v2
+v v1 v2
 v11 v12 v21 v22
-v111 v112 v121 v122 v211 v212 v221 v222
+v111 v121 v122 v211 v212 v222
 ```
 
 +++
@@ -386,7 +392,7 @@ la première idée consisterait à garder dans un attribut `self.neighbours` un 
 mais il se trouve que dans `hops.txt` on nous donne aussi le numéro de la ligne de métro qui connecte deux stations, on va donc vouloir attacher à chaque lien ce numéro de ligne, et du coup un ensemble n'est sans doute pas ce qu'il y a de mieux...
 
 ```{code-cell} ipython3
-# version étudiant : à vous de compléter le code
+# à vous de compléter le code
 
 class Node:
     """
@@ -396,24 +402,23 @@ class Node:
     finally it has an optional 'label' attribute that we will use when
     drawing the graph on a map
     """
-    def __init__(self, station: Station):
-        ...
+    def __init__(self, station: "Station"):
+        pass # votre code ..
+
 
     def add_edge(self, neighbour: "Node", line):
-        ...
+        pass # votre code ..
 
     def nb_edges(self):
-        ...
+        pass # votre code ..
 
     def iter_neighbours(self):
         "iterates (neighbour, line) over neighbours"
-        ...
+        pass # votre code ..
 
-    # we also need to be able to use
+    # we will also need these 2 attributes (so, refer to: properties)
     # node.latitude
     # node.longitude
-    # create properties:
-    ...
 ```
 
 ```{code-cell} ipython3
@@ -429,44 +434,39 @@ class Graph:
     as essentially a set of nodes (thus of stations)
     """
     def __init__(self):
-        ...
+        pass # votre code ..
 
     def add_node(self, station):
         """
         insert a station in graph; duplicates are simply ignored
         """
-        ...
+        pass # votre code ..
 
     def find_node_from_station_id(self, station_id):
         """
         spot a node from a specific station id
         """
-        ...
-        
+        pass # votre code ..
+
     def add_edge(self, from_station_id, to_station_id, line):
         """
         insert an edge - both ends must exist already
         """
-        ...
-        
+        pass # votre code ..
+
     def iter_nodes(self):
         """
         an iterator on nodes
         """
-        ...
+        pass # votre code ..
 
     def iter_edges(self):
         """
         iterates over triples (node_from, node_to, line)
         """
-        ...
-        
-    # optionnel
-    def __len__(self):
-        ...
-        
-    def nb_edges(self):
-        ...
+        pass # votre code ..
+
+    # ... ajoutez ce dont vous avez besoin
 ```
 
 ## construction du graphe
@@ -629,23 +629,24 @@ nous avons simplement besoin dans les deux cas d'un objet `Storage` qui impléme
 
 ### FIFO / FILO
 
++++
+
+à vous d'implémenter les deux classes suivantes
+
 ```{code-cell} ipython3
 :cell_style: split
 
 from collections import deque
 class Fifo:
     def __init__(self):
-        ...
-
+        pass
     def store(self, item):
-        ...
-
+        pass
     def retrieve(self):
-        ...
-
+        pass
     # pour 'while storage:'
     def __len__(self):
-        ...
+        pass
 ```
 
 ```{code-cell} ipython3
@@ -654,21 +655,19 @@ class Fifo:
 from collections import deque
 class Filo:
     def __init__(self):
-        ...
-
+        pass
     def store(self, item):
-        ...
-
+        pass
     def retrieve(self):
-        ...
-
+        pass
     # ditto
     def __len__(self):
-        ...
+        pass
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 # pour vérifier
 fifo = Fifo()
@@ -680,6 +679,7 @@ while fifo:
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 # pour vérifier
 filo = Filo()
@@ -691,32 +691,36 @@ while filo:
 
 ### parcours générique
 
++++
+
+vous avez à présent toutes les informations pour écrire vous-même la fonction suivante, qui va nous servir ensuite à implémenter les deux parcours (voyez les cellules suivantes)
+
 ```{code-cell} ipython3
 # avec nos spécifications, on peut écrire le parcours
 # en utilisant principalement
 # for neighbour, line in node.iter_neighbours():
-#
+
+
 def scan(start_node, storage):
     """
     scan all vertices reachable from start vertex
     in an order that is DF or BF depending on the
     storage policy (fifo or filo)
+    
     storage should have store() and retrieve() methods
     and be testable for emptiness (if storage: ...)
+    
     also it should be empty when entering the scan
     """
 
-    storage.store(start_node)
-    # keep track of what we've seen
-    ...
-    
-    while storage:
-        ...
+    pass # your code here
 ```
 
 ### les deux parcours spécifiques
 
 ```{code-cell} ipython3
+# depth first search becomes just this:
+
 def DFS(metro, station):
     node = metro.find_node_from_station_id(station.name)
     storage = Filo()
@@ -724,6 +728,8 @@ def DFS(metro, station):
 ```
 
 ```{code-cell} ipython3
+# and likewise for breadth first search
+
 def BFS(metro, station):
     node = metro.find_node_from_station_id(station.name)
     storage = Fifo()
@@ -736,11 +742,15 @@ def BFS(metro, station):
 
 pour illustrer les deux parcours, on va simplement utiliser l'attribut `label` des noeuds, et y ranger l'ordre dans lequel se fait le parcours
 
+si tout se passe bien vous allez voir le réseau du métro parisien, avec les stations numérotées selon ces deux algorithmes
+
 +++
 
 #### depth-first scan
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # labelling all stations according to a DFS scan
 for index, node in enumerate(DFS(metro, chatelet_station)):
     node.label = str(index)
@@ -751,9 +761,29 @@ build_map(metro)
 #### breadth-first scan
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # same with a BFS
 for index, node in enumerate(BFS(metro, chatelet_station)):
     node.label = str(index)
 print(f"index={index}")
 build_map(metro)
 ```
+
+### un dernier mot : instances hashables
+
++++
+
+vous avez peut-être utilisé un ensemble pour mémoriser dans la fonction `scan()` les sommets parcourus; en tous cas c'est assez logique d'y penser.
+
+je signale à ce sujet que par défaut, les instances de classe peuvent effectivement être insérée dans un ensemble; ce qui peut sembler un peu contredire ce qu'on a pu dire au sujet des types prédéfinis, à savoir qu'un ensemble ne peut contenir que des objets immutables
+
+en fait par défaut, lorsqu'on insère une instance dans un ensemble, ce qui sert de clé pour le hachage c'est le résultat de `id()`, c'est-à-dire en gros l'adresse de l'instance
+
+dans le cas qui nous intéresse ici, on a créé des instances de `Node`, on peut effectivement les mettre dans un ensemble sans trop de précaution, il y a des chances pour que ça fonctionne tout seul (typiquement si on crée une seule instance de `Node` par station de métro)
+
+mais bon, si on veut être propre, il est intéressant de redéfinir 2 dunder (sur la classe `Node` donc) pour que les recherches dans l'ensemble soient pertinentes; [il s'agit des dunder `__hash__` et `__eq__` ](https://docs.python.org/3/glossary.html#term-hashable) que je vous invite à implémenter si vous ne l'avez pas fait.
+
++++
+
+***
