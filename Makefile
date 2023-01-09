@@ -43,7 +43,7 @@ exec-clean:
 	./execute-all-notebooks.sh -x -c -v
 
 
-# BOOKS
+# TOCS
 
 tocs: jb/_toc-python.yml jb/_toc-ds.yml
 
@@ -52,6 +52,8 @@ jb/_toc-python.yml: .nbhosting/nbhosting.yaml
 
 jb/_toc-ds.yml: .nbhosting/nbhosting.yaml
 	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t data-science
+
+# BOOKS
 
 book-python:
 	jupyter-book build --toc jb/_toc-python.yml --config jb/_config.yml .
