@@ -266,7 +266,7 @@ Voici les règles des enchères en plis cachetés à un tour au second prix, ou 
 
 Exemple:
 
-```diff
+```
 Started auction of type: Vickrey
 Please enter the amount for the opening bid: 50
 Opening bid is: 50
