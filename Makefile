@@ -43,9 +43,9 @@ exec-clean:
 	./execute-all-notebooks.sh -x -c -v
 
 
-# TOCS
+# table of contents: inject the contents from nbhosintg into jb
 
-tocs: jb/_toc-python.yml jb/_toc-ds.yml
+toc: jb/_toc-python.yml jb/_toc-ds.yml
 
 jb/_toc-python.yml: .nbhosting/nbhosting.yaml
 	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t python

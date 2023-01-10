@@ -17,13 +17,14 @@ html:
 only_build_toc_files: true
 
 exclude_patterns:
-  - .teacher/*
-  - .solutions/*
-  - snake/.solutions/*
+  - "**/.teacher/*"
 
 execute:
   execute_notebooks: cache
-  exclude_patterns: [ "*-corrige*" ]
+  exclude_patterns:
+    - "**/*-corrige*"
+    - "**/.teacher/*"
+    - "**/snake*.py"
 
 parse:
   myst_enable_extensions:
