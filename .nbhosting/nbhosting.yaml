@@ -56,10 +56,11 @@ tracks:
     - "python-tps/pagerank-thrones/README*.py"
   - name: 'TPs visu & games'
     notebooks:
-    - "python-tps/games/README*snake.md"
+    - "python-tps/snake/README*.md"
+#    - "python-tps/flappybird-wip/README*.md"
     - "python-tps/boids/README*.md"
-    - "python-tps/games/README*flappybird.md"
     - "python-tps/redis/README*.md"
+    - "python-tps/dobble/README*.md"
   - name: howtos
     notebooks:
       - python-howtos/requests-howto-nb.md

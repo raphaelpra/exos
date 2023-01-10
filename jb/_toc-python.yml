@@ -36,10 +36,10 @@ parts:
   - glob: python-tps/pagerank-thrones/README*
 - caption: TPs visu & games
   chapters:
-  - glob: python-tps/games/README*snake
+  - glob: python-tps/snake/README*
   - glob: python-tps/boids/README*
-  - glob: python-tps/games/README*flappybird
   - glob: python-tps/redis/README*
+  - glob: python-tps/dobble/README*
 - caption: howtos
   chapters:
   - file: python-howtos/requests-howto-nb
