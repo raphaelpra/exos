@@ -89,7 +89,7 @@ def generator_size(gen):
 
     WARNING: this will exhaust the input generator
     """
-    return sum(map(lambda x: 1, gen))
+    return sum(1 for _ in gen)
 
 
 
@@ -119,7 +119,7 @@ def np_to_position(a):
 
 from matplotlib import pyplot as plt
 
-def draw_position(p):
+def draw_position(p, filename=None):
     """
     position is expected to be a tuple of numbers
     between 1 and n
@@ -133,6 +133,8 @@ def draw_position(p):
     # as presented in the README
     plt.imshow(a.T, cmap='inferno')
     plt.yticks(range(len(p)))
+    if filename:
+        plt.savefig(filename)
     plt.show()
 
 

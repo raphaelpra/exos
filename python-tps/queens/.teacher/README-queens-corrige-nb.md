@@ -75,7 +75,12 @@ c'est ainsi qu'on va représenter une position, comme par exemple celle-ci
 
 par le tuple `(0, 4, 1, 2, 3)` qui donne les coordonnées en Y dans les colonnes successives (ici le dessin est fait avec matplotlib, du coup les Y sont descendants, l'orientation n'a pas importance)
 
-+++
+```{code-cell} ipython3
+# prune-cell
+from rooks_and_queens import *
+
+draw_position((0, 4, 1, 2, 3), "../media/coordinates.svg")
+```
 
 ### ce qu'on doit pouvoir faire
 
