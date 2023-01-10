@@ -39,6 +39,7 @@ parts:
   - glob: python-tps/snake/README*
   - glob: python-tps/boids/README*
   - glob: python-tps/redis/README*
+  - glob: python-tps/motus/README*
   - glob: python-tps/dobble/README*
 - caption: howtos
   chapters:

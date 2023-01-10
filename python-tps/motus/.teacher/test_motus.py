@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from motus import *
 
-french = Dictionary("ods6.txt")
+french = Dictionary("data/ods6.txt")
 
 class Tests(TestCase):
 

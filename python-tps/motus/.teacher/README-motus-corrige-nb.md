@@ -39,7 +39,7 @@ pour plus de détails sur ce jeu, voyez <https://fr.wikipedia.org/wiki/Motus_(je
 
 voici un exemple de session, le mot à deviner était `CITRON`
 
-![](motus-example.png)
+![](media/motus-example.png)
 
 ici on a 
 * d'abord essayé `CASTOR`; la 'correction' nous a appris que
@@ -76,14 +76,14 @@ puis on donne ensuite autant de jaunes que possible, et à chaque fois les lettr
 +++
 
 c'est  ainsi que par exemple, avec le mot caché `addition` on obtient la correction suivante (la dernière ligne est uniquement explicatoire)
-![](example-addition.svg)
+![](media/example-addition.svg)
 
 vous remarquez que la réponse contient un `d` bleu, alors qu'il y a deux `d` dans le mot à deviner, mais comme ils ont déjà été 'consommés' pour les deux `d` rouges, le troisième `d` est considéré comme absent.
 
 +++
 
 autre exemple, le mot caché est `escarcelle`
-![](example-escarcelle.svg)
+![](media/example-escarcelle.svg)
 
 vous remarquez que la réponse contient
 
@@ -130,4 +130,55 @@ print(f"{Back.RED} C {Style.RESET_ALL} {Back.RED} I {Style.RESET_ALL} "
       f"{Back.YELLOW} M {Style.RESET_ALL} {Back.YELLOW} A {Style.RESET_ALL}")
 ```
 
-xxx à suivre
+## des données utiles
+
+on vous a joint un dictionnaire:
+
+```{code-cell} ipython3
+from pathlib import Path
+from itertools import islice
+
+# the N first lines of this file
+DICO = "data/ods6.txt"
+N = 8
+
+with Path(DICO).open() as f:
+    for line in islice(f, N):
+        print(line, end="")
+print("...")
+```
+
+```{code-cell} ipython3
+# cette donnée provient de cette URL
+print(Path("data/ods6.url").open().read())
+```
+
+## étape 1: l'ordi anime le jeu
+
+dans un premier temps, l'ordi se contente de vous faire jouer:
+* il demande un nombre de lettres
+* il tire au sort un mot
+* il montre la première lettre, et les autres sont en gris
+* l'humain propose un mot, l'ordi donne la "correction", etc.. jusqu'à ce que mot soit trouvé
+
+```{code-cell} ipython3
+# à vous
+```
+
+## étape 2: un bouton d'aide
+
+pareil, mais l'humain peut demander à l'ordi un indice; à vous de voir, on peut imaginer
+
+* que l'ordi affiche les mots (ou seulement le nombre de mots) qui sont compatibles avec ce qu'on sait à ce stade
+* ou qu'il indique des lettres - s'il y en a - déduites des mots qui sont compatibles avec ce qu'on sait à ce stade
+* ...
+
++++
+
+## l'ordi peut jouer indifféremment les deux rôles
+
+est-ce que ce serait possible de structurer le code de façon que l'ordi sache indifféremment: 
+
+* ou bien animer le jeu,
+* ou bien jouer avec un humain qui anime le jeu,
+* ou remplir les deux rôles et jouer contre lui-même ?

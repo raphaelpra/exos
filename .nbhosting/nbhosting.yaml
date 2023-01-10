@@ -60,6 +60,7 @@ tracks:
 #    - "python-tps/flappybird-wip/README*.md"
     - "python-tps/boids/README*.md"
     - "python-tps/redis/README*.md"
+    - "python-tps/motus/README*.md"
     - "python-tps/dobble/README*.md"
   - name: howtos
     notebooks:
