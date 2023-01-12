@@ -28,13 +28,37 @@ nbhosting:
 
 +++
 
-dans cet exercice, vous allez devoir écrire un module qui s'appelle `rooks_and_queens.py`
+vous êtes censé travailler en local sur votre ordi; commencez par {download}`télécharger le zip<./ARTEFACTS-queens.zip>` qui contient
 
-et à la fin du TP, vous devez pouvoir tester votre code en faisant
+* ce notebook
+* un dossier `media/` avec la·es figure·s
+* un dossier `data/` le cas échéant
+* un fichier de test `test_rooks_and_queens.py`
 
++++ {"slideshow": {"slide_type": "slide"}}
+
+l'idée générale, c'est d'utiliser un workflow classique, qui consiste en ceci :
+
+* vous commencez à travailler directement dans le notebook
+* une fois que le code marche raisonnablement, vous extrayez votre code pour le ranger dans un module Python normal, qui s'appelle `rooks_and_queens.py`
+* que vous pouvez alors importer depuis le notebook, toutes les visualisations continuent à fonctionner
+* et en plus comme ça le code devient réutilisable - depuis un autre notebook, ou depuis un programme classique
+* et en plus on peut le tester facilement
+
++++
+
+en effet, le fichier fourni de test `test_rooks_and_queens.py` sait valider votre code; c'est un exercice pour commencer à utiliser un framework de test  
+ici on va utiliser `pytest`, si nécessaire installez cet outil avec `pip install pytest` (eh oui :)
+
++++
+
+et avec ce setup
+
+* depuis le notebook, vous pouvez importer `rooks_and_queens` et mettre au point votre code
+* et depuis le terminal, vous pouvez lancer les tests en faisant (dans le dossier en question bien sûr)
+  
 ```bash
 # vous pouvez faire `pytest` tout court aussi
-
 $ pytest test_rooks_and_queens.py
 ================================ test session starts ================================
 platform darwin -- Python 3.10.8, pytest-7.2.0, pluggy-1.0.0
@@ -48,6 +72,15 @@ test_rooks_and_queens.py ...                                                  [1
 ```
 
 mais bien sûr d'ici là, n'hésitez pas à lancer votre code interactivement et le debugger, soit dans ce notebook, soit dans ipython, etc..
+
++++
+
+il y a toutefois une précaution à prendre si vous travaillez comme ceci  
+en effet l'import d'un module est **caché** par Python, ce qui fait que par défaut, les changements que vous faites dans fichier `rooks_and_queens.py` ne sont plus rechargés après le premier import
+
+pour vous installer confortablement, voyez ce lien:
+
+https://nbhosting.inria.fr/builds/ue12-p22-python/handouts/latest/8-10-import-basics.html#autoreload-et-ipython
 
 +++
 
@@ -73,7 +106,7 @@ aussi, pour se simplifier la vie
 c'est ainsi qu'on va représenter une position, comme par exemple celle-ci
 ![](media/coordinates.svg)
 
-par le tuple `(0, 4, 1, 2, 3)` qui donne les coordonnées en Y dans les colonnes successives (ici le dessin est fait avec matplotlib, du coup les Y sont descendants, l'orientation n'a pas importance)
+par le tuple `(0, 4, 1, 2, 3)` qui donne les coordonnées en Y dans les colonnes successives (ici le dessin est fait avec matplotlib, du coup les Y sont descendants, l'orientation n'a pas d'importance)
 
 +++
 
@@ -163,48 +196,6 @@ for p in queens(6):
 def queens():
     ...
 ```
-
-## modalités (2)
-
-+++
-
-### pour travailler en local
-
-on vous fournit comme artefacts:
-
-* ce notebook
-* un dossier media/ avec la·es figure·s
-* un fichier de test `test_rooks_and_queens.py`
-
-ce dernire est un fichier de test pour valider votre code; c'est un exercice pour commencer à utiliser un framework de test (ici on va utiliser `pytest`)
-
-au fur et à mesure que votre code marche, mettez-le dans un fichier `rooks_and_queens.py`, dans le même dossier
-
-+++
-
-avec ce setup
-* depuis le notebook, quand vous importez `rooks_and_queens`, vous importez votre code
-* et depuis le terminal, si vous exécutez (dans le dossier en question bien sûr)
-  
-  ```bash
-  # une seule fois suffit bien sûr
-  pip install pytest
-  
-  # et ensuite pour tester
-  pytest
-  ```
-  
-  alors vous exécutez les tests qui sont définis dans ce fichier de tests unitaires
-
-+++
-
-l'idée générale, c'est d'utiliser un workflow classique, qui consiste en ceci :
-
-* vous commencez à travailler directement dans le notebook
-* une fois que le code marche raisonnablement, vous extrayez votre code pour le ranger dans un module Python normal
-* que vous pouvez importer depuis le notebook, toutes les visualisations continuent à fonctionner
-* et en plus comme ça le code devient réutilisable - depuis un autre notebook, ou depuis un programme classique
-* et en plus on peut le tester facilement
 
 +++ {"tags": ["level_intermediate"]}
 
