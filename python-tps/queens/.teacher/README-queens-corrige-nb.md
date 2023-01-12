@@ -172,8 +172,8 @@ mais bon pour cet exercice on va vous demander de réfléchir à une façon de *
 
 ```{code-cell} ipython3
 # à vous d'écrire le code de la fonction (un générateur donc) rooks
-def rooks():
-    ...
+#def rooks():
+#    ...
 ```
 
 ## les reines
@@ -198,8 +198,8 @@ for p in queens(6):
 
 ```{code-cell} ipython3
 # votre code pour définir queens
-def queens():
-    ...
+#def queens():
+#    ...
 ```
 
 +++ {"tags": ["level_intermediate"]}
