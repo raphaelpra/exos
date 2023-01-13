@@ -73,7 +73,7 @@ class ClosestNext(dict):
             self.min_distance = total
 
 
-# %% slideshow={"slide_type": "fragment"} trusted=true
+# %% trusted=true
 # calcule seulement la distance
 def shortest_distance(graph_data, src, dst):
     explored = {src: 0}
@@ -118,7 +118,7 @@ class ClosestPreviousNext(dict):
             self.min_distance = total
 
 
-# %% slideshow={"slide_type": "fragment"} trusted=true
+# %% trusted=true
 # même algo mais mémorise aussi le chemin
 def shortest_path(graph_data, src, dst):
     # on en garde un peu plus dans cette structure

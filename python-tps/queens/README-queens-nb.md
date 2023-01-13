@@ -35,7 +35,7 @@ vous êtes censé travailler en local sur votre ordi; commencez par {download}`t
 * un dossier `data/` le cas échéant
 * un fichier de test `test_rooks_and_queens.py`
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++
 
 l'idée générale, c'est d'utiliser un workflow classique, qui consiste en ceci :
 

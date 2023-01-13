@@ -17,12 +17,6 @@ language_info:
   pygments_lexer: ipython3
 nbhosting:
   title: 'TP: les boids'
-rise:
-  autolaunch: true
-  slideNumber: c/t
-  start_slideshow_at: selected
-  theme: sky
-  transition: cube
 ---
 
 <div class="licence">

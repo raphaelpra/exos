@@ -1,5 +1,4 @@
 ---
-celltoolbar: Slideshow
 jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
@@ -23,7 +22,7 @@ nbhosting:
 
 # un jeu multi-joueur
 
-+++ {"slideshow": {"slide_type": "-"}}
++++
 
 on se propose de réaliser un petit jeu multi joueur, et pour cela nous aurons besoin de
 
@@ -181,7 +180,7 @@ et cherchez une adresse parmi les intervalles réservés aux adresses privées
 
 ![](private-ranges.png)
 
-+++ {"slideshow": {"slide_type": "-"}}
++++
 
 ## pour lancer le jeu
 

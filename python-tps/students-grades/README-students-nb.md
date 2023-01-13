@@ -19,12 +19,6 @@ language_info:
 nbhosting:
   show_up_down_buttons: true
   title: TP - classes simples
-rise:
-  autolaunch: true
-  slideNumber: c/t
-  start_slideshow_at: selected
-  theme: sky
-  transition: cube
 ---
 
 # TP : Student et Class

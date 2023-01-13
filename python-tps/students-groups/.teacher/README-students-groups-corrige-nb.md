@@ -403,6 +403,6 @@ check_values_ter(L120)
 # prune-end
 ```
 
-+++ {"slideshow": {"slide_type": ""}}
++++
 
 ***

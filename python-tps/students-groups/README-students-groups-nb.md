@@ -19,7 +19,6 @@ language_info:
   pygments_lexer: ipython3
 nbhosting:
   title: students and groups
-version: '1.0'
 ---
 
 # reading files and building structures
@@ -123,11 +122,11 @@ and observe that there are multiple interfaces to build a dataframe)
   ```
   that expects as an input the output of `parse` and that outlines ill-formed input
 
-NOTE. 
+NOTE.
 * in a first approximation, use patterns like `a-z` to check for letters;  
 * how does this behave with respect to names with accents and cedillas
 * then play with `\w` to see if you can overcome this problem
 
-+++ {"slideshow": {"slide_type": ""}}
++++
 
 ***
