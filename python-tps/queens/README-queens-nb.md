@@ -20,7 +20,7 @@ nbhosting:
   title: 'TP: les reines'
 ---
 
-# le problème des reines
+# TP - le problème des reines
 
 +++
 
@@ -31,7 +31,7 @@ nbhosting:
 vous êtes censé travailler en local sur votre ordi; commencez par {download}`télécharger le zip<./ARTEFACTS-queens.zip>` qui contient
 
 * ce notebook
-* un dossier `media/` avec la·es figure·s
+* un dossier `media/` avec les figures
 * un dossier `data/` le cas échéant
 * un fichier de test `test_rooks_and_queens.py`
 
