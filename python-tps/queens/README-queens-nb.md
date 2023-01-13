@@ -80,7 +80,7 @@ en effet l'import d'un module est **caché** par Python, ce qui fait que par dé
 
 pour vous installer confortablement, voyez ce lien:
 
-https://nbhosting.inria.fr/builds/ue12-p22-python/handouts/latest/8-10-import-basics.html#autoreload-et-ipython
+<https://nbhosting.inria.fr/builds/python-exos/python/latest/README.html#note-on-autoreload-in-ipython-or-notebooks>
 
 +++
 

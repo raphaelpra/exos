@@ -10,10 +10,24 @@ still relevant
 in any case, in the present repo I try to gather all the other, generally more
 informal, material for practising Python and/or the Data-Science ecosystem
 
+## there is no runtime tool here !
+
+also note that, as opposed to the auto-corrected exercises mentioned above,
+there is a **deliberate choice to not provide a notebooks infrastructure** or
+any other online runtime tool here  
+this is because we want our students to become autonomous, so it means they are
+supposed to solve all these problems **on their own laptop**, where they are
+expected to have acquired the skills for installing and managing a decent
+software stack (typically bash + vscode + python + ipython + jupyter)  
+the fact that most of the material is written as a notebook is mostly a
+convenience, both for authoring (outputs are up-to-date), and of course in cases
+where the starting material is a notebook itself
+
 ## contents
 
-the material is organized along these 2 categories, and in each category we try
-to make a distinction between
+the material is organized along these 2 categories (pure Python, and the
+Data-Science ecosystem) and in each category we try to make a distinction
+between
 
 * `exos`: short, simple one-shot assignments
 * `tps`: more elaborate assignments, with several steps, that let students
@@ -26,6 +40,13 @@ as well as, less interesting probably:
 * `samples`: miscell pieces of code that can come in handy
 * `reading`: the idea was to gather full-length projects, that students could
   read; may disappear on the long run, and merged with `samples`
+
+## formats
+
+as noted above, most of the contents is written as notebooks; all notebooks are
+jupytext-encoded using either `py:percent` or `md:myst` formats  
+also all notebooks have their filename prefix ending in `-nb` to help the
+distinction between notebooks and pure Python or pure markdown
 
 ## online
 
