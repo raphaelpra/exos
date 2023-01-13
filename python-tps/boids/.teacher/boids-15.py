@@ -9,7 +9,7 @@ import itertools
 import arcade
 
 BACKGROUND = arcade.color.ALMOND
-IMAGE = "arrow-resized.png"
+IMAGE = "media/arrow-resized.png"
 WIDTH, HEIGHT = 800, 800
 
 NB_BOIDS = 20
@@ -17,7 +17,7 @@ NB_BOIDS = 20
 NOISE_ANGLE = 1     # in degrees
 
 # obstacles
-OBSTACLE_IMAGE = "obstacle-resized.png"
+OBSTACLE_IMAGE = media/obstacle-resized.png"
 # add 10 x 10 obstacles
 OBSTACLE_GRID = 10
 

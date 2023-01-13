@@ -5,7 +5,7 @@ display a single object, inert, at (100, 100)
 import arcade
 
 BACKGROUND = arcade.color.ALMOND
-IMAGE = "arrow-resized.png"
+IMAGE = "media/arrow-resized.png"
 
 class Window(arcade.Window):
 

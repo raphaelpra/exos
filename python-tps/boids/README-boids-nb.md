@@ -30,9 +30,26 @@ rise:
 <span>Thierry Parmentelat</span>
 </div>
 
+# TP - les boids avec `arcade`
+
 +++
 
-# TP - les boids avec `arcade`
+## c'est quoi les *boids* ?
+
+une simulation ludique où on tente de reproduire le comportement d'animaux en
+groupes - typiquement oiseaux et poissons
+
+### intérêts
+
+c'est intéressant parce que
+
+* c'est une illustration du modèle de programmation "par acteurs"
+  chaque entité dans l'univers adapte son comportement en fonction de ses
+  voisins immédiats
+* on y découvre [arcade, une autre bibliothèque de jeux pour
+  Python](https://api.arcade.academy/en/latest/)
+  et c'est intéressant pour nous car cette librairie se programme exclusivement
+  **par spécialisation de classes**
 
 +++
 
@@ -45,27 +62,13 @@ dans ce TP nous allons
 
 +++
 
-### la librairie `arcade`
-
-il s'agit d'une librairie Python pour construire des jeux; un peu comme `pygame` donc, mais on s'y intéresse ici parce que le modèle de programmation avec `arcade` est par essence beaucoup **plus orienté objet**
-
-<https://api.arcade.academy/en/latest/>
-
-+++
-
-### c'est quoi les *boids*
-
-c'est le nom qu'on donne à une simulation d'un groupe d'animaux - pensez, oiseaux ou poissons
+### notre sujet
 
 dans sa version originale chaque animal décide de sa trajectoire, **en fonction uniquement de ses voisins proches**, et cela en suivant trois règles:
 
 * séparation (typiquement pour éviter les obstacles)
 * alignement (tout le monde va, en gros, dans la même direction)
 * cohésion (rester groupés)
-
-+++
-
-### notre sujet
 
 pour la partie imposée de ce TP, on va se contenter d'implémenter la **règle de séparation**  
 c'est-à-dire ce qui permet aux boids d'éviter de heurter les autres boids, et les obstacles
@@ -87,13 +90,15 @@ le contrat est rempli dès que vous avez: **des obstacles** fixes, et **des boid
 
 +++
 
-## contenu
+### contenu
 
 vous êtes censé travailler en local sur votre ordi;
 commencez par {download}`télécharger le zip<./ARTEFACTS-boids.zip>` qui contient
 
-* le starter code (v01)
-* les figures
+* le starter code dans `boids-01.py`
+* les figures dans le dossier `media/`
+
++++
 
 ## pas à pas
 
@@ -109,7 +114,7 @@ display a single object, inert, at (100, 100)
 import arcade
 
 BACKGROUND = arcade.color.ALMOND
-IMAGE = "arrow-resized.png"
+IMAGE = "media/arrow-resized.png"
 
 class Window(arcade.Window):
 
@@ -137,7 +142,7 @@ arcade.run()
 ```
 
 * installez la librairie
-* vérifiez que vous avez le fichier `arrow-resized.png` (il est dans le repo)
+* vérifiez que vous avez le fichier `media/arrow-resized.png` (il est dans le zip)
 * copiez et lancez le code ci-dessus
 
 vous devez voir un seul boid immobile, dans le coin en bas à gauche
@@ -274,7 +279,7 @@ ceci est beaucoup plus facile à utiliser si le boid continue de tourner pendant
 ### v07: ajouter un obstacle
 
 ajoutez un unique obstacle, immobile, par exemple au centre du jeu  
-vous trouverez une image `obstacle-resized.png` pour le matérialiser
+vous trouverez une image media/obstacle-resized.png` pour le matérialiser
 
 **2 options**
 * on pourrait facilement s'en sortir avec juste la classe `Sprite`
@@ -319,7 +324,7 @@ on peut la résumer comme ceci:
 
 +++
 
-<img src="separation.png" width="80%">
+![](media/separation.png)
 
 +++
 

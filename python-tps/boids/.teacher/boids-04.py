@@ -7,7 +7,7 @@ import math
 import arcade
 
 BACKGROUND = arcade.color.ALMOND
-IMAGE = "arrow-resized.png"
+IMAGE = "media/arrow-resized.png"
 WIDTH, HEIGHT = 800, 800
 
 class Boid(arcade.Sprite):
