@@ -34,6 +34,9 @@ diff-commands:
 requirements:
 	pip install nbprune
 
+# ARTEFACTS
+artefacts:
+	find . -name ARTEFACTS | xargs update-artefacts.sh
 
 # EXEC
 exec:
