@@ -30,6 +30,7 @@ parse:
   myst_enable_extensions:
     - html_image    # for raw <img> tags in markdown
     - dollarmath    # for mathjax
+    - strikethrough
 
 sphinx:
   config:
@@ -38,5 +39,5 @@ sphinx:
         - jupytext.reads
         - fmt: py:percent
     html_show_copyright: false
-    # not working as advertised
-    #html_extra_path: ['jb/_static']
+    # not quite convincing but...
+    html_extra_path: ['media']
