@@ -31,7 +31,7 @@ un petit TP pour travailler
 * un peu de groupby
 * un peu de gestion du temps et des durées
 
-+++
++++ {"tags": []}
 
 # outils
 
@@ -275,11 +275,11 @@ df_paris_2000_ys = ...
  and df_paris_2000_ys.iloc[-2].seconds == 7780)
 ```
 
-+++ {"hide_input": true}
++++ {"hide_input": true, "tags": []}
 
 ## aggrégats
 
-+++
++++ {"tags": []}
 
 ### moyenne
 
