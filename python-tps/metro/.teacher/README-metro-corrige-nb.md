@@ -26,7 +26,7 @@ version: '1.0'
 
 +++
 
-<img src="media/metro-map.png" width="600px" />
+![](media/metro-map.png)
 
 +++
 
