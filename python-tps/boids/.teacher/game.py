@@ -28,7 +28,7 @@ NB_BOIDS = 50
 BOID_SPEED = 3
 
 # one boid
-BOID_IMAGE = "arrow.png"
+BOID_IMAGE = "media/arrow.png"
 BOID_SCALE = 0.12
 
 ### what is proximity
@@ -45,7 +45,7 @@ COHESION_RATIO = 0.02
 NOISE_RADIUS = 0.05
 
 # obstacles
-OBSTACLE_IMAGE = "obstacle.png"
+OBSTACLE_IMAGE = "media/obstacle.png"
 OBSTACLE_SCALE = 0.15
 
 OBSTACLES_RADIUS = WIDTH / 2.8

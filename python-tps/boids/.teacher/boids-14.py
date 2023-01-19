@@ -16,7 +16,7 @@ NB_BOIDS = 20
 NOISE_ANGLE = 1     # in degrees
 
 # obstacles
-OBSTACLE_IMAGE = media/obstacle-resized.png"
+OBSTACLE_IMAGE = "media/obstacle-resized.png"
 # add 10 x 10 obstacles
 OBSTACLE_GRID = 10
 

@@ -14,7 +14,7 @@ WIDTH, HEIGHT = 800, 800
 NOISE_ANGLE = 1     # in degrees
 
 # obstacles
-OBSTACLE_IMAGE = media/obstacle-resized.png"
+OBSTACLE_IMAGE = "media/obstacle-resized.png"
 
 class Obstacle(arcade.Sprite):
 
