@@ -324,7 +324,7 @@ class Window(arcade.Window):
                         self.obstacles.remove(o)
             # LEFT click
             else:
-                print('left click')
+                # print('left click')
                 self.obstacles.append(Obstacle(x, y))
 
         return super().on_mouse_press(x, y, button, modifiers)
