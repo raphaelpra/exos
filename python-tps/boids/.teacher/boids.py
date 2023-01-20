@@ -31,8 +31,8 @@ BOID_SPEED = 3
 # one boid
 # arrow-resized:
 # if you only have the resized version just use that with scale 1
-BOID_IMAGE = "media/arrow.png"
-BOID_SCALE = 0.12
+BOID_IMAGE = "media/arrow-resized.png"
+#BOID_SCALE = 0.12
 
 ### what is proximity
 # close_flock is computed once per loop, with distance_1 (abs)
@@ -48,8 +48,8 @@ COHESION_RATIO = 0.02
 NOISE_RADIUS = 0.05
 
 # obstacles
-OBSTACLE_IMAGE = "media/obstacle.png"
-OBSTACLE_SCALE = 0.15
+OBSTACLE_IMAGE = "media/obstacle-resized.png"
+#OBSTACLE_SCALE = 0.15
 
 OBSTACLES_RADIUS = WIDTH / 2.8
 NB_OBSTACLES = 30
@@ -86,7 +86,7 @@ class Boid(arcade.Sprite):
           x, y: initial position, picked randomly if not set
           angle: initial angle, picked randomly if not set
         """
-        super().__init__(BOID_IMAGE, BOID_SCALE)
+        super().__init__(BOID_IMAGE) #, BOID_SCALE)
         self.flock = flock
         self.obstacles = obstacles
         self.center_x = x if x is not None else random.random()*WIDTH
@@ -272,7 +272,7 @@ class Obstacle(arcade.Sprite):
     one per obstacle
     """
     def __init__(self, cx, cy):
-        super().__init__(OBSTACLE_IMAGE, OBSTACLE_SCALE)
+        super().__init__(OBSTACLE_IMAGE) #, OBSTACLE_SCALE)
         self.center_x, self.center_y = cx, cy
 
     def is_close_to(self, pos_x, pos_y) -> bool:
