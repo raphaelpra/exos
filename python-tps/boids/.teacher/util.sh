@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FOCUS="game.py"
+#FOCUS="game.py"
 FOCUS="boids.py"
 STEM=$(basename $FOCUS .py)
 
