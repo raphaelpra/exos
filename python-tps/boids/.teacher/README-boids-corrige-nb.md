@@ -393,7 +393,12 @@ vous pouvez ensuite améliorer dans les directions suivantes :
 * bien tenir compte de la vitesse de rafraichissement du jeu  
   i.e., est-ce que la simulation continue de fonctionner si on ralentit la logique du jeu avec 
   `Window.set_update_rate()`
-* etc...
+* etc...  
+  pour information voici une synthèse des 3 règles, à vous de chercher pour préciser comment interpréter ces figures
+
++++
+
+![](media/boids-rules.png)
 
 +++
 

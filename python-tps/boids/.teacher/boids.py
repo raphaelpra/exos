@@ -397,7 +397,7 @@ def main():
     parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
     parser.add_argument("-n", "--nb-boids", type=int, help="set number of boids",
                         default=NB_BOIDS)
-    parser.add_argument("-s", "--boid-speed", type=int, help="set number of boids",
+    parser.add_argument("-s", "--boid-speed", type=int, help="set boid speed",
                         default=BOID_SPEED)
     parser.add_argument("-c", "--close-radius", type=int, help="set 'close' radius",
                         default=CLOSE_RADIUS1)
