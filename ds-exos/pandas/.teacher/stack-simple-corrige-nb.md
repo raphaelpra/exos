@@ -207,7 +207,7 @@ for col in df_all.columns:
 
 ```{code-cell} ipython3
 # pour vérifier le résultat de visu
-df_all
+# df_all
 ```
 
 ***
