@@ -169,20 +169,16 @@ population['France']
 
 Vous trouverez à cette URL un accès aux données de population par pays
 
-<https://population.un.org/wpp/Download/Standard/CSV/>
-
-et plus spécifiquement, le lien pour downloader la donnée
-
-`https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_TotalPopulationBySex.csv`
+<https://github.com/datasets/population/blob/main/data/population.csv>
 
 +++
 
 *Attention* ce ne sont pas les mêmes données exactement, celles-ci sont beaucoup plus détaillées...
 
 ```{code-cell} ipython3
-# ici j'ai fait un 'Copy Link Address' depuis chrome, l'espace s'est fait remplacer par un %20
-# 20 en hexa = 32 en décimal, c'est le codepoint de Espace
-URL2 = "https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_TotalPopulationBySex.csv"
+# pareil, on clique sur 'Raw' pour obtenir le lien vers la donnée 'crue'
+
+URL2 = "https://raw.githubusercontent.com/datasets/population/main/data/population.csv"
 ```
 
 ```{code-cell} ipython3
@@ -253,23 +249,64 @@ df = pd.read_csv(URL2)
 ```
 
 ```{code-cell} ipython3
-df.head()
+# on regarde un peu ce qu'il y a dedans
+df.head(3)
+```
+
+```{code-cell} ipython3
+df.tail(3)
 ```
 
 ```{code-cell} ipython3
 # conversion en date
-df.Time = pd.to_datetime(df.Time, format="%Y")
-
-begin, end = pd.to_datetime('1950', format='%Y'), pd.to_datetime('2021', format='%Y')
+df['Time'] = pd.to_datetime(df.Year, format="%Y")
 ```
 
 ```{code-cell} ipython3
-df_france = df[(df.Location == 'France') & (df.Time >= begin) & (df.Time <= end)]
+# maintenant on a une colonne en plus, mais du bon type
+# df
+```
+
+```{code-cell} ipython3
+# on nettoie / renomme
+del df['Year']
+
+df = df.rename(columns = {
+    'Country Name': 'Country',
+    'Country Code': 'Code',
+    'Value': 'Population',
+})
+```
+
+```{code-cell} ipython3
+# df
+```
+
+```{code-cell} ipython3
+# on choisit un index un peu plus parlant
+df = df.set_index('Time')
+```
+
+```{code-cell} ipython3
+# df
+```
+
+```{code-cell} ipython3
+# on se définit arbitrairement une période qui nous intéresse
+begin = pd.to_datetime('1980', format='%Y')
+end = pd.to_datetime('2010', format='%Y')
+```
+
+```{code-cell} ipython3
+:scrolled: true
+
+# on filtre ce qui nous intéresse
+
+df_france = df[(df.Country == 'France') & (df.index >= begin) & (df.index <= end)]
 df_france
 ```
 
 ```{code-cell} ipython3
-df_france = df_france.set_index('Time')
-
-df_france[['PopMale', 'PopFemale']].plot();
+# on peut maintenant dessiner
+df_france[['Population']].plot();
 ```
