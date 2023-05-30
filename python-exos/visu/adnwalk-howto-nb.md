@@ -19,7 +19,7 @@ nbhosting:
   title: visualiser un brin d'ADN
 ---
 
-<span style="float:left;">Licence CC BY-NC-ND</span><span style="float:right;">Thierry Parmentelat&nbsp;<img src="media/inria-25.png" style="display:inline"></span><br/>
+Licence CC BY-NC-ND - Thierry Parmentelat
 
 +++
 
@@ -35,7 +35,7 @@ Il s'agit donc de dessiner le parcours d'une séquence d'ADN, en décidant que c
 
 +++
 
-![Extrait du transparent](media/adnwalk-directions.png)
+![Extrait du transparent](../media/adnwalk-directions.png)
 
 +++
 
