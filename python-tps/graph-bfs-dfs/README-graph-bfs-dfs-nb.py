@@ -8,7 +8,7 @@
 #       extension: .py
 #       format_name: percent
 #   kernelspec:
-#     display_name: Python 3
+#     display_name: Python 3 (ipykernel)
 #     language: python
 #     name: python3
 # ---
@@ -24,9 +24,9 @@
 # * depth-first (DF) browsing, and
 # * breadth-first (BF) browsing
 #
-# intuitively :
+# intuitively, considering for example from the following tree
 
-# %%
+# %% trusted=true
 import graphviz
 
 tree = graphviz.Digraph(engine='dot')
@@ -47,8 +47,11 @@ tree.edge('v22', 'v222')
 
 tree
 
+# %% [markdown]
+# these 2 algorithms would yield the nodes in the following orders
+
 # %% [markdown] cell_style="split"
-# DF browsing from v would scan
+# DF browsing **from `v`** would scan
 # ```
 # v v1 v11 v111 v112 
 # v12 v121 v122 
@@ -57,7 +60,7 @@ tree
 # ```
 
 # %% [markdown] cell_style="split"
-# BF browsing would scan
+# BF browsing **from `v`** would scan
 # ```
 # v 
 # v1 v2 
@@ -69,22 +72,37 @@ tree
 # ## objectives
 
 # %% [markdown]
-# we want to write a **generator** that implements these 2 browsing policies from a a graph and vertex.
+# we want to write a **generator** that implements these 2 browsing policies from a graph and vertex.
 #
-# of course only the nodes reachable from the entry vertex will be browsed.
+# of course, only the nodes reachable from the entry vertex will be browsed by this method
 
 # %% [markdown]
 # ## algorithms
 #
-# the algorithms used to perform these scans are, interestingly, very close to one another
+# the 2 algorithms used to perform these scans are, interestingly, **very close** to one another
 #
-# in both cases we need a STORAGE object, where we can store things and retrieve them later on
+# in both cases we need a STORAGE object, where we can `store()` things and `retrieve()` them later on
 
 # %% [markdown]
 # ### FIFO / FILO
 
-# %% cell_style="split"
+# %% [markdown]
+# Let us consider the following 2 storage implementations:
+#
+# * `Fifo` implements a *first-in-first-out* policy
+# * `Filo` does the exact opposite and has a *first-in-last-out* policy
+#
+# Remember the regular `list` class is more optimized for a `append()/pop()` usage
+#
+# So to work around that, we're using a `deque` class, instead of a simple list; it is actually useful only in the `Filo` case, but this way we have a more homogeneous code
+#
+# **Exercise**: you may wish to factorize both into a single class...
+#
+# But let's get to it:
+
+# %% cell_style="split" trusted=true
 from collections import deque
+
 class Fifo:
     def __init__(self):
         self.line = deque()
@@ -97,8 +115,9 @@ class Fifo:
         return len(self.line)
 
 
-# %% cell_style="split"
+# %% cell_style="split" trusted=true
 from collections import deque
+
 class Filo:
     def __init__(self):
         self.line = deque()
@@ -111,14 +130,18 @@ class Filo:
         return len(self.line)        
 
 
-# %% cell_style="split"
+# %% cell_style="split" trusted=true
+# let's check it does what we want
+
 fifo = Fifo()
 for i in range(1, 4):
     fifo.store(i)
 while fifo:
     print(f"retrieve → {fifo.retrieve()}")
 
-# %% cell_style="split"
+# %% cell_style="split" trusted=true
+# same here
+
 filo = Filo()
 for i in range(1, 4):
     filo.store(i)
@@ -126,18 +149,27 @@ while filo:
     print(f"retrieve → {filo.retrieve()}")
 
 
-# %%
+# %% trusted=true
 # assumptions:
-# vertices reachable from a vertex are 
-# stored in a 'neighbours' attribute
+# 
+# * 
+# 
+
 def scan(start, storage):
     """
-    scan all vertices reachable from start vertex
-    in an order that is DF or BF depending on the 
+    performs a scan of all the vertices reachable from start vertex
+    
+    in an order that is DF or BF, depending on the 
     storage policy (fifo or filo)
-    storage should have store() and retrieve() methods
-    and be testable for emptiness (if storage: ...)
-    also it should be empty when entering the scan
+    
+    assumptions:
+    
+    * vertices reachable from a vertex are 
+      stored in a 'neighbours' attribute
+    
+    * storage should have store() and retrieve() methods
+      and be testable for emptiness (if storage: ...)
+    * also it should be empty when entering the scan
     """
 
     storage.store(start)
@@ -155,7 +187,7 @@ def scan(start, storage):
             storage.store(neighbour)
 
 
-# %%
+# %% trusted=true
 class Vertex:
     def __init__(self, name):
         self.name = name
@@ -163,21 +195,24 @@ class Vertex:
         
     def __repr__(self):
         return self.name
+    
+    def add_neighbour(self, other):
+        self.neighbours.add(other)
 
 
-# %%
+# %% trusted=true
 # rebuild sample graph
 def tree_vertex(name, depth):
     if depth == 0:
         return Vertex(name)
     elif depth > 0:
         result = Vertex(name)
-        result.neighbours.add(tree_vertex(name+'1', depth-1))
-        result.neighbours.add(tree_vertex(name+'2', depth-1))
+        result.add_neighbour(tree_vertex(name+'1', depth-1))
+        result.add_neighbour(tree_vertex(name+'2', depth-1))
         return result
 
 
-# %%
+# %% trusted=true
 g = tree_vertex('v', 3)
 g
 
@@ -187,11 +222,11 @@ g
 # %% [markdown] cell_style="split"
 # ### FIFO = BF - breadth first
 
-# %% cell_style="split"
+# %% cell_style="split" trusted=true
 for vertex in scan(g, Filo()):
     print(vertex)
 
-# %% cell_style="split" inputHidden=false outputHidden=false
+# %% cell_style="split" inputHidden=false outputHidden=false trusted=true
 for vertex in scan(g, Fifo()):
     print(vertex)
 
@@ -201,19 +236,19 @@ for vertex in scan(g, Fifo()):
 # %% [markdown]
 # being a generator, we can combine it with all the `itertools` and the like
 
-# %%
+# %% trusted=true
 import itertools
 
 # %% [markdown]
 # for example, if we need to print every other vertex in a DF scan
 
-# %% cell_style="split"
+# %% cell_style="split" trusted=true
 df_scan = scan(g, Filo())
 
 for v in itertools.islice(df_scan, 0, None, 2):
     print(v)
 
-# %% cell_style="split"
+# %% cell_style="split" trusted=true tags=["level_intermediate"]
 # notice that df_scan is now exhausted !
 
 for v in itertools.islice(df_scan, 0, None, 2):
@@ -222,7 +257,8 @@ for v in itertools.islice(df_scan, 0, None, 2):
 # %% [markdown]
 # or skip the first 3..
 
-# %%
+# %% trusted=true
+# but we can easily create a new one !
 df_scan = scan(g, Filo())
 
 for v in itertools.islice(df_scan, 3, None):
@@ -230,7 +266,3 @@ for v in itertools.islice(df_scan, 3, None):
 
 # %% [markdown] cell_style="center"
 # ***
-
-# %% [markdown]
-# applied on the graph from 'game of thrones' 
-#
