@@ -24,10 +24,8 @@ parts:
   - file: ds-exos/pandas/stack-simple-nb
   - file: ds-exos/pandas/stack-multicol-nb
   - file: ds-exos/pandas/mosaique-nb
-- caption: quizzes pandas
-  chapters:
-  - glob: ds-quizzes/[0-9]*-nb
-- caption: miscell howtos
+  - file: ds-exos/dataviz/groupby-draw-nb
+- caption: howtos pandas
   chapters:
   - file: ds-howtos/split-count-into-columns-howto-nb
   - file: ds-howtos/timeseries-clean-smooth-howto-nb
@@ -36,12 +34,12 @@ parts:
   - file: ds-howtos/coronavirus-howto-nb
   - file: ds-howtos/fremont-bridge-howto-nb
   - file: ds-howtos/numpy-meshgrid-howto-nb
-- caption: miscell dashboards
+- caption: dashboards
   chapters:
   - file: ds-howtos/dashboard-with-dash
   - file: ds-howtos/streamlit-sinus
   - file: ds-howtos/streamlit-taylor
-- caption: exercices dataviz
+- caption: quizzes pandas
   chapters:
-  - file: ds-exos/dataviz/groupby-draw-nb
+  - glob: ds-quizzes/[0-9]*-nb
 root: README

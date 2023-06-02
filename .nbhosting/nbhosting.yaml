@@ -109,10 +109,10 @@ tracks:
     - ds-exos/pandas/stack-simple-nb.md
     - ds-exos/pandas/stack-multicol-nb.md
     - ds-exos/pandas/mosaique-nb.md
-  - name: quizzes pandas
-    notebooks:
-    - ds-quizzes/[0-9]*-nb.py
-  - name: miscell howtos
+    # initially stored in a separate folder, 
+    # but that's more confusing than helpful
+    - ds-exos/dataviz/groupby-draw-nb.md
+  - name: howtos pandas
     notebooks:
     - ds-howtos/split-count-into-columns-howto-nb.md
     - ds-howtos/timeseries-clean-smooth-howto-nb.md
@@ -121,14 +121,14 @@ tracks:
     - ds-howtos/coronavirus-howto-nb.md
     - ds-howtos/fremont-bridge-howto-nb.md
     - ds-howtos/numpy-meshgrid-howto-nb.md
-  - name: miscell dashboards
+  - name: dashboards
     notebooks:
     - ds-howtos/dashboard-with-dash.py
     - ds-howtos/streamlit-sinus.py
     - ds-howtos/streamlit-taylor.py
-  - name: exercices dataviz
+  - name: quizzes pandas
     notebooks:
-    - ds-exos/dataviz/groupby-draw-nb.md
+    - ds-quizzes/[0-9]*-nb.py
 
 builds:
   - id: python
