@@ -110,7 +110,7 @@ remember the logic of the UTF-8 encoding
 
 +++
 
-![](../media/unicode-decode-example.png)
+![](media/unicode-decode-example.png)
 
 +++
 
@@ -137,6 +137,14 @@ sounds good
 
 ## decode manually ?
 
++++
+
+this table describes how the UTF8 encoding works:
+
++++
+
+![](media/unicode-utf8-areas.png)
+
 ```{code-cell} ipython3
 # we want 5 bits from the first byte and 6 from the second byte
 on2bytes_0_len = 5
@@ -156,6 +164,8 @@ def mask_from_len(length):
 ```
 
 ```{code-cell} ipython3
+# let us check that it works as advertised:
+
 # e.g. for byte0
 # the result allows to separate 
 # the (3-bits) padding from 
@@ -227,7 +237,7 @@ len(text2)
 44 is because 
 
 * 4 * 10 chars = 40 bytes
-* *plus* 4 bytes for the BOM located in the first 4 bytes
+* ***plus* 4 bytes** for the BOM located in the first 4 bytes
 
 ```{code-cell} ipython3
 with Path("encodings2-utf32").open('rb') as f:
@@ -256,6 +266,8 @@ with that in mind it is easier to
 for example: decode the `ç` in our initial string
 
 ```{code-cell} ipython3
+# remember that ç is at index 2
+
 text2[2]
 ```
 
@@ -271,9 +283,16 @@ b4 = raw[offset:offset+4]
 because it is little endian - see <https://en.wikipedia.org/wiki/Endianness> - it means we have to mirror the data bytes to get the actual value
 
 ```{code-cell} ipython3
+# int.from_bytes knowns how to transform a sequence
+# of bytes into an int, given the endian-ness
+
 int.from_bytes(b4, 'little')
 ```
 
 ```{code-cell} ipython3
+# and indeed, that is what was encoded in the file !
+
 chr(231)
 ```
+
+***
