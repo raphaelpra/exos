@@ -64,7 +64,7 @@ toc: jb/_toc-python.yml jb/_toc-ds.yml
 book-python:
 	jupyter-book build --toc jb/_toc-python.yml --config jb/_config.yml --path-output book-python .
 book-ds:
-	jupyter-book build --toc jb/_toc-ds.yml --config jb/_config.yml -path-output book-ds .
+	jupyter-book build --toc jb/_toc-ds.yml --config jb/_config.yml --path-output book-ds .
 book:
 	@echo choose the book you want to build
 	@echo make book-python

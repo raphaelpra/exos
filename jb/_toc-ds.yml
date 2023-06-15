@@ -14,6 +14,9 @@ parts:
 - caption: TP Taylor
   chapters:
   - glob: ds-tps/taylor/taylor-*
+- caption: TP geopandas
+  chapters:
+  - file: ds-tps/geo/geopandas-nb
 - caption: exercices pandas
   chapters:
   - file: ds-exos/pandas/television-nb

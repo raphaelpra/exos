@@ -81,6 +81,8 @@ tracks:
     notebooks:
     - "python-tps/subprocesses-howto.md/README*.md"
     - "python-tps/webscraper-wip/README*.md"
+
+
 - description: DataScience - activités
   id: data-science
   name: Data Science
@@ -99,6 +101,9 @@ tracks:
   - name: TP Taylor
     notebooks:
     - ds-tps/taylor/taylor-*.md
+  - name: TP geopandas
+    notebooks:
+    - ds-tps/geo/geopandas-nb.md
   - name: exercices pandas
     notebooks:
     - ds-exos/pandas/television-nb.md
