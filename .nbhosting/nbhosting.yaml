@@ -68,12 +68,12 @@ tracks:
   - name: lecture de code
     notebooks:
       - python-reading/snake/snake.py
-  - name: exercices avancés
+  - name: avancés
     notebooks:
     - python-exos/advanced/encodings-howto-nb.md
+    - python-exos/advanced/randomdate-readme-nb.md
     - python-exos/advanced/attributes-proxy-nb.md
     - python-exos/advanced/attributes-dynprop-nb.md
-    - python-exos/advanced/randomdate-readme-nb.md
   - name: sample code
     notebooks:
     - "python-samples/*.py"
@@ -119,13 +119,13 @@ tracks:
     - ds-exos/dataviz/groupby-draw-nb.md
   - name: howtos pandas
     notebooks:
+    - ds-howtos/numpy-meshgrid-howto-nb.md
     - ds-howtos/split-count-into-columns-howto-nb.md
+    - ds-howtos/pivot-vs-stack-unstack-howto-nb.md
     - ds-howtos/timeseries-clean-smooth-howto-nb.md
     - ds-howtos/groupby-ratings-howto-nb.md
-    - ds-howtos/pivot-vs-stack-unstack-howto-nb.md
     - ds-howtos/coronavirus-howto-nb.md
     - ds-howtos/fremont-bridge-howto-nb.md
-    - ds-howtos/numpy-meshgrid-howto-nb.md
   - name: dashboards
     notebooks:
     - ds-howtos/dashboard-with-dash.py

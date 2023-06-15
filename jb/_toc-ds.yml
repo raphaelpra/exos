@@ -30,13 +30,13 @@ parts:
   - file: ds-exos/dataviz/groupby-draw-nb
 - caption: howtos pandas
   chapters:
+  - file: ds-howtos/numpy-meshgrid-howto-nb
   - file: ds-howtos/split-count-into-columns-howto-nb
+  - file: ds-howtos/pivot-vs-stack-unstack-howto-nb
   - file: ds-howtos/timeseries-clean-smooth-howto-nb
   - file: ds-howtos/groupby-ratings-howto-nb
-  - file: ds-howtos/pivot-vs-stack-unstack-howto-nb
   - file: ds-howtos/coronavirus-howto-nb
   - file: ds-howtos/fremont-bridge-howto-nb
-  - file: ds-howtos/numpy-meshgrid-howto-nb
 - caption: dashboards
   chapters:
   - file: ds-howtos/dashboard-with-dash

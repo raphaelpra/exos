@@ -47,12 +47,12 @@ parts:
 - caption: lecture de code
   chapters:
   - file: python-reading/snake/snake
-- caption: "exercices avanc\xE9s"
+- caption: "avanc\xE9s"
   chapters:
   - file: python-exos/advanced/encodings-howto-nb
+  - file: python-exos/advanced/randomdate-readme-nb
   - file: python-exos/advanced/attributes-proxy-nb
   - file: python-exos/advanced/attributes-dynprop-nb
-  - file: python-exos/advanced/randomdate-readme-nb
 - caption: sample code
   chapters:
   - glob: python-samples/*
