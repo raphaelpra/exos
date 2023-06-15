@@ -24,6 +24,7 @@ tracks:
     # filesystem too, requires files_sortby.py
     # probably a duplicate of the previous one
     - python-exos/basic/files-sortby-nb.md
+    - python-exos/advanced/randomdate-readme-nb.md
   - name: exercices classes
     notebooks:
     - python-exos/classes/wordcounts-readme-nb.md
@@ -71,7 +72,6 @@ tracks:
   - name: avancés
     notebooks:
     - python-exos/advanced/encodings-howto-nb.md
-    - python-exos/advanced/randomdate-readme-nb.md
     - python-exos/advanced/attributes-proxy-nb.md
     - python-exos/advanced/attributes-dynprop-nb.md
   - name: sample code

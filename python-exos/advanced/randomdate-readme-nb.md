@@ -16,7 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: 'génération aléatoire de dates'
+  title: "g\xE9n\xE9ration al\xE9atoire de dates"
 ---
 
 <div class="licence">
@@ -26,110 +26,204 @@ nbhosting:
 
 +++
 
-Exo fichier / format / datetime
+# random dates
 
 +++
 
-# un générateur de date
+````{admonition} **Survol**
+
+Dans ce TP, nous allons:
+
+* écrire une fonction permettant de générer une date au hasard dans un intervalle
+* produire un fichier contenant *n* échantillons 
+* relire et trier le fichier
+
+Dans le but de 
+
+* pratiquer l'écriture et la lecture de fichiers
+* manipuler des dates
+
+````
+
++++
+
+## étape 1: générer une date
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+````{admonition} to do
+Écrivez une fonction qui se comporte comme `generate_random_date`
+
+(lisez bien les indices avant de vous lancer)
 
 ```{code-cell} ipython3
 from randomdate import generate_random_date
-```
 
-```{code-cell} ipython3
 help(generate_random_date)
 ```
 
 ```{code-cell} ipython3
+# that can be called like this
 generate_random_date()
 ```
 
 ```{code-cell} ipython3
-generate_random_date()
+# or like this
+generate_random_date("10/02/2020", "31/12/2021")
 ```
 
-## Indices
++++ {"tags": []}
+
+### indices
 
 +++
 
-### ne même pas essayer 
+#### ne même pas essayer 
 
-* si vous générez les trois morceaux indépendamment
-  * vous n'avez aucune chance d'être uniforme
+bien sûr, si vous essayez de générer les trois morceaux indépendamment
+
+* vous n'avez aucune chance d'être uniforme
+* en plus ça ne marche plus du tout si les bornes tombent comme ici au milieu de l'année et du mois
 
 +++
 
-### le module `random`
+#### le module `random`
 
 ```{code-cell} ipython3
-# générer un entier dans un intervalle
+# pour générer un entier dans un intervalle
+# lisez la doc pour savoir si les bornes sont incluses ou pas
+
 import random
 random.randint(1000, 2000)
 ```
 
-### le module `datetime`
+#### le module `datetime`
+
++++
+
+pour représenter :
+
+* les instants au cours du temps (dates, heures, ...): la classe `datetime`  
+  que, juste pour être compatibles avec la PEP008, on va importer sous le nom de `DateTime`
+* les durées - i.e. la différence entre deux instants: la classe `timedelta`  
+  et idem ici on va l'appeler `TimeDelta``
+
+voici quelques-uns des traits qu'on va utiliser
 
 ```{code-cell} ipython3
-from datetime import datetime
-day = datetime(2000, 3, 1)
+from datetime import datetime as DateTime, timedelta as TimeDelta
+```
+
+```{code-cell} ipython3
+# to build a DateTime that describes a specific day
+# one can do (among other methods)
+
+day = DateTime.strptime("15/02/2017", "%d/%m/%Y")
 day
 ```
 
-```{code-cell} ipython3
-# convertir en entiers (ici des jours, mais peu importe)
-i = day.toordinal()
-i
-```
+ici le deuxième paramètre représente le **`format`** utilisé pour afficher les dates, voir la liste complète ici
+<https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior>
 
 ```{code-cell} ipython3
-# et dans l'autre sens
-day_after = datetime.fromordinal(i + 2)
+# the interesting thing is that these objects
+# know ho to do basic arithmetic
+
+# le surlendemain de ce jour ce sera
+day_after = day + TimeDelta(days=2)
 day_after
 ```
 
-### [les formats de date/time](https://docs.python.org/3.5/library/datetime.html#strftime-and-strptime-behavior)
+```{code-cell} ipython3
+# then to convert a DateTime object back to a string
+# one can do (again there are other ways...)
+
+f"{day_after:%d %m %Y}"
+```
 
 ```{code-cell} ipython3
-# revenir d'une date à un string
-f"{day_after:%d %m %Y}"
+# ofor example, this works too
+
+DateTime.strftime(day_after, "%Y/%m/%d")
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# your code
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# test it
 ```
 
 *****
 
 +++
 
-# écrire *n* échantillons dans un fichier
+## étape 2: écrire *n* échantillons dans un fichier
+
++++
+
+mêmes modalités, récrivez la fonction suivante
 
 ```{code-cell} ipython3
-from randomdate import write_random_dates_in_file
+from randomdate import write_random_data
 ```
 
 ```{code-cell} ipython3
-help(write_random_dates_in_file)
+help(write_random_data)
 ```
 
 ```{code-cell} ipython3
 with open("randomdate.txt", 'w') as output:
-    write_random_dates_in_file(output, 3)
+    write_random_data(output, 3)
 ```
 
 ```{code-cell} ipython3
+# this is just to see what is in the generated file
+# if on Windows, it will likely not work, use vs-code instead..
+
 !cat randomdate.txt
 ```
 
-# relire le fichier et le trier
+### indices
+
+* regardez la valeur de `string.ascii_lowercase`
+* regardez les fonctions `random.choice()` et `random.choices()`  
 
 ```{code-cell} ipython3
-from randomdate import sort_file_dates
+:tags: [level_basic]
+
+# your code
 ```
 
 ```{code-cell} ipython3
-help(sort_file_dates)
+:tags: [level_basic]
+
+# test it
+with open("randomdate.txt", 'w') as output:
+    write_random_data(output, 20)
+```
+
+## étape 3: relire le fichier et le trier
+
++++
+
+mêmes modalités, récrivez la fonction suivante
+
+```{code-cell} ipython3
+from randomdate import sort_data
 ```
 
 ```{code-cell} ipython3
-with open("randomdate.txt") as input:
-    sort_file_dates(input)
+help(sort_data)
+```
+
+```{code-cell} ipython3
+sort_data("randomdate.txt", "randomdate-sorted.txt")
 ```
 
 ```{code-cell} ipython3
@@ -138,52 +232,40 @@ with open("randomdate.txt") as input:
 
 ## Indices
 
-* on n'a pas d'autre choix que de lire l'entrée en entier avant de trier
-  * et de reconstruire un objet `datetime` par ligne
-  * pour pouvoir trier proprement et réimprimer 
-* un objet fichier a un attribut `name` - [voir doc `io`](https://docs.python.org/3.5/library/io.html#module-io)
+* on a le choix entre
+  * la **fonction** `sorted()` qui fabrique une copie triée
+  * le **méthode** `list.sort()` qui copie une liste en place
+
+  du coup si on essaye d'optimiser l'utilisation de la mémoire, on va choisir laquelle ?
+* ces fonctions pour trier acceptent un paramètre `key=`, regardez bien comment ça marche ce truc-là
+* pas la peine d'essayer de finasser et de lire le fichier ligne par ligne, on n'a pas d'autre choix que de lire l'entrée en entier avant de trier
 
 ```{code-cell} ipython3
-with open('randomdate.txt') as input:
-    to_sort = []
-    for line in input:
-        tokens = line.split()
-        day, month, year, *rest, comment = tokens
-        date = datetime(int(year), int(month), int(day))
-        to_sort.append( (date, rest[0], comment))
-    to_sort.sort(key = lambda tuple: tuple[0])
-    print(to_sort)
+:tags: [level_basic]
+
+# your code
 ```
 
-# Variantes
+```{code-cell} ipython3
+:tags: [level_basic]
 
-`randomdate_cl.py`
+# test it
+sort_data("randomdate.txt", "randomdate-sorted.txt")
+```
 
-* générez un commentaire random ou lieu de 'bla', fait de 1 a 4 mots choisis dans un dictionnaire
+```{code-cell} ipython3
+!cat randomdate-sorted.txt
+```
+
+## Variantes
+
+indépendantes les unes des autres:
 
 * si vous vous sentez confortable avec les classes, vous pouvez écrire une classe `Sample` pour chaque élément dans le fichier
 
 * écrivez un `if __name__ == '__main__'` pour rendre votre script exécutable
   et utilisez `ArgumentParser` pour paramétrer le nombre de lignes générées
 
-```{code-cell} ipython3
-from randomdate_cl import write_random_dates_in_file as write_random_dates_cl
-```
++++
 
-```{code-cell} ipython3
-with open("randomdate-cl.txt", 'w') as output:
-    write_random_dates_cl(output, 3)
-```
-
-```{code-cell} ipython3
-!cat randomdate-cl.txt
-```
-
-```{code-cell} ipython3
-from randomdate_cl import sort_file_dates as sort_file_dates_cl
-```
-
-```{code-cell} ipython3
-with open("randomdate-cl.txt") as input:
-    sort_file_dates_cl(input)
-```
+****
