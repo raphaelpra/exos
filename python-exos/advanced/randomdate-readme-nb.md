@@ -55,6 +55,7 @@ Dans le but de
 Écrivez une fonction qui se comporte comme `generate_random_date`
 
 (lisez bien les indices avant de vous lancer)
+````
 
 ```{code-cell} ipython3
 from randomdate import generate_random_date
@@ -230,7 +231,7 @@ sort_data("randomdate.txt", "randomdate-sorted.txt")
 !cat randomdate.txt.sort
 ```
 
-## Indices
+### indices
 
 * on a le choix entre
   * la **fonction** `sorted()` qui fabrique une copie triée
@@ -257,7 +258,7 @@ sort_data("randomdate.txt", "randomdate-sorted.txt")
 !cat randomdate-sorted.txt
 ```
 
-## Variantes
+## variantes
 
 indépendantes les unes des autres:
 

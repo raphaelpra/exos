@@ -9,6 +9,7 @@ parts:
   - file: python-exos/basic/adnpercents-readme-nb
   - file: python-exos/basic/files-scanext-nb
   - file: python-exos/basic/files-sortby-nb
+  - file: python-exos/advanced/randomdate-readme-nb
 - caption: exercices classes
   chapters:
   - file: python-exos/classes/wordcounts-readme-nb
@@ -50,7 +51,6 @@ parts:
 - caption: "avanc\xE9s"
   chapters:
   - file: python-exos/advanced/encodings-howto-nb
-  - file: python-exos/advanced/randomdate-readme-nb
   - file: python-exos/advanced/attributes-proxy-nb
   - file: python-exos/advanced/attributes-dynprop-nb
 - caption: sample code
