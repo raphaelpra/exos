@@ -1,10 +1,13 @@
 ---
 jupytext:
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+    -jupytext.custom_cell_magics, -language_info.version, -language_info.codemirror_mode.version,
+    -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
+    -toc, -vscode
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.14.5
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -60,7 +63,7 @@ pour obtenir des coordonnées latitude/longitude à partir d'une adresse, en Fra
 
 lisez bien cette page, et notamment tout en bas il y a une zone où vous pouvez faire une recherche en ligne
 
-```{code-cell} ipython3
+```{code-cell}
 # for starters, we only need the 'regular fit' pandas
 
 import pandas as pd
@@ -68,7 +71,7 @@ import pandas as pd
 
 vous pouvez charger le fichier `data/addresses.csv`; toutes ces adresses sont situées à PARIS
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # load the data in data/addresses.csv
@@ -79,7 +82,7 @@ vous pouvez charger le fichier `data/addresses.csv`; toutes ces adresses sont si
 addresses = ...
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -92,7 +95,7 @@ et la première chose qu'on va faire, c'est naturellement d'utiliser cette API p
 
 mais avant cela, je vous recommande de produire un fichier `addresses-small.csv` qui contient un petit extrait, disons les 10 ou 20 premières lignes; ce sera très utile pour débugger
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # produce a small extract into addresses-small.csv
@@ -100,7 +103,7 @@ mais avant cela, je vous recommande de produire un fichier `addresses-small.csv`
 # your code here
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -114,7 +117,7 @@ addresses.iloc[:10].to_csv('addresses-small.csv', index=False)
 
 c'est très pratique de pouvoir faire une recherche des adresses 'une par une'; voici comment ça se présenterait
 
-```{code-cell} ipython3
+```{code-cell}
 # requests is the swiss knife for doing http
 import requests
 
@@ -137,7 +140,7 @@ def localize_one(num, typ, nom):
     return response.json()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # and here is how we could use it
 
 localize_one(18, 'rue', 'BERNARDINS')
@@ -155,7 +158,7 @@ localize_one(18, 'rue', 'BERNARDINS')
 ```
 ````
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # try to estimate how long it would take 
@@ -164,7 +167,7 @@ localize_one(18, 'rue', 'BERNARDINS')
 # your code here
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 %%timeit -n 3
@@ -174,7 +177,7 @@ localize_one(18, 'rue', 'BERNARDINS')
 details = localize_one(18, 'rue', 'BERNARDINS')
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -290,7 +293,7 @@ je vous recommande d'y aller pas à pas, commencez par juste l'étape 1, puis 1 
 
 c'est utile aussi de commencer par une toute petite dataframe pour ne pas attendre des heures pendant la mise au point...
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # your code here
@@ -316,7 +319,7 @@ def localize_many(filename, col_number, col_type, col_name, col_city):
     pass
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -358,7 +361,7 @@ def localize_many(filename, col_number, col_type, col_name, col_city):
     
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # try your code on the small sample for starters
@@ -367,7 +370,7 @@ addresses_small = localize_many("addresses-small.csv", "number", "type", "name",
 addresses_small
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # sanity check : make sure that all the entries have 
@@ -378,7 +381,7 @@ addresses_small
 # your code
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -393,7 +396,7 @@ addresses_small = localize_many("addresses-small.csv", "number", "type", "name",
   sum(addresses_small.result_type != 'housenumber') == 0)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # when you think you're ready, go full scale
@@ -405,7 +408,7 @@ addresses_small = localize_many("addresses-small.csv", "number", "type", "name",
 # addresses = localize_many("data/addresses.csv", "number", "type", "name", "city")
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # sanity check 
@@ -413,7 +416,7 @@ addresses_small = localize_many("addresses-small.csv", "number", "type", "name",
 # len(addresses)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # at this point you should store the data
@@ -424,7 +427,7 @@ addresses_small = localize_many("addresses-small.csv", "number", "type", "name",
 # your code
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -448,7 +451,7 @@ et pour ça il y a plein de libs disponibles, on va choisir `folium`
 
 si nécessaire, il faut l'installer (comment on fait déjà ?)
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 import folium
@@ -464,7 +467,7 @@ et surtout (regardez les deux premiers pour l'instant):
 * l'objet `Marker` <https://python-visualization.github.io/folium/quickstart.html#Markers>
 * et un peu plus tard on utilisera aussi des overlays <https://python-visualization.github.io/folium/quickstart.html#GeoJSON/TopoJSON-Overlays>
 
-```{code-cell} ipython3
+```{code-cell}
 # ~ chatelet 
 
 CENTER = 48.856542, 2.347614
@@ -472,7 +475,7 @@ CENTER = 48.856542, 2.347614
 
 ### le fond de carte
 
-```{code-cell} ipython3
+```{code-cell}
 # pour commencer on va recharger la dataframe précédente
 import pandas as pd
 
@@ -483,7 +486,7 @@ addresses = pd.read_csv("addresses-geoloc.csv")
 addresses_small = addresses.sample(n=20)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # créez une map centrée sur ce point et de zoom 13
@@ -499,7 +502,7 @@ def paris_map():
 paris_map()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -522,7 +525,7 @@ paris_map()
 pareil mais vous ajoutez les adresses qui se trouvent dans la dataframe  
 éventuellement, vous pouvez comme sur l'exemple du *Getting Started* ajouter un tooltip avec l'adresse complète
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [framed_cell, level_basic]
 
 # your code here
@@ -535,7 +538,7 @@ def map_addresses(geoloc):
     pass
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -554,7 +557,7 @@ def map_addresses(geoloc):
     return map
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # and try it out
 
 # make sure you use A SMALL DATAFRAME because with this method
@@ -568,7 +571,7 @@ map_addresses(addresses_small)
 
 une fonction très sympatique de `folium`, c'est qu'on peut sauver cette carte sous la forme d'un fichier html, on dit *standalone*, c'est-à-dire autosuffisant, pas besoin de Python ni de Jupyter pour la regarder
 
-```{code-cell} ipython3
+```{code-cell}
 map_small = map_addresses(addresses_small)
 map_small.save("addresses-small.html")
 ```
@@ -583,14 +586,14 @@ maintenant on va ranger les adresses par quartier; pour cela nous avons dans le 
 
 ça se présente comme ceci:
 
-```{code-cell} ipython3
+```{code-cell}
 # à ce stade on a besoin de geopandas
 # installez-le si besoin
 
 import geopandas as gpd
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # ça se lit facilement
 quartiers = gpd.read_file("data/quartiers_paris.shp", encoding="utf8")
 
@@ -598,13 +601,13 @@ quartiers = gpd.read_file("data/quartiers_paris.shp", encoding="utf8")
 type(quartiers)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # qu'on peut afficher normalement
 
 quartiers
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # et on peut même l'afficher sommairement avec matplotlib
 
 # bon c'est loin d'être parfait mais ça nous suffit à ce stade
@@ -622,7 +625,7 @@ pour afficher cela sur la carte, il faut se livrer à une petite gymnastique
 
 ce qui nous donne ceci:
 
-```{code-cell} ipython3
+```{code-cell}
 def paris_map():
     """
     create a map of Paris with its 80 quartiers
@@ -651,7 +654,7 @@ def paris_map():
     return map
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 paris_map()
 ```
 
@@ -671,14 +674,14 @@ maintenant c'est à vous: il s'agit d'améliorer cela pour ajouter des couleurs 
 
 ### couleurs: étape 1
 
-```{code-cell} ipython3
+```{code-cell}
 # in order to display a number in hexadecimal, you can use this 
 
 x = 10
 f"{x:02x}"
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # your code here
@@ -693,7 +696,7 @@ def random_color():
     
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -706,13 +709,13 @@ def random_color():
     return f"#{randbyte()}{randbyte()}{randbyte()}"
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 random_color(), random_color()
 ```
 
 ### couleurs: étape 2
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # add a random color column in quartiers
@@ -720,7 +723,7 @@ random_color(), random_color()
 # your code here
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -728,7 +731,7 @@ random_color(), random_color()
 quartiers['color'] = quartiers.geometry.map(lambda x: random_color())
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 quartiers.head(3)
 ```
 
@@ -742,7 +745,7 @@ quartiers.head(3)
 <https://stackoverflow.com/questions/72983410/folium-geojson-how-to-apply-the-stylefunction-within-a-loop>
 ````
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # display the quartiers with their individual color
@@ -757,7 +760,7 @@ def paris_map():
     pass
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -784,7 +787,7 @@ def paris_map():
     return map
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # display it
 paris_map()
 ```
@@ -819,7 +822,7 @@ je vous donne le code; ce qu'il faut savoir notamment c'est qu'en `geopandas` il
 
 <https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.set_geometry.html>
 
-```{code-cell} ipython3
+```{code-cell}
 def convert_lat_lon(df):
     """
     the input df is expected to have 2 columns named 'latitude' and 'longitude'
@@ -849,13 +852,13 @@ def convert_lat_lon(df):
     
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # let's apply that to our small input
 
 geoaddresses_small = convert_lat_lon(addresses_small)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # we will also need to set the active column in the quartiers (geo)dataframe
 
 quartiers.set_geometry('geometry', inplace=True)
@@ -865,7 +868,7 @@ quartiers.set_geometry('geometry', inplace=True)
 
 Il ne nous reste plus qu'à faire ce fameux *spatial join*, je vous laisse trouver le code pour faire ça
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # spatial join allows to extend the addresses dataframe
@@ -889,7 +892,7 @@ def add_quartiers(gdf):
     return gdf
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -899,7 +902,7 @@ def add_quartiers(gdf):
     return quartiers.sjoin(gdf, predicate='contains')
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # try your code
 
 # xxx you can safely ignore this warning...
@@ -909,7 +912,7 @@ geoaddresses_small_extended = add_quartiers(geoaddresses_small)
 geoaddresses_small_extended.head(2)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # verify your code
 
 # make sure you have the right number of lines in the result
@@ -925,7 +928,7 @@ comme vous allez le voir, l'objet `folium.Marker` ne peut pas s'afficher avec un
 
 pour contourner ça, utilisez à la place un objet de type `folium.CircleMarker`
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # rewrite map_addresses so that each address is shown 
@@ -946,7 +949,7 @@ def map_addresses(gdf):
     return
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -972,7 +975,7 @@ def map_addresses(gdf):
     return map
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # test the new function
 
 map = map_addresses(geoaddresses_small_extended)
@@ -987,13 +990,13 @@ c'est sans doute un bon moment pour sauver tout ce qu'on a fait:
 - sauvez la geo-dataframe dans un fichier `addresses-small-extended.csv`
 - sauvez la carte au format html (même nom sinon) pour une utilisation en *standalone* (par exemple pour la publier sur un site weeb indépendant des notebooks et de jupyter et tout ça)
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_basic]
 
 # votre code
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [level_intermediate]
 
 # prune-cell
@@ -1008,7 +1011,7 @@ pour pouvoir passer à l'échelle, il est indispensable de *clusteriser*; c'est-
 
 ne perdez pas de temps à chercher le code vous-même, c'est un peu *hacky* comme on dit, voici comment il faut faire
 
-```{code-cell} ipython3
+```{code-cell}
 from folium import plugins
 
 def map_addresses(gdf):
@@ -1053,7 +1056,7 @@ function (row) {
 
 ### sur l'échantillon
 
-```{code-cell} ipython3
+```{code-cell}
 # let's first test it on the small extract
 
 map_addresses(geoaddresses_small_extended)
@@ -1061,7 +1064,7 @@ map_addresses(geoaddresses_small_extended)
 
 ### sur le dataset entier
 
-```{code-cell} ipython3
+```{code-cell}
 # and if all goes well we can try and display the full monty
 
 # first prepare the full dataset
@@ -1072,7 +1075,7 @@ final_map = map_addresses(geoaddresses)
 final_map
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # makes sense to save the hard work
 
 geoaddresses.to_csv("addresses-final.csv")
