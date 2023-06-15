@@ -13,9 +13,11 @@ kernelspec:
 
 # Un peu de geopandas
 
-+++ {"tags": ["framed_cell"]}
+ce TP vise à vous faire découvrir quelques possibilités de manipulation et d'affichage de données géographiques
 
-````{admonition} **survol** 
++++
+
+````{admonition} **survol**
 
 voici les différentes étapes du TP en résumé
 
@@ -28,10 +30,15 @@ voici les différentes étapes du TP en résumé
 1. enfin on verra comment passer à l'échelle pour visualiser plusieurs dizaines de milliers de points
 ````
 
++++ {"tags": ["hide-input"], "hide_input": true}
+
+le résultat final sera de produire une carte comme ceci
+
+<iframe src="../../_static/addresses-final.html" style="width: 100%; height: 400px;"></iframe>
+
 +++
 
-ce TP vise à vous faire découvrir quelques possibilités de manipulation et d'affichage de données géographiques
-
+````{admonition} librairies utilisées
 on va utiliser principalement
 
 * `geopandas`: comme son nom l'indique, `geopandas` <https://geopandas.org/en/stable/> est une librairie pour faire .. un peu de géo
@@ -39,6 +46,9 @@ on va utiliser principalement
   pour faire court, elle permet de manipuler un dataframe avec des coordonnées géographiques
 
 * `folium` pour l'affichage de cartes
+
+* et aussi au début un peu de `requests` pour envoyer des requêtes à l'API de géolocalisation
+````
 
 +++
 
