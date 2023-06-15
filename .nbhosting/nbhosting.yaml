@@ -91,6 +91,7 @@ tracks:
     notebooks:
     - ds-exos/numpy/indices-nb.md
     - ds-exos/numpy/mandelbrot-nb.md
+    - ds-howtos/numpy-meshgrid-howto-nb.md
   - name: TP sounds
     notebooks:
     - ds-tps/sounds/README-sounds-nb.md
@@ -119,7 +120,6 @@ tracks:
     - ds-exos/dataviz/groupby-draw-nb.md
   - name: howtos pandas
     notebooks:
-    - ds-howtos/numpy-meshgrid-howto-nb.md
     - ds-howtos/split-count-into-columns-howto-nb.md
     - ds-howtos/pivot-vs-stack-unstack-howto-nb.md
     - ds-howtos/timeseries-clean-smooth-howto-nb.md
