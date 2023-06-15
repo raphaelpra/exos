@@ -4,6 +4,7 @@ parts:
   chapters:
   - file: ds-exos/numpy/indices-nb
   - file: ds-exos/numpy/mandelbrot-nb
+  - file: ds-howtos/numpy-meshgrid-howto-nb
 - caption: TP sounds
   chapters:
   - file: ds-tps/sounds/README-sounds-nb
@@ -30,7 +31,6 @@ parts:
   - file: ds-exos/dataviz/groupby-draw-nb
 - caption: howtos pandas
   chapters:
-  - file: ds-howtos/numpy-meshgrid-howto-nb
   - file: ds-howtos/split-count-into-columns-howto-nb
   - file: ds-howtos/pivot-vs-stack-unstack-howto-nb
   - file: ds-howtos/timeseries-clean-smooth-howto-nb
