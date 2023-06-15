@@ -13,13 +13,34 @@ kernelspec:
 
 # Un peu de geopandas
 
++++ {"tags": ["framed_cell"]}
+
+````{admonition} **survol** 
+
+voici les différentes étapes du TP en résumé
+
+1. on part d'un gros paquet d'adresses parisiennes
+1. on va commencer par les géolocaliser: trouver leurs latitude/longitude
+1. on va ensuite les afficher sur une carte
+1. puis on va ajouter dans le mélange [les 80 quartiers parisiens](https://fr.wikipedia.org/wiki/Liste_des_quartiers_administratifs_de_Paris); d'abord en les affichant simplement sur la carte
+1. puis on va voir comment on ferait pour associer chaque adresse dans un quartier
+1. et pour vérifier qu'on ne s'est pas trompé, on affichera les quartiers et les adresses avec des couleurs
+1. enfin on verra comment passer à l'échelle pour visualiser plusieurs dizaines de milliers de points
+````
+
 +++
 
-comme son nom l'indique, geopandas <https://geopandas.org/en/stable/> est une librairie pour faire .. un peu de géo
+ce TP vise à vous faire découvrir quelques possibilités de manipulation et d'affichage de données géographiques
 
-pour faire court, elle permet de manipuler un dataframe avec des coordonnées géographiques
+on va utiliser principalement
 
-+++ {"tags": ["framed_cell"]}
+* `geopandas`: comme son nom l'indique, `geopandas` <https://geopandas.org/en/stable/> est une librairie pour faire .. un peu de géo
+
+  pour faire court, elle permet de manipuler un dataframe avec des coordonnées géographiques
+
+* `folium` pour l'affichage de cartes
+
++++
 
 ## géolocalisation
 
@@ -41,16 +62,20 @@ vous pouvez charger le fichier `data/addresses.csv`; toutes ces adresses sont si
 :tags: [level_basic]
 
 # load the data in data/addresses.csv
+# and display a few first lines
 
 # your code here
+
+addresses = ...
 ```
 
 ```{code-cell} ipython3
 :tags: [level_intermediate]
 
 # prune-cell
-df = pd.read_csv('data/addresses.csv')
-df.head(4)
+
+addresses = pd.read_csv('data/addresses.csv')
+addresses.head(4)
 ```
 
 et la première chose qu'on va faire, c'est naturellement d'utiliser cette API pour géolocaliser ces adresses
@@ -69,7 +94,8 @@ mais avant cela, je vous recommande de produire un fichier `addresses-small.csv`
 :tags: [level_intermediate]
 
 # prune-cell
-df.iloc[:10].to_csv('addresses-small.csv', index=False)
+
+addresses.iloc[:10].to_csv('addresses-small.csv', index=False)
 ```
 
 ### une par une
@@ -135,7 +161,7 @@ localize_one(18, 'rue', 'BERNARDINS')
 
 # prune-cell
 
-address = localize_one(18, 'rue', 'BERNARDINS')
+details = localize_one(18, 'rue', 'BERNARDINS')
 ```
 
 ```{code-cell} ipython3
@@ -259,7 +285,7 @@ c'est utile aussi de commencer par une toute petite dataframe pour ne pas attend
 
 # your code here
 
-def search_and_join(filename, col_number, col_type, col_name, col_city):
+def localize_many(filename, col_number, col_type, col_name, col_city):
     """
     calls the https://api-adresse.data.gouv.fr API
     and returns an augmented dataframe with 4 new columns
@@ -290,7 +316,7 @@ import requests
 # this one is to fake a file from a string
 import io
 
-def mass_search(filename, col_number, col_type, col_name, col_city):
+def mass_post(filename, col_number, col_type, col_name, col_city):
 
     # we don't care about the index for now
     # but note that if we want to merge the result
@@ -313,9 +339,9 @@ def mass_search(filename, col_number, col_type, col_name, col_city):
     return result
 
 
-def search_and_join(filename, col_number, col_type, col_name, col_city):
+def localize_many(filename, col_number, col_type, col_name, col_city):
     df = pd.read_csv(filename)
-    geoloc = mass_search(filename, col_number, col_type, col_name, col_city)
+    geoloc = mass_post(filename, col_number, col_type, col_name, col_city)
     # because we don't set an index, it it safe to merge
     geoloc = geoloc[['latitude', 'longitude', 'result_city', 'result_type']]
     return df.merge(geoloc, left_index=True, right_index=True)
@@ -327,8 +353,8 @@ def search_and_join(filename, col_number, col_type, col_name, col_city):
 
 # try your code on the small sample for starters
 
-# geoloc_small = search_and_join("addresses-small.csv", "number", "type", "name", "city")
-# geoloc_small
+addresses_small = localize_many("addresses-small.csv", "number", "type", "name", "city")
+addresses_small
 ```
 
 ```{code-cell} ipython3
@@ -349,12 +375,12 @@ def search_and_join(filename, col_number, col_type, col_name, col_city):
 
 # sanity check
 
-geoloc_small = search_and_join("addresses-small.csv", "number", "type", "name", "city")
+addresses_small = localize_many("addresses-small.csv", "number", "type", "name", "city")
 
 
-( sum(geoloc_small.result_city != 'Paris') == 0
+( sum(addresses_small.result_city != 'Paris') == 0
  and
-  sum(geoloc_small.result_type != 'housenumber') == 0)
+  sum(addresses_small.result_type != 'housenumber') == 0)
 ```
 
 ```{code-cell} ipython3
@@ -363,7 +389,10 @@ geoloc_small = search_and_join("addresses-small.csv", "number", "type", "name", 
 # when you think you're ready, go full scale
 # be ready to wait for at least 40-60s 
 
-# geoloc = search_and_join("data/addresses.csv", "number", "type", "name", "city")
+# optional: try to record the time it takes !
+# tip: see for example time.time()
+
+# addresses = localize_many("data/addresses.csv", "number", "type", "name", "city")
 ```
 
 ```{code-cell} ipython3
@@ -371,7 +400,7 @@ geoloc_small = search_and_join("addresses-small.csv", "number", "type", "name", 
 
 # sanity check 
 
-# len(geoloc)
+# len(addresses)
 ```
 
 ```{code-cell} ipython3
@@ -380,7 +409,7 @@ geoloc_small = search_and_join("addresses-small.csv", "number", "type", "name", 
 # at this point you should store the data
 # it's just good practice, as you've done one important step of the process
 
-# store geoloc in addresses-geoloc.csv
+# store geolocalized addresses in addresses-geoloc.csv
 
 # your code
 ```
@@ -393,10 +422,10 @@ geoloc_small = search_and_join("addresses-small.csv", "number", "type", "name", 
 from pathlib import Path
 
 if not Path("addresses-geoloc.csv").exists():
-    geoloc = search_and_join("data/addresses.csv", "number", "type", "name", "city")
-    geoloc.to_csv("addresses-geoloc.csv", index=False)
+    addresses = localize_many("data/addresses.csv", "number", "type", "name", "city")
+    addresses.to_csv("addresses-geoloc.csv", index=False)
 else:
-    geoloc = pd.read_csv("addresses-geoloc.csv")
+    addresses = pd.read_csv("addresses-geoloc.csv")
 ```
 
 ## afficher sur une carte
@@ -413,14 +442,6 @@ si nécessaire, il faut l'installer (comment on fait déjà ?)
 :tags: [level_basic]
 
 import folium
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-%pip install folium
-
-# prune-cell
 ```
 
 pour commencer, allez chercher la documentation; le plus simple c'est de demander à google `folium python`
@@ -445,11 +466,11 @@ CENTER = 48.856542, 2.347614
 # pour commencer on va recharger la dataframe précédente
 import pandas as pd
 
-geoloc = pd.read_csv("addresses-geoloc.csv")
+addresses = pd.read_csv("addresses-geoloc.csv")
 
 # et en faire un petit échantillon
 
-geoloc_small = geoloc.sample(n=20)
+addresses_small = addresses.sample(n=20)
 ```
 
 ```{code-cell} ipython3
@@ -478,7 +499,7 @@ def paris_map():
     return folium.Map(
         location=CENTER,
         zoom_start=13,
-        width='80%',
+        # width='80%',
     )
 
 paris_map()
@@ -530,7 +551,7 @@ def map_addresses(geoloc):
 # trying to display tens of thousands addresses
 # is going to be SUPER SLOOOOOW !
 
-map_addresses(geoloc_small)
+map_addresses(addresses_small)
 ```
 
 ### on sauve la carte
@@ -538,8 +559,8 @@ map_addresses(geoloc_small)
 une fonction très sympatique de `folium`, c'est qu'on peut sauver cette carte sous la forme d'un fichier html, on dit *standalone*, c'est-à-dire autosuffisant, pas besoin de Python ni de Jupyter pour la regarder
 
 ```{code-cell} ipython3
-map_small = map_addresses(geoloc_small)
-map_small.save("map-small.html")
+map_small = map_addresses(addresses_small)
+map_small.save("addresses-small.html")
 ```
 
 et maintenant pour voir le résultat, ouvrez le fichier dans un autre tab du navigateur
@@ -592,13 +613,15 @@ pour afficher cela sur la carte, il faut se livrer à une petite gymnastique
 ce qui nous donne ceci:
 
 ```{code-cell} ipython3
-def map_addresses_in_quartiers_1(geoloc):
+def paris_map():
     """
-    create a map with the addresses in geoloc
-    and the 80 quartiers of Paris
+    create a map of Paris with its 80 quartiers
     """
-    # create a new map object containing the points
-    map = map_addresses(geoloc)
+    map = folium.Map(
+        location=CENTER,
+        zoom_start=13,
+        # width='80%',
+    )
 
     # translate the geo-dataframe into a JSON string
     quartiers_json = quartiers.to_json()
@@ -619,7 +642,7 @@ def map_addresses_in_quartiers_1(geoloc):
 ```
 
 ```{code-cell} ipython3
-map_addresses_in_quartiers_1(geoloc_small)
+paris_map()
 ```
 
 ### un peu de couleurs
@@ -636,7 +659,7 @@ maintenant c'est à vous: il s'agit d'améliorer cela pour ajouter des couleurs 
 
 +++
 
-#### étape 1.
+### couleurs: étape 1
 
 ```{code-cell} ipython3
 # in order to display a number in hexadecimal, you can use this 
@@ -677,7 +700,7 @@ def random_color():
 random_color(), random_color()
 ```
 
-#### étape 2.
+### couleurs: étape 2
 
 ```{code-cell} ipython3
 :tags: [level_basic]
@@ -699,7 +722,7 @@ quartiers['color'] = quartiers.geometry.map(lambda x: random_color())
 quartiers.head(3)
 ```
 
-#### étape 3.
+### couleurs: étape 3
 
 +++
 
@@ -716,10 +739,10 @@ quartiers.head(3)
 
 # your code
 
-def map_addresses_in_quartiers_2(geoloc):
+def paris_map():
     """
-    same as map_addresses_in_quartiers_1 
-    but with individual colors
+    create a map of Paris with its 80 quartiers
+    each quartier is shown in its individual color
     """
     pass
 ```
@@ -729,10 +752,17 @@ def map_addresses_in_quartiers_2(geoloc):
 
 # prune-cell
 
-def map_addresses_in_quartiers_2(geoloc):
+def paris_map():
+    map = folium.Map(
+        location=CENTER,
+        zoom_start=13,
+        # width='80%',
+    )
 
-    map = map_addresses(geoloc)
+    # translate the geo-dataframe into a JSON string
     quartiers_json = quartiers.to_json()
+
+    # create a folium JSON object from that
     folium.GeoJson(
         data=quartiers_json,
         style_function=lambda x: {"color": x["properties"]["color"]},
@@ -746,7 +776,7 @@ def map_addresses_in_quartiers_2(geoloc):
 
 ```{code-cell} ipython3
 # display it
-map_addresses_in_quartiers_2(geoloc_small)
+paris_map()
 ```
 
 ## spatial join
@@ -758,23 +788,22 @@ c'est-à-dire en pratique de rajouter dans la dataframe des adresses une ou des 
 
 et pour faire cela il existe un **outil très intéressant** dans geopandas [qui s'appelle le *spatial join* et qui est décrit ici](https://geopandas.org/en/stable/gallery/spatial_joins.html#Spatial-Joins)
 
-en deux mots, l'idée c'est de faire comme un JOIN usuel (ou un `pd.merge()` si vous préférez), mais pour décider si on doit aligner deux lignes (une dans la df de gauche et l'autre dans la df de droite)
+en deux mots, l'idée c'est de faire comme un JOIN usuel (ou un `pd.merge()` si vous préférez)  
+mais pour décider si on doit aligner deux lignes (une dans la df de gauche et l'autre dans la df de droite):
 - au lieu de vérifier **l'égalité** entre deux colonnes
 - on va cette fois utiliser un **prédicat** entre deux colonnes géographiques, comme par exemple ici le prédicat **`contains`**
 
 ce qui signifie, en pratique, qu'on va faire ceci
 
 1. transformer la dataframe d'adresses en une `GeoDataFrame` et remplacer les colonnes `latitude` et `longitude` par une colonne `position`, cette fois dans un format connu de `geopandas`
-2. pour pouvoir appliquer un *spatial join* entre la dataframe d'adresses et la dataframe des quartiers, en choisissant ce prédicat **`contains`**
+2. et ainsi on pourra appliquer un *spatial join* entre la (géo)dataframe d'adresses et la (géo)dataframe des quartiers, en choisissant ce prédicat **`contains`**
 3. et du coup modifier la carte pour afficher les adresses dans la bonne couleur - celle du quartier - pour vérifier qu'on a bien fait correctement le classement en quartiers
 
-de sorte à obtenir autant de ligne que d'adresses, mais avec une ou des colonnes en plus (couleur, pourquoi pas un numéro...) qui caractérisent le quartier dans lequel se trouve l'adresse
+on doit donc obtenir autant de ligne que d'adresses, mais avec une ou des colonnes en plus (couleur, nom du quartier, ...) qui caractérisent le quartier dans lequel se trouve l'adresse
 
 +++
 
-#### étape 1
-
-+++
+### spatial join: étape 1
 
 je vous donne le code; ce qu'il faut savoir notamment c'est qu'en `geopandas` il y a la notion de 'colonne active', celle qui contient les informations géographiques; ça n'est pas forcément hyper-intuitif la première fois...
 
@@ -813,17 +842,16 @@ def convert_lat_lon(df):
 ```{code-cell} ipython3
 # let's apply that to our small input
 
-gpd_small = convert_lat_lon(geoloc_small)
+geoaddresses_small = convert_lat_lon(addresses_small)
 ```
 
 ```{code-cell} ipython3
-# we will also need to set the active column in the quartiers dataframe
+# we will also need to set the active column in the quartiers (geo)dataframe
+
 quartiers.set_geometry('geometry', inplace=True)
 ```
 
-#### étape 2
-
-+++
+### spatial join: étape 2
 
 Il ne nous reste plus qu'à faire ce fameux *spatial join*, je vous laisse trouver le code pour faire ça
 
@@ -867,8 +895,8 @@ def add_quartiers(gdf):
 # xxx you can safely ignore this warning...
 # UserWarning: CRS mismatch between the CRS of left geometries and the CRS of right geometries
 
-gpd_small_q = add_quartiers(gpd_small)
-gpd_small_q.head(2)
+geoaddresses_small_extended = add_quartiers(geoaddresses_small)
+geoaddresses_small_extended.head(2)
 ```
 
 ```{code-cell} ipython3
@@ -876,10 +904,10 @@ gpd_small_q.head(2)
 
 # make sure you have the right number of lines in the result
 
-gpd_small_q.shape
+geoaddresses_small_extended.shape
 ```
 
-#### étape 3
+### spatial join: étape 3
 
 on va donc maintenant récrire `map_addresses`; la logique reste la même mais on veut afficher chaque adresse avec une couleur qui provient de son quartier
 
@@ -913,10 +941,10 @@ def map_addresses(gdf):
 
 # prune-cell
 
-def map_addresses(gpd_df):
-    if 'human' not in gpd_df.columns:
+def map_addresses(gdf):
+    if 'human' not in gdf.columns:
         # create a column with a human-readable address
-        gpd_df['human'] = gpd_df['number'].astype(str) + ', ' + geoloc['type'] + ' ' + geoloc['name']
+        gdf['human'] = gdf['number'].astype(str) + ', ' + gdf['type'] + ' ' + gdf['name']
 
     map = paris_map()
     
@@ -929,7 +957,7 @@ def map_addresses(gpd_df):
             # deafult seems to be 10
             radius=8,
         ).add_to(map)
-    gpd_df.apply(add_marker, axis=1)
+    gdf.apply(add_marker, axis=1)
 
     return map
 ```
@@ -937,21 +965,31 @@ def map_addresses(gpd_df):
 ```{code-cell} ipython3
 # test the new function
 
-map_addresses(gpd_small_q)
+map = map_addresses(geoaddresses_small_extended)
+
+map
+```
+
+### on sauve la carte
+
+c'est sans doute un bon moment pour sauver tout ce qu'on a fait:
+
+- sauvez la geo-dataframe dans un fichier `addresses-small-extended.csv`
+- sauvez la carte au format html (même nom sinon) pour une utilisation en *standalone* (par exemple pour la publier sur un site weeb indépendant des notebooks et de jupyter et tout ça)
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# votre code
 ```
 
 ```{code-cell} ipython3
-map_addresses_in_quartiers_2(gpd_small_q)
-```
+:tags: [level_intermediate]
 
-```{code-cell} ipython3
-# prune-begin
+# prune-cell
 
-xxx to finish
-```
-
-```{code-cell} ipython3
-
+geoaddresses_small_extended.to_csv("addresses-small-extended.csv")
+map.save("addresses-small-extended.html")
 ```
 
 ## on clusterise
@@ -961,10 +999,74 @@ pour pouvoir passer à l'échelle, il est indispensable de *clusteriser*; c'est-
 ne perdez pas de temps à chercher le code vous-même, c'est un peu *hacky* comme on dit, voici comment il faut faire
 
 ```{code-cell} ipython3
-# 
 from folium import plugins
 
-...
+def map_addresses(gdf):
+
+    # start like before
+    if 'human' not in gdf.columns:
+        # create a column with a human-readable address
+        gdf['human'] = gdf['number'].astype(str) + ', ' + gdf['type'] + ' ' + gdf['name']
+
+    map = paris_map()
+
+
+    # we need a JavaScript function...
+    # this is required to get  good performances
+    callback = """
+function (row) {
+  // if you need to debug it
+  // console.log(row)
+  let circle = L.circleMarker(
+      // the position
+      new L.LatLng(row[0], row[1]), 
+      // styling
+     {color: row[3], radius: 8},
+    )
+  // add the tooltip
+  circle.bindTooltip(row[2]).openTooltip()
+  return circle
+}
+"""
+
+    # compute an extract with fewer columns
+    # not strictly necessary but easier to deal with column names
+    extract = gdf[['latitude', 'longitude', 'human', 'color']]
+    cluster = plugins.FastMarkerCluster(
+        extract, callback=callback,
+        # nicer behaviour
+        disableClusteringAtZoom=18,
+    ).add_to(map)
+
+    return map
+```
+
+### sur l'échantillon
+
+```{code-cell} ipython3
+# let's first test it on the small extract
+
+map_addresses(geoaddresses_small_extended)
+```
+
+### sur le dataset entier
+
+```{code-cell} ipython3
+# and if all goes well we can try and display the full monty
+
+# first prepare the full dataset
+
+geoaddresses = add_quartiers(convert_lat_lon(addresses))
+final_map = map_addresses(geoaddresses)
+
+final_map
+```
+
+```{code-cell} ipython3
+# makes sense to save the hard work
+
+geoaddresses.to_csv("addresses-final.csv")
+final_map.save("addresses-final.html")
 ```
 
 ***
