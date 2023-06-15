@@ -43,7 +43,7 @@ np.indices((5, 10))
 np.linspace(-np.pi, np.pi, 10)
 ```
 
-## meshgrid
+## pour dessiner une courbe en 3D
 
 +++
 
@@ -56,30 +56,40 @@ sur un domaine rectangulaire
 +++
 
 la technique standard consiste à 
-. créer deux tableaux X et Y rectangulaires, qui correspondent à notre pavage
 
+1. créer deux tableaux X et Y rectangulaires, qui correspondent à notre pavage  
   le premier contient les X, et le second contient les Y, des points du pavage
-  
-. appliquer la fonction en question **à ces deux tableaux**, ce qui donne un tableau rectangulaire avec la valeur de la fonction à ce point
+1. appliquer la fonction en question **à ces deux tableaux**, ce qui donne un tableau rectangulaire avec la valeur de la fonction à ce point
 
-. on peut ensuite passer ces trois tableaux rectangulaires à `plt.plot_surface`
+1. on peut ensuite passer ces trois tableaux rectangulaires à `plt.plot_surface`
+
++++
+
+## étape 1: meshgrid
 
 ```{code-cell} ipython3
 # on commence par calculer les domaines
+
 domX = np.linspace(-5, 5, 5)
 domY = np.linspace(0, 9, 10)
 ```
 
 ```{code-cell} ipython3
+# avec meshgrid, c'est magique, ça fabrique le pavage pour nous
+
 X, Y = np.meshgrid(domX, domY)
 X, Y
 ```
 
-on voit bien la ressemblance avec `indices` (en fait on pourrait se passer de `indices` en combinant `np.arange` et `np.meshgrid`)
+on voit bien la ressemblance avec `indices`, en ce sens que le premier tableau contient la coordonnée et X et le second contient la coordonnée en Y
 
 ```{code-cell} ipython3
 X.shape, Y.shape
 ```
+
+## étape 2: calcul de Z
+
++++
 
 maintenant on peut appliquer la fonction
 
@@ -92,12 +102,16 @@ Z.shape
 Z
 ```
 
+## étape 3: dessin
+
++++
+
 et la dessiner
 
 ```{code-cell} ipython3
-%matplotlib notebook
-
 import matplotlib.pyplot as plt
+
+%matplotlib widget
 ```
 
 ```{code-cell} ipython3
