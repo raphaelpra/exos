@@ -5,6 +5,7 @@ pandas
 matplotlib
 ipywidgets
 ipympl
+
 mpld3
 bokeh
 plotly
