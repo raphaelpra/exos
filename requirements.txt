@@ -1,7 +1,5 @@
-jupyterlab
-jupytext
-jupyterlab-jupytext
-jupyterlab-courselevels
+# contents
+
 numpy
 pandas
 matplotlib
@@ -21,3 +19,22 @@ graphviz
 geopandas
 keplergl
 scikit-learn
+
+
+# tooling
+
+jupyterlab
+jupytext
+
+# for vs-code
+ipykernel
+
+# not yet stable
+#jupyterlab-jupytext
+git+https://github.com/mwouts/jupyterlab-jupytext.git@jupyterlab4
+
+# not yet stable
+#jupyterlab-myst
+git+https://github.com/executablebooks/jupyterlab-myst.git@agoose77/feat-jupyterlab-v4-next
+
+jupyterlab-courselevels
