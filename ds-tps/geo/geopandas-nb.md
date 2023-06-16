@@ -18,6 +18,8 @@ kernelspec:
 
 ce TP vise à vous faire découvrir quelques possibilités de manipulation et d'affichage de données géographiques
 
+pour le faire sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-geo.zip>`
+
 +++
 
 ````{admonition} **survol**
