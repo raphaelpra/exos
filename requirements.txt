@@ -34,8 +34,5 @@ ipykernel
 #jupyterlab-jupytext
 git+https://github.com/mwouts/jupyterlab-jupytext.git@jupyterlab4
 
-# not yet stable
-#jupyterlab-myst
-git+https://github.com/executablebooks/jupyterlab-myst.git@agoose77/feat-jupyterlab-v4-next
-
+jupyterlab-myst
 jupyterlab-courselevels
