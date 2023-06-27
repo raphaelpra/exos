@@ -11,7 +11,7 @@ RUN true \
  && pip install -U jupyterlab \
  && pip install -U jupytext \
  && pip install -U git+https://github.com/mwouts/jupyterlab-jupytext.git@jupyterlab4 \
- && pip install git+https://github.com/executablebooks/jupyterlab-myst.git@agoose77/feat-jupyterlab-v4-next \
+ && pip install jupyterlab-myst \
  && pip install -U jupyterlab-courselevels \
  && pip install -U nb-courselevels \
  && pip install -U nbautoeval \
