@@ -37,6 +37,8 @@ Les intérêts de ce TP
 
 ## Instructions
 
+{download}`Commencez par télécharger le zip<./ARTEFACTS-auctions.zip>`
+
 Votre but est d'implémenter des ventes aux enchères. Une vente aux enchères à l'aveugle a déjà été implémentée pour vous dans le fichier `blind.py`.
 Vous pouvez exécuter chacun des fichiers directement, pour "jouer" aux enchères:
 
