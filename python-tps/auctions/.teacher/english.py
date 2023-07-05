@@ -1,6 +1,5 @@
-from itertools import count
+# pylint: disable=missing-docstring
 
-from utils import Cli
 from auction import Auction
 
 
@@ -26,6 +25,7 @@ class EnglishAuction(Auction):
             if not still_alive:
                 break
         return winner, standing_bid
+
 
 if __name__ == "__main__":
     auction = EnglishAuction()

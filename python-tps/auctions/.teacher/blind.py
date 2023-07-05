@@ -1,4 +1,5 @@
-from utils import Cli
+# pylint: disable=missing-docstring
+
 from auction import Auction
 
 

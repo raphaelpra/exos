@@ -1,4 +1,4 @@
-from itertools import count
+# pylint: disable=missing-docstring
 
 from utils import Cli
 

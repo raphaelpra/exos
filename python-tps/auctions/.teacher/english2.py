@@ -1,9 +1,11 @@
+# pylint: disable=missing-docstring
+
 """
-my first version of english.py before I came to better understand the requirement
+my first version of english.py before I came to better understand
+the requirement
 here a bidder who passes is immediately removed from the table...
 """
 
-from utils import Cli
 from auction import Auction
 
 

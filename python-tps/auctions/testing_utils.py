@@ -1,7 +1,8 @@
+# pylint: disable=missing-docstring
+
 # NE PAS MODIFIER
 import threading
 from time import sleep
-import sys
 
 
 class FakeCli():
@@ -34,7 +35,8 @@ class FakeCli():
             sleep(.01)
         else:
             raise Exception(
-                f"The input \"{self.current_message}\" wasn't consumed in the last 100ms"
+                f'The input "{self.current_message}"'
+                f" wasn't consumed in the last 100ms"
             )
 
         self.current_message = message if message else FakeCli.SKIP
@@ -57,13 +59,13 @@ def make_auction(auction_cls):
     def wrapped_play():
         try:
             auction.play()
-        except Exception as e:
+        except Exception:  # as exc:
             pass
-            # sys.stderr.write(str(e))
+            # sys.stderr.write(str(exc))
             # sys.stderr.flush()
 
-    t = threading.Thread(target=wrapped_play, daemon=True)
-    t.start()
+    thread = threading.Thread(target=wrapped_play, daemon=True)
+    thread.start()
     return cli
 
 

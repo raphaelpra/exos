@@ -1,3 +1,5 @@
+# pylint: disable=missing-docstring
+
 # Fichier de test pour la "plomberie"
 # Ca ne devrait pas vous intéresser
 import unittest

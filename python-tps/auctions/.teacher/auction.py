@@ -1,3 +1,5 @@
+# pylint: disable=missing-docstring
+
 from itertools import count
 
 from utils import Cli
@@ -14,7 +16,8 @@ class Auction:
 
     def prompt_opening(self):
         self.cli.display(f'Started auction of type: {self.classname()}')
-        opening_bid = self.cli.prompt('Please enter the amount for the opening bid:')
+        opening_bid = self.cli.prompt(
+            'Please enter the amount for the opening bid:')
         opening_bid = int(opening_bid)
         self.cli.display(f"Opening bid is: {opening_bid}")
         self.opening_bid = opening_bid
@@ -35,14 +38,14 @@ class Auction:
     def display_winner(self):
         # Display winner
         self.cli.display("\n~~~~~~~~\n")
-        self.cli.display(f"Winner is {self.winner}. Winning bid is {self.final_bid}.")
+        self.cli.display(f"Winner is {self.winner}."
+                         f" Winning bid is {self.final_bid}.")
 
     def play(self):
         self.prompt_opening()
         self.prompt_bidders()
         self.winner, self.final_bid = self.collect_bids()
         self.display_winner()
-
 
     # the customizable part
     def classname(self):
@@ -57,5 +60,6 @@ class Auction:
         """
         must return a tuple winner, final_bid
         """
-        print(f"you must implement the bids() method on class {self.classname()}")
-
+        print(f"you must implement the collect_bids() method"
+              f" on class {self.classname()}")
+        return None, None

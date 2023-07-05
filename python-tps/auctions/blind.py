@@ -1,5 +1,8 @@
+# pylint: disable=missing-docstring
+
 from itertools import count
 
+# CLI = Command Line Interface
 from utils import Cli
 
 
