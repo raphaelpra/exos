@@ -25,14 +25,13 @@ scikit-learn
 # tooling
 
 jupyterlab
-jupytext
 
 # for vs-code
 ipykernel
 
 # not yet stable
-#jupyterlab-jupytext
-git+https://github.com/mwouts/jupyterlab-jupytext.git@jupyterlab4
+/Users/tparment/git/jupytext/dist/jupytext-1.15.0.dev1-py3-none-any.whl
+#git+https://github.com/parmentelat/jupytext.git@main
 
 jupyterlab-myst
 jupyterlab-courselevels
