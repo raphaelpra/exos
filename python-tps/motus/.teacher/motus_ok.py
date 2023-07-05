@@ -111,8 +111,8 @@ Attempts = list[Attempt]
 class Hidden:
 
     """
-    the algorithm to compute an Answer
-    actually we return an Attempt as it is way nicer to look at
+    models the hidden word, and provide the algorithm to compare
+    a typed word with the hidden one
     """
     def __init__(self, word: str):
         self.word = word

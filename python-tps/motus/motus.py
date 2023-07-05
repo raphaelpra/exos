@@ -75,7 +75,7 @@ class Attempt:
 
     def __iter__(self):
         """
-        allow to unpack e.g.
+        allows to unpack e.g.
         word, answer = attempt
         """
         yield self.word
@@ -111,8 +111,8 @@ Attempts = list[Attempt]
 class Hidden:
 
     """
-    the algorithm to compute an Answer
-    actually we return an Attempt as it is way nicer to look at
+    models the hidden word, and provide the algorithm to compare
+    a typed word with the hidden one
     """
     def __init__(self, word: str):
         self.word = word
@@ -125,7 +125,8 @@ class Hidden:
 
     def attempt(self, typed: str) -> Attempt:
         """
-        returns the 'attempt': when a user types the typed word,
+        compares the typed answer with the hidden word
+        and returns an Attempt object that summarizes the result
 
         there is a subtlety with chars appearing several times,
         so a few examples:
@@ -134,6 +135,8 @@ class Hidden:
         | ABC    | AAA   | RBB    | a single match |
         | ABCA   | AAAA  | RBBR   | two matches    |
         | ABCA   | AAAY  | RBYB   | one exact match and one partial |
+
+        this version is clearly broken and you job is to fix it
         """
         if len(self) != len(typed):
             raise ValueError(f"length mismatch {len(self)} != {len(typed)}")
@@ -141,22 +144,12 @@ class Hidden:
         red_indices = {
             index for index, (ct, ch) in enumerate(zip(typed, self.word))
             if ct == ch}
-        # the remaining chars in the hidden word
-        remaining = [char for index, char in enumerate(self.word)
-                     if index not in red_indices]
-        # now let's focus on the other characters
-        yellow_indices = set()
-        for index, c in enumerate(typed):
-            if index in red_indices:
-                continue
-            # do we have this char in the remaining chars ?
-            # if yes, remove it
-            try:
-                remaining.remove(c)
-                yellow_indices.add(index)
-            # if not, it's OK, we'll fill this index with BLUE later
-            except ValueError:
-                pass
+        yellow_indices = {
+            index for index, (ct, ch) in enumerate(zip(typed, self.word))
+            if index not in red_indices
+            and ct in self.word
+        }
+
         # fill the result
         result = []
         for i in range(len(self)):
