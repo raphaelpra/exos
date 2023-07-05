@@ -75,7 +75,7 @@ class Attempt:
 
     def __iter__(self):
         """
-        allow to unpack e.g.
+        allows to unpack e.g.
         word, answer = attempt
         """
         yield self.word
@@ -125,7 +125,8 @@ class Hidden:
 
     def attempt(self, typed: str) -> Attempt:
         """
-        returns the 'attempt': when a user types the typed word,
+        compares the typed answer with the hidden word
+        and returns an Attempt object that summarizes the result
 
         there is a subtlety with chars appearing several times,
         so a few examples:

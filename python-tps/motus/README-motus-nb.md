@@ -45,7 +45,7 @@ ici on a
 * d'abord essayé `CASTOR`; la 'correction' nous a appris que
   * le mot commence par un `C`,
   * qu'il contient un `O` en 5-ème position,
-  * qu'il ontient un `T` mais pas en 4-éme position,
+  * qu'il contient un `T` mais pas en 4-éme position,
   * et un `R` mais pas en dernière position,
   * et pas de `A` ni de `S`
 * on a ensuite essayé `CINEMA` ou a appris que
@@ -75,21 +75,21 @@ puis on donne ensuite autant de jaunes que possible, et à chaque fois les lettr
 
 +++
 
-c'est  ainsi que par exemple, avec le mot caché `addition` on obtient la correction suivante (la dernière ligne est uniquement explicatoire)
+c'est  ainsi que par exemple, avec le mot caché `addition` on obtient la correction suivante (la dernière ligne est uniquement explicative)  
 ![](media/example-addition.svg)
 
 vous remarquez que la réponse contient un `d` bleu, alors qu'il y a deux `d` dans le mot à deviner, mais comme ils ont déjà été 'consommés' pour les deux `d` rouges, le troisième `d` est considéré comme absent.
 
 +++
 
-autre exemple, le mot caché est `escarcelle`
+autre exemple, le mot caché est `escarcelle`  
 ![](media/example-escarcelle.svg)
 
 vous remarquez que la réponse contient
 
 * un `e` rouge en 1ème position, 
 * un `e` jaune en 6-ième position qui correspond à la 7-ème position du mot caché, 
-* et aussi un `e` bleu en 9-ème position, malgré le fait que le mot caché contient .. plein de `e` !
+* et aussi un `e` bleu en 9-ème position, **malgré le fait que le mot caché contient .. plein de `e`** !
 
 ce qui signifie entre autres qu'il ne suffit pas trouver une lettre en bleu dans la réponse pour en déduire qu'elle n'est pas présente dans le mot, comme ce contrexemple nous le montre bien
 
@@ -120,7 +120,8 @@ print(f"{Back.RED} C {Style.RESET_ALL} {Back.RED} I {Style.RESET_ALL} "
 
 ## des données utiles
 
-on vous a joint un dictionnaire:
+{download}`commencez par télécharger le zip<./ARTEFACTS-motus.zip>`
+dans lequel se trouve un dictionnaire:
 
 ```{code-cell} ipython3
 from pathlib import Path
@@ -137,7 +138,7 @@ print("...")
 ```
 
 ```{code-cell} ipython3
-# cette donnée provient de cette URL
+# FYI this data comes from this URL
 print(Path("data/ods6.url").open().read())
 ```
 
@@ -150,23 +151,44 @@ dans un premier temps, l'ordi se contente de vous faire jouer:
 * l'humain propose un mot, l'ordi donne la "correction", etc.. jusqu'à ce que mot soit trouvé
 
 ```{code-cell} ipython3
-# à vous
+# à vous de jouer
+
+# le mieux est d'écrire votre code dans un fichier séparé motus.py
+# qu'on peut lancer en faisant simplement dans le terminal
+# $ python motus.py
+
+# ça peut être utile, au moins pour le debug, de pouvoir choisir le mot caché
+# c'est-à-dire de pouvoir lancer
+# $ python motus.py arrosoir
+
+# ou encore en option, de pouvoir aussi choisir le nombre de lettres
+# comme ceci
+# $ python motus.py --length 8
 ```
 
-## étape 2: un bouton d'aide
+## étape 2: de l'aide
 
-pareil, mais l'humain peut demander à l'ordi un indice; à vous de voir, on peut imaginer
+pareil, mais l'humain peut demander à l'ordi un indice; à vous de voir, on peut imaginer par exemple
 
-* que l'ordi affiche les mots (ou seulement le nombre de mots) qui sont compatibles avec ce qu'on sait à ce stade
-* ou qu'il indique des lettres - s'il y en a - déduites des mots qui sont compatibles avec ce qu'on sait à ce stade
+* si on tape `?help`, le jeu affiche un readme qui résume .. les commandes de triche
+* si on tape `?howmany`, le jeu affiche combien de mots conviennent dans le dictionnaires
+* si on tape `?words`, le jeu affiche les mots qui conviennent
+* si on tape `?letters`, le jeu affiche, si on en trouve, les lettres que l'on peut déduire à ce stade de la recherche
 * ...
 
 +++
 
-## l'ordi peut jouer indifféremment les deux rôles
+## discussion: refactoring ?
 
-est-ce que ce serait possible de structurer le code de façon que l'ordi sache indifféremment: 
+on voudrait maintenant que l'ordi puisse indifféremment: 
 
-* ou bien animer le jeu,
+* ou bien animer le jeu (comme on vient de le faire)
 * ou bien jouer avec un humain qui anime le jeu,
-* ou remplir les deux rôles et jouer contre lui-même ?
+* ou remplir les deux rôles et jouer contre lui-même...
+
+est-ce que le code est bien adapté pour ça ?  
+sinon comment le restructurer pour ce type d'usages ?
+
++++
+
+***
