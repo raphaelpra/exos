@@ -20,6 +20,8 @@ graphviz
 geopandas
 keplergl
 scikit-learn
+folium
+vega_datasets
 
 
 # tooling

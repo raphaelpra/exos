@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # ---
 # jupyter:
-#   celltoolbar: Slideshow
 #   jupytext:
 #     cell_metadata_filter: all
 #     cell_metadata_json: true

@@ -375,10 +375,12 @@ CENTER = 48.856542, 2.347614
 ### le fond de carte
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour commencer on va recharger la dataframe précédente
 import pandas as pd
 
-addresses = pd.read_csv("addresses-geoloc.csv")
+addresses = pd.read_csv("data/addresses-geoloc.csv")
 
 # et en faire un petit échantillon
 
@@ -436,6 +438,8 @@ map_addresses(addresses_small)
 une fonction très sympatique de `folium`, c'est qu'on peut sauver cette carte sous la forme d'un fichier html, on dit *standalone*, c'est-à-dire autosuffisant, pas besoin de Python ni de Jupyter pour la regarder
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 map_small = map_addresses(addresses_small)
 map_small.save("addresses-small.html")
 ```
@@ -669,12 +673,16 @@ def convert_lat_lon(df):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # let's apply that to our small input
 
 geoaddresses_small = convert_lat_lon(addresses_small)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # we will also need to set the active column in the quartiers (geo)dataframe
 
 quartiers.set_geometry('geometry', inplace=True)
@@ -709,6 +717,8 @@ def add_quartiers(gdf):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # try your code
 
 # xxx you can safely ignore this warning...
@@ -719,6 +729,8 @@ geoaddresses_small_extended.head(2)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # verify your code
 
 # make sure you have the right number of lines in the result
@@ -756,6 +768,8 @@ def map_addresses(gdf):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # test the new function
 
 map = map_addresses(geoaddresses_small_extended)
@@ -828,6 +842,8 @@ function (row) {
 ### sur l'échantillon
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # let's first test it on the small extract
 
 map_addresses(geoaddresses_small_extended)
@@ -836,6 +852,8 @@ map_addresses(geoaddresses_small_extended)
 ### sur le dataset entier
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # and if all goes well we can try and display the full monty
 
 # first prepare the full dataset
@@ -847,6 +865,8 @@ final_map
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # makes sense to save the hard work
 
 geoaddresses.to_csv("addresses-final.csv")

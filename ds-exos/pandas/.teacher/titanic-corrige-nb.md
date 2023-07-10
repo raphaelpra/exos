@@ -80,6 +80,8 @@ df = df_raw[columns.keys()].rename(columns=columns)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 df.head()
 ```
 

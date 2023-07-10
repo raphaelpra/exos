@@ -146,6 +146,8 @@ def checkers():
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit afficher True
 
 np.all(checkers(3, 4) == np.array([[0,1,0,1],[1,0,1,0],[0,1,0,1]]))
@@ -161,12 +163,16 @@ def checkers():
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit afficher True
 
 np.all(checkers(3, 4) == np.array([[0,1,0,1],[1,0,1,0],[0,1,0,1]]))
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit afficher True
 
 checkers(3, 4).dtype == bool
@@ -206,23 +212,31 @@ mais les appels avec seulement deux paramètres continuent à fonctionner comme 
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit afficher True
 
 np.all(checkers(3, 4) == np.array([[0,1,0,1],[1,0,1,0],[0,1,0,1]]))
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit afficher True
 
 np.all(checkers(3, 4, True) == ~(checkers(3, 4)))
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour débugger
 checkers(3, 4)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour débugger
 checkers(3, 4, True)
 ```

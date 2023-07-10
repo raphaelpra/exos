@@ -307,13 +307,15 @@ uniques
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit afficher True
 uniques.sort()
 np.all(uniques[:-1] == np.arange(1, 4)) and np.isnan(uniques[-1])
 ```
 
 ```{code-cell} ipython3
-:tags: [level_basic]
+:tags: [level_basic, raises-exception]
 
 # point de réflexion : pourquoi ceci ne renvoie-t-il pas True ?
 uniques.sort()
@@ -346,6 +348,8 @@ nb_lines_to_clean = df.cLT2FREQ.isna().sum()
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit afficher True
 
 nb_lines_to_clean == 1017
@@ -357,6 +361,8 @@ nb_lines_to_clean == 1017
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ou encore, plus proprement
 expected_lines = len(df) - nb_lines_to_clean
 expected_lines
@@ -401,6 +407,8 @@ df.drop(index=df[df.cLT2FREQ.isna()].index, inplace=True)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit afficher True
 
 # la forme après nettoyage
@@ -435,6 +443,8 @@ df = df[~ df.cLT2FREQ.isna()]
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit afficher True
 
 # la forme après nettoyage

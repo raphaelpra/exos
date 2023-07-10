@@ -147,11 +147,15 @@ df = pd.read_csv(URL, sep="\t", names=NAMES)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour vérifier, ceci doit afficher True
 df.shape == (359, 4) and df.iloc[0, 0] == 'PARIS' and df.columns[0] == 'city'
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ce qui maintenant nous donne ceci
 df.head(2)
 ```
@@ -170,12 +174,15 @@ par exemple je crée ici un fichier qu'on peut relire sous excel
 
 ```{code-cell} ipython3
 :hide_input: false
+:tags: [raises-exception]
 
 loop = "marathon-loop.csv"
 df.to_csv(loop, sep=";", index=False)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour voir un aperçu
 head(loop, 4)
 ```
@@ -199,6 +206,8 @@ df_1971 = df[df.year == 1971]
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit retourner True
 df_1971.shape == (3, 4) and df_1971.seconds.max() == 8574
 ```
@@ -220,6 +229,8 @@ df_london_1981 = df[(df.city == 'LONDON') & (df.year == 1981)]
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit retourner True
 df_london_1981.shape == (1, 4) and df_london_1981.iloc[0].seconds == 7908
 ```
@@ -280,6 +291,8 @@ df_10_to_12
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit retourner True
 df_10_to_12.shape == (3, 4) and df_10_to_12.iloc[0].year == 2002 and df_10_to_12.iloc[-1].year == 2000
 ```
@@ -317,6 +330,8 @@ s_paris_2000
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit retourner True
 isinstance(s_paris_2000, pd.Series) and len(s_paris_2000) == 12 and s_paris_2000.iloc[-1] == 2000
 ```
@@ -342,6 +357,8 @@ df_paris_2000_ys = df_paris_2000[['year', 'seconds']]
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ceci doit retourner True
 (isinstance(df_paris_2000_ys, pd.DataFrame)
  and df_paris_2000_ys.shape == (12, 2) 
@@ -378,6 +395,8 @@ seconds_average = df.seconds.mean()
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour vérifier
 import math
 math.isclose(seconds_average, 7933.660167130919)
@@ -406,6 +425,8 @@ formatted_average = f"{hours}h {minutes}' {seconds}''"
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour vérifier
 formatted_average == "2h 12' 13''"
 ```
@@ -451,6 +472,8 @@ count_by_year
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour vérifier
 (isinstance(count_by_year, pd.Series)
  and len(count_by_year) == 65
@@ -498,6 +521,8 @@ df_broken
 le truc c'est que ici, on n'a **pas une date** mais c'est une **durée**
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # repartons des données de départ
 
 df.dtypes
@@ -520,11 +545,15 @@ df.duration = pd.to_timedelta(df.duration)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour vérifier - doit retourner True
 df.duration.dtype == 'timedelta64[ns]'
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # et effectivement c'est beaucoup mieux
 
 df.head(2)
@@ -584,6 +613,8 @@ df.head()
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour vérifier
 (    np.all(df.loc[0, ['hour', 'minute', 'second']] == [2, 6, 29])
  and df.hour.dtype == int

@@ -52,7 +52,7 @@ deux points à retenir
 
 * le package expose **les mêmes fonctions** que numpy mais **modifiées** pour pouvoir être dérivées
 
-  donc à partir d'ici la variable `np` désigne **le code autograd** et non pas le ode numpy; mais il s'utilise exactement pareil
+  donc à partir d'ici la variable `np` désigne **le code autograd** et non pas le code numpy; mais il s'utilise exactement pareil
   
 * la fonction `grad` retourne la dérivée (en fait le gradient) de son paramètre (une fonction, donc)
 
@@ -82,10 +82,12 @@ appliquez à ce domaine la dérivée de *sin*
 
 ```{code-cell} ipython3
 # votre code
+# votre job est de définir sin_der qui
+# est la fonction dérivée de sinus
 ```
 
 ```{code-cell} ipython3
-:tags: [level_basic]
+:tags: [level_basic, raises-exception]
 
 sin_der(0.)
 ```
@@ -101,7 +103,7 @@ except Exception as exc:
 ```
 
 ```{code-cell} ipython3
-:tags: [level_basic]
+:tags: [level_basic, raises-exception]
 
 # du coup on vectorise avec numpy
 sin_der_vec = np.vectorize(sin_der)

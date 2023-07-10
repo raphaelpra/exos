@@ -58,6 +58,8 @@ df = ...
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 df.head()
 ```
 

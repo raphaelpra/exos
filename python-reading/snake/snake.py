@@ -1,3 +1,5 @@
+# # a snake game
+
 # on affiche le score (la taille du serpent) dans la bannière
 # game over si le serpent se marche dessus
 # game over si on sort du cadre

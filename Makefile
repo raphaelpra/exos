@@ -62,9 +62,9 @@ toc: jb/_toc-python.yml jb/_toc-ds.yml
 
 # BOOKS
 book-python:
-	jupyter-book build --toc jb/_toc-python.yml --config jb/_config.yml --path-output book-python .
+	PYDEVD_DISABLE_FILE_VALIDATION=1 jupyter-book build --toc jb/_toc-python.yml --config jb/_config.yml --path-output book-python .
 book-ds:
-	jupyter-book build --toc jb/_toc-ds.yml --config jb/_config.yml --path-output book-ds .
+	PYDEVD_DISABLE_FILE_VALIDATION=1 jupyter-book build --toc jb/_toc-ds.yml --config jb/_config.yml --path-output book-ds .
 book:
 	@echo choose the book you want to build
 	@echo make book-python

@@ -17,13 +17,20 @@ html:
 only_build_toc_files: true
 
 exclude_patterns:
+  # required to prevent endless deepening
+  # of the build tree
+  - "**/_build"
   - "**/.teacher/*"
+  - "**/teacher/*"
+  - "**/.ipynb_checkpoints"
+  - "**/.pytest_cache"
 
 execute:
   execute_notebooks: cache
   exclude_patterns:
     - "**/*-corrige*"
     - "**/.teacher/*"
+    - "**/teacher/*"
     - "**/snake*.py"
 
 parse:

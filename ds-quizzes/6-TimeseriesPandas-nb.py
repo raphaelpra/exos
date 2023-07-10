@@ -3,10 +3,12 @@
 #   jupytext:
 #     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
 #     formats: py:percent
-#     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#     notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
+#       -jupytext.text_representation.format_version,
+#
+#       -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
+#
+#       -language_info.file_extension, -language_info.mimetype, -toc'
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -76,7 +78,7 @@ hos = ...
 # %% [markdown]
 # **What is the dtype of each columns?**
 
-# %%
+# %% tags=["raises-exception"]
 hos.dtypes
 
 # %% [markdown]
@@ -97,13 +99,13 @@ hos.dtypes
 #
 # Let us see the solution together (found on stackoverflow...)
 
-# %%
+# %% tags=["raises-exception"]
 resampled_hos.plot()
 
 # %% [markdown]
 # To solve the issue with bar plots, we need to work with matplotlib
 
-# %%
+# %% tags=["raises-exception"]
 from matplotlib.dates import AutoDateLocator, ConciseDateFormatter, AutoDateFormatter
 
 locator = AutoDateLocator()

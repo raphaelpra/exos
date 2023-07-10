@@ -208,7 +208,7 @@ decode(eaccent), decode(ccedilla)
 
 use this table to write a complete UTF-8 decoder 
 
-![](../slides/media/unicode-utf8-areas.png)
+![](../media/unicode-utf8-areas.png)
 
 +++
 

@@ -20,7 +20,7 @@ parts:
   chapters:
   - file: python-tps/files-formats/README-files-formats-mp
   - file: python-tps/watson/README-watson-nb
-  - file: python-tps/students-groups/README-students-groups
+  - file: python-tps/students-groups/README-students-groups-nb
   - file: python-tps/indexing-structs/README-indexing-structs-nb
   - file: python-tps/queens/README-queens-nb
 - caption: TPs classes
@@ -58,6 +58,6 @@ parts:
   - glob: python-samples/*
 - caption: WIP
   chapters:
-  - glob: python-tps/subprocesses-howto.md/README*
+  - file: python-tps/subprocesses-howto
   - glob: python-tps/webscraper-wip/README*
 root: README

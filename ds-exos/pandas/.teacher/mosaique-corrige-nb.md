@@ -370,6 +370,7 @@ df1
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 # ceci doit afficher True
 df1.shape == (7, 3)
@@ -404,6 +405,7 @@ df2 = pd.read_csv("data/weight_height_no_comments.csv",
 
 ```{code-cell} ipython3
 :cell_style: center
+:tags: [raises-exception]
 
 # ceci doit afficher True
 (
@@ -436,12 +438,14 @@ df = pd.read_csv("data/weight_height.csv")
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 df.head()
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 # ceci doit afficher True
 (
@@ -503,7 +507,7 @@ df.describe()
 # pour partir d'un truc propre
 
 ...
-df.head()
+# df.head()
 ```
 
 ```{code-cell} ipython3
@@ -555,6 +559,8 @@ df['Mass Index'] = df.Weight / (df.Height **2)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 df.head()
 ```
 
@@ -591,10 +597,14 @@ df['Gender-cat'] = df.Gender.astype('category')
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 df.head()
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 df.dtypes
 ```
 
@@ -831,6 +841,7 @@ cars = pd.read_csv("data/car_sales.csv")
 
 ```{code-cell} ipython3
 :hide_input: false
+:tags: [raises-exception]
 
 cars.head(5)
 ```

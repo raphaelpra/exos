@@ -38,7 +38,7 @@ tracks:
     - "python-tps/files-formats/README-files-formats-mp.md"
     - "python-tps/watson/README-watson-nb.md"
     # using dicts for indexing and sets for creating groups
-    - "python-tps/students-groups/README-students-groups.md"
+    - "python-tps/students-groups/README-students-groups-nb.md"
     # using dicts for structs and for indexing
     - python-tps/indexing-structs/README-indexing-structs-nb.md
     # itertools
@@ -79,7 +79,7 @@ tracks:
     - "python-samples/*.py"
   - name: WIP
     notebooks:
-    - "python-tps/subprocesses-howto.md/README*.md"
+    - "python-tps/subprocesses-howto.md"
     - "python-tps/webscraper-wip/README*.md"
 
 

@@ -260,6 +260,8 @@ df_final
 ## pas demandé
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ce n'était pas demandé, mais 
 # si on veut remettre un index propre, on n'a qu'à faire
 df_final.index = pd.RangeIndex(0, len(df_final))
@@ -269,12 +271,16 @@ df_final
 ## à quoi ça sert
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # en tous cas, sous cette forme, on peut s'intéresser à un type particulier
 df_t1 = df_final.loc[df_final.attribute == 't1', :]
 df_t1
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # ou juste les nombres
 df_t1_nb = df_t1[df_t1.type == 'nb']
 df_t1_nb

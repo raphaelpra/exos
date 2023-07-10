@@ -226,6 +226,7 @@ df1
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 # ceci doit afficher True
 df1.shape == (7, 3)
@@ -251,6 +252,7 @@ df2 = ...
 
 ```{code-cell} ipython3
 :cell_style: center
+:tags: [raises-exception]
 
 # ceci doit afficher True
 (
@@ -272,12 +274,14 @@ df = ...
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 df.head()
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 # ceci doit afficher True
 (
@@ -321,7 +325,7 @@ affichez un résumé / des informations générales
 # pour partir d'un truc propre
 
 ...
-df.head()
+# df.head()
 ```
 
 ### Ajout d'une colonne
@@ -337,6 +341,8 @@ df = ...
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 df.head()
 ```
 
@@ -353,10 +359,14 @@ df = ...
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 df.head()
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 df.dtypes
 ```
 
@@ -445,6 +455,7 @@ cars = ...
 
 ```{code-cell} ipython3
 :hide_input: false
+:tags: [raises-exception]
 
 cars.head(5)
 ```
