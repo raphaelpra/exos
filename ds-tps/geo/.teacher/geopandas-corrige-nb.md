@@ -132,7 +132,7 @@ def localize_one(num, typ, nom):
     # we build the URL which directly contains the address pieces
     url = f"https://api-adresse.data.gouv.fr/search/?q={num}+{typ}+{nom},Paris&limit=1"
     print(f"localize_one is fetching page\n{url}")
-    
+
     # sending request to the web server
     response = requests.get(url)
 
@@ -152,7 +152,7 @@ def localize_one(num, typ, nom):
 localize_one(18, 'rue', 'BERNARDINS')
 ```
 
-````{danger} 
+````{danger}
 ***MAIS*** on ne va pas faire comme ça... pourquoi d'après vous ?
 
 ```{hint}
@@ -196,7 +196,7 @@ details = localize_one(18, 'rue', 'BERNARDINS')
 dans une autre dimension complètement: ici on envoie donc une requête vers l'URL  
 `https://api-adresse.data.gouv.fr/search/?q=18+rue+BERNARDINS,Paris&limit=1`
 
-Les caractères `?` et `&` jouent un rôle particulier: pour information, la syntaxe générale c'est 
+Les caractères `?` et `&` jouent un rôle particulier: pour information, la syntaxe générale c'est
 ```
 http://le.host.name/le/path?param1=truc&param2=bidule&param3=machinechose
 ```
@@ -290,7 +290,7 @@ sauf que nous, on ne veut pas utiliser `curl`, on veut faire cette requête en P
   1. soit on commence par sauver le texte dans un fichier temporaire (juste faire attention à choisir un nom de fichier qui n'existe pas, de préférence dans un dossier temporaire, voir le module `tempfile`)
   1. soit on triche un peu, et grâce à `io.StringIO` on peut transformer une chaine en fichier !
   
-  c'est ce qu'on va faire dans notre solution, mais la première option est tout à fait raisonnable aussi 
+  c'est ce qu'on va faire dans notre solution, mais la première option est tout à fait raisonnable aussi
 ````
 
 +++
@@ -321,7 +321,7 @@ def localize_many(filename, col_number, col_type, col_name, col_city):
         street number, street type, street name and city name
         to be used for geolocating
     """
-    
+
     pass
 ```
 
@@ -364,7 +364,7 @@ def localize_many(filename, col_number, col_type, col_name, col_city):
     # because we don't set an index, it it safe to merge
     geoloc = geoloc[['latitude', 'longitude', 'result_city', 'result_type']]
     return df.merge(geoloc, left_index=True, right_index=True)
-    
+
 ```
 
 ```{code-cell} ipython3
@@ -417,7 +417,7 @@ addresses_small = localize_many("addresses-small.csv", "number", "type", "name",
 ```{code-cell} ipython3
 :tags: [level_basic]
 
-# sanity check 
+# sanity check
 
 # len(addresses)
 ```
@@ -474,7 +474,7 @@ et surtout (regardez les deux premiers pour l'instant):
 * et un peu plus tard on utilisera aussi des overlays <https://python-visualization.github.io/folium/quickstart.html#GeoJSON/TopoJSON-Overlays>
 
 ```{code-cell} ipython3
-# ~ chatelet 
+# ~ chatelet
 
 CENTER = 48.856542, 2.347614
 ```
@@ -482,10 +482,12 @@ CENTER = 48.856542, 2.347614
 ### le fond de carte
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour commencer on va recharger la dataframe précédente
 import pandas as pd
 
-addresses = pd.read_csv("addresses-geoloc.csv")
+addresses = pd.read_csv("data/addresses-geoloc.csv")
 
 # et en faire un petit échantillon
 
@@ -554,7 +556,7 @@ def map_addresses(geoloc):
     geoloc['human'] = geoloc['number'].astype(str) + ', ' + geoloc['type'] + ' ' + geoloc['name']
 
     map = paris_map()
-    
+
     def add_marker(row):
         folium.Marker([row.latitude, row.longitude],
                       tooltip=f"{row.human}").add_to(map)
@@ -578,6 +580,8 @@ map_addresses(addresses_small)
 une fonction très sympatique de `folium`, c'est qu'on peut sauver cette carte sous la forme d'un fichier html, on dit *standalone*, c'est-à-dire autosuffisant, pas besoin de Python ni de Jupyter pour la regarder
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 map_small = map_addresses(addresses_small)
 map_small.save("addresses-small.html")
 ```
@@ -699,7 +703,7 @@ def random_color():
     """
     # of course this is not the right answer
     return "#12f285"
-    
+
 ```
 
 ```{code-cell} ipython3
@@ -841,7 +845,7 @@ def convert_lat_lon(df):
 
     # we need a geopandas-friendly df
     geo_df = gpd.GeoDataFrame(df)
-    
+
     # beware, here LONGITUDE comes first !
     geo_df['position'] = gpd.points_from_xy(df.longitude, df.latitude)
 
@@ -855,16 +859,20 @@ def convert_lat_lon(df):
     geo_df.set_geometry('position', inplace=True)
 
     return geo_df
-    
+
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # let's apply that to our small input
 
 geoaddresses_small = convert_lat_lon(addresses_small)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # we will also need to set the active column in the quartiers (geo)dataframe
 
 quartiers.set_geometry('geometry', inplace=True)
@@ -892,7 +900,7 @@ def add_quartiers(gdf):
     c_ar : arrondissement number
     color: the (random) color of that quartier
     ...
-    
+
     """
     # this is not the right answer...
     return gdf
@@ -909,6 +917,8 @@ def add_quartiers(gdf):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # try your code
 
 # xxx you can safely ignore this warning...
@@ -919,6 +929,8 @@ geoaddresses_small_extended.head(2)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # verify your code
 
 # make sure you have the right number of lines in the result
@@ -966,7 +978,7 @@ def map_addresses(gdf):
         gdf['human'] = gdf['number'].astype(str) + ', ' + gdf['type'] + ' ' + gdf['name']
 
     map = paris_map()
-    
+
     def add_marker(row):
         folium.CircleMarker(
             [row.latitude, row.longitude],
@@ -982,6 +994,8 @@ def map_addresses(gdf):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # test the new function
 
 map = map_addresses(geoaddresses_small_extended)
@@ -1038,7 +1052,7 @@ function (row) {
   // console.log(row)
   let circle = L.circleMarker(
       // the position
-      new L.LatLng(row[0], row[1]), 
+      new L.LatLng(row[0], row[1]),
       // styling
      {color: row[3], radius: 8},
     )
@@ -1063,6 +1077,8 @@ function (row) {
 ### sur l'échantillon
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # let's first test it on the small extract
 
 map_addresses(geoaddresses_small_extended)
@@ -1071,6 +1087,8 @@ map_addresses(geoaddresses_small_extended)
 ### sur le dataset entier
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # and if all goes well we can try and display the full monty
 
 # first prepare the full dataset
@@ -1082,6 +1100,8 @@ final_map
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # makes sense to save the hard work
 
 geoaddresses.to_csv("addresses-final.csv")

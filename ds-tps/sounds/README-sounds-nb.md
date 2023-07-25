@@ -428,7 +428,8 @@ def float_to_int16(as_float):
 :cell_style: split
 :tags: [raises-exception]
 
-# pour écouter 
+# pour écouter
+
 MyAudio(float_to_int16(la_do), autoplay=True)
 ```
 
@@ -436,7 +437,7 @@ MyAudio(float_to_int16(la_do), autoplay=True)
 :cell_style: split
 :tags: [raises-exception]
 
-# sans conversion 
+# sans conversion
 MyAudio(la_do, autoplay=True)
 ```
 
@@ -1047,7 +1048,7 @@ pour transposer d'une quinte, il nous faut multiplier la fréquence par 3/2; on 
 sauf que cette fois, il faut un peu interpoler; on est donc amené à faire des moyennes comme ceci
 
 ```
-data         data3  
+data         data3
 0    0       0
 1    1+2/2   1
 2    --
@@ -1065,8 +1066,8 @@ data         data3
 1. remplir dans `data3` les données de rang pair  
    qui correspondent aux multiples de 3 dans le tableau de départ
 1. remplir dans `data3` les données de rang impair  
-   en implémentant l'interpolation 
-   
+   en implémentant l'interpolation
+
 **remarque**: nos data sont en `int16`, on va s'efforcer
 de continuer à travailler dans ce format
 
@@ -1171,8 +1172,8 @@ def closest(note):
     """
     on retourne le rationnel le plus proche
     avec l'erreur relative que ça représente
-    
-    sous la forme d'un tuple 
+
+    sous la forme d'un tuple
     (rationnel, erreur relative)
     """
     # on va trier une liste de tuples (rational, relative_error)
@@ -1181,7 +1182,7 @@ def closest(note):
     # dans ces ordres de grandeur ça n'a pas bcp d'importance
     # par contre ça donne un code un peu plus intéressant
     candidates = [(rational, abs(note-rational)/note) for rational in rationals]
-    
+
     return sorted(candidates, key=lambda couple: couple[1])[0]
 ```
 

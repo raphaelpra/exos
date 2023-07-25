@@ -115,7 +115,7 @@ def localize_one(num, typ, nom):
     # we build the URL which directly contains the address pieces
     url = f"https://api-adresse.data.gouv.fr/search/?q={num}+{typ}+{nom},Paris&limit=1"
     print(f"localize_one is fetching page\n{url}")
-    
+
     # sending request to the web server
     response = requests.get(url)
 
@@ -135,7 +135,7 @@ def localize_one(num, typ, nom):
 localize_one(18, 'rue', 'BERNARDINS')
 ```
 
-````{danger} 
+````{danger}
 ***MAIS*** on ne va pas faire comme ça... pourquoi d'après vous ?
 
 ```{hint}
@@ -160,7 +160,7 @@ localize_one(18, 'rue', 'BERNARDINS')
 dans une autre dimension complètement: ici on envoie donc une requête vers l'URL  
 `https://api-adresse.data.gouv.fr/search/?q=18+rue+BERNARDINS,Paris&limit=1`
 
-Les caractères `?` et `&` jouent un rôle particulier: pour information, la syntaxe générale c'est 
+Les caractères `?` et `&` jouent un rôle particulier: pour information, la syntaxe générale c'est
 ```
 http://le.host.name/le/path?param1=truc&param2=bidule&param3=machinechose
 ```
@@ -254,7 +254,7 @@ sauf que nous, on ne veut pas utiliser `curl`, on veut faire cette requête en P
   1. soit on commence par sauver le texte dans un fichier temporaire (juste faire attention à choisir un nom de fichier qui n'existe pas, de préférence dans un dossier temporaire, voir le module `tempfile`)
   1. soit on triche un peu, et grâce à `io.StringIO` on peut transformer une chaine en fichier !
   
-  c'est ce qu'on va faire dans notre solution, mais la première option est tout à fait raisonnable aussi 
+  c'est ce qu'on va faire dans notre solution, mais la première option est tout à fait raisonnable aussi
 ````
 
 +++
@@ -285,7 +285,7 @@ def localize_many(filename, col_number, col_type, col_name, col_city):
         street number, street type, street name and city name
         to be used for geolocating
     """
-    
+
     pass
 ```
 
@@ -324,7 +324,7 @@ addresses_small
 ```{code-cell} ipython3
 :tags: [level_basic]
 
-# sanity check 
+# sanity check
 
 # len(addresses)
 ```
@@ -367,7 +367,7 @@ et surtout (regardez les deux premiers pour l'instant):
 * et un peu plus tard on utilisera aussi des overlays <https://python-visualization.github.io/folium/quickstart.html#GeoJSON/TopoJSON-Overlays>
 
 ```{code-cell} ipython3
-# ~ chatelet 
+# ~ chatelet
 
 CENTER = 48.856542, 2.347614
 ```
@@ -561,7 +561,6 @@ def random_color():
     """
     # of course this is not the right answer
     return "#12f285"
-    
 ```
 
 ```{code-cell} ipython3
@@ -655,7 +654,7 @@ def convert_lat_lon(df):
 
     # we need a geopandas-friendly df
     geo_df = gpd.GeoDataFrame(df)
-    
+
     # beware, here LONGITUDE comes first !
     geo_df['position'] = gpd.points_from_xy(df.longitude, df.latitude)
 
@@ -669,7 +668,6 @@ def convert_lat_lon(df):
     geo_df.set_geometry('position', inplace=True)
 
     return geo_df
-    
 ```
 
 ```{code-cell} ipython3
@@ -710,7 +708,7 @@ def add_quartiers(gdf):
     c_ar : arrondissement number
     color: the (random) color of that quartier
     ...
-    
+
     """
     # this is not the right answer...
     return gdf
@@ -817,7 +815,7 @@ function (row) {
   // console.log(row)
   let circle = L.circleMarker(
       // the position
-      new L.LatLng(row[0], row[1]), 
+      new L.LatLng(row[0], row[1]),
       // styling
      {color: row[3], radius: 8},
     )

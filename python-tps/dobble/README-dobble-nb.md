@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.4
+    jupytext_version: 1.15.0.dev1
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -56,7 +56,7 @@ une fois que vous avez construit vos solutions pour ces 3 valeurs de N, écrivez
 * pour ces premiers essais, je vous conseille de prendre des nombres comme symboles
 * je vous impose de créer 3 classes pour représenter respectivement un symbole, une carte, et le paquet de cartes
 
-```{code-cell}
+```{code-cell} ipython3
 # quelque chose comme ça
 
 from pathlib import Path
@@ -81,17 +81,17 @@ class Deck:
         pass
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # should return True
 Deck("data/cards02.txt").check_unique()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # should return True
 Deck("data/cards03.txt").check_unique()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # should return False and print an error message
 Deck("data/cards03-broken.txt").check_unique()
 ```
@@ -109,7 +109,7 @@ ajoutez les méthodes qui vont bien dans vos classes
 pouvez-vous émettre des conjectures par rapport à ces nombres ?  
 vérifiez-les sur vos premiers exemples
 
-```{code-cell}
+```{code-cell} ipython3
 # à vous
 
 def conjecture(deck):
@@ -121,7 +121,7 @@ def conjecture(deck):
     pass
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # 
 ```
 
@@ -140,7 +140,7 @@ vous trouverez dans le dossier `data/` deux fichiers `game08.txt` et `game10.txt
 
 **indice** observez-vous une sorte de symétrie entre les symboles et les cartes ? pourrait-on même parler de dualité ?
 
-```{code-cell}
+```{code-cell} ipython3
 GAMES = G8, G10 = (Deck(f"data/game{i:02}.txt") for i in (8, 10))
 ```
 
@@ -165,18 +165,18 @@ en partant du premier de ces fichiers, on a produit le diagramme suivant
 
 sauriez-vous aménager votre code pour produire un diagramme similaire avec `data06.txt` (qui par ailleurs a été construit selon la même logique)
 
-```{code-cell}
+```{code-cell} ipython3
 import matplotlib.pyplot as plt
 # with ipympl (which needs to be pip install'ed) 
 # we can run on jupyter or vscode
 %matplotlib ipympl
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # ajoutez dans la classe Deck une méthode draw_map()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # puis
 Deck("data/cards06.txt").draw_map()
 ```

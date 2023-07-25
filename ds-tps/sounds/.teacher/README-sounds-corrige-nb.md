@@ -126,11 +126,15 @@ la_1seconde = np.sin(2*np.pi*LA*t)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour débugger
 len(la_1seconde)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter le résultat
 # remarquez qu'on a maintenant perdu la fréquence d'échantillonnage
 # il faut repasser cette information au lecteur de musique
@@ -154,12 +158,14 @@ def MyAudio(what, **kwds):
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 MyAudio(la_1seconde)
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 MyAudio(la_1seconde, autoplay=True)
 ```
@@ -195,12 +201,16 @@ def sine(freq, duration=1):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter: plus court
 
 MyAudio(sine(LA, .5), autoplay=True)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter: plus long
 
 MyAudio(sine(LA, 1.5), autoplay=True)
@@ -235,7 +245,7 @@ def sine_linear(freq1, freq2, duration):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
+:tags: [level_intermediate, raises-exception]
 
 # pour écouter
 MyAudio(sine_linear(440, 660, 3))
@@ -286,6 +296,8 @@ crescendo_la_1seconde = sine(LA) * t
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter
 MyAudio(crescendo_la_1seconde) #, autoplay=True)
 ```
@@ -309,6 +321,8 @@ def crescendo(freq, duration):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter
 MyAudio(crescendo(LA, 2)) #, autoplay=True)
 ```
@@ -337,6 +351,8 @@ def crescendo(freq, duration, increase=True):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter
 
 MyAudio(crescendo(LA, 2, increase=False)) #, autoplay=True)
@@ -389,7 +405,7 @@ def apply_crescendo(sound, increase=True):
         volume = volume[::-1]
     return sound * volume
 
-MyAudio(apply_crescendo(sine(LA, 2))) #, autoplay=True)    
+MyAudio(apply_crescendo(sine(LA, 2))) #, autoplay=True)
 ```
 
 ## concaténation
@@ -421,6 +437,8 @@ la_do = np.concatenate([
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter
 
 MyAudio(la_do, autoplay=True)
@@ -550,15 +568,18 @@ def float_to_int16(as_float):
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
-# pour écouter 
+# pour écouter
+
 MyAudio(float_to_int16(la_do), autoplay=True)
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
-# sans conversion 
+# sans conversion
 MyAudio(la_do, autoplay=True)
 ```
 
@@ -591,12 +612,14 @@ vous allez reconnaitre dans les deux cas le pin-pon des pompiers
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 Audio(filename='media/pin-pon-la-si.wav')
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 Audio(filename='media/pin-pon-fa-sol.wav')
 ```
@@ -617,6 +640,7 @@ ainsi par exemple, vous pouvez constater que si on multiplie une fréquence par 
 
 ```{code-cell} ipython3
 :cell_style: center
+:tags: [raises-exception]
 
 # une octave de LA
 MyAudio(
@@ -632,6 +656,7 @@ permet d'obtenir une note **une octave** au dessus
 
 ```{code-cell} ipython3
 :cell_style: center
+:tags: [raises-exception]
 
 # même effet avec le DO naturellement
 MyAudio(
@@ -739,6 +764,7 @@ def freq_from_name(name):
 
 ```{code-cell} ipython3
 :cell_style: center
+:tags: [raises-exception]
 
 # pour vérifier: devrait retourner 440
 # ou presque (rappelez-vous les erreurs d'arrondi avec les flottants)
@@ -748,6 +774,7 @@ freq_from_name('la')
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 :cell_style: center
 
 # attention à la précision !
@@ -782,6 +809,7 @@ certains sont **très proches** de rapports **rationnels simples**
 **[note]** il n'y a pas d'exercice dans cette section, juste un exemple de visualisation
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 :cell_style: split
 
 # intervalle do-mi (tierce majeure) ~= 5/4
@@ -789,6 +817,7 @@ ratios[4]
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 :cell_style: split
 
 # intervalle do-sol (quinte) ~= 3/2
@@ -804,6 +833,7 @@ pour visualiser les ratios de la gamme
 (uniquement des exemples d'utilisation de matplotlib)
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 :cell_style: center
 
 %matplotlib inline
@@ -851,6 +881,7 @@ def turn_off_xticks():
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 :cell_style: split
 
 # on crée une figure
@@ -892,6 +923,7 @@ accord_do_mi_sol = do + mi + sol
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 # pour écouter
 
 MyAudio(accord_do_mi_sol, autoplay=True)
@@ -959,6 +991,7 @@ MyAudio(original)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 :cell_style: split
 
 # pour vérifier
@@ -973,7 +1006,7 @@ MyAudio(restored)
 on part d'un petit fichier `media/sounds-cello.wav`
 
 ```{code-cell} ipython3
-wavfile.read?
+#wavfile.read?
 ```
 
 ```{code-cell} ipython3
@@ -1013,6 +1046,8 @@ print(f"longueur morceau={len(data) / samplerate}")
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour vérifier à l'oreille
 MyAudio(data)
 ```
@@ -1116,12 +1151,15 @@ data_echoed[offset::] += (data[:-offset:] * delayed_ratio)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter
 
 MyAudio(data_echoed)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 :scrolled: true
 
 # pour observer
@@ -1155,12 +1193,15 @@ data_echoed_v2[offset:] += data*delayed_ratio
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter
 MyAudio(data_echoed_v2)
 ```
 
 ```{code-cell} ipython3
 :scrolled: true
+:tags: [raises-exception]
 
 # pour observer
 
@@ -1233,6 +1274,7 @@ data2 = data[::2]
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 :cell_style: split
 
 # pour écouter
@@ -1241,6 +1283,7 @@ MyAudio(data)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 :cell_style: split
 
 # pour écouter
@@ -1251,6 +1294,8 @@ MyAudio(data2)
 naturellement le profil reste le même mais l'échelle des X est plus courte (deux fois moins d'échantillons)
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 %matplotlib notebook
 
 plt.figure(figsize=(10, 4))
@@ -1270,7 +1315,7 @@ pour transposer d'une quinte, il nous faut multiplier la fréquence par 3/2; on 
 sauf que cette fois, il faut un peu interpoler; on est donc amené à faire des moyennes comme ceci
 
 ```
-data         data3  
+data         data3
 0    0       0
 1    1+2/2   1
 2    --
@@ -1288,8 +1333,8 @@ data         data3
 1. remplir dans `data3` les données de rang pair  
    qui correspondent aux multiples de 3 dans le tableau de départ
 1. remplir dans `data3` les données de rang impair  
-   en implémentant l'interpolation 
-   
+   en implémentant l'interpolation
+
 **remarque**: nos data sont en `int16`, on va s'efforcer
 de continuer à travailler dans ce format
 
@@ -1327,6 +1372,8 @@ data3[1::2] = (data[1::3] //2) + (data[2::3] // 2)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # vérification de visu
 # ces deux segments correspondent normalement 
 # au même instant dans le morceau
@@ -1335,6 +1382,8 @@ data[12000:12007], data3[8000:8005]
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # pour écouter
 MyAudio(data3)
 ```
@@ -1381,7 +1430,7 @@ def closest1(note):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
+:tags: [level_intermediate, raises-exception]
 
 # mais le souci c'est qu'on a perdu de l'information
 tierce, quinte = ratios[4], ratios[7]
@@ -1404,7 +1453,7 @@ def closest2(note):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
+:tags: [level_intermediate, raises-exception]
 
 closest2(quinte)
 ```
@@ -1418,8 +1467,8 @@ def closest(note):
     """
     on retourne le rationnel le plus proche
     avec l'erreur relative que ça représente
-    
-    sous la forme d'un tuple 
+
+    sous la forme d'un tuple
     (rationnel, erreur relative)
     """
     # on va trier une liste de tuples (rational, relative_error)
@@ -1428,12 +1477,12 @@ def closest(note):
     # dans ces ordres de grandeur ça n'a pas bcp d'importance
     # par contre ça donne un code un peu plus intéressant
     candidates = [(rational, abs(note-rational)/note) for rational in rationals]
-    
+
     return sorted(candidates, key=lambda couple: couple[1])[0]
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
+:tags: [level_intermediate, raises-exception]
 
 closest(quinte)
 ```

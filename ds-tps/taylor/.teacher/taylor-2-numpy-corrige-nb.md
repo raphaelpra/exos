@@ -183,12 +183,16 @@ def custom(X):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # calculez Y3 l'image de X par custom
 
 Y3 = custom(X)                            # prune-line
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # calculez Y4 l'image de X par l'approx. de custom d'ordre 20
 
 Y4 = taylor2(X, custom, 20)                # prune-line
@@ -215,6 +219,8 @@ plt.plot(X, Y4);
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 Y3/Y4
 ```
 

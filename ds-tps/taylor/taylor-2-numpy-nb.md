@@ -64,11 +64,6 @@ def taylor1(X, derivatives):
     """
     # à vous
     ...
-    shape = X.size,                                    # prune-line
-    Y = np.zeros(shape)                                # prune-line
-    for degree, derivative in enumerate(derivatives):  # prune-line
-        Y += X**degree * derivative/factorial(degree)  # prune-line
-    return Y                                           # prune-line
 ```
 
 ### testez la
@@ -102,13 +97,6 @@ def taylor2(X, f, n):
     
     retourne un tableau Y qui est l'approximation de Taylor sur ce domaine pour cette fonction à ce degré
     """
-    derivatives = []                                      # prune-line
-    for degree in range(n):                               # prune-line
-        # attention à bien passer 0. et pas l'entier 0    # prune-line
-        derivatives.append(f(0.))                         # prune-line
-        f = grad(f)                                       # prune-line
-    print(derivatives)                                    # prune-line
-    return taylor1(X, derivatives)                        # prune-line
 ```
 
 ### testez la
@@ -138,23 +126,18 @@ def custom(X):
     retourne 2 * sin(X) + cos(X/4)
     """
     ...
-    return 2*np.sin(X) + np.cos(X/4)      # prune-line
 ```
 
 ```{code-cell} ipython3
 :tags: [raises-exception]
 
 # calculez Y3 l'image de X par custom
-
-Y3 = custom(X)                            # prune-line
 ```
 
 ```{code-cell} ipython3
 :tags: [raises-exception]
 
 # calculez Y4 l'image de X par l'approx. de custom d'ordre 20
-
-Y4 = taylor2(X, custom, 20)                # prune-line
 ```
 
 ```{code-cell} ipython3

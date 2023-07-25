@@ -82,7 +82,7 @@ hos.head()
 # %% [markdown]
 # **What is the dtype of each columns?**
 
-# %%
+# %% tags=["raises-exception"]
 hos.dtypes
 
 # %% [markdown]
@@ -127,13 +127,13 @@ resampled_hos.plot.bar()
 #
 # Let us see the solution together (found on stackoverflow...)
 
-# %%
+# %% tags=["raises-exception"]
 resampled_hos.plot()
 
 # %% [markdown]
 # To solve the issue with bar plots, we need to work with matplotlib
 
-# %%
+# %% tags=["raises-exception"]
 from matplotlib.dates import AutoDateLocator, ConciseDateFormatter, AutoDateFormatter
 
 locator = AutoDateLocator()
