@@ -7,6 +7,9 @@
 # 	pip install nbprune
 #
 
+all: toc style prune artefacts book-ds book-python
+ds: toc style prune artefacts book-ds
+python: toc style prune artefacts book-python
 
 ########## STYLE
 # we need 2 forms:
