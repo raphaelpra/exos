@@ -1,9 +1,10 @@
 ---
 jupytext:
-  cell_metadata_filter: all, -hidden, -heading_collapsed, -run_control, -trusted
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
+    -jupytext.custom_cell_magics, -language_info.version, -language_info.codemirror_mode.version,
+    -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
+    -toc, -vscode
   text_representation:
     extension: .md
     format_name: myst
@@ -23,11 +24,15 @@ nbhosting:
 import numpy as np
 ```
 
-on va commencer par quelques astuces / rappels
+# broadcasting / dimensions
 
 +++
 
-# broadcasting
+on va commencer par quelques rappels et astuces
+
++++
+
+## broadcasting
 
 +++
 
@@ -54,7 +59,7 @@ eh bien ces deux tableaux, bien que n'ayant pas la même forme, peuvent s'ajoute
 row + col
 ```
 
-# reshaping
+## reshaping
 
 +++
 
@@ -78,7 +83,7 @@ col2 = raw[:, np.newaxis]
 col2
 ```
 
-# indices
+## `indices`
 
 +++
 
@@ -110,6 +115,8 @@ Produisez le tableau de la table de multiplication des entiers entre 1 et n
 On peut le faire de au moins 3 façons (cf les 3 premières sections ci-dessus)
 
 ```{code-cell} ipython3
+:tags: [level_advanced]
+
 N = 5
 
 # à vous
@@ -133,9 +140,9 @@ ex. avec `checkers(3, 4)`
 | 1| 0| 1| 0|
 | 0| 1| 0| 1|
 
-**[consigne]** assurez-vous de bien renvoyer un tableau de booléens
-
 ```{code-cell} ipython3
+:tags: [level_advanced]
+
 # à vous
 
 def checkers():
@@ -146,7 +153,7 @@ def checkers():
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
+:tags: [raises-exception, hide-output, level_basic]
 
 # ceci doit afficher True
 
@@ -156,6 +163,8 @@ np.all(checkers(3, 4) == np.array([[0,1,0,1],[1,0,1,0],[0,1,0,1]]))
 ### v2 - pareil, mais doit retourner des booléens
 
 ```{code-cell} ipython3
+:tags: [level_advanced]
+
 # à vous
 
 def checkers():
@@ -163,7 +172,7 @@ def checkers():
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
+:tags: [raises-exception, level_basic, hide-output]
 
 # ceci doit afficher True
 
@@ -171,7 +180,7 @@ np.all(checkers(3, 4) == np.array([[0,1,0,1],[1,0,1,0],[0,1,0,1]]))
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
+:tags: [raises-exception, level_basic, hide-output]
 
 # ceci doit afficher True
 
@@ -187,6 +196,8 @@ comment feriez-vous pour afficher le tableau comme un damier ?
 **[indice]** voyez `plt.imshow()`
 
 ```{code-cell} ipython3
+:tags: [level_advanced]
+
 # à vous
 ...
 ```
@@ -208,11 +219,13 @@ ex. avec `checkers(3, 4, True)`
 mais les appels avec seulement deux paramètres continuent à fonctionner comme avant
 
 ```{code-cell} ipython3
+:tags: [level_advanced]
+
 # à vous
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
+:tags: [raises-exception, level_basic, hide-output]
 
 # ceci doit afficher True
 
@@ -220,7 +233,7 @@ np.all(checkers(3, 4) == np.array([[0,1,0,1],[1,0,1,0],[0,1,0,1]]))
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
+:tags: [raises-exception, level_basic, hide-output]
 
 # ceci doit afficher True
 
@@ -228,14 +241,14 @@ np.all(checkers(3, 4, True) == ~(checkers(3, 4)))
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
+:tags: [raises-exception, level_basic, hide-output]
 
 # pour débugger
 checkers(3, 4)
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
+:tags: [raises-exception, level_basic, hide-output]
 
 # pour débugger
 checkers(3, 4, True)
@@ -248,6 +261,8 @@ checkers(3, 4, True)
 On veut maintenant tester que si on ajoute ces deux formes on n'obtient que des 1
 
 ```{code-cell} ipython3
+:tags: [level_advanced]
+
 # à vous d'écrire le code qui vous permettra de vous en assurer
 ```
 
@@ -282,7 +297,7 @@ I, J = np.indices((5, 5))
 ```
 
 ```{code-cell} ipython3
-# si on décale applique abs()
+# si on décale, retourne, et applique abs()
 abs(2-I), abs(2-J)
 ```
 
@@ -297,6 +312,8 @@ abs(2-I) + abs(2-J)
 ```
 
 ```{code-cell} ipython3
+:tags: [level_advanced]
+
 # à vous de mettre tout cela ensemble
 
 def stairs(n):
@@ -304,16 +321,11 @@ def stairs(n):
 ```
 
 ```{code-cell} ipython3
-# pour inspection visuelle
+:tags: [level_advanced]
 
-S2 = stairs(2); S2
-```
-
-```{code-cell} ipython3
 # comment feriez-vous pour afficher le résultat visuellement ?
 
 # à vous
-...
 ```
 
 ***
