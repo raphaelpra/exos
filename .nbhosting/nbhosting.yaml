@@ -2,6 +2,9 @@
 # override in the course-local nbhosting.yaml if needed
 tracks-filter: [ python ]
 
+# we define 2 tracks - python and data-science
+# in terms of jupyter-book outputs,
+# this will result in 2 books being built
 tracks:
 - description: Python - activités
   id: python
@@ -115,7 +118,7 @@ tracks:
     - ds-exos/pandas/stack-simple-nb.md
     - ds-exos/pandas/stack-multicol-nb.md
     - ds-exos/pandas/mosaique-nb.md
-    # initially stored in a separate folder, 
+    # initially stored in a separate folder,
     # but that's more confusing than helpful
     - ds-exos/dataviz/groupby-draw-nb.md
   - name: howtos pandas
@@ -128,7 +131,7 @@ tracks:
     - ds-howtos/fremont-bridge-howto-nb.md
   - name: dashboards
     notebooks:
-    - ds-howtos/dashboard-with-dash.py
+    - ds-howtos/dashboard-with-dash-nb.py
     - ds-howtos/streamlit-sinus.py
     - ds-howtos/streamlit-taylor.py
   - name: quizzes pandas

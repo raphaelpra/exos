@@ -39,7 +39,7 @@ parts:
   - file: ds-howtos/fremont-bridge-howto-nb
 - caption: dashboards
   chapters:
-  - file: ds-howtos/dashboard-with-dash
+  - file: ds-howtos/dashboard-with-dash-nb
   - file: ds-howtos/streamlit-sinus
   - file: ds-howtos/streamlit-taylor
 - caption: quizzes pandas
