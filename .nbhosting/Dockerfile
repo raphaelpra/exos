@@ -8,9 +8,8 @@ FROM nbhosting/minimal-notebook
 # because we provide our own nbconfig/notebook.json
 # and that is where is stored the enabled/disabled extensions
 RUN true \
- && pip install -U --pre jupyterlab notebook jupyterlab-myst jupytext \
- && pip install -U git+https://github.com/mwouts/jupyterlab-jupytext.git@jupyterlab4 \
- && pip install jupyterlab-courselevels jupyterlab-nbhosting \
+ && pip install -U jupyterlab notebook jupytext jupyterlab-myst \
+ && pip install -U jupyterlab-courselevels \
  && pip install -U nbautoeval ipythontutor \
  && pip install numpy pandas matplotlib ipywidgets ipympl \
  && pip install mpld3 bokeh plotly folium vispy seaborn pygal networkx mypy autograd k3d \
