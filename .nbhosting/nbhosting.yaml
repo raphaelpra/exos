@@ -1,6 +1,13 @@
 ---
-# override in the course-local nbhosting.yaml if needed
-tracks-filter: [ python ]
+# you may want to redefine locally either
+# - the list of tracks as tracks-filter
+# - and the list of builds as builds-filter
+# typically
+# tracks-filter: [ python ]
+# builds-filter: [ python ]
+# or
+# tracks-filter: [ data-science ]
+# builds-filter: [ data-science ]
 
 # we define 2 tracks - python and data-science
 # in terms of jupyter-book outputs,
