@@ -377,7 +377,6 @@ print(img.min(), img.max())
 ```
 
 ```{code-cell} ipython3
-:scrolled: false
 :tags: [level_basic]
 
 # prune-cell
@@ -460,7 +459,6 @@ for (lig, col) in ((10, 20), (100, 200)):
 ```
 
 ```{code-cell} ipython3
-:scrolled: false
 :tags: [level_basic]
 
 # prune-cell
@@ -550,7 +548,6 @@ plt.imshow(R, cmap='Reds')
 ```
 
 ```{code-cell} ipython3
-:scrolled: false
 :tags: [level_basic]
 
 # prune-cell
@@ -626,7 +623,6 @@ plt.imshow(img1);
 ```
 
 ```{code-cell} ipython3
-:scrolled: false
 :tags: [level_basic]
 
 # prune-cell
@@ -714,7 +710,7 @@ img = plt.imread(filename)
 # prune-cell
 ```
 
-2. Passez ses valeurs en flottants entre 0 et 1 et affichez-la  
+2. Passez ses valeurs en flottants entre 0 et 1 et affichez-la
 
 ```{code-cell} ipython3
 # votre code
@@ -809,8 +805,6 @@ plt.imshow(np.sqrt(gr), cmap='gray');
 ```
 
 ```{code-cell} ipython3
-:scrolled: false
-
 # prune-cell
 
 plt.figure()
@@ -882,7 +876,6 @@ axes[1, 1].set_ylabel('de -1 à 1')            # label d'ordonnées
 axes[1, 2].set_title('sinus magenta')
 plt.tight_layout()                            # ajustement automatique des paddings
 ```
-</div>
 
 ```{code-cell} ipython3
 import numpy as np
@@ -971,7 +964,7 @@ ax_rig.set_title('racine');
 2. Affichez-les en damier:  
    A B C  
    C A B  
-   B C A  
+   B C A
 
 ```{code-cell} ipython3
 # votre code

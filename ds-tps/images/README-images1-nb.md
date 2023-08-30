@@ -418,7 +418,6 @@ axes[1, 1].set_ylabel('de -1 à 1')            # label d'ordonnées
 axes[1, 2].set_title('sinus magenta')
 plt.tight_layout()                            # ajustement automatique des paddings
 ```
-</div>
 
 ```{code-cell} ipython3
 import numpy as np
