@@ -3,9 +3,12 @@ jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   cell_metadata_json: true
   encoding: '# -*- coding: utf-8 -*-'
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+  notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
+    -jupytext.text_representation.format_version,
+
     -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
+
+    -language_info.file_extension, -language_info.mimetype, -toc'
   text_representation:
     extension: .md
     format_name: myst
@@ -17,16 +20,16 @@ language_info:
   name: python
   nbconvert_exporter: python
   pygments_lexer: ipython3
-notebookname: indexation & slicing
+nbhosting:
+  title: TP simple avec des images
 ---
 
-<div class="licence">
-<span>Licence CC BY-NC-ND</span>
-<span>UE 12</span>
-<span><img src="media/ensmp-25-alpha.png" /></span>
-</div>
+Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-+++
+```{code-cell} ipython3
+from IPython.display import HTML
+HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+```
 
 # TP images (1/2)
 
@@ -54,24 +57,22 @@ on se sert d'images pour égayer des exercices avec `numpy`
 +++
 
 1. Importez la librairie `numpy`
+
 1. Importez la librairie `matplotlib.pyplot`  
-ou toute autre librairie d'affichage que vous aimez et/ou savez utiliser, e.g.`seaborn`...
+ou toute autre librairie d'affichage que vous aimez et/ou savez utiliser `seaborn`...
 
 ```{code-cell} ipython3
 # votre code
 ```
 
-3. choisissez le mode d'affichage `notebook` de matplotlib
+2. optionnel - changez la taille par défaut des figures matplotlib
+   par exemple choisissez d'afficher les figures dans un carré de 4x4 (en théorie ce sont des inches)
 
-```{code-cell} ipython3
-# votre code
-```
+````{tip}
+il y a plein de façons de le faire, google et/ou stackoverflow sont vos amis...
+````
 
-4. (optionnel): changez la taille par défaut des figures matplotlib; par exemple un carré de 4x4 (en théorie ce sont des inches)
-
-```{code-cell} ipython3
-# votre code
-```
++++
 
 ## création d'une image de couleur
 
@@ -86,6 +87,7 @@ ou toute autre librairie d'affichage que vous aimez et/ou savez utiliser, e.g.`s
 `(r, g, b) = (0, 0, 0)` donne la couleur noire  
 `(r, g, b) = (255, 255, 0)` donne la couleur jaune ...
 <img src='media/synthese-additive.png' width=200>
+
 * pour afficher le tableau `im` comme une image, utilisez: `plt.imshow(im)`
 * pour afficher plusieurs images dans une même cellule de notebook faire `plt.show()` après chaque `plt.imshow(...)`
 
@@ -120,30 +122,20 @@ ou toute autre librairie d'affichage que vous aimez et/ou savez utiliser, e.g.`s
 # votre code
 ```
 
-5. faites un quadrillage dans une autre couleur - par exemple cyan c'est-à-dire 0, 255, 255 - de 1 ligne sur 10 et 1 colonne sur 10
+5. Faites un quadrillage d'une ligne bleue, toutes les 10 lignes et colonnes et affichez-le
 
 ```{code-cell} ipython3
 # votre code
 ```
 
-6. utilisez le code de 4. pour vérifier les valeurs des pixels aux coins  
-   pensez à copier-coller les cellules du notebook avec (en mode édition)  
-   * 'c' pour copier
-   * 'v' pour coller
-   * 'D' et 'U' pour descendre/monter la·les cellules·s sélectionnée·s
-
-+++
-
 ## lecture d'une image en couleur
 
 +++
 
-1. Avec la fonction `plt.imread` lisez le fichier `data/les-mines.jpg`  
+1. Avec la fonction `plt.imread` lisez le fichier `les-mines.jpg`  
 ou toute autre image - *faites juste attention à la taille*
 
 ```{code-cell} ipython3
-filename = 'data/les-mines.jpg'
-
 # votre code
 ```
 
@@ -167,11 +159,6 @@ si il ne l'est pas copiez-le
 ```
 
 5. Quelle est la dimension de l'image ?
-
-```{code-cell} ipython3
-# votre code
-```
-
 6. Quelle est la taille de l'image en hauteur et largeur ?
 
 ```{code-cell} ipython3
@@ -179,11 +166,6 @@ si il ne l'est pas copiez-le
 ```
 
 7. Quel est le nombre d'octets utilisé par pixel ?
-
-```{code-cell} ipython3
-# votre code
-```
-
 8. Quel est le type des pixels ?  
 (deux types pour les pixels: entiers non-signés 8 bits ou flottants sur 64 bits)
 
@@ -191,7 +173,7 @@ si il ne l'est pas copiez-le
 # votre code
 ```
 
-9. Quelles sont ses valeurs maximale et minimale des canaux des pixels ?
+9. Quelles sont ses valeurs maximale et minimale des pixels ?
 
 ```{code-cell} ipython3
 # votre code
@@ -226,8 +208,8 @@ si il ne l'est pas copiez-le
 # votre code
 ```
 
-3. Isoler le rectangle de `lig` lignes et `col` colonnes en milieu d'image  
-affichez-le pour `(lig, col) = (10, 20)` puis `(lig, col) = (100, 200)`
+3. Isoler le rectangle de `l` lignes et `c` colonnes en milieu d'image  
+affichez-le pour `(l, c) = (10, 20)`) puis `(l, c) = (100, 200)`)
 
 ```{code-cell} ipython3
 # votre code
@@ -246,8 +228,6 @@ affichez-le pour `(lig, col) = (10, 20)` puis `(lig, col) = (100, 200)`
 1. Relire l'image
 
 ```{code-cell} ipython3
-filename = 'data/les-mines.jpg'
-
 # votre code
 ```
 
@@ -260,38 +240,40 @@ filename = 'data/les-mines.jpg'
 3. Afficher chaque canal avec `plt.imshow`  
     La couleur est-elle la couleur attendue ?  
     Si oui très bien, si non que se passe-t-il ?
-    
-    **[indice]** table des couleurs
+
+    **rappel** table des couleurs
+
     * `RGB` représente directement l'encodage de la couleur du pixel  
     et non un indice dans une table
+
     * donc pour afficher des pixel avec les 3 valeurs RGB pas besoin de tables de couleurs  
-    on a déjà la couleur
+    on a la couleur
+
     * mais pour afficher une image unidimensionnelle contenant des nombres de `0` à `255`  
     il faut bien lui dire à quoi correspondent les valeurs  
     (lors de l'affichage, le `255` des rouges n'est pas le même `255` des verts)
-    * donner le paramètre `cmap=` à `plt.imshow`, `'Reds'`,  `'Greens'` ou  `'Blues'`
 
-Corrigez vos affichages si besoin
+    * donner le paramètre `cmap=` à `plt.imshow`, `'Reds'`,  `'Greens'` ou  `'Blues'`
 
 ```{code-cell} ipython3
 # votre code
 ```
 
-4. Copiez l'image, remplacer dans la copie:
-  * un carré de taille `(200, 200)` en bas à droite, par
-  * A. un carré de couleur RGB avec R à 219, G à 112 et B à 147 (vous obtenez quelle couleur)  
-  * B. puis par un carré blanc avec des rayures horizontales rouges de 1 pixel
+4. Corrigez vos affichages si besoin
 
 ```{code-cell} ipython3
-# votre code A.
+# votre code
 ```
+
+5. Copiez l'image, remplacer dans la copie, un carré de taille `(200, 200)` en bas à droite  
+   . par un carré de couleur RGB avec R à 219, G à 112 et B à 147 (vous obtenez quelle couleur)  
+   . par un carré blanc avec des rayures horizontales rouges de 1 pixel
 
 ```{code-cell} ipython3
-# votre code B.
-# pensez à zoomer si nécessaire pour bien voir la différence
+# votre code
 ```
 
-5. enfin affichez les 20 dernières lignes et colonnes du carré à rayures
+6. enfin affichez les 20 dernières lignes et colonnes du carré à rayures
 
 ```{code-cell} ipython3
 # votre code
@@ -301,11 +283,13 @@ Corrigez vos affichages si besoin
 
 +++
 
+````{admonition} rappel: la transparence
 **rappel** RGB-A
 
 * on peut indiquer, dans une quatrième valeur des pixels, leur transparence
 * ce 4-ème canal s'appelle le canal alpha
 * les valeurs vont de `0` pour transparent à `255` pour opaque
+````
 
 +++
 
@@ -343,38 +327,35 @@ Corrigez vos affichages si besoin
 # votre code
 ```
 
-3. Transformer l'image en deux images en niveaux de gris :   
-A. en mettant pour chaque pixel la moyenne de ses valeurs R, G, B  
-B. en utilisant la correction 'Y' (qui corrige le constrate) basée sur la formule  
-   G = $0.299\,R + 0.587\,V + 0.114\,B\,$
-
-```{code-cell} ipython3
-# votre code A.
-```
-
-```{code-cell} ipython3
-# votre code B.
-```
-
-4. Passez au carré les pixels (de la question A. ci-dessus) et affichez l'image
+3. Transformer l'image en deux images en niveaux de gris :  
+a. en mettant pour chaque pixel la moyenne de ses valeurs R, G, B  
+b. en utilisant la correction 'Y' (qui corrige le constrate) basée sur la formule  
+   `G = 0.299 * R + 0.587 * V + 0.114 * B`
 
 ```{code-cell} ipython3
 # votre code
 ```
 
-5. Appliquez la racine carrée - toujours à la sortie de l'exercice A. - affichez-la
+4. Passez au carré les pixels et affichez l'image
 
 ```{code-cell} ipython3
 # votre code
 ```
 
-6. Convertissez l'image de niveaux de gris en type entier non-signé 8 bits et affichez la en niveaux de gris
+5. Passez en racine carré les pixels et affichez-la
 
 ```{code-cell} ipython3
 # votre code
 ```
 
-# affichage grille de figures
+6. Convertissez l'image de niveaux de gris en type entier non-signé 8 bits et affichez la  
+en niveaux de gris
+
+```{code-cell} ipython3
+# votre code
+```
+
+## affichage grille de figures
 
 +++
 
@@ -420,11 +401,12 @@ plt.tight_layout()                            # ajustement automatique des paddi
 ```
 
 ```{code-cell} ipython3
+# ce qui nous donne, mis bout à bout
 import numpy as np
 import matplotlib.pyplot as plt
 
 # le code
-fig, axes = plt.subplots(2, 3, figsize=(8, 4))
+fig, axes = plt.subplots(2, 3)
 print(type(axes))
 print(axes.shape)
 
@@ -442,10 +424,10 @@ axes[0, 0].set_title('sinus bleu')
 axes[0, 2].set_xlabel('de 0 à 2 pi')
 axes[1, 1].set_ylabel('de -1 à 1')
 axes[1, 2].set_title('sinus magenta')
-plt.tight_layout()
+plt.tight_layout();
 ```
 
-# reprenons le TP
+## reprenons le TP
 
 +++
 
@@ -454,22 +436,16 @@ Reprenez les trois images en niveau de gris que vous aviez produites ci-dessus:
   B: celle obtenue avec la correction Y  
   C: celle obtenue avec la racine carrée
 
-1. Affichez les trois images côte à côte
-   A B C
+1. Affichez les trois images côte à côte  
+   1 2 3
 
-```{code-cell} ipython3
-# votre code
-```
-
-+++ {"tags": ["level_intermediate"]}
++++
 
 2. Affichez-les en damier:  
-   A B C  
-   C A B  
-   B C A
+   1 2 3  
+   3 1 2  
+   2 3 1
 
 ```{code-cell} ipython3
 # votre code
 ```
-
-***

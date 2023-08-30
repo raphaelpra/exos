@@ -3,9 +3,12 @@ jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   cell_metadata_json: true
   encoding: '# -*- coding: utf-8 -*-'
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+  notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
+    -jupytext.text_representation.format_version,
+
     -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
+
+    -language_info.file_extension, -language_info.mimetype, -toc'
   text_representation:
     extension: .md
     format_name: myst
@@ -17,31 +20,16 @@ language_info:
   name: python
   nbconvert_exporter: python
   pygments_lexer: ipython3
-notebookname: indexation & slicing
+nbhosting:
+  title: suite du TP simple avec des images
 ---
 
-<div class="licence">
-<span>Licence CC BY-NC-ND</span>
-<span>UE12</span>
-<span><img src="media/ensmp-25-alpha.png" /></span>
-</div>
+Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
 ```{code-cell} ipython3
 from IPython.display import HTML
-HTML('<link rel="stylesheet" href="slides-notebook.css" />')
+HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 ```
-
-+++ {"tags": ["level_advanced"]}
-
-pas fait par manque de temps, mais ce TP aurait besoin d'être retravaillé comme la partie 1, i.e.
-
-* utiliser %matplotlib notebook
-  * et donc faire des plt.figure(); pas besoin par contre du `plt.show()`
-* utiliser nbprune et notamment marquer les cellules à enlever avec `# prune-cell`
-* couper les énoncés en petits morceaux + digestes
-* l'insérer ensuite dans `nbhosting.yaml` pour l'exposer une fois prêt
-
-+++
 
 # TP images (2/2)
 
@@ -60,11 +48,14 @@ from matplotlib import pyplot as plt
 
 **notions intervenant dans ce TP**
 
+````{admonition} →
 sur les tableaux `numpy.ndarray`
+
 * `reshape()`, tests, masques booléens, *ufunc*, agrégation, opérations linéaires sur les `numpy.ndarray`
 * les autres notions utilisées sont rappelées (très succinctement)
 
 pour la lecture, l'écriture et l'affichage d'images
+
 * utilisez `plt.imread`, `plt.imshow`
 * utilisez `plt.show()` entre deux `plt.imshow()` dans la même cellule
 
@@ -74,10 +65,12 @@ pour la lecture, l'écriture et l'affichage d'images
 * nous ne signifions pas là du tout que ce sont les meilleures  
 par exemple `matplotlib.pyplot.imsave` ne vous permet pas de donner la qualité de la compression  
 alors que la fonction `save` de `PIL` le permet
+
 * vous êtes libres d'utiliser une autre librairie comme `opencv`  
   si vous la connaissez assez pour vous débrouiller (et l'installer), les images ne sont qu'un prétexte
 
 **n'oubliez pas d'utiliser le help en cas de problème.**
+````
 
 +++
 
@@ -95,42 +88,34 @@ YellowGreen 154 205 50
 ```
 Le nom de la couleur est suivi des 3 valeurs de ses codes `R`, `G` et `B`  
 Lisez cette table en `Python` et rangez-la dans la structure qui vous semble adéquate.
-<br>
-
-1. Affichez, à partir de votre structure, les valeurs rgb entières des couleurs suivantes  
-`'Red'`, `'Lime'`, `'Blue'`
-<br>
-
-1. Faites une fonction `patchwork` qui  
-   * prend une liste de couleurs et la structure donnant le code des couleurs RGB
-   * et retourne un tableau `numpy` avec un patchwork de ces couleurs  
-   * (pas trop petits les patchs - on doit voir clairement les taches de couleurs  
-   si besoin de compléter l'image mettez du blanc  
-   (`numpy.indices` peut être utilisé)
-<br>
-<br>
-1. Tirez aléatoirement une liste de couleurs et appliquez votre fonction à ces couleurs.
-<br>
-
-1. Sélectionnez toutes les couleurs à base de blanc et affichez leur patchwork  
-même chose pour des jaunes  
-<br>
-
-1. Appliquez la fonction à toutes les couleurs du fichier  
-et sauver ce patchwork dans le fichier `patchwork.jpg` avec `plt.imsave`
-<br>
-
-1. Relisez et affichez votre fichier  
-   attention si votre image vous semble floue c'est juste que l'affichage grossit vos pixels
-
-vous devriez obtenir quelque chose comme ceci
-<img src="patchwork-all.jpg" width="200px">
 
 ```{code-cell} ipython3
 # votre code
 ```
 
-**[indice]**
+2. Affichez, à partir de votre structure, les valeurs rgb entières des couleurs suivantes  
+`'Red'`, `'Lime'`, `'Blue'`
+
+```{code-cell} ipython3
+# votre code
+```
+
+3. Faites une fonction `patchwork` qui  
+
+   * prend une liste de couleurs et la structure donnant le code des couleurs RGB
+   * et retourne un tableau `numpy` avec un patchwork de ces couleurs  
+   * (pas trop petits les patchs - on doit voir clairement les taches de couleurs  
+   si besoin de compléter l'image mettez du blanc  
+   (`numpy.indices` peut être utilisé)
+
+```{code-cell} ipython3
+# votre code
+```
+
+````{tip}
+en version un peu brute, on pourrait utiliser juste la racine carrée;
+par exemple avec 5 couleurs créer un carré 3x3 - mais 3x2 c'est quand même mieux !
+
 
 pour calculer le rectangle qui contient n couleurs
 
@@ -153,8 +138,39 @@ n | rect | `int(sqrt(n))` |
 15 | 4x4 | 3
 16 | 4x4 | 4
 17 | 4x5 | 4
+````
 
 +++
+
+4. Tirez aléatoirement une liste de couleurs et appliquez votre fonction à ces couleurs.
+
+```{code-cell} ipython3
+# votre code
+```
+
+5. Sélectionnez toutes les couleurs à base de blanc et affichez leur patchwork  
+même chose pour des jaunes
+
+```{code-cell} ipython3
+# votre code
+```
+
+6. Appliquez la fonction à toutes les couleurs du fichier  
+et sauver ce patchwork dans le fichier `patchwork.png` avec `plt.imsave`
+
+```{code-cell} ipython3
+# votre code
+```
+
+7. Relisez et affichez votre fichier  
+   attention si votre image vous semble floue c'est juste que l'affichage grossit vos pixels
+
+vous devriez obtenir quelque chose comme ceci
+<img src="patchwork-all.jpg" width="200px">
+
+```{code-cell} ipython3
+# votre code
+```
 
 ## Somme des valeurs RGB d'une image
 
@@ -162,23 +178,55 @@ n | rect | `int(sqrt(n))` |
 
 0. Lisez l'image `les-mines.jpg`
 
+```{code-cell} ipython3
+# votre code
+```
+
 1. Créez un nouveau tableau `numpy.ndarray` en sommant **avec l'opérateur `+`** les valeurs RGB des pixels de votre image
+
+```{code-cell} ipython3
+# votre code
+```
 
 2. Affichez l'image (pas terrible), son maximum et son type
 
+```{code-cell} ipython3
+# votre code
+```
+
 3. Créez un nouveau tableau `numpy.ndarray` en sommant **avec la fonction d'agrégation `np.sum`** les valeurs RGB des pixels de votre image
+
+```{code-cell} ipython3
+# votre code
+```
 
 4. Affichez l'image, son maximum et son type
 
+```{code-cell} ipython3
+# votre code
+```
+
 5. Pourquoi cette différence ? Utilisez le help `np.sum?`
+
+```{code-cell} ipython3
+# votre code
+```
 
 6. Passez l'image en niveaux de gris de type entiers non-signés 8 bits  
 (de la manière que vous préférez)
+
+```{code-cell} ipython3
+# votre code
+```
 
 7. Remplacez dans l'image en niveaux de gris,  
 les valeurs >= à 127 par 255 et celles inférieures par 0  
 Affichez l'image avec une carte des couleurs des niveaux de gris  
 vous pouvez utilisez la fonction `numpy.where`
+
+```{code-cell} ipython3
+# votre code
+```
 
 8. avec la fonction `numpy.unique`  
 regardez les valeurs différentes que vous avez dans votre image en noir et blanc
@@ -194,10 +242,10 @@ regardez les valeurs différentes que vous avez dans votre image en noir et blan
 Pour passer en sépia les valeurs R, G et B d'un pixel  
 (encodées ici sur un entier non-signé 8 bits)  
 
-1. on transforme les valeurs $R$, $G$ et $B$ par la transformation  
-$0.393\, R + 0.769\, G + 0.189\, B$  
-$0.349\, R + 0.686\, G + 0.168\, B$  
-$0.272\, R + 0.534\, G + 0.131\, B$  
+1. on transforme les valeurs `R`, `G` et `B` par la transformation  
+`0.393 * R + 0.769 * G + 0.189 * B`  
+`0.349 * R + 0.686 * G + 0.168 * B`  
+`0.272 * R + 0.534 * G + 0.131 * B`  
 (attention les calculs doivent se faire en flottants pas en uint8  
 pour ne pas avoir, par exemple, 256 devenant 0)  
 1. puis on seuille les valeurs qui sont plus grandes que `255` à `255`
@@ -206,23 +254,15 @@ pour ne pas avoir, par exemple, 256 devenant 0)
 
 +++
 
-**Exercice**
+````{tip}
+jetez un coup d'oeil à la fonction `np.dot` 
+qui est si on veut une généralisation du produit matriciel
 
-1. Faites une fonction qui prend en argument une image RGB et rend une image RGB sépia  
-la fonction `numpy.dot` doit être utilisée (si besoin, voir l'exemple ci-dessous)
-
-1. Passez votre patchwork de couleurs en sépia  
-Lisez le fichier `patchwork-all.jpg` si vous n'avez pas de fichier perso
-2. Passez l'image `les-mines.jpg` en sépia
-
-```{code-cell} ipython3
-# votre code
-```
+dont voici un exemple d'utilisation:
+````
 
 ```{code-cell} ipython3
 :scrolled: true
-
-# INDICE:
 
 # exemple de produit de matrices avec `numpy.dot`
 # le help(np.dot) dit: dot(A, B)[i,j,k,m] = sum(A[i,j,:] * B[k,:,m])
@@ -234,23 +274,34 @@ B = np.arange(m*k*n).reshape(m, k, n)
 C = A.dot(B)
 # or C = np.dot(A, B)
 
-A.shape, B.shape, C.shape
+print(f"en partant des dimensions {A.shape} et {B.shape}")
+print(f"on obtient un résultat de dimension {C.shape}")
+print(f"et le nombre de termes dans chaque `sum()` est {A.shape[-1]} == {B.shape[-2]}")
 ```
 
-correction: comment ça marche ?
-
-la doc dit que
-> `dot(a, b)[i,j,k,m] = sum(a[i,j,:] * b[k,:,m])`
-
-dans notre cas:
-* a.dim = 3 (`a.shape = lines, cols, 3`), et
-* b.dim = 2, (`b.shape = 3, 3`), ce qui donne
-
-> `dot(image, SEPIA)[i, j, canal]
-  = sum(image[i, j, :] * SEPIA[:, canal])`  
-  cqfd $\diamond$
+**Exercice**
 
 +++
+
+1. Faites une fonction qui prend en argument une image RGB et rend une image RGB sépia  
+la fonction `numpy.dot` peut être utilisée si besoin, voir l'exemple ci-dessus
+
+```{code-cell} ipython3
+# votre code
+```
+
+2. Passez votre patchwork de couleurs en sépia  
+Lisez le fichier `patchwork-all.jpg` si vous n'avez pas de fichier perso
+
+```{code-cell} ipython3
+# votre code
+```
+
+3. Passez l'image `les-mines.jpg` en sépia
+
+```{code-cell} ipython3
+# votre code
+```
 
 ## Exemple de qualité de compression
 
@@ -258,20 +309,50 @@ dans notre cas:
 
 1. Importez la librairie `Image`de `PIL` (pillow)  
 (vous devez peut être installer PIL dans votre environnement)
-1. Quelle est la taille du fichier 'les-mines.jpg' sur disque ?
-1. Lisez le fichier 'les-mines.jpg' avec `Image.open` et avec `plt.imread`  
 
-3. Vérifiez que les valeurs contenues dans les deux objets sont proches
+```{code-cell} ipython3
+# votre code
+```
 
-4. Sauvez (toujours avec de nouveaux noms de fichiers)  
+2. Quelle est la taille du fichier `les-mines.jpg` sur disque ?
+
+```{code-cell} ipython3
+file = "les-mines.jpg"
+```
+
+```{code-cell} ipython3
+# votre code
+```
+
+3. Lisez le fichier 'les-mines.jpg' avec `Image.open` et avec `plt.imread`
+
+```{code-cell} ipython3
+# votre code
+```
+
+4. Vérifiez que les valeurs contenues dans les deux objets sont proches
+
+```{code-cell} ipython3
+# votre code
+```
+
+5. Sauvez (toujours avec de nouveaux noms de fichiers)  
 l'image lue par `imread` avec `plt.imsave`  
 l'image lue par `Image.open` avec `save` et une `quality=100`  
 (`save` s'applique à l'objet créé par `Image.open`)
 
-5. Quelles sont les tailles de ces deux fichiers sur votre disque ?  
+```{code-cell} ipython3
+# votre code
+```
+
+6. Quelles sont les tailles de ces deux fichiers sur votre disque ?  
 Que constatez-vous ?
 
-6. Relisez les deux fichiers créés et affichez avec `plt.imshow` leur différence
+```{code-cell} ipython3
+# votre code
+```
+
+7. Relisez les deux fichiers créés et affichez avec `plt.imshow` leur différence
 
 ```{code-cell} ipython3
 # votre code
