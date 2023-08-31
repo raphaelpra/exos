@@ -1,10 +1,15 @@
 ---
+execution:
+  allow_errors: true
 jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   encoding: '# -*- coding: utf-8 -*-'
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
+  notebook_metadata_filter: 'all, -jupytext.text_representation.jupytext_version,
+    -jupytext.text_representation.format_version,
+
     -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
+
+    -language_info.file_extension, -language_info.mimetype, -toc'
   text_representation:
     extension: .md
     format_name: myst
@@ -17,16 +22,17 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: manipuler du son
+  title: TP - un peu de musique
 ---
 
-<div class="licence">
-<span>Licence CC BY-NC-ND</span>
-<span>Thierry Parmentelat</span>
-<span><img src="media/inria-25-alpha.png" /></span>
-</div>
++++ {"editable": true, "slideshow": {"slide_type": ""}, "tags": []}
 
-+++
+Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
+
+```{code-cell} ipython3
+from IPython.display import HTML
+HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
+```
 
 # TP - un peu de musique
 
@@ -51,7 +57,17 @@ import numpy as np
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
+
+# en mode interactif ça peut être utile de choisir un mode interactif
+# comme par exemple celui-ci
+# par contre ça nécessite de faire un `pip install ipympl`
+# %matplotlib ipympl
 ```
+
+````{admonition} à quoi ça sert ?
+Grâce au mode de rendu dit *"ipympl"*, on a plus de possibilités d'interaction avec la figure  
+pour zoomer (icône carrée), déplacer (les deux flêches croisées), revenir au point de vue de départ (la maison)..
+````
 
 ```{code-cell} ipython3
 # pour jouer le son qu'on va produire
@@ -102,40 +118,38 @@ imaginons que nous voulions produire un son correspondant à un LA à 440 Hz, su
 
 +++
 
-**[indice]**
+````{tip}
+:class: dropdown
+
 la fonction qui donne la position de la membrane en fonction du temps est, si $\phi$ représente la fréquence du son
 
 $$ 
 f: [0, 1] \rightarrow [0, 1] \\
   f(t) = sin(2\pi\phi t)
 $$
+````
 
 ```{code-cell} ipython3
 # votre code
 la_1seconde = ...
 ```
 
-```{code-cell} ipython3
-:tags: [raises-exception]
-
-# pour débugger
-len(la_1seconde)
-```
+***
+***
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
+---
+editable: true
+slideshow:
+  slide_type: ''
+tags: [raises-exception]
+---
 # pour écouter le résultat
 # remarquez qu'on a maintenant perdu la fréquence d'échantillonnage
 # il faut repasser cette information au lecteur de musique
 
 Audio(la_1seconde, rate=RATE)
 ```
-
-***
-***
-
-+++
 
 **commodité**
 
@@ -147,16 +161,24 @@ def MyAudio(what, **kwds):
 ```
 
 ```{code-cell} ipython3
-:cell_style: split
-:tags: [raises-exception]
-
+---
+cell_style: split
+editable: true
+slideshow:
+  slide_type: ''
+tags: [raises-exception]
+---
 MyAudio(la_1seconde)
 ```
 
 ```{code-cell} ipython3
-:cell_style: split
-:tags: [raises-exception]
-
+---
+cell_style: split
+editable: true
+slideshow:
+  slide_type: ''
+tags: [raises-exception]
+---
 MyAudio(la_1seconde, autoplay=True)
 ```
 
@@ -168,10 +190,11 @@ pour généraliser un petit peu, on va écrire une fonction
 qui produit un son sinusoïdal, et qui prend en paramètres  
 la fréquence et la durée
 
-+++
+````{tip}
+:class: dropdown
 
-**[indice]**
 commencez par vous demander combien d'échantillons on doit produire
+````
 
 ```{code-cell} ipython3
 # votre code
@@ -181,16 +204,12 @@ def sine(freq, duration=1, amplitude=1.):
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter: plus court
 
 MyAudio(sine(LA, .5), autoplay=True)
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter: plus long
 
 MyAudio(sine(LA, 1.5), autoplay=True)
@@ -215,7 +234,7 @@ def sine_linear(freq1, freq2, duration):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate, raises-exception]
+:tags: [level_intermediate]
 
 # pour écouter
 MyAudio(sine_linear(440, 660, 3))
@@ -234,19 +253,6 @@ par exemple qui monte crescendo de manière linéaire
 sur toute la durée du son
 
 1. comment on pourrait faire ça ?
-1. en faire une fonction
-
-   ```python
-   def crescendo_sine(freq, duration):
-        ...
-   ```
-1. ajouter un paramètre pour pouvoir décroître
-   ```python
-   def crescendo_sine(freq, duration, increase=True):
-        ...
-   ```
-1. avancés: 
-   est-ce qu'on ne pourrait pas faire un choix un peu plus malin ?
 
 ```{code-cell} ipython3
 # votre code pour 1.
@@ -255,44 +261,53 @@ crescendo_la_1seconde = ...
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter
 MyAudio(crescendo_la_1seconde) #, autoplay=True)
 ```
 
+2. en faire une fonction
+
+   ```python
+   def crescendo_sine(freq, duration):
+        ...
+   ```
+
 ```{code-cell} ipython3
 # votre code pour 2.
-def crescendo(freq, duration):
+def crescendo_sine(freq, duration):
     ...
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter
-MyAudio(crescendo(LA, 2)) #, autoplay=True)
+MyAudio(crescendo_sine(LA, 2)) #, autoplay=True)
 ```
+
+3. ajouter un paramètre pour pouvoir décroître
+   ```python
+   def crescendo_sine(freq, duration, increase=True):
+        ...
+   ```
 
 ```{code-cell} ipython3
 # votre code pour 3.
-def crescendo(freq, duration, increase=True):
+def crescendo_sine(freq, duration, increase=True):
     ...
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter
 
-MyAudio(crescendo(LA, 2, increase=False)) #, autoplay=True)
+MyAudio(crescendo_sine(LA, 2, increase=False)) #, autoplay=True)
 ```
 
-exo 4.
+4. avancés:
+   est-ce qu'on ne pourrait pas faire un choix un peu plus malin ?
 
-**[indice]**
-
-* comment s'y prendrait-on pour faire un crescendo sur un son qui ne serait pas sinusoïdal ?
+````{tip}
+on vient de faire le crescendo pour un son sinusoïdal  
+mais ça pourrait s'appliquer à plein d'autres sons, comment faire pour n'écrire ce code qu'une seule fois ?
+````
 
 ```{code-cell} ipython3
 # votre code pour 4.
@@ -318,8 +333,6 @@ la_do = ...
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter
 
 MyAudio(la_do, autoplay=True)
@@ -339,7 +352,7 @@ aussi nous allons maintenant nous poser la question de changer d'échelle - et d
 
 ### entiers signés ou non
 
-ce qui nous amène à une petite digression: profitons-en pour regarder un peu comment sont encodés les entiers; 
+ce qui nous amène à une petite digression: profitons-en pour regarder un peu comment sont encodés les entiers;
 
 l'encodage des **entiers signés** fonctionne comme suit; on regarde ici les types `int8` et `uint8` car c'est plus simple, le principe est exactement le même pour des tailles plus grandes
 
@@ -351,12 +364,12 @@ par contre pour les entiers **signés**, on va devoir utiliser **un bit comme bi
 
 +++
 
-| entier |    int8    |     uint8    | 
+| entier |    int8    |     uint8    |
 |--------|------------|--------------|
 | -128   | `10000000` | n/a |
 | -127   | `10000001` | n/a |
-| -126   | `10000010` | n/a | 
-| ...    | 
+| -126   | `10000010` | n/a |
+| ...    |
 | -003   | `11111101` | n/a |
 | -002   | `11111110` | n/a |
 | -001   | `11111111` | n/a |
@@ -364,7 +377,7 @@ par contre pour les entiers **signés**, on va devoir utiliser **un bit comme bi
 | 000    | `00000000` | `00000000` (idem) |
 | 001    | `00000001` | `00000001` (idem) |
 | 002    | `00000010` | `00000010` (idem) |
-| ...    | 
+| ...    |
 | 125    | `01111101` | `01111101` (idem) |
 | 126    | `01111110` | `01111110` (idem) |
 | 127    | `01111111` | `01111111` (idem) |
@@ -389,15 +402,22 @@ du coup avec le type `int16` on va pouvoir encoder l'intervalle [-32768, 32767]
 
 +++
 
-**[[exercice]]**
+````{admonition} signé ou pas signé ?
 
-* pour coder le son, faut-il utiliser des entiers signés ou non signés ?
-* fabriquez un tableau contenant les entiers de 32764 à 32771 inclus
-* convertissez-le en entier 16 bits signés
+pour coder le son, faut-il utiliser des entiers signés ou non signés ?
+* fabriquez un tableau de -5 à 5 comme des entiers 16 bits non signés
+* fabriquez un tableau contenant les entiers de 32764 à 32771 comme des entiers 16 bits signés
 * que constatez-vous
 * qu'est-ce que cela signifie pour la génération de son ?
 
-+++
+```{note}
+d'ailleurs il semble qu'avec les versions futures de numpy, ce genre de manipes tordues provoquera une exception...
+```
+````
+
+```{code-cell} ipython3
+# à vous
+```
 
 ### mise à l'échelle
 
@@ -409,7 +429,7 @@ en vous souvenant qu'on a à notre disposition la méthode `array.astype()`
 pour fabriquer une copie d'un tableau numpy convertie dans un autre type,
 
 écrivez une fonction qui transforme  
-notre tableau de flottants dans [-1, 1]. 
+notre tableau de flottants dans [-1, 1].
 en un tableau d'**entiers signés 16bits**
 
 et pour préserver le niveau sonore, il faut que les entrés maximales  
@@ -426,16 +446,13 @@ def float_to_int16(as_float):
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 # pour écouter
-
 MyAudio(float_to_int16(la_do), autoplay=True)
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 # sans conversion
 MyAudio(la_do, autoplay=True)
@@ -470,55 +487,51 @@ vous allez reconnaitre dans les deux cas le pin-pon des pompiers
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 Audio(filename='media/pin-pon-la-si.wav')
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 Audio(filename='media/pin-pon-fa-sol.wav')
 ```
 
 ici dans les deux cas, les deux notes utilisées (la - si, puis fa - sol)  
 sont dans les deux cas séparées de 2 crans dans la gamme chromatique  
-(on dit que les deux notes constituent un *intervalle* de 2 demi-tons, soit un ton)   
+(on dit que les deux notes constituent un *intervalle* de 2 demi-tons, soit un ton)  
 et comme c'est le **même intervalle**, notre oreille entend dans les deux cas la même "mélodie"
 
 +++
 
 ### un intervalle = un rapport entre fréquences
 
-enfin, il faut savoir que ce qui caractérise un intervalle, 
+enfin, il faut savoir que ce qui caractérise un intervalle,
 c'est le **rapport** entre les fréquences des deux notes
 
 ainsi par exemple, vous pouvez constater que si on multiplie une fréquence par 2
 
 ```{code-cell} ipython3
 :cell_style: center
-:tags: [raises-exception]
 
 # une octave de LA
 MyAudio(
-    np.concatenate((sine(LA, 0.5), 
+    np.concatenate((sine(LA, 0.5),
                     sine(2*LA, 0.5))),
     autoplay=True)
 ```
 
 on entend une note qui ressemble beaucoup à la premiére  
-en fait le fait de **multiplier la fréquence par 2**  
+en réalité, le fait de **multiplier la fréquence par 2**  
 permet d'obtenir une note **une octave** au dessus  
 (c'est-à-dire de passer d'un DO au DO au dessus)
 
 ```{code-cell} ipython3
 :cell_style: center
-:tags: [raises-exception]
 
 # même effet avec le DO naturellement
 MyAudio(
-    np.concatenate((sine(DO, 0.5), 
+    np.concatenate((sine(DO, 0.5),
                     sine(2*DO, 0.5))),
     autoplay=True)
 ```
@@ -532,21 +545,21 @@ les fréquences des notes de la gamme (dite *bien tempérée*)
 
 en effet on sait que, puisque c'est toujours le même intervalle,  
 un demi-ton correspond à un rapport constant entre les (fréquences des) notes  
-qu'on va appeler $alpha$
+qu'on va appeler $\alpha$
 
 $$
-\frac{do\sharp}{do} = 
-\frac{ré}{do\sharp} = 
+\frac{do\sharp}{do} =
+\frac{ré}{do\sharp} =
 \ldots
-\frac{si}{la\sharp} = 
+\frac{si}{la\sharp} =
 \frac{do'}{si} = \alpha
 $$
 
 +++ {"cell_style": "center"}
 
-et comme par ailleurs on sait qu'entre les deux *do* il y a une octave  
+et comme par ailleurs on sait qu'entre les deux *do* il y a une octave 
 donc $
-\frac{do'}{do} = 2 
+\frac{do'}{do} = 2
 $
 
 mais c'est aussi
@@ -567,8 +580,8 @@ d'où il ressort que $\alpha^{12} = 2$
 
 +++ {"cell_style": "split"}
 
-$
-\begin{array}
+$$
+\begin{array}{cccc}
 00 & 1 & 2^0 & do\\
 1 & \sqrt[^{12}]{2} & 2^{1/12} & do\sharp\\
 2 & (\sqrt[^{12}]{2})^2 & 2^{2/12} & ré\\
@@ -576,12 +589,9 @@ $
 11 & (\sqrt[^{12}]{2})^{11} & 2^{11/12} & la\sharp\\
 12 & 2 & 2^{12/12} & do'\\
 \end{array}
-$
+$$
 
-```{code-cell} ipython3
-# votre code
-...
-```
++++
 
 2. on a besoin d'une fonction qui calcule la fréquence  
    d'une note à partir de son nom  
@@ -599,29 +609,36 @@ def freq_from_name(name):
 
 ```{code-cell} ipython3
 :cell_style: center
-:tags: [raises-exception]
 
-# pour vérifier: devrait retourner 440
+# pour vérifier: devrait retourner 
 # ou presque (rappelez-vous les erreurs d'arrondi avec les flottants)
-
 
 freq_from_name('la')
 ```
 
 ```{code-cell} ipython3
-:cell_style: center
-:tags: [raises-exception]
+:cell_style: split
 
 # attention à la précision !
 freq_from_name('la') == 440
 ```
 
 ```{code-cell} ipython3
-# question: on fait comment déjà pour comparer deux flottants ?
+:tags: [framed_cell]
 
+# question: on fait comment déjà pour comparer deux flottants ?
 # à vous
-...
 ```
+
++++ {"cell_style": "split"}
+
+```{tip}
+:class: dropdown
+
+pensez à utiliser ceci `np.isclose(freq_from_name('la'), 440)`
+```
+
++++
 
 ## rationnels approchants
 
@@ -631,11 +648,12 @@ pour comprendre les harmonies, ce qui intéressant
 c'est que parmi les ratios qu'on a calculés plus haut,  
 certains sont **très proches** de rapports **rationnels simples**
 
-**[note]** il n'y a pas d'exercice dans cette section, juste un exemple de visualisation
+````{note}
+il n'y a pas d'exercice dans cette section, juste un exemple de visualisation
+````
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 # intervalle do-mi (tierce majeure) ~= 5/4
 ratios[4]
@@ -643,7 +661,6 @@ ratios[4]
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 # intervalle do-sol (quinte) ~= 3/2
 ratios[7]
@@ -659,14 +676,11 @@ pour visualiser les ratios de la gamme
 
 ```{code-cell} ipython3
 :cell_style: center
-:tags: [raises-exception]
-
-%matplotlib inline
 
 plt.figure(figsize=(2, 6))
 
 # on veut afficher 12 points de coordonnées
-# tous avec une coordonnée X=0 
+# tous avec une coordonnée X=0
 X = np.zeros(ratios.shape)
 
 # et pour marqueur un petit trait horizontal
@@ -707,7 +721,6 @@ def turn_off_xticks():
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 # on crée une figure
 plt.figure(figsize=(2, 6))
@@ -739,8 +752,6 @@ accord_do_mi_sol = ...
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter
 
 MyAudio(accord_do_mi_sol, autoplay=True)
@@ -773,7 +784,7 @@ from scipy.io import wavfile
 original = la_do # par exemple
 #
 # sauver le son 'before' dans un fichier 'sample.wav'
-# 
+#
 restored = ... # relisez le fichier 'sample.wav' dans une variable 'after'
 ```
 
@@ -788,7 +799,6 @@ MyAudio(original)
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 # pour vérifier
 
@@ -801,13 +811,7 @@ MyAudio(restored)
 
 on part d'un petit fichier `media/sounds-cello.wav`
 
-```{code-cell} ipython3
-#wavfile.read?
-```
-
-```{code-cell} ipython3
-%ls -l media/sounds-cello.wav
-```
++++
 
 <audio controls src="media/sounds-cello.wav" style="width:100%">
 
@@ -815,55 +819,66 @@ on part d'un petit fichier `media/sounds-cello.wav`
 
 **exercice**
 
-1. lire le fichier (ranger le signal dans une variable `data`) 
-1. afficher le samplerate utilisé dans le fichier
-1. afficher le nombre d'échantillons
-1. afficher la longueur du morceau en secondes
+1. lire le fichier (ranger le signal dans une variable `data`)
+   (voyez `wavfile.read`)
 
 ```{code-cell} ipython3
 # votre code
-
-data = ...
 ```
 
-```{code-cell} ipython3
-:tags: [raises-exception]
+2. écoutez le
 
-# pour vérifier à l'oreille
-MyAudio(data)
+```{code-cell} ipython3
+# votre code
+```
+
+3. afficher le samplerate utilisé dans le fichier
+
+```{code-cell} ipython3
+# votre code
+```
+
+4. afficher le nombre d'échantillons
+
+```{code-cell} ipython3
+# votre code
+```
+
+5. afficher la longueur du morceau en secondes
+
+```{code-cell} ipython3
+# votre code
 ```
 
 ### à quoi ça ressemble
 
-+++
++++ {"tags": ["licence"]}
 
 on va utiliser matplotlib pour afficher le signal
 
 affichez le signal du morceau (la position de la membrane) en fonction du temps à l'aide de la fonction `plt.plot()`
 
-+++
-
-**[indices]** 
-* adoptez le mode de rendu dit `notebook`  `%matplotlib notebook`
-* utilisez-le pour zoomer dans le diagramme
+````{tip}
+* c'est important d'avoir un rendu interactif (souvenez vous de `%matplotlib`)
+* pour pouvoir zoomer dans le diagramme
 * notamment utiles: pour zoomer (icône carrée), déplacer (les deux flêches croisées), revenir au point de vue de départ (la maison)..
+````
 
-```{code-cell} ipython3
-# à vous
-```
++++
 
 ## effet d'echo
 
 +++
 
 maintenant on veut ajouter un effet d'echo  
-  
+
 il nous faut pour cela
 
 * créer une version du son initial, mais décalée dans le temps  
 * et ajouter les deux
 
 sauf que si on s'y prend comme cela:
+
 * les deux signaux apparaissent avec le même niveau sonore  
   or un effet d'echo sous-entend une atténuation du signal tardif
 * en plus avec le type `int16`, on risque de causer des erreurs de débordement  
@@ -876,6 +891,7 @@ sauf que si on s'y prend comme cela:
 ![](media/sounds-offsets.png)
 
 c'est ce qu'on essaie d'illustrer ici
+
 * le signal de départ (en vert)
 * est décalé vers la droite de la valeur du retard
 * et on applique à chacun une pondération  
@@ -896,18 +912,16 @@ main_ratio, delayed_ratio = 0.7, 0.3
 **exercice** v1
 
 1. traduire `delay` en nombre d'échantillons `offset`
-1. produire le son avec echo, 
+1. produire le son avec echo,
    sur une durée correspondant au son de départ
 
 ```{code-cell} ipython3
-# votre code pour produire 
+# votre code pour produire
 # le son de 'data' avec echo
 data_echoed = ...
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter
 
 MyAudio(data_echoed)
@@ -915,7 +929,6 @@ MyAudio(data_echoed)
 
 ```{code-cell} ipython3
 :scrolled: true
-:tags: [raises-exception]
 
 # pour observer
 
@@ -926,6 +939,7 @@ plt.plot(data_echoed, linewidth=0.05);
 **exercice** v2
 
 1. idem mais pour produire une durée un peu plus longue, correspondant à la somme
+
   * de la durée du son de départ
   * et du retard
 
@@ -936,15 +950,12 @@ data_echoed_v2 = ...
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter
 MyAudio(data_echoed_v2)
 ```
 
 ```{code-cell} ipython3
 :scrolled: true
-:tags: [raises-exception]
 
 # pour observer
 
@@ -983,9 +994,9 @@ je vous laisse y réfléchir un moment...
 
 +++
 
-pour élever d'une octave, il suffit d'ignorer un échantillon sur deux 
+pour élever d'une octave, il suffit d'ignorer un échantillon sur deux
 
-pourquoi ? de cette façon on va artificiellement 
+pourquoi ? de cette façon on va artificiellement
 
 * diminuer la durée par 2 (2 fois moins d'échantillons, toujours à la même fréquence d'échantillonage de 44.100 Hz)
 * et du coup multiplier par 2 la fréquence des sons perçus
@@ -1008,7 +1019,6 @@ data2 = ...
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 # pour écouter
 
@@ -1017,7 +1027,6 @@ MyAudio(data)
 
 ```{code-cell} ipython3
 :cell_style: split
-:tags: [raises-exception]
 
 # pour écouter
 
@@ -1027,10 +1036,6 @@ MyAudio(data2)
 naturellement le profil reste le même mais l'échelle des X est plus courte (deux fois moins d'échantillons)
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
-%matplotlib notebook
-
 plt.figure(figsize=(10, 4))
 plt.plot(data2, linewidth=0.05);
 ```
@@ -1048,7 +1053,7 @@ pour transposer d'une quinte, il nous faut multiplier la fréquence par 3/2; on 
 sauf que cette fois, il faut un peu interpoler; on est donc amené à faire des moyennes comme ceci
 
 ```
-data         data3
+data         data3  
 0    0       0
 1    1+2/2   1
 2    --
@@ -1077,18 +1082,14 @@ data3 = ...
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # vérification de visu
-# ces deux segments correspondent normalement 
+# ces deux segments correspondent normalement
 # au même instant dans le morceau
 
 data[12000:12007], data3[8000:8005]
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # pour écouter
 MyAudio(data3)
 ```
@@ -1103,7 +1104,7 @@ on peut s'amuser à calculer, pour chaque note, la fraction la plus proche - si 
 
 +++ {"tags": ["level_intermediate"]}
 
-pour ça on se fixe par exemple N=7 et pour chaque note x, on veut minimiser abs(x-r) pour r étant dans l'espace 
+pour ça on se fixe par exemple N=7 et pour chaque note x, on veut minimiser abs(x-r) pour r étant dans l'espace
 $$r\in\{1 + p/q, q<=N, 0<=p<=q\}$$
 
 +++ {"tags": ["level_intermediate"]}
@@ -1135,7 +1136,7 @@ def closest1(note):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate, raises-exception]
+:tags: [level_intermediate]
 
 # mais le souci c'est qu'on a perdu de l'information
 tierce, quinte = ratios[4], ratios[7]
@@ -1158,7 +1159,7 @@ def closest2(note):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate, raises-exception]
+:tags: [level_intermediate]
 
 closest2(quinte)
 ```
@@ -1177,7 +1178,7 @@ def closest(note):
     (rationnel, erreur relative)
     """
     # on va trier une liste de tuples (rational, relative_error)
-    # c'est sous-optimal d'un point de vue algorithmique 
+    # c'est sous-optimal d'un point de vue algorithmique
     # car on n'a pas vraiment besoin de trier toute la liste
     # dans ces ordres de grandeur ça n'a pas bcp d'importance
     # par contre ça donne un code un peu plus intéressant
@@ -1187,7 +1188,7 @@ def closest(note):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate, raises-exception]
+:tags: [level_intermediate]
 
 closest(quinte)
 ```
@@ -1196,7 +1197,7 @@ closest(quinte)
 
 ### les accords harmonieux
 
-+++ {"tags": ["level_intermediate"], "lines_to_next_cell": 2}
++++ {"tags": ["level_intermediate"]}
 
 si on ne garde que les notes qui sont très proches - avec une erreur relative de moins de 0.5%  
 on trouve les intervalles do-fa et do-sol
