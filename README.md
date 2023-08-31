@@ -1,4 +1,4 @@
-# flotpython companion
+# flotpython exos
 
 this repo contains exercises and TPs that complement the Python MOOC
 
@@ -53,8 +53,8 @@ distinction between notebooks and pure Python or pure markdown
 these 2 categories are available online here, with an attempt to organize each
 content into meaningful sections:
 
-* [pure-Python: start here](https://nbhosting.inria.fr/builds/python-exos/python/latest/README.html)
-* [pure-Python: start here](https://nbhosting.inria.fr/builds/python-exos/data-science/latest/README.html)
+* [pure Python: start here](https://nbhosting.inria.fr/builds/python-exos/python/latest/README.html)
+* [data science: start here](https://nbhosting.inria.fr/builds/ds-exos/data-science/latest/README.html)
 
 ## note on autoreload in ipython or notebooks
 
@@ -71,7 +71,7 @@ your interpreter
 
 when then, **BEWARE** because **a second `import` will not reload the file**  
 this is intended, and desirable, because loading a module is costly; so the
-interpreter caches its loaded modules, and long story short, you can re-imoport
+interpreter caches its loaded modules, and long story short, you can re-import
 as much as you want, you still run the old code !
 
 **to work around this situation**: with the trick that follows, you won't even
