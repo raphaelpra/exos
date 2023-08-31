@@ -288,7 +288,7 @@ plt.imshow(pat);
 
 +++
 
-0. Lisez l'image `les-mines.jpg`
+0. Lisez l'image `data/les-mines.jpg`
 
 ```{code-cell} ipython3
 # votre code
@@ -299,7 +299,7 @@ plt.imshow(pat);
 import numpy as np
 from matplotlib import pyplot as plt
 
-im = plt.imread('les-mines.jpg')
+im = plt.imread('data/les-mines.jpg')
 ```
 
 1. Créez un nouveau tableau `numpy.ndarray` en sommant **avec l'opérateur `+`** les valeurs RGB des pixels de votre image
@@ -491,7 +491,7 @@ SEPIA=np.array([[0.393, 0.349, 0.272],
                 [0.769, 0.686, 0.534],
                 [0.189, 0.168, 0.131]])
 
-img = plt.imread('les-mines.jpg') # dtype = uint8
+img = plt.imread('data/les-mines.jpg') # dtype = uint8
 print(img.dtype)
 print(img.shape, SEPIA.shape) # (i, j, 3) (m, 3)
 
@@ -528,7 +528,7 @@ def sepia(im, SEPIA=np.array([[0.393, 0.349, 0.272],
     return result.astype(np.uint8)
 
 plt.imshow(
-    sepia(plt.imread('les-mines.jpg')));
+    sepia(plt.imread('data/les-mines.jpg')));
 ```
 
 prune-cell: comment ça marche ?
@@ -564,7 +564,7 @@ im = plt.imread(file)
 plt.imshow(sepia(im));
 ```
 
-3. Passez l'image `les-mines.jpg` en sépia
+3. Passez l'image `data/les-mines.jpg` en sépia
 
 ```{code-cell} ipython3
 # votre code
@@ -573,9 +573,9 @@ plt.imshow(sepia(im));
 ```{code-cell} ipython3
 # prune-cell 3.
 
-im_sepia = sepia(plt.imread('les-mines.jpg'))
+im_sepia = sepia(plt.imread('data/les-mines.jpg'))
 plt.imshow(im_sepia)
-plt.imsave('les-mines-sepia.jpg', im_sepia)
+plt.imsave('data/les-mines-sepia.jpg', im_sepia)
 ```
 
 ## Exemple de qualité de compression
@@ -594,10 +594,10 @@ from PIL import Image
 # votre code
 ```
 
-2. Quelle est la taille du fichier `les-mines.jpg` sur disque ?
+2. Quelle est la taille du fichier `data/les-mines.jpg` sur disque ?
 
 ```{code-cell} ipython3
-file = "les-mines.jpg"
+file = "data/les-mines.jpg"
 ```
 
 ```{code-cell} ipython3
@@ -615,7 +615,7 @@ from pathlib import Path
 print(f"{file} {Path(file).stat().st_size} bytes")
 ```
 
-3. Lisez le fichier 'les-mines.jpg' avec `Image.open` et avec `plt.imread`
+3. Lisez le fichier 'data/les-mines.jpg' avec `Image.open` et avec `plt.imread`
 
 ```{code-cell} ipython3
 # votre code

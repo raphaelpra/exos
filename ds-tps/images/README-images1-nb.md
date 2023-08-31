@@ -133,7 +133,7 @@ il y a plein de façons de le faire, google et/ou stackoverflow sont vos amis...
 
 +++
 
-1. Avec la fonction `plt.imread` lisez le fichier `les-mines.jpg`  
+1. Avec la fonction `plt.imread` lisez le fichier `data/les-mines.jpg`  
 ou toute autre image - *faites juste attention à la taille*
 
 ```{code-cell} ipython3
@@ -316,7 +316,7 @@ affichez-le pour `(l, c) = (10, 20)`) puis `(l, c) = (100, 200)`)
 
 +++
 
-1. Relire l'image `les-mines.jpg`
+1. Relire l'image `data/les-mines.jpg`
 
 ```{code-cell} ipython3
 # votre code

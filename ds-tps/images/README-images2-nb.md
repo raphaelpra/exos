@@ -28,7 +28,7 @@ Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
 +++
 
-
+pour réaliser ce TP localement sur votre ordi, si ce n'est pas déjà fait, {download}`commencez par télécharger le zip<./ARTEFACTS-images.zip>`
 
 +++
 
@@ -177,7 +177,7 @@ vous devriez obtenir quelque chose comme ceci
 
 +++
 
-0. Lisez l'image `les-mines.jpg`
+0. Lisez l'image `data/les-mines.jpg`
 
 ```{code-cell} ipython3
 # votre code
@@ -298,7 +298,7 @@ Lisez le fichier `patchwork-all.jpg` si vous n'avez pas de fichier perso
 # votre code
 ```
 
-3. Passez l'image `les-mines.jpg` en sépia
+3. Passez l'image `data/les-mines.jpg` en sépia
 
 ```{code-cell} ipython3
 # votre code
@@ -315,17 +315,17 @@ Lisez le fichier `patchwork-all.jpg` si vous n'avez pas de fichier perso
 # votre code
 ```
 
-2. Quelle est la taille du fichier `les-mines.jpg` sur disque ?
+2. Quelle est la taille du fichier `data/les-mines.jpg` sur disque ?
 
 ```{code-cell} ipython3
-file = "les-mines.jpg"
+file = "data/les-mines.jpg"
 ```
 
 ```{code-cell} ipython3
 # votre code
 ```
 
-3. Lisez le fichier 'les-mines.jpg' avec `Image.open` et avec `plt.imread`
+3. Lisez le fichier 'data/les-mines.jpg' avec `Image.open` et avec `plt.imread`
 
 ```{code-cell} ipython3
 # votre code

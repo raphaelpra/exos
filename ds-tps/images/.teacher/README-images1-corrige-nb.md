@@ -193,7 +193,7 @@ plt.imshow(img);
 
 +++
 
-1. Avec la fonction `plt.imread` lisez le fichier `les-mines.jpg`  
+1. Avec la fonction `plt.imread` lisez le fichier `data/les-mines.jpg`  
 ou toute autre image - *faites juste attention à la taille*
 
 ```{code-cell} ipython3
@@ -205,7 +205,7 @@ ou toute autre image - *faites juste attention à la taille*
 import numpy as np
 from matplotlib import pyplot as plt
 
-file = 'les-mines.jpg'
+file = 'data/les-mines.jpg'
 
 # 1.
 im = plt.imread(file)
@@ -315,7 +315,7 @@ plt.imshow(im[:10, :10, :]);
 import numpy as np
 from matplotlib import pyplot as plt
 
-file = 'les-mines.jpg'
+file = 'data/les-mines.jpg'
 
 # 1.
 im = plt.imread(file)
@@ -395,7 +395,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # 1.
-file = 'les-mines.jpg'
+file = 'data/les-mines.jpg'
 im = plt.imread(file)
 ```
 
@@ -536,7 +536,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # 1.
-file = 'les-mines.jpg'
+file = 'data/les-mines.jpg'
 im = plt.imread(file)
 ```
 
@@ -573,7 +573,7 @@ plt.show()
 
 +++
 
-1. Relire l'image `les-mines.jpg`
+1. Relire l'image `data/les-mines.jpg`
 
 ```{code-cell} ipython3
 # votre code
@@ -585,7 +585,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # 1.
-file = 'les-mines.jpg'
+file = 'data/les-mines.jpg'
 im = plt.imread(file)
 ```
 
