@@ -26,10 +26,11 @@ nbhosting:
 
 Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-```{code-cell} ipython3
-from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
-```
++++
+
+pour réaliser ce TP localement sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-images.zip>`
+
++++
 
 # TP images (1/2)
 

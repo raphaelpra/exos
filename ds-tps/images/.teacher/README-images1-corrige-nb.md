@@ -26,10 +26,11 @@ nbhosting:
 
 Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-```{code-cell} ipython3
-from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
-```
++++
+
+pour réaliser ce TP localement sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-images.zip>`
+
++++
 
 # TP images (1/2)
 
@@ -398,7 +399,7 @@ file = 'les-mines.jpg'
 im = plt.imread(file)
 ```
 
-2. Découpez l'image en ses trois canaux Red, Green et Blue  
+2. Découpez l'image en ses trois canaux Red, Green et Blue
 
 ```{code-cell} ipython3
 # votre code
@@ -462,7 +463,7 @@ for (channel, cmap) in (R, 'Reds'), (G, 'Greens'), (B, 'Blues'):
 
 5. Copiez l'image, remplacer dans la copie, un carré de taille `(200, 200)` en bas à droite  
    . par un carré de couleur RGB avec R à 219, G à 112 et B à 147 (vous obtenez quelle couleur)  
-   . par un carré blanc avec des rayures horizontales rouges de 1 pixel  
+   . par un carré blanc avec des rayures horizontales rouges de 1 pixel
 
 ```{code-cell} ipython3
 # votre code
@@ -588,7 +589,7 @@ file = 'les-mines.jpg'
 im = plt.imread(file)
 ```
 
-2. Passez ses valeurs en flottants entre 0 et 1 et affichez-la  
+2. Passez ses valeurs en flottants entre 0 et 1 et affichez-la
 
 ```{code-cell} ipython3
 # votre code

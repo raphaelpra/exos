@@ -26,10 +26,11 @@ nbhosting:
 
 Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-```{code-cell} ipython3
-from IPython.display import HTML
-HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
-```
++++
+
+pour réaliser ce TP localement sur votre ordi, si ce n'est pas déjà fait, {download}`commencez par télécharger le zip<./ARTEFACTS-images.zip>`
+
++++
 
 # TP images (2/2)
 
@@ -102,7 +103,6 @@ with open('rgb-codes.txt', 'r') as f:
         colors_dict[name] = [int(r), int(g), int(b)]
 ```
 
-
 2. Affichez, à partir de votre structure, les valeurs rgb entières des couleurs suivantes  
 `'Red'`, `'Lime'`, `'Blue'`
 
@@ -115,7 +115,6 @@ with open('rgb-codes.txt', 'r') as f:
 for c in ['Red', 'Lime', 'Blue']:
     print(c, colors_dict[c])
 ```
-
 
 3. Faites une fonction `patchwork` qui  
 
@@ -253,7 +252,6 @@ for s in ['white', 'red']: #, 'blue', 'medium', 'light', 'brown'
     plt.show()
 ```
 
-
 6. Appliquez la fonction à toutes les couleurs du fichier  
 et sauver ce patchwork dans le fichier `patchwork.png` avec `plt.imsave`
 
@@ -304,7 +302,7 @@ from matplotlib import pyplot as plt
 im = plt.imread('les-mines.jpg')
 ```
 
-1. Créez un nouveau tableau `numpy.ndarray` en sommant **avec l'opérateur `+`** les valeurs RGB des pixels de votre image  
+1. Créez un nouveau tableau `numpy.ndarray` en sommant **avec l'opérateur `+`** les valeurs RGB des pixels de votre image
 
 ```{code-cell} ipython3
 # votre code
@@ -617,7 +615,7 @@ from pathlib import Path
 print(f"{file} {Path(file).stat().st_size} bytes")
 ```
 
-3. Lisez le fichier 'les-mines.jpg' avec `Image.open` et avec `plt.imread`  
+3. Lisez le fichier 'les-mines.jpg' avec `Image.open` et avec `plt.imread`
 
 ```{code-cell} ipython3
 # votre code
@@ -668,7 +666,7 @@ for ext in ['PLT', 'PIL']:
     print(f"{ext} {Path(f'{file}-{ext}.jpg').stat().st_size} bytes")
 ```
 
-7. Relisez les deux fichiers créés et affichez avec `plt.imshow` leur différence  
+7. Relisez les deux fichiers créés et affichez avec `plt.imshow` leur différence
 
 ```{code-cell} ipython3
 # votre code
