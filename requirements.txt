@@ -3,9 +3,6 @@
 numpy
 pandas
 matplotlib
-ipywidgets
-ipympl
-
 mpld3
 bokeh
 plotly
@@ -13,7 +10,6 @@ vispy
 seaborn
 pygal
 networkx
-mypy
 autograd
 k3d
 graphviz
@@ -23,17 +19,17 @@ scikit-learn
 folium
 vega_datasets
 
-
 # tooling
-
-jupyterlab
+jupyter
+jupytext
+jupyterlab-myst
+ipywidgets
+ipympl
+# for some unknown reason, without this
+# I am getting version jupyterlab-widgets==1.1.5
+# which breaks interactive plots
+jupyterlab-widgets>=3.0
+jupyterlab-courselevels
 
 # for vs-code
 ipykernel
-
-# not yet stable
-/Users/tparment/git/jupytext/dist/jupytext-1.15.0.dev1-py3-none-any.whl
-#git+https://github.com/parmentelat/jupytext.git@main
-
-jupyterlab-myst
-jupyterlab-courselevels
