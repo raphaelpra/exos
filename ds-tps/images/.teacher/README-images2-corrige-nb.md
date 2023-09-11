@@ -82,7 +82,7 @@ alors que la fonction `save` de `PIL` le permet
 
 +++
 
-1. Le fichier `rgb-codes.txt` contient une table de couleurs:
+1. Le fichier `data/rgb-codes.txt` contient une table de couleurs:
 ```
 AliceBlue 240 248 255
 AntiqueWhite 250 235 215
