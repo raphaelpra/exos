@@ -66,7 +66,7 @@ Commencez par créer et activer un environnement dédié au TP:
 
 ```bash
 # on commence par créer un environnement "snake"
-(base) $ conda create -n snake python=3.10
+(base) $ conda create -n snake python=3.11
 # puis on l'active
 (base) $ conda activate snake
 # votre terminal doit indiquer le nom d'environnement:
@@ -442,7 +442,7 @@ Voici un très rapide résumé des commandes pour gérer ses environnements virt
 * pour créer un nouvel environnement
 
   ```bash
-  conda create -n un-nouveau python=3.10
+  conda create -n un-nouveau python=3.11
   ```
 
   (le fait de spécifier la version de Python est optionnel, mais recommandé)
