@@ -1,5 +1,7 @@
 # Le snake
 
+pour réaliser ce TP localement sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-snake.zip>`
+
 Le but de ce TP est de réaliser un petit jeu en Python. L'objectif est de vous
 apprendre à concevoir et réaliser un programme complet, et non de réaliser le
 nouveau best-seller.
