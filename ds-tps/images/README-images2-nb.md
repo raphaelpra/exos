@@ -170,7 +170,8 @@ et sauver ce patchwork dans le fichier `patchwork.png` avec `plt.imsave`
    attention si votre image vous semble floue c'est juste que l'affichage grossit vos pixels
 
 vous devriez obtenir quelque chose comme ceci
-<img src="patchwork-all.jpg" width="200px">
+
+![](media/patchwork-all.jpg)
 
 ```{code-cell} ipython3
 # votre code

@@ -100,7 +100,7 @@ Lisez cette table en `Python` et rangez-la dans la structure qui vous semble ad√
 ```{code-cell} ipython3
 # prune-cell 1.
 colors_dict = dict()
-with open('rgb-codes.txt', 'r') as f:
+with open('data/rgb-codes.txt', 'r') as f:
     for line in f:
         name, r, g, b = line.split()
         colors_dict[name] = [int(r), int(g), int(b)]
@@ -272,7 +272,8 @@ plt.imshow(im_all);
    attention si votre image vous semble floue c'est juste que l'affichage grossit vos pixels
 
 vous devriez obtenir quelque chose comme ceci
-<img src="patchwork-all.jpg" width="200px">
+
+![](media/patchwork-all.jpg)
 
 ```{code-cell} ipython3
 # votre code
@@ -562,7 +563,7 @@ Lisez le fichier `patchwork-all.jpg` si vous n'avez pas de fichier perso
 
 # prune-cell 2.
 
-file = 'patchwork-all.jpg'
+file = 'media/patchwork-all.jpg'
 im = plt.imread(file)
 plt.imshow(sepia(im));
 ```
