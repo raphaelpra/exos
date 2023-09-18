@@ -138,43 +138,33 @@ par exemple avec 5 couleurs créer un carré 3x3 - mais 3x2 c'est quand même mi
 
 pour calculer le rectangle qui contient n couleurs
 
-n | rect | `int(sqrt(n))` |
--|-|-|
-1 | 1x1 | 1
-2 | 1x2 | 1
-3 | 2x2 | 1
-4 | 2x2 | 2
-5 | 2x3 | 2
-6 | 2x3 | 2
-7 | 3x3 | 2
-8 | 3x3 | 2
-9 | 3x3 | 3
-10 | 3x4 | 3
-11 | 3x4 | 3
-12 | 3x4 | 3
-13 | 4x4 | 3
-14 | 4x4 | 3
-15 | 4x4 | 3
-16 | 4x4 | 4
-17 | 4x5 | 4
+n | rect | n | rect | n | rect | n | rect |
+-|-|-|-|-|-|-|-|
+1 | 1x1 | 5 | 2x3 | 9 | 3x3 | 14 | 4x4 |
+2 | 1x2 | 6 | 2x3 | 10 | 3x4 | 15 | 4x4 |
+3 | 2x2 | 7 | 3x3 | 11 | 3x4 | 16 | 4x4 |
+4 | 2x2 | 8 | 3x3 | 12 | 3x4 | 17 | 4x5 |
 ````
 
 ```{code-cell} ipython3
-# prune-cell 3
-# this is optional
-# (a rougher approach would always use a square)
+# prune-cell
+# a rougher approach would just use a square
 def rectangle_size(n):
     '''
     computes the optimal size for a square of rectangle
     to store that many colors;
     if a rectangle, it will be of the form n-1, n
     '''
-    c = int(np.sqrt(n-1))+1
-    if (c-1)*c >= n:
-        return c-1, c
-    else:
-        return c, c
+    c = np.ceil(np.sqrt(n))
+    l = np.ceil(n / c)
+    return int(l), int(c)
 
+for n in range(1, 18):
+    print(f"{n=} -> {rectangle_size(n)=}")
+```
+
+```{code-cell} ipython3
+# prune-cell
 def patchwork (col_list, col_dict, side=5, background='White'):
     '''
     create an image with a patchwork of the col_list colors
@@ -233,8 +223,8 @@ plt.imshow(patchwork(colors, colors_dict, side=5));
 import random
 k = 19
 im = patchwork(random.sample(list(colors_dict.keys()), k),
-                     colors_dict,
-                     side=10)
+               colors_dict,
+               side=10)
 
 plt.imshow(im);
 ```
@@ -491,9 +481,11 @@ la fonction `numpy.dot` peut être utilisée si besoin, voir l'exemple ci-dessus
 
 ```{code-cell} ipython3
 # prune-cell 1. pas à pas
-SEPIA=np.array([[0.393, 0.349, 0.272],
-                [0.769, 0.686, 0.534],
-                [0.189, 0.168, 0.131]])
+# le même code que ci-dessous mais avec plein de print()
+
+SEPIA = np.array([[0.393, 0.349, 0.272],
+                  [0.769, 0.686, 0.534],
+                  [0.189, 0.168, 0.131]])
 
 img = plt.imread('data/les-mines.jpg') # dtype = uint8
 print(img.dtype)
@@ -518,7 +510,7 @@ plt.imshow(img_SEPIA);
 
 ```{code-cell} ipython3
 # prune-cell 1. avec dot()
-# dans ce cas de figure on peut aussi bien utiliser
+# dans ce cas de figure on peut utiliser indifféremment
 # np.dot ou @ (aka np.matmul)
 # https://numpy.org/doc/stable/reference/generated/numpy.dot.html
 
@@ -680,6 +672,7 @@ for ext in ['PLT', 'PIL']:
 :scrolled: true
 
 # prune-cell 7.
+
 imPLT_PLT = plt.imread(f"{file}-PLT.jpg")
 imPLT_PIL = plt.imread(f"{file}-PIL.jpg")
 print(np.all(np.isclose(imPLT_PLT, imPLT_PIL)))

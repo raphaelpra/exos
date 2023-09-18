@@ -123,25 +123,12 @@ par exemple avec 5 couleurs créer un carré 3x3 - mais 3x2 c'est quand même mi
 
 pour calculer le rectangle qui contient n couleurs
 
-n | rect | `int(sqrt(n))` |
--|-|-|
-1 | 1x1 | 1
-2 | 1x2 | 1
-3 | 2x2 | 1
-4 | 2x2 | 2
-5 | 2x3 | 2
-6 | 2x3 | 2
-7 | 3x3 | 2
-8 | 3x3 | 2
-9 | 3x3 | 3
-10 | 3x4 | 3
-11 | 3x4 | 3
-12 | 3x4 | 3
-13 | 4x4 | 3
-14 | 4x4 | 3
-15 | 4x4 | 3
-16 | 4x4 | 4
-17 | 4x5 | 4
+n | rect | n | rect | n | rect | n | rect |
+-|-|-|-|-|-|-|-|
+1 | 1x1 | 5 | 2x3 | 9 | 3x3 | 14 | 4x4 |
+2 | 1x2 | 6 | 2x3 | 10 | 3x4 | 15 | 4x4 |
+3 | 2x2 | 7 | 3x3 | 11 | 3x4 | 16 | 4x4 |
+4 | 2x2 | 8 | 3x3 | 12 | 3x4 | 17 | 4x5 |
 ````
 
 +++
