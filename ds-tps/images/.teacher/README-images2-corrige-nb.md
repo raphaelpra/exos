@@ -106,6 +106,16 @@ with open('data/rgb-codes.txt', 'r') as f:
         colors_dict[name] = [int(r), int(g), int(b)]
 ```
 
+```{code-cell} ipython3
+# prune-cell 1. 
+# ou encore, en plus pédant
+colors_dict = dict()
+with open('data/rgb-codes.txt', 'r') as f:
+    for line in f:
+        name, *rgb = line.split()
+        colors_dict[name] = list(map(int, rgb))
+```
+
 2. Affichez, à partir de votre structure, les valeurs rgb entières des couleurs suivantes  
 `'Red'`, `'Lime'`, `'Blue'`
 
@@ -196,9 +206,9 @@ def patchwork (col_list, col_dict, side=5, background='White'):
 
     # c*I + J transforms I and J in the corresponding color indices in the colormap
     # its shape is the same as the final image
-    print(f"{j[:2]=}")
-    print(f"{J[:2]=}")
-    print(f"{c*I+J=}")
+    # print(f"{j[:2]=}")
+    # print(f"{J[:2]=}")
+    # print(f"{c*I+J=}")
 
     # so all we are left with is .. a simple array-by-array indexation
     return colormap[c*I + J]
