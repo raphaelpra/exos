@@ -112,6 +112,9 @@ tracks:
   - name: TP Taylor
     notebooks:
     - ds-tps/taylor/taylor-*.md
+  - name: TP pentominos
+    notebooks:
+    - ds-tps/pentominos/README-pentominos-nb.md
   - name: TP geopandas
     notebooks:
     - ds-tps/geo/geopandas-nb.md

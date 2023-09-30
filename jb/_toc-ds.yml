@@ -15,6 +15,9 @@ parts:
 - caption: TP Taylor
   chapters:
   - glob: ds-tps/taylor/taylor-*
+- caption: TP pentominos
+  chapters:
+  - file: ds-tps/pentominos/README-pentominos-nb
 - caption: TP geopandas
   chapters:
   - file: ds-tps/geo/geopandas-nb
