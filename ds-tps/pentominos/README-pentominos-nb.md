@@ -29,7 +29,7 @@ in order to work on this exercise from your laptop, {download}`start with downlo
 (images courtesy of wikipedia)
 
 
-## exact cover
+## the exact cover problem
 
 ### an example
 
@@ -53,9 +53,9 @@ you feed the algorithm with a set of vectors that all have the same length, and 
 13: (0 1 0 0 0 1 1 1)
 ```
 
-and the output is a subset of the input vectors, such that **each column of the input is covered exactly once**  
+and the goal is to find a subset of the input vectors, such that **each column of the input is covered exactly once**  
 (of course there is the accessory question about whether there are several
-solutions, but let's not dwelve into that, for now at least..)
+solutions, but let's not dwelve into that, for now at least..)  
 so in the above example, there would be 2 solutions, namely
 
 ```
@@ -71,13 +71,13 @@ and
 
 ### the algorithm and its implementation in Python
 
-this algorithm has been the subject of a famous article by Donald Knuth - one of
+one possible way to solve this problem has been the subject of a famous article by Donald Knuth - one of
 the fathers of Computer Science - in 2000, and is known as Knuth's Algorithm X
 
 we're not going to go into the details of the algorithm either, but rather focus
 on the application to solving pentominoes (see next section)
 
-let us just remember that
+let us just outline that
 
 - Algorithm X, also known as dancing links, is an extremely efficient
   implementation for solving the exact cover problem
@@ -103,6 +103,8 @@ def workaround_sanitize(array):
     exact_cover.io.save_problem(filename, array)
     return exact_cover.io.load_problem(filename)
 ```
+
+see also <https://github.com/jwg4/exact_cover/pull/65>
 ````
 
 
@@ -267,7 +269,7 @@ for each piece, compute its - possibly up to 8 - variants
 
 ### compute all possible translations
 
-for each piece (supposed to hve been rotated and/or swapped already)
+for each piece (supposed to have been rotated and/or swapped already)
 compute all the possible locations on the board
 
 
@@ -278,7 +280,7 @@ given a board and a set of pieces, compute the input to `get_exact_cover()`
 
 ### pretty-print a solution
 
-`exact_cover` will then compute one solution (if there's one, of course)  
+`get_exact_cover()` will then compute one solution (if there's one, of course)  
 from this solution, your job is to compute a 'pretty' view of the solution, something like e.g.
   ```
   (( 3  3  6  7  7  5  5  5 11 11 11 11)
@@ -339,7 +341,7 @@ you should find at least one solution for
 
 ### further applications
 
-you can use exact_cover to solve a whole range of other problems, like for example sudoku - and it's actually less obvious to do the mapping; if you're done early you can give these some thought
+you can use `exact_cover` to solve a whole range of other problems, like for example sudoku - and it's actually less obvious to do the mapping; if you're done early you can give these some thought
 
 
 ### links
