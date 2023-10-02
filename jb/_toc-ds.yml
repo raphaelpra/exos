@@ -18,9 +18,6 @@ parts:
 - caption: TP pentominos
   chapters:
   - file: ds-tps/pentominos/README-pentominos-nb
-- caption: TP geopandas
-  chapters:
-  - file: ds-tps/geo/geopandas-nb
 - caption: exercices pandas
   chapters:
   - file: ds-exos/pandas/television-nb
@@ -32,6 +29,9 @@ parts:
   - file: ds-exos/pandas/stack-multicol-nb
   - file: ds-exos/pandas/mosaique-nb
   - file: ds-exos/dataviz/groupby-draw-nb
+- caption: TP geopandas
+  chapters:
+  - file: ds-tps/geo/geopandas-nb
 - caption: howtos pandas
   chapters:
   - file: ds-howtos/split-count-into-columns-howto-nb

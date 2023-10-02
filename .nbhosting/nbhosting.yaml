@@ -115,9 +115,6 @@ tracks:
   - name: TP pentominos
     notebooks:
     - ds-tps/pentominos/README-pentominos-nb.md
-  - name: TP geopandas
-    notebooks:
-    - ds-tps/geo/geopandas-nb.md
   - name: exercices pandas
     notebooks:
     - ds-exos/pandas/television-nb.md
@@ -131,6 +128,9 @@ tracks:
     # initially stored in a separate folder,
     # but that's more confusing than helpful
     - ds-exos/dataviz/groupby-draw-nb.md
+  - name: TP geopandas
+    notebooks:
+    - ds-tps/geo/geopandas-nb.md
   - name: howtos pandas
     notebooks:
     - ds-howtos/split-count-into-columns-howto-nb.md
