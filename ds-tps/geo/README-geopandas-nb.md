@@ -871,4 +871,11 @@ geoaddresses.to_csv("addresses-final.csv")
 final_map.save("addresses-final.html")
 ```
 
+## références
+
+le jeu de données utilisé ici provient à l'origine de
+<https://nakala.fr/10.34847/nkl.3038f62v#e6f991e37ab1fadb388262b57472a703ba379d48>, légèrement retravaillé pour les besoins du TP
+
++++
+
 ***

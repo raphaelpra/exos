@@ -364,7 +364,6 @@ def localize_many(filename, col_number, col_type, col_name, col_city):
     # because we don't set an index, it it safe to merge
     geoloc = geoloc[['latitude', 'longitude', 'result_city', 'result_type']]
     return df.merge(geoloc, left_index=True, right_index=True)
-
 ```
 
 ```{code-cell} ipython3
@@ -703,7 +702,6 @@ def random_color():
     """
     # of course this is not the right answer
     return "#12f285"
-
 ```
 
 ```{code-cell} ipython3
@@ -859,7 +857,6 @@ def convert_lat_lon(df):
     geo_df.set_geometry('position', inplace=True)
 
     return geo_df
-
 ```
 
 ```{code-cell} ipython3
@@ -1107,5 +1104,12 @@ final_map
 geoaddresses.to_csv("addresses-final.csv")
 final_map.save("addresses-final.html")
 ```
+
+## références
+
+le jeu de données utilisé ici provient à l'origine de
+<https://nakala.fr/10.34847/nkl.3038f62v#e6f991e37ab1fadb388262b57472a703ba379d48>, légèrement retravaillé pour les besoins du TP
+
++++
 
 ***
