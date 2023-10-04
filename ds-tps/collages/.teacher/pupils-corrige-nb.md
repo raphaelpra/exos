@@ -32,7 +32,7 @@ on a trois fichiers à recoller
 ```{code-cell} ipython3
 :cell_style: split
 
-df1 = pd.read_csv('data/pupils.csv')
+df1 = pd.read_csv('data/pupils1.csv')
 df1
 ```
 
