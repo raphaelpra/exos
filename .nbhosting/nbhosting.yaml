@@ -102,14 +102,14 @@ tracks:
     - ds-exos/numpy/indices-nb.md
     - ds-exos/numpy/mandelbrot-nb.md
     - ds-howtos/numpy-meshgrid-howto-nb.md
-  - name: TP sounds
+  - name: TP numpy sounds
     notebooks:
     - ds-tps/sounds/README-sounds-nb.md
-  - name: TP images
+  - name: TP numpy images
     notebooks:
     - ds-tps/images/README-images1-nb.md
     - ds-tps/images/README-images2-nb.md
-  - name: TP Taylor
+  - name: TP numpy Taylor
     notebooks:
     - ds-tps/taylor/taylor-*.md
   - name: TP pentominos
@@ -120,7 +120,6 @@ tracks:
     - ds-exos/pandas/television-nb.md
     - ds-exos/pandas/marathon-nb.md
     - ds-exos/pandas/titanic-nb.md
-    - ds-exos/pandas/pupils-nb.md
     - ds-exos/pandas/bornes-nb.md
     - ds-exos/pandas/stack-simple-nb.md
     - ds-exos/pandas/stack-multicol-nb.md
@@ -128,6 +127,9 @@ tracks:
     # initially stored in a separate folder,
     # but that's more confusing than helpful
     - ds-exos/dataviz/groupby-draw-nb.md
+  - name: TP pandas
+    notebooks:
+    - ds-tps/collages/README-collages-nb.md
   - name: TP geopandas
     notebooks:
     - ds-tps/geo/geopandas-nb.md

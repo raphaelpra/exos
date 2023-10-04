@@ -5,14 +5,14 @@ parts:
   - file: ds-exos/numpy/indices-nb
   - file: ds-exos/numpy/mandelbrot-nb
   - file: ds-howtos/numpy-meshgrid-howto-nb
-- caption: TP sounds
+- caption: TP numpy sounds
   chapters:
   - file: ds-tps/sounds/README-sounds-nb
-- caption: TP images
+- caption: TP numpy images
   chapters:
   - file: ds-tps/images/README-images1-nb
   - file: ds-tps/images/README-images2-nb
-- caption: TP Taylor
+- caption: TP numpy Taylor
   chapters:
   - glob: ds-tps/taylor/taylor-*
 - caption: TP pentominos
@@ -23,12 +23,14 @@ parts:
   - file: ds-exos/pandas/television-nb
   - file: ds-exos/pandas/marathon-nb
   - file: ds-exos/pandas/titanic-nb
-  - file: ds-exos/pandas/pupils-nb
   - file: ds-exos/pandas/bornes-nb
   - file: ds-exos/pandas/stack-simple-nb
   - file: ds-exos/pandas/stack-multicol-nb
   - file: ds-exos/pandas/mosaique-nb
   - file: ds-exos/dataviz/groupby-draw-nb
+- caption: TP pandas
+  chapters:
+  - file: ds-tps/collages/README-collages-nb
 - caption: TP geopandas
   chapters:
   - file: ds-tps/geo/geopandas-nb

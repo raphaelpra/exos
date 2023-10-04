@@ -18,10 +18,14 @@ language_info:
   pygments_lexer: ipython3
 nbhosting:
   show_up_down_buttons: true
-  title: exo pupils
+  title: exo collages
 ---
 
 # collages
+
++++
+
+pour réaliser ce TP localement sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-collages.zip>`
 
 ```{code-cell} ipython3
 import pandas as pd
@@ -32,19 +36,19 @@ on a trois fichiers à recoller
 ```{code-cell} ipython3
 :cell_style: split
 
-df1 = pd.read_csv('data/pupils1.csv')
+df1 = pd.read_csv('data/collages1.csv')
 df1
 ```
 
 ```{code-cell} ipython3
 :cell_style: split
 
-df2 = pd.read_csv('data/pupils2.csv')
+df2 = pd.read_csv('data/collages2.csv')
 df2
 ```
 
 ```{code-cell} ipython3
-df3 = pd.read_csv('data/pupils3.csv')
+df3 = pd.read_csv('data/collages3.csv')
 df3
 ```
 
