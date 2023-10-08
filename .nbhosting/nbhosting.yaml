@@ -164,4 +164,5 @@ builds:
     directory: .
     script: |
       pip install jupyter-book
+      pip install sphinx-exercise
       jupyter-book build --toc jb/_toc-ds.yml --config jb/_config.yml .
