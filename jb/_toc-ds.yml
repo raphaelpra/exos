@@ -22,15 +22,15 @@ parts:
   chapters:
   - file: ds-exos/pandas/television-nb
   - file: ds-exos/pandas/marathon-nb
+  - file: ds-exos/pandas/mosaique-nb
   - file: ds-exos/pandas/titanic-nb
   - file: ds-exos/pandas/bornes-nb
   - file: ds-exos/pandas/stack-simple-nb
   - file: ds-exos/pandas/stack-multicol-nb
-  - file: ds-exos/pandas/mosaique-nb
-  - file: ds-exos/dataviz/groupby-draw-nb
 - caption: TP pandas
   chapters:
   - file: ds-tps/collages/README-collages-nb
+  - file: ds-tps/groupby-draw/README-groupby-draw-nb
 - caption: TP geopandas
   chapters:
   - file: ds-tps/geo/geopandas-nb

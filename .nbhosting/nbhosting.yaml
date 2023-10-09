@@ -119,17 +119,15 @@ tracks:
     notebooks:
     - ds-exos/pandas/television-nb.md
     - ds-exos/pandas/marathon-nb.md
+    - ds-exos/pandas/mosaique-nb.md
     - ds-exos/pandas/titanic-nb.md
     - ds-exos/pandas/bornes-nb.md
     - ds-exos/pandas/stack-simple-nb.md
     - ds-exos/pandas/stack-multicol-nb.md
-    - ds-exos/pandas/mosaique-nb.md
-    # initially stored in a separate folder,
-    # but that's more confusing than helpful
-    - ds-exos/dataviz/groupby-draw-nb.md
   - name: TP pandas
     notebooks:
     - ds-tps/collages/README-collages-nb.md
+    - ds-tps/groupby-draw/README-groupby-draw-nb.md
   - name: TP geopandas
     notebooks:
     - ds-tps/geo/geopandas-nb.md

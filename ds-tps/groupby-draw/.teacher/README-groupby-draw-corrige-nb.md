@@ -19,7 +19,9 @@ language_info:
 
 # dessins par groupby
 
-et lire plusieurs feuillets depuis excel
+et accessoirement, lire plusieurs feuillets depuis excel
+
+{download}`mais commencez par télécharger le zip<./ARTEFACTS-groupby-draw.zip>`
 
 +++
 
