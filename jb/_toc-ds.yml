@@ -20,7 +20,6 @@ parts:
   - file: ds-tps/pentominos/README-pentominos-nb
 - caption: exercices pandas
   chapters:
-  - file: ds-exos/pandas/television-nb
   - file: ds-exos/pandas/marathon-nb
   - file: ds-exos/pandas/mosaique-nb
   - file: ds-exos/pandas/titanic-nb
@@ -29,6 +28,7 @@ parts:
   - file: ds-exos/pandas/stack-multicol-nb
 - caption: TP pandas
   chapters:
+  - file: ds-tps/television/README-television-nb
   - file: ds-tps/collages/README-collages-nb
   - file: ds-tps/groupby-draw/README-groupby-draw-nb
 - caption: TP geopandas

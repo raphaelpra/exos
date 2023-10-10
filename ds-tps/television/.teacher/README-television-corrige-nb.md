@@ -25,6 +25,10 @@ nbhosting:
 
 +++
 
+pour réaliser ce TP localement sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-television.zip>`
+
++++
+
 cet exercice est originellement proposé ici:
 
 <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/notebooks/td1a_cenonce_session_10.html#exercice-1-creer-un-fichier-excel>
@@ -142,6 +146,15 @@ le mieux c'est d'utiliser `dropna`
 ```
 
 ```{code-cell} ipython3
+:hide_input: false
+
+# prune-cell
+df = pd.read_csv("data/television.txt", sep="\t")
+
+df.dropna(axis='columns', how='all', inplace=True)
+```
+
+```{code-cell} ipython3
 # ceci doit afficher True
 df.shape == (8403, 4)
 ```
@@ -178,6 +191,18 @@ def is_empty_column(df, colname):
 ```
 
 ```{code-cell} ipython3
+:hide_input: false
+
+# prune-cell
+def is_empty_column(df, col):
+    s = df[col]
+    # just to make it worth the pain
+    # a column is deemed empty if has only n/a and 0
+    mask = (s.isna()) | (s == 0.)
+    return mask.all()
+```
+
+```{code-cell} ipython3
 :cell_style: split
 
 # ceci doit afficher True
@@ -210,6 +235,18 @@ empty_columns = ...
 ```
 
 ```{code-cell} ipython3
+:hide_input: false
+
+# prune-cell
+df = pd.read_csv("data/television.txt", sep="\t")
+
+empty_columns = (col for col in df.columns
+                 if is_empty_column(df, col))
+        
+df.drop(columns = empty_columns, inplace=True)
+```
+
+```{code-cell} ipython3
 # ceci doit afficher True
 df.shape == (8403, 4)
 ```
@@ -222,6 +259,19 @@ Bien sûr on a découpé le problème en deux mais en fait ça peut se récrire 
 # à vous
 
 # récrire tout ceci en une seule passe
+```
+
+```{code-cell} ipython3
+:hide_input: false
+:lines_to_next_cell: 2
+:tags: [level_basic]
+
+# prune-cell
+df = pd.read_csv("data/television.txt", sep="\t")
+
+df.drop(inplace=True,
+        columns=(col for col in df.columns
+                 if ((df[col].isna()) | (df[col]==0)).all()))
 ```
 
 ```{code-cell} ipython3
@@ -247,6 +297,13 @@ la méthode la plus simple consiste à utiliser [`Series.unique`](https://pandas
 ```{code-cell} ipython3
 # à vous
 uniques = ...
+```
+
+```{code-cell} ipython3
+:hide_input: false
+
+# prune-cell
+uniques = df.cLT2FREQ.unique()
 ```
 
 ```{code-cell} ipython3
@@ -280,6 +337,18 @@ dans un premier temps on vous demande de calculer le nombre de lignes concernée
 ```{code-cell} ipython3
 # à vous
 nb_lines_to_clean = ...
+```
+
+```{code-cell} ipython3
+# prune-cell
+nb_lines_to_clean = len(df[df.cLT2FREQ.isna()])
+```
+
+```{code-cell} ipython3
+# prune-cell
+
+# ou encore
+nb_lines_to_clean = df.cLT2FREQ.isna().sum()
 ```
 
 ```{code-cell} ipython3
@@ -334,6 +403,14 @@ option 1: on peut utiliser `df.drop()`, l'avantage étant qu'on peut faire l'op�
 ```
 
 ```{code-cell} ipython3
+:hide_input: false
+
+# prune-cell
+# on calcule l'index de la dataframe qui matche notre critère
+df.drop(index=df[df.cLT2FREQ.isna()].index, inplace=True)
+```
+
+```{code-cell} ipython3
 :tags: [raises-exception]
 
 # ceci doit afficher True
@@ -362,6 +439,14 @@ df = ...
 ```
 
 ```{code-cell} ipython3
+:hide_input: false
+
+# prune-cell
+
+df = df[~ df.cLT2FREQ.isna()]
+```
+
+```{code-cell} ipython3
 :tags: [raises-exception]
 
 # ceci doit afficher True
@@ -382,6 +467,18 @@ je vous laisse conclure le TP, il s'agit d'enregistrer nos données nettoyées d
 filename = "television.xlsx"
 
 # df.to_excel?
+```
+
+```{code-cell} ipython3
+:hide_input: false
+
+# prune-cell
+
+# ce module est nécessaire - au moins dans mon environnement
+# ! pip install openpyxl
+#
+# puis tout simplement
+df.to_excel("television.xlsx")
 ```
 
 je vous laisse éventuellement vérifier votre code en rechargeant sous excel le fichier produit

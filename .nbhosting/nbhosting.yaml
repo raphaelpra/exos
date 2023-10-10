@@ -117,7 +117,6 @@ tracks:
     - ds-tps/pentominos/README-pentominos-nb.md
   - name: exercices pandas
     notebooks:
-    - ds-exos/pandas/television-nb.md
     - ds-exos/pandas/marathon-nb.md
     - ds-exos/pandas/mosaique-nb.md
     - ds-exos/pandas/titanic-nb.md
@@ -126,6 +125,7 @@ tracks:
     - ds-exos/pandas/stack-multicol-nb.md
   - name: TP pandas
     notebooks:
+    - ds-tps/television/README-television-nb.md
     - ds-tps/collages/README-collages-nb.md
     - ds-tps/groupby-draw/README-groupby-draw-nb.md
   - name: TP geopandas
