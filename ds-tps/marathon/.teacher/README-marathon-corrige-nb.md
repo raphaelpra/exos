@@ -25,6 +25,10 @@ nbhosting:
 
 +++
 
+pour réaliser ce TP localement sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-marathon.zip>`
+
++++
+
 un petit TP pour travailler
 
 * le chargement et la sélection
