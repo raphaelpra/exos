@@ -26,7 +26,7 @@ nbhosting:
 
 Voir la version originale de ce TP - par Jake Vanderplas - sur Youtube
 
-https://www.youtube.com/watch?v=_ZEWDGpM-vM&list=PLYCpMb24GpOC704uO9svUrihl-HY1tTJJ
+<https://www.youtube.com/watch?v=_ZEWDGpM-vM&list=PLYCpMb24GpOC704uO9svUrihl-HY1tTJJ>
 
 +++
 
