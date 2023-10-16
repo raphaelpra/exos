@@ -130,7 +130,7 @@ tracks:
     - ds-tps/groupby-draw/README-groupby-draw-nb.md
   - name: TP geopandas
     notebooks:
-    - ds-tps/geo/geopandas-nb.md
+    - ds-tps/geo/README-geopandas-nb.md
   - name: howtos pandas
     notebooks:
     - ds-howtos/split-count-into-columns-howto-nb.md

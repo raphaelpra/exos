@@ -33,7 +33,7 @@ parts:
   - file: ds-tps/groupby-draw/README-groupby-draw-nb
 - caption: TP geopandas
   chapters:
-  - file: ds-tps/geo/geopandas-nb
+  - file: ds-tps/geo/README-geopandas-nb
 - caption: howtos pandas
   chapters:
   - file: ds-howtos/split-count-into-columns-howto-nb
