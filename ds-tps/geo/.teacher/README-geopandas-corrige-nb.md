@@ -139,6 +139,7 @@ def localize_one(num, typ, nom):
     # if all is OK, http returns a code in the [200 .. 300[ range
     if not (200 <= response.status_code < 300):
         print("WHOOPS....")
+        return
 
     # we can then read the answer 
     # remember it's a JSON string
@@ -192,7 +193,9 @@ details = localize_one(18, 'rue', 'BERNARDINS')
 30_000 * .100
 ```
 
-````{note}
+````{admonition} ? et & dans l'URL
+:class: note dropdown
+
 dans une autre dimension complètement: ici on envoie donc une requête vers l'URL  
 `https://api-adresse.data.gouv.fr/search/?q=18+rue+BERNARDINS,Paris&limit=1`
 
@@ -214,7 +217,7 @@ et pour vous faire réfléchir: il se passerait quoi si par exemple dans la colo
 
 si vous avez bien lu la page qui décrit l'API, vous devez avoir remarqué qu'il y a une autre façon de lui soumettre une recherche
 
-c'est ce qui est indiqué ici:
+c'est ce qui est indiqué ici (cherchez `search/csv` dans la page de l'API)
 ```
 curl -X POST -F data=@path/to/file.csv -F columns=voie -F columns=ville https://api-adresse.data.gouv.fr/search/csv/
 ```
@@ -267,7 +270,7 @@ sauf que nous, on ne veut pas utiliser `curl`, on veut faire cette requête en P
 +++
 
 1. en une seule requête à l'API, on va envoyer **tout le fichier** csv, en lui indiquant juste quelles sont les colonnes qui contiennent les morceaux de l'adresse
-2. le résultat - toujours au format csv - peut être également transformé en dataframe
+2. le résultat - toujours au format csv - pourra être également transformé en dataframe
 3. qu'il ne restera plus qu'à `merge` (ou `join` si vous préférez) avec la dataframe de départ, pour ajouter les résultats de la géolocalisation dans les données de départ
    pour cette étape on peut envisager de ne garder que certaines colonnes de la géolocalisation (assez bavarde par ailleurs), je vous recommande de conserver uniquement:
    * `latitude`, `longitude` - *of course*
@@ -285,7 +288,7 @@ sauf que nous, on ne veut pas utiliser `curl`, on veut faire cette requête en P
   ```python
   response = requests.post(url, file={'data': filename}, data={'columns': ['col1', ...]})
   ```
-* enfin, `pd.read_csv` s'attend à un paramètre de type fchier, i.e. du genre de ce qu'on obtient avec `open()`  
+* enfin, `pd.read_csv` s'attend à un paramètre de type fichier, i.e. du genre de ce qu'on obtient avec `open()`  
   et du coup pour reconstruire une dataframe à partir du texte obtenu dans la requête http, on a deux choix
   1. soit on commence par sauver le texte dans un fichier temporaire (juste faire attention à choisir un nom de fichier qui n'existe pas, de préférence dans un dossier temporaire, voir le module `tempfile`)
   1. soit on triche un peu, et grâce à `io.StringIO` on peut transformer une chaine en fichier !
@@ -349,6 +352,7 @@ def mass_post(filename, col_number, col_type, col_name, col_city):
             data={'columns': [col_number, col_type, col_name, col_city]})
     if not (200 <= response.status_code < 300):
         print(f"OOPS, got {response.status_code}")
+        return None
 
     # this time the output is csv, not json
     # note that read_csv requires a file-like object
@@ -490,7 +494,7 @@ addresses = pd.read_csv("data/addresses-geoloc.csv")
 
 # et en faire un petit échantillon
 
-addresses_small = addresses.sample(n=20)
+addresses_small = addresses.iloc[:20]
 ```
 
 ```{code-cell} ipython3
