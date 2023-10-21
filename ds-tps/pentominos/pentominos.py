@@ -18,18 +18,6 @@ ALL_BOARDS = {x: getattr(data, x) for x in data.__dict__ if x.startswith('BOARD'
 DEBUG = False
 NO_SYMMETRY = False
 
-
-
-def workaround_sanitize(array):
-    """
-    save and reload to work around a sneaky bug
-    in exact_cover
-    """
-    filename = ".sanitizing-array.txt"
-    exact_cover.io.save_problem(filename, array)
-    return exact_cover.io.load_problem(filename)
-
-
 def compute_symmetries(a):
     """Find all symmetries of a given pentomino."""
     symmetries = []
@@ -125,7 +113,6 @@ def solve(board, pieces):
     both are returned
     """
     lines = all_exact_cover_lines(board, pieces)
-    lines = workaround_sanitize(lines)
     DEBUG and print(
         f"sending to exact_cover lines with {lines.shape=} and {lines.dtype=}"
     )
@@ -254,9 +241,8 @@ def main():
     if args.small:
         triminoes()
     else:
-        #for name, board in ALL_BOARDS.items():
-        for board in [BOARD_8_9]:
-            full_monty("DBG", board, PENTOMINOS)
+        for name, board in ALL_BOARDS.items():
+            full_monty(name, board, PENTOMINOS)
 
 
 if __name__ == "__main__":

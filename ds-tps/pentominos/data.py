@@ -43,16 +43,18 @@ BOARD_8_8 = np.zeros((8, 8), dtype=DTYPE)
 BOARD_8_8[3:5, 3:5] = 1
 
 # 2 separate 3x10 rectangles
-BOARD_2_3_10 = np.zeros((3, 21), dtype=DTYPE)
-BOARD_2_3_10[:, 10] = 1
+# has no solution
+NO_BOARD_2_3_10 = np.zeros((3, 21), dtype=DTYPE)
+NO_BOARD_2_3_10[:, 10] = 1
 
 # 2 separate 5x6 rectangles
 BOARD_2_5_6 = np.zeros((5, 13), dtype=DTYPE)
 BOARD_2_5_6[:, 6] = 1
 
 # 3 separate 4x5 rectangles
-BOARD_3_4_5 = np.zeros((3, 23), dtype=DTYPE)
-BOARD_3_4_5[:, 5:6] = 1
+# has no solution
+NO_BOARD_3_4_5 = np.zeros((3, 23), dtype=DTYPE)
+NO_BOARD_3_4_5[:, 5:6] = 1
 
 BOARD_8_9 = np.zeros((8, 9), dtype=DTYPE)
 BOARD_8_9[::7, ::8] = 1

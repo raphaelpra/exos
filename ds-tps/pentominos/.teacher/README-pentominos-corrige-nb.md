@@ -85,8 +85,11 @@ let us just outline that
 
 So your first task is to search for that package, install it, and read the basics about how to use it
 
-````{admonition} Important tip !
-:class: danger
+````{admonition} Make sure to use exact_cover >= 1.3.0
+:class: dropdown danger
+
+**this is now fixed in version 1.3.0**, so you probably don't care; 
+see <https://github.com/jwg4/exact_cover/pull/65> for the full story
 
 during my own attempt at this exercise, I ran into a nasty bug in this library  
 that was stubbornly returning 'no solution' whereas there obviously was one..
