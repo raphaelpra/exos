@@ -19,6 +19,7 @@ scikit-learn
 folium
 vega_datasets
 dash
+streamlit
 
 # tooling
 jupyter

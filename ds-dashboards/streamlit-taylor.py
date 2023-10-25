@@ -1,9 +1,34 @@
-# WARNING
+# ---
+# jupyter:
+#   jupytext:
+#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+#     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
+#       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
+#       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
+#       -toc, -rise, -version
+#     text_representation:
+#       extension: .py
+#       format_name: light
+#   kernelspec:
+#     display_name: Python 3 (ipykernel)
+#     language: python
+#     name: python3
+#   language_info:
+#     name: python
+#     nbconvert_exporter: python
+#     pygments_lexer: ipython3
+# ---
+
+# # a streamlit dashboard for Taylor
+
+# ````{admonition} attention
+# :class: warning
 #
-# this code won't work from a notebook server
-# you need to kick it off locally using
-#
+# this code won't work from a notebook server you need to kick it off from a terminal using (download as .py if needed)
+# ```bash
 # streamlit run streamlit-taylor.py
+# ```
+# ````
 
 from math import factorial
 
@@ -12,7 +37,14 @@ import autograd.numpy as np
 
 from bokeh.plotting import figure, show
 
+# +
 import streamlit as st
+
+FORMULA = r"""
+F_n(x) = \sum_{i=0}^{n} \frac{f^{(i)}(0)x^{i}}{i!}
+"""
+
+# -
 
 class Taylor:
     """
@@ -39,8 +71,7 @@ class Taylor:
         # create figure
         x_range = (self.domain[0], self.domain[-1])
         self.figure = figure(title=self.function.__name__,
-                             x_range=x_range, y_range=self.y_range,
-                            plot_width=900)
+                             x_range=x_range, y_range=self.y_range)
 
         # each of the 2 curves is a bokeh line object
         self.figure.line(self.domain, self.function(self.domain), color='green')
@@ -71,8 +102,12 @@ class Taylor:
         return result
 
 
-degree = st.number_input(
-    "enter degree", value=1, step=2,
+st.title("Taylor approximation of sin(x)")
+
+st.latex(FORMULA)
+
+degree = st.slider(
+    "enter degree n", value=1, step=2,
     help="the degree of the approximating polynom; the higher the degree, the better the match")
 
 max_domain = st.number_input(

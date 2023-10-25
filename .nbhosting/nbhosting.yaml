@@ -141,9 +141,9 @@ tracks:
     - ds-howtos/fremont-bridge-howto-nb.md
   - name: dashboards
     notebooks:
-    - ds-howtos/dashboard-with-dash-nb.py
-    - ds-howtos/streamlit-sinus.py
-    - ds-howtos/streamlit-taylor.py
+    - ds-dashboards/dashboard-with-dash-nb.py
+    - ds-dashboards/streamlit-sinus.py
+    - ds-dashboards/streamlit-taylor.py
   - name: quizzes pandas
     notebooks:
     - ds-quizzes/[0-9]*-nb.py
