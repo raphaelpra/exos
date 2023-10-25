@@ -18,6 +18,7 @@ keplergl
 scikit-learn
 folium
 vega_datasets
+dash
 
 # tooling
 jupyter
