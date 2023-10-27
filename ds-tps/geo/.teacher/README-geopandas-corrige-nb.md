@@ -595,7 +595,14 @@ et maintenant pour voir le résultat, ouvrez le fichier dans un autre tab du nav
 
 ## les quartiers de Paris
 
-maintenant on va ranger les adresses par quartier; pour cela nous avons dans le dossier `data/` les fichiers `quartiers_paris.*` qui contiennent la définition de 80 quartiers qui recouvrent Paris intra-muros
+maintenant on va ranger les adresses par quartier; pour cela nous avons dans le dossier `data/` le fichier `quartier_paris.zip` qui contiennent la définition des 80 quartiers qui recouvrent Paris intra-muros
+
+````{admonition} source
+:class: dropdown
+
+obtenu ici <https://opendata.paris.fr/explore/dataset/quartier_paris/export/?disjunctive.c_ar>  
+en choisissant le format "Shapefile"
+````
 
 ça se présente comme ceci:
 
@@ -608,7 +615,7 @@ import geopandas as gpd
 
 ```{code-cell} ipython3
 # ça se lit facilement
-quartiers = gpd.read_file("data/quartiers_paris.shp", encoding="utf8")
+quartiers = gpd.read_file("data/quartier_paris.zip", encoding="utf8")
 
 # et le résultat est .. une dataframe
 type(quartiers)
