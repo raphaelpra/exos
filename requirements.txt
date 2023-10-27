@@ -20,6 +20,7 @@ folium
 vega_datasets
 dash
 streamlit
+gradio
 
 # tooling
 jupyter
