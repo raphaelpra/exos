@@ -30,6 +30,12 @@
 # streamlit run streamlit-sinus.py
 # ```
 # ````
+#
+# the output is a dashboard where you can change a sinusoid's amplitude and phase, like this
+#
+# ```{image} streamlit-sinus.png
+# :width: 500px
+# ```
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -70,5 +76,4 @@ def sinus4(freq, phase, amplitude, domain):
     return figure
 
 
-# +
 st.pyplot(fig=sinus4(freq, phase, amplitude, domain))

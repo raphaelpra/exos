@@ -24,11 +24,17 @@
 # ````{admonition} attention
 # :class: warning
 #
-# this code won't work from a notebook server you need to kick it off from a terminal using (download as .py if needed)
+# this code won't work from a notebook, you need to kick it off from a terminal using (download as .py if needed)
 # ```bash
 # streamlit run streamlit-taylor.py
 # ```
 # ````
+#
+# This will open a browser page where you can interact with a dashboard that looks like this
+#
+# ```{image} streamlit-taylor.png
+# :width: 500px
+# ```
 
 from math import factorial
 
@@ -43,6 +49,7 @@ import streamlit as st
 FORMULA = r"""
 F_n(x) = \sum_{i=0}^{n} \frac{f^{(i)}(0)x^{i}}{i!}
 """
+
 
 # -
 
