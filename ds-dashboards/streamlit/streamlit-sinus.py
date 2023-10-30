@@ -43,7 +43,7 @@ import matplotlib.pyplot as plt
 # +
 import streamlit as st
 
-
+st.set_page_config(layout="wide")
 # -
 
 st.title("Sinusoidal with matplotlib")
@@ -52,7 +52,8 @@ freq = st.slider("frequency", value=1, min_value=1, max_value=10, step=1)
 
 phase = 0
 
-amplitude = st.selectbox(
+# .sidebar allows to put widgets on the left hand side
+amplitude = st.sidebar.selectbox(
      'Amplitude',
      (.1, 1, 3, 5),
      # the index in the tuple above

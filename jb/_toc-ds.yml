@@ -44,9 +44,10 @@ parts:
   - file: ds-howtos/fremont-bridge-howto-nb
 - caption: dashboards
   chapters:
+  - file: ds-dashboards/streamlit/README-streamlit-nb
+  - file: ds-dashboards/streamlit/streamlit-sinus
+  - file: ds-dashboards/streamlit/streamlit-taylor
   - file: ds-dashboards/dashboard-with-dash-nb
-  - file: ds-dashboards/streamlit-sinus
-  - file: ds-dashboards/streamlit-taylor
 - caption: quizzes pandas
   chapters:
   - glob: ds-quizzes/[0-9]*-nb
