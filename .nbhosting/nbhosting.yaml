@@ -128,9 +128,10 @@ tracks:
     - ds-tps/marathon/README-marathon-nb.md
     - ds-tps/collages/README-collages-nb.md
     - ds-tps/groupby-draw/README-groupby-draw-nb.md
-  - name: TP geopandas
+  - name: geo data
     notebooks:
-    - ds-tps/geo/README-geopandas-nb.md
+    - ds-geo/folium/README-folium-nb.md
+    - ds-geo/tp-addresses/README-geopandas-nb.md
   - name: howtos pandas
     notebooks:
     - ds-howtos/split-count-into-columns-howto-nb.md

@@ -31,9 +31,10 @@ parts:
   - file: ds-tps/marathon/README-marathon-nb
   - file: ds-tps/collages/README-collages-nb
   - file: ds-tps/groupby-draw/README-groupby-draw-nb
-- caption: TP geopandas
+- caption: geo data
   chapters:
-  - file: ds-tps/geo/README-geopandas-nb
+  - file: ds-geo/folium/README-folium-nb
+  - file: ds-geo/tp-addresses/README-geopandas-nb
 - caption: howtos pandas
   chapters:
   - file: ds-howtos/split-count-into-columns-howto-nb

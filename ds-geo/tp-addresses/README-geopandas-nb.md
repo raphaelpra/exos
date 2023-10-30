@@ -88,15 +88,6 @@ vous pouvez charger le fichier `data/addresses.csv`; toutes ces adresses sont si
 addresses = ...
 ```
 
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-addresses = pd.read_csv('data/addresses.csv')
-addresses.head(4)
-```
-
 et la première chose qu'on va faire, c'est naturellement d'utiliser cette API pour géolocaliser ces adresses
 
 mais avant cela, je vous recommande de produire un fichier `addresses-small.csv` qui contient un petit extrait, disons les 10 ou 20 premières lignes; ce sera très utile pour débugger
@@ -107,14 +98,6 @@ mais avant cela, je vous recommande de produire un fichier `addresses-small.csv`
 # produce a small extract into addresses-small.csv
 
 # your code here
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-addresses.iloc[:10].to_csv('addresses-small.csv', index=False)
 ```
 
 ### une par une
@@ -172,25 +155,6 @@ localize_one(18, 'rue', 'BERNARDINS')
 # to resolve 20_000 addresses this way
 
 # your code here
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-%%timeit -n 3
-
-# prune-cell
-
-details = localize_one(18, 'rue', 'BERNARDINS')
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-# on observe un temps de l'ordre de 100ms par requête
-# ce qui fait pas loin d'une heure pour le tout
-30_000 * .100
 ```
 
 ````{admonition} ? et & dans l'URL
@@ -329,48 +293,6 @@ def localize_many(filename, col_number, col_type, col_name, col_city):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-# again...
-import requests
-# this one is to fake a file from a string
-import io
-
-def mass_post(filename, col_number, col_type, col_name, col_city):
-
-    # we don't care about the index for now
-    # but note that if we want to merge the result
-    # with the initial data, there is a need 
-    # for a unique index...
-
-    with open(filename) as feed:
-        response = requests.post(
-            "https://api-adresse.data.gouv.fr/search/csv/", 
-            files={'data': feed},
-            data={'columns': [col_number, col_type, col_name, col_city]})
-    if not (200 <= response.status_code < 300):
-        print(f"OOPS, got {response.status_code}")
-        return None
-
-    # this time the output is csv, not json
-    # note that read_csv requires a file-like object
-    # and we have a str, so io.StringIO comes to the rescue
-    result = pd.read_csv(io.StringIO(response.text))
-
-    return result
-
-
-def localize_many(filename, col_number, col_type, col_name, col_city):
-    df = pd.read_csv(filename)
-    geoloc = mass_post(filename, col_number, col_type, col_name, col_city)
-    # because we don't set an index, it it safe to merge
-    geoloc = geoloc[['latitude', 'longitude', 'result_city', 'result_type']]
-    return df.merge(geoloc, left_index=True, right_index=True)
-```
-
-```{code-cell} ipython3
 :tags: [level_basic]
 
 # try your code on the small sample for starters
@@ -388,21 +310,6 @@ addresses_small
 # result_type == 'housenumber'
 
 # your code
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-# sanity check
-
-addresses_small = localize_many("addresses-small.csv", "number", "type", "name", "city")
-
-
-( sum(addresses_small.result_city != 'Paris') == 0
- and
-  sum(addresses_small.result_type != 'housenumber') == 0)
 ```
 
 ```{code-cell} ipython3
@@ -434,20 +341,6 @@ addresses_small = localize_many("addresses-small.csv", "number", "type", "name",
 # store geolocalized addresses in addresses-geoloc.csv
 
 # your code
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-from pathlib import Path
-
-if not Path("addresses-geoloc.csv").exists():
-    addresses = localize_many("data/addresses.csv", "number", "type", "name", "city")
-    addresses.to_csv("addresses-geoloc.csv", index=False)
-else:
-    addresses = pd.read_csv("addresses-geoloc.csv")
 ```
 
 ## afficher sur une carte
@@ -513,22 +406,6 @@ def paris_map():
 paris_map()
 ```
 
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-# on purpose a little smaller so we can more easily scroll 
-def paris_map():
-    return folium.Map(
-        location=CENTER,
-        zoom_start=13,
-        # width='80%',
-    )
-
-paris_map()
-```
-
 ### on ajoute les adresses
 
 +++ {"tags": ["framed_cell"]}
@@ -547,25 +424,6 @@ def map_addresses(geoloc):
     contained in the input dataframe shown as a marker
     """
     pass
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-def map_addresses(geoloc):
-    # create a column with a human-readable address
-    geoloc['human'] = geoloc['number'].astype(str) + ', ' + geoloc['type'] + ' ' + geoloc['name']
-
-    map = paris_map()
-
-    def add_marker(row):
-        folium.Marker([row.latitude, row.longitude],
-                      tooltip=f"{row.human}").add_to(map)
-    geoloc.apply(add_marker, axis=1)
-
-    return map
 ```
 
 ```{code-cell} ipython3
@@ -639,8 +497,7 @@ quartiers.plot();
 pour afficher cela sur la carte, il faut se livrer à une petite gymnastique
 
 1. on construit la map comme on l'a vu jusqu'ici
-2. on transforme la geo-dataframe (`quartiers`) en JSON
-3. que l'on peut passer alors à `folium.GeoJson()` pour créer un objet
+3. on passe à `folium.GeoJson()` la geo-dataframe, pour créer un objet
 4. qu'on ajoute dans la map
 
 ce qui nous donne ceci:
@@ -656,12 +513,9 @@ def paris_map():
         # width='80%',
     )
 
-    # translate the geo-dataframe into a JSON string
-    quartiers_json = quartiers.to_json()
-
-    # create a folium JSON object from that
+    # create a folium JSON object from the geo df
     folium.GeoJson(
-        data=quartiers_json,
+        data=quartiers,
         # optionnally we could also tweak things on the way
         # try to uncomment these
         # style_function=lambda x: {"fillColor": "#45a012", "color": "#881212"}
@@ -716,19 +570,6 @@ def random_color():
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-import random
-
-def random_color():
-    def randbyte():
-        return f"{random.randint(0, 255):02x}"
-    return f"#{randbyte()}{randbyte()}{randbyte()}"
-```
-
-```{code-cell} ipython3
 random_color(), random_color()
 ```
 
@@ -740,14 +581,6 @@ random_color(), random_color()
 # add a random color column in quartiers
 
 # your code here
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-quartiers['color'] = quartiers.geometry.map(lambda x: random_color())
 ```
 
 ```{code-cell} ipython3
@@ -777,33 +610,6 @@ def paris_map():
     each quartier is shown in its individual color
     """
     pass
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-def paris_map():
-    map = folium.Map(
-        location=CENTER,
-        zoom_start=13,
-        # width='80%',
-    )
-
-    # translate the geo-dataframe into a JSON string
-    quartiers_json = quartiers.to_json()
-
-    # create a folium JSON object from that
-    folium.GeoJson(
-        data=quartiers_json,
-        style_function=lambda x: {"color": x["properties"]["color"]},
-        tooltip=folium.GeoJsonTooltip(fields=["l_qu", "c_ar"], aliases=["quartier", "arr"])
-    # and add it to the map
-    ).add_to(map)
-
-    # and that's it
-    return map
 ```
 
 ```{code-cell} ipython3
@@ -915,16 +721,6 @@ def add_quartiers(gdf):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-def add_quartiers(gdf):
-    # xxx gdf.to_crs("EPSG:4326", inplace=True)
-    return quartiers.sjoin(gdf, predicate='contains')
-```
-
-```{code-cell} ipython3
 :tags: [raises-exception]
 
 # try your code
@@ -976,32 +772,6 @@ def map_addresses(gdf):
 ```
 
 ```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-def map_addresses(gdf):
-    if 'human' not in gdf.columns:
-        # create a column with a human-readable address
-        gdf['human'] = gdf['number'].astype(str) + ', ' + gdf['type'] + ' ' + gdf['name']
-
-    map = paris_map()
-
-    def add_marker(row):
-        folium.CircleMarker(
-            [row.latitude, row.longitude],
-            tooltip=folium.Tooltip(f"{row.human}"),
-            color=row.color,
-            fillColor=row.color,
-            # deafult seems to be 10
-            radius=8,
-        ).add_to(map)
-    gdf.apply(add_marker, axis=1)
-
-    return map
-```
-
-```{code-cell} ipython3
 :tags: [raises-exception]
 
 # test the new function
@@ -1022,15 +792,6 @@ c'est sans doute un bon moment pour sauver tout ce qu'on a fait:
 :tags: [level_basic]
 
 # votre code
-```
-
-```{code-cell} ipython3
-:tags: [level_intermediate]
-
-# prune-cell
-
-geoaddresses_small_extended.to_csv("addresses-small-extended.csv")
-map.save("addresses-small-extended.html")
 ```
 
 ## on clusterise
