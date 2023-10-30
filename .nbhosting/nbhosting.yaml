@@ -131,7 +131,7 @@ tracks:
   - name: geo data
     notebooks:
     - ds-geo/folium/README-folium-nb.md
-    - ds-geo/tp-addresses/README-geopandas-nb.md
+    - ds-geo/tp-addresses/README-addresses-nb.md
   - name: howtos pandas
     notebooks:
     - ds-howtos/split-count-into-columns-howto-nb.md

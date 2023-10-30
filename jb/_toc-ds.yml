@@ -34,7 +34,7 @@ parts:
 - caption: geo data
   chapters:
   - file: ds-geo/folium/README-folium-nb
-  - file: ds-geo/tp-addresses/README-geopandas-nb
+  - file: ds-geo/tp-addresses/README-addresses-nb
 - caption: howtos pandas
   chapters:
   - file: ds-howtos/split-count-into-columns-howto-nb
