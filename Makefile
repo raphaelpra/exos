@@ -68,21 +68,21 @@ exec-clean:
 .PHONY: exec exec-clean
 
 
-# table of contents: inject the contents from nbhosintg into jb
-jb/_toc-python.yml: .nbhosting/nbhosting.yaml
+# table of contents: inject the contents from nbhosting into jb
+jb/python/_toc.yml: .nbhosting/nbhosting.yaml
 	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t python
 
-jb/_toc-ds.yml: .nbhosting/nbhosting.yaml
+jb/ds/_toc.yml: .nbhosting/nbhosting.yaml
 	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t data-science
-toc: jb/_toc-python.yml jb/_toc-ds.yml
+toc: jb/python/_toc.yml jb/ds/_toc.yml
 .PHONY: toc
 
 
 # BOOKS
 book-python:
-	PYDEVD_DISABLE_FILE_VALIDATION=1 jupyter-book build --toc jb/_toc-python.yml --config jb/_config.yml --path-output book-python .
+	PYDEVD_DISABLE_FILE_VALIDATION=1 jupyter-book build --toc jb/python/_toc.yml --config jb/_config.yml --path-output book-python .
 book-ds:
-	PYDEVD_DISABLE_FILE_VALIDATION=1 jupyter-book build --toc jb/_toc-ds.yml --config jb/_config.yml --path-output book-ds .
+	PYDEVD_DISABLE_FILE_VALIDATION=1 jupyter-book build --toc jb/ds/_toc.yml --config jb/_config.yml --path-output book-ds .
 book:
 	@echo choose the book you want to build
 	@echo make book-python
