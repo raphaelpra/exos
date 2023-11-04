@@ -154,6 +154,7 @@ builds:
   - id: python
     name: Python
     description: core Python
+    external_url: https://flotpython-exos-python.readthedocs.io/
     directory: .
     script: |
       pip install jupyter-book
@@ -161,6 +162,7 @@ builds:
   - id: data-science
     name: Data Science
     description: numpy, pandas, dataviz
+    external_url: https://flotpython-exos-ds.readthedocs.io/
     directory: .
     script: |
       pip install jupyter-book
