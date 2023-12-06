@@ -5,6 +5,7 @@ pandas
 matplotlib
 mpld3
 bokeh
+jupyter-bokeh
 plotly
 vispy
 seaborn
@@ -33,6 +34,7 @@ ipympl
 # which breaks interactive plots
 jupyterlab-widgets>=3.0
 jupyterlab-courselevels
+jupyterlab-gridwidth
 
 # for vs-code
 ipykernel
