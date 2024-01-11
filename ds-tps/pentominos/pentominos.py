@@ -18,6 +18,7 @@ ALL_BOARDS = {x: getattr(data, x) for x in data.__dict__ if x.startswith('BOARD'
 DEBUG = False
 NO_SYMMETRY = False
 
+
 def compute_symmetries(a):
     """Find all symmetries of a given pentomino."""
     symmetries = []
@@ -113,10 +114,15 @@ def solve(board, pieces):
     both are returned
     """
     lines = all_exact_cover_lines(board, pieces)
-    DEBUG and print(
-        f"sending to exact_cover lines with {lines.shape=} and {lines.dtype=}"
-    )
-    # DEBUG and print(lines)
+    if DEBUG:
+        print(
+            f"sending to exact_cover lines with {lines.shape=} and {lines.dtype=}"
+        )
+        # print(lines)
+        # save input matrix as csv
+        import pandas as pd
+        df = pd.DataFrame(lines, dtype=np.uint8)
+        df.to_csv("matrix.csv", index=False)
     try:
         solution = exact_cover.get_exact_cover(lines)
         DEBUG and print(f"solution is of {type(solution)=})")
@@ -225,6 +231,7 @@ def draw(solution, *, cmap_name="copper", filename=None):
 def triminoes():
     full_monty("triminoes", SMALL_BOARD, [SMALL_PIECE, SMALL_PIECE])
 
+
 def main():
     from argparse import ArgumentParser
 
@@ -232,6 +239,7 @@ def main():
     parser.add_argument("-d", "--debug", action="store_true")
     parser.add_argument("--no-symmetry", action="store_true")
     parser.add_argument("-s", "--small", action="store_true")
+    parser.add_argument("-p", "--pentamino", action="store_true")
     args = parser.parse_args()
     global DEBUG
     DEBUG = args.debug
@@ -240,6 +248,8 @@ def main():
     enable_full_print()
     if args.small:
         triminoes()
+    elif args.pentamino:
+        full_monty("pentamino", ALL_BOARDS['BOARD_5_12'], PENTOMINOS)
     else:
         for name, board in ALL_BOARDS.items():
             full_monty(name, board, PENTOMINOS)
