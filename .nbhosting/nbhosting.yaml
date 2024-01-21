@@ -109,6 +109,9 @@ tracks:
     notebooks:
     - ds-tps/images/README-images1-nb.md
     - ds-tps/images/README-images2-nb.md
+  - name: howto opencv - yolo
+    notebooks:
+    - ds-howtos/opencv-yolo-howto/opencv-yolo-howto-nb.py
   - name: TP numpy Taylor
     notebooks:
     - ds-tps/taylor/taylor-*.md

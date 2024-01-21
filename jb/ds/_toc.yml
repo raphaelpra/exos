@@ -12,6 +12,9 @@ parts:
   chapters:
   - file: ds-tps/images/README-images1-nb
   - file: ds-tps/images/README-images2-nb
+- caption: howto opencv - yolo
+  chapters:
+  - file: ds-howtos/opencv-yolo-howto/opencv-yolo-howto-nb
 - caption: TP numpy Taylor
   chapters:
   - glob: ds-tps/taylor/taylor-*
