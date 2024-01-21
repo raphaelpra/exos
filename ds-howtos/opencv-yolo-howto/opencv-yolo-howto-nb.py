@@ -1,7 +1,7 @@
 # ---
 # jupyter:
 #   jupytext:
-#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
@@ -68,6 +68,8 @@ import cv2
 from utils_image import show_image
 
 img = cv2.imread('./media/people-2.jpg')
+
+# + tags=["skip-execution"]
 show_image(img)
 
 # +
@@ -104,12 +106,15 @@ b, g, r = img[:, :, 0], img[:, :, 1], img[:, :, 2]
 # and black means a low value for that channel
 
 imgs = np.concatenate((b, g, r), axis=1)
-show_image(imgs)
 
-# +
+# + tags=["skip-execution"]
+show_image(imgs)
+# -
+
 # let us add a transparency that amounts to b (why not..)
 img_b = cv2.merge((b, g, r, b))
 
+# + tags=["skip-execution"]
 # imshow does not show transparency - we save in a png file ...
 show_image(img_b, store_in_filename="BGRB.png")
 
@@ -135,6 +140,7 @@ R1 = cv2.getRotationMatrix2D((0,0), -45, 1)
 # apply it
 rotated_1 = cv2.warpAffine(img, R1, (img.shape[0], img.shape[1]))
 
+# + tags=["skip-execution"]
 show_image(rotated_1)
 
 # +
@@ -147,6 +153,7 @@ R2 = cv2.getRotationMatrix2D((w/2, h/2), -90, 1)
 # apply it
 rotated_2 = cv2.warpAffine(img, R2, (img.shape[1], img.shape[0]))
 
+# + tags=["skip-execution"]
 show_image(rotated_2)
 # -
 
@@ -155,22 +162,27 @@ show_image(rotated_2)
 import cv2
 from utils_image import show_image
 
+# +
 img = cv2.imread('./media/people-2.jpg')
 
 blur = cv2.GaussianBlur(img, (51, 51), 0)
+
+# + tags=["skip-execution"]
 show_image(blur)
+# -
 
 # ### resize / strech
 
 import cv2
 from utils_image import show_image
 
+# +
 img = cv2.imread('./media/abstract.jpg')
 
-# +
 # scaling down by 0.5 in x and y
-
 img_res = cv2.resize(img, (0, 0), fx=0.5, fy=0.5)
+
+# + tags=["skip-execution"]
 show_image(img_res)
 
 # +
@@ -179,14 +191,17 @@ show_image(img_res)
 #      that's the usual way (but unlike mpl !)
 
 img_res = cv2.resize(img, (0, 0), fx=3, fy=0.5)
+
+# + tags=["skip-execution"]
 show_image(img_res)
 
 # +
 # scale to target image size 500 x 500 pixels
 
 img_res = cv2.resize(img, (500, 500))
-show_image(img_res)
 
+# + tags=["skip-execution"]
+show_image(img_res)
 # -
 
 # ### HSV
@@ -215,6 +230,7 @@ from utils_image import show_image
 
 img = cv2.imread('./media/abstract.jpg')
 
+# + tags=["skip-execution"]
 show_image(img)
 
 # +
@@ -224,6 +240,7 @@ img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV) # le faire en numpy
 
 h, s, v = img_hsv[:, :, 0], img_hsv[:, :, 1], img_hsv[:, :, 2]
 
+# + tags=["skip-execution"]
 show_image(np.concatenate((h, s, v), axis=0))
 # -
 
@@ -250,6 +267,8 @@ img = cv2.imread('./media/people-2.jpg', cv2.IMREAD_COLOR)
 
 # moving to HSV coordinates
 img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+# + tags=["skip-execution"]
 show_image(img)
 
 # +
@@ -257,6 +276,8 @@ show_image(img)
 
 h, s, v = img_hsv[:, :, 0], img_hsv[:, :, 1], img_hsv[:, :, 2]
 hsv_split = np.concatenate((h, s, v), axis=1)
+
+# + tags=["skip-execution"]
 show_image(hsv_split, window_name='img_hsv')
 
 # +
@@ -273,6 +294,7 @@ ret_h, max_h = cv2.threshold(h, 15, 255, cv2.THRESH_BINARY_INV)
 #    s > 40 and h < 15
 img_skin = cv2.bitwise_and(min_s, max_h)
 
+# + tags=["skip-execution"]
 show_image(img_skin)
 # -
 
@@ -286,6 +308,8 @@ from utils_image import show_image
 # an image using grayscale
 
 img = cv2.imread('./media/abstract.jpg', cv2.IMREAD_GRAYSCALE)
+
+# + tags=["skip-execution"]
 show_image(img)
 # -
 
@@ -304,6 +328,7 @@ threshold = 150
 img_bw = np.zeros(img.shape)
 img_bw[img > threshold] = 255
 
+# + tags=["skip-execution"]
 show_image(img_bw)
 
 # +
@@ -314,6 +339,7 @@ threshold = 150
 
 ret, img_bw_cv2 = cv2.threshold(img, threshold, 255, cv2.THRESH_BINARY) # idem
 
+# + tags=["skip-execution"]
 show_image(img_bw_cv2)
 
 # +
@@ -329,6 +355,7 @@ img_nb_cv2_adap = cv2.adaptiveThreshold(
         # something loosely related to contrast...
 )
 
+# + tags=["skip-execution"]
 show_image(img_nb_cv2_adap, window_name='img_gris adaptative')
 # -
 
@@ -341,15 +368,16 @@ import numpy as np
 from IPython.display import Image
 from utils_image import show_image
 
-# + editable=true slideshow={"slide_type": ""} tags=[]
+# +
 img = cv2.imread('./media/abstract.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 1)
 
+# + tags=["skip-execution"]
 show_image(thresh)
 
-# + editable=true slideshow={"slide_type": ""} tags=[]
+# +
 # another method to find contours
 
 contours, hierar = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -360,6 +388,8 @@ thickness = 2
 color = (0, 0, 0)
 
 img3 = cv2.drawContours(img2, contours, -1, color, thickness)
+
+# + tags=["skip-execution"]
 show_image(img3)
 
 # +
@@ -383,6 +413,7 @@ img4 = cv2.drawContours(
     np.ones(img2.shape, dtype="uint8")*255,
     [the_largest_contour], -1, color, thickness)
 
+# + tags=["skip-execution"]
 show_image(img4)
 
 # +
@@ -403,6 +434,7 @@ img4 = cv2.drawContours(
     np.ones(img2.shape, dtype="uint8")*255,
     [the_largest_contour], -1, color, thickness)
 
+# + tags=["skip-execution"]
 show_image(img4)
 # -
 
@@ -429,6 +461,7 @@ faces = face_cascade.detectMultiScale(
 for (x, y, w, h) in faces:
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
+# + tags=["skip-execution"]
 # and voilà
 show_image(img, window_name="face-detection")
 # -
@@ -460,6 +493,7 @@ for (x, y, w, h) in eyes:
     rc = w//2
     cv2.circle(img, (xc, yc), rc, (255, 255, 0), 2)
 
+# + tags=["skip-execution"]
 show_image(img, window_name="eyes-detection") # attention peut détecter des tas d'oeils partout !
 # -
 
@@ -511,7 +545,7 @@ def mouse_callback(event, x, y, flags, param):
         color = (0, 255, 0)
 
 
-# +
+# + tags=["skip-execution"]
 # and now we can write the code for achieving the goal (see above)
 
 # being global, these variables can be read
@@ -611,6 +645,7 @@ import cv2
 from IPython.display import Image
 # from utils_image import show_image
 
+# + tags=["skip-execution"]
 def display_video_highlight_faces(
     # one mandatory parameter
     video_filename,
@@ -720,7 +755,7 @@ posEstimation = mp.solutions.pose
 
 pose = posEstimation.Pose() # INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 
-# + scrolled=true
+# + scrolled=true tags=["skip-execution"]
 # here again a function would come in handy...
 
 # you know the drill..
@@ -781,7 +816,7 @@ draw_tool = mp.solutions.drawing_utils
 posEstimation = mp.solutions.pose
 pose = posEstimation.Pose() # INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 
-# +
+# + tags=["skip-execution"]
 capture = cv2.VideoCapture("./media/player-woman.mov")
 
 ret, frame = capture.read()
@@ -887,6 +922,8 @@ box_annotator = sv.BoxAnnotator(
 )
 
 img = box_annotator.annotate(scene=img, detections=detections, labels=labels)
+
+# + tags=["skip-execution"]
 show_image(img, window_name="YOLO")
 # -
 
@@ -903,7 +940,7 @@ from utils_image import show_image
 
 model = YOLO("yolov8l.pt")
 
-# +
+# + tags=["skip-execution"]
 # on this clip we would detect persons
 capture = cv2.VideoCapture("./media/friends.mov")
 
@@ -935,6 +972,3 @@ while ret:
 capture.release()
 cv2.destroyAllWindows()
 cv2.waitKey(1)
-# +
-
-
