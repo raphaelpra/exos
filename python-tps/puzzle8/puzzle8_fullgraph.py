@@ -109,3 +109,19 @@ class Solver:
         with open(GRAPH_FILENAME, 'rb') as f:
             solver.graph = pickle.load(f)
         return solver
+
+def main():
+    import time
+    begin = time.time()
+    solver = Solver()
+    solver.compute_full_graph()
+    print(f"computed graph in {time.time() - begin} seconds")
+    begin = time.time()
+    solver.save_graph()
+    print(f"saved graph in {time.time() - begin} seconds")
+    begin = time.time()
+    solver2 = Solver.load_graph()
+    print(f"loaded graph in {time.time() - begin} seconds")
+
+if __name__ == '__main__':
+    main()
