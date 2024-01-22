@@ -34,14 +34,21 @@ from IPython.display import Image
 # our own utilities
 from utils_image import show_image
 
-# # `opencv`
+# # `opencv` & `yolo` use cases
 #
 # let's see some basic code samples that involve
 #
-# * basic features of `opencv`
+# * basic features of `opencv` and `yolo`
 # * pre-trained machine-learning models
 # * these reworked samples were inspired by this MOOC in French
 #   <https://www.linkedin.com/learning/l-essentiel-d-opencv-avec-python-pour-le-deep-learning/solution-suivre-les-positions-des-epaules-et-des-genoux>
+#
+# ````{admonition} warning: the HTML output is poor
+# :class: warning
+#
+# the techniques used for viewing images and videos in this notebook cannot easily work in an HTML environment  
+# for this reason if you are reading this in HTML format, you are much better off running the notebook locally ! 
+# ````
 
 # ## images
 #
