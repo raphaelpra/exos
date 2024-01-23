@@ -209,10 +209,8 @@ class Solver:
         if goal is None:
             goal = Board()
 
-        distance = cost_so_far.get(goal, float('inf'))
-
-        return distance, self.reconstruct_path(came_from, from_board, goal)
-        came_from, cost_so_far = self.s_path_details(from_board, goal)
+        came_from, _ = self.s_path_details(from_board, goal)
+        return self.reconstruct_path(came_from, from_board, goal)
 
 
     def a_star_details(self, from_board, goal) -> tuple[
@@ -244,7 +242,7 @@ class Solver:
                     came_from[next] = current
         return came_from, cost_so_far
 
-    def a_star(self, from_board, goal=None) -> tuple[float, list[Board]]:
+    def a_star(self, from_board, goal=None) -> list[Board]:
         """
         computes the (one) shortest path in the graph from
         from_board to goal which defaults to
@@ -256,10 +254,8 @@ class Solver:
         if goal is None:
             goal = Board()
 
-        came_from, cost_so_far = self.a_star_details(from_board, goal)
-        distance = cost_so_far.get(goal, float('inf'))
-
-        return distance, self.reconstruct_path(came_from, from_board, goal)
+        came_from, _ = self.a_star_details(from_board, goal)
+        return self.reconstruct_path(came_from, from_board, goal)
 
 
 def main():
