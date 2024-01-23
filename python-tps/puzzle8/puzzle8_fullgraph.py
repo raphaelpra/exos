@@ -23,12 +23,14 @@ NEIGHBOURS = {
     8: [5, 7],
 }
 
-
 class Board:
     """
     represents a board of the puzzle8 game
     encoded as a tuple of the 9 integers 0..8
     """
+
+    manhattan_distance_cache: dict[tuple[int, int], int] = dict()
+
     def __init__(self, array=None):
         if array is None:
             array = GOAL
@@ -62,6 +64,36 @@ class Board:
             next[zero_index], next[neighbour_index] = (
                 next[neighbour_index], next[zero_index])
             yield Board(next)
+
+
+    def manhattan_distance(self, other) -> int:
+        """
+        computes the manhattan distance between two boards
+        """
+
+        if not self.manhattan_distance_cache:
+            def coords(i):
+                return i // 3, i % 3
+            for i in range(9):
+                for j in range(9):
+                    xi, yi = coords(i)
+                    xj, yj = coords(j)
+                    self.manhattan_distance_cache[(i, j)] = (
+                        abs(xi - xj) + abs(yi - yj))
+        sum = 0
+        for i in range(9):
+            self_i = self.internal.index(i)
+            other_i = other.internal.index(i)
+            sum += self.manhattan_distance_cache[(self_i, other_i)]
+        return sum
+
+    def hamming_distance(self, other) -> int:
+        """
+        computes the hamming distance between two boards
+        """
+        return sum(
+            slot_i != slot_other
+            for slot_i ,slot_other in zip(self.internal, other.internal))
 
 
 class Solver:
@@ -139,7 +171,7 @@ class Solver:
         while not frontier.empty():
             current = frontier.get().board
 
-            # passsing an unreachable goal (like e.g. None) will scan the whole
+            # passing an unreachable goal (like e.g. None) will scan the whole
             # connected component reachable from from_board
             if current == goal:
                 break
@@ -153,26 +185,81 @@ class Solver:
                     came_from[next] = current
         return came_from, cost_so_far
 
-    def solve(self, from_board, goal=None) -> tuple[float, list[Board]]:
+    def reconstruct_path(self, came_from, from_board, goal) -> list[Board]:
         """
-        computes the (one) shortest path in the graph from
-        from_board to goal which defaults to
-        (1, 2, 3, 4, 5, 6, 7, 8, 0)
+        returns the path from from_board to goal
+        using the came_from dictionary
         """
-        if goal is None:
-            goal = Board()
-
-        came_from, cost_so_far = self.solve_details(from_board, goal)
         current = goal
         path = []
         if goal not in came_from:
-            return float("inf"), path
+            return path
         while current != from_board:
             path.append(current)
             current = came_from[current]
         path.append(from_board)
         path.reverse()
-        return cost_so_far[goal], path
+        return path
+
+    def solve(self, from_board, goal=None) -> tuple[float, list[Board]]:
+        """
+        computes the (one) shortest path in the graph from
+        from_board to goal
+        """
+        if goal is None:
+            goal = Board()
+
+        came_from, cost_so_far = self.solve_details(from_board, goal)
+        distance = cost_so_far.get(goal, float('inf'))
+
+        return distance, self.reconstruct_path(came_from, from_board, goal)
+
+
+    def a_star_details(self, from_board, goal) -> tuple[
+                        dict[Board, Board],
+                        dict[Board, int]]:
+        """
+        returns the details of scanning using the A* algorithm
+        """
+        frontier = PriorityQueue()
+        frontier.put(self.Item(0, from_board))
+
+        came_from = {from_board: None}
+        cost_so_far = {from_board: 0}
+        came_from[from_board] = None
+        cost_so_far[from_board] = 0
+
+        while not frontier.empty():
+            current = frontier.get().board
+
+            if current == goal:
+                break
+
+            for next in current.iter_moves():
+                new_cost = cost_so_far[current] + current.manhattan_distance(next)
+                if next not in cost_so_far or new_cost < cost_so_far[next]:
+                    cost_so_far[next] = new_cost
+                    priority = new_cost + next.manhattan_distance(goal)
+                    frontier.put(self.Item(priority, next))
+                    came_from[next] = current
+        return came_from, cost_so_far
+
+    def a_star(self, from_board, goal=None) -> tuple[float, list[Board]]:
+        """
+        computes the (one) shortest path in the graph from
+        from_board to goal which defaults to
+        (1, 2, 3, 4, 5, 6, 7, 8, 0) using the A* algorithm
+
+        does NOT use self.graph, and does NOT require to
+        have computed the full graph beforehand
+        """
+        if goal is None:
+            goal = Board()
+
+        came_from, cost_so_far = self.a_star_details(from_board, goal)
+        distance = cost_so_far.get(goal, float('inf'))
+
+        return distance, self.reconstruct_path(came_from, from_board, goal)
 
 
 def main():
@@ -180,18 +267,28 @@ def main():
     begin = time.time()
     solver = Solver()
     solver.compute_full_graph()
-    print(f"computed graph in {time.time() - begin} seconds"
+    print(f"computed graph in {time.time() - begin:.2f} seconds"
           f" with {len(solver.graph)} nodes"
           f" and {solver.nb_edges()} edges")
     solver.double_check()
     begin = time.time()
-    s1 = Board.from_string("1 2 3 4 5 6 0 7 8")  # d = 2
-    s2 = Board.from_string("8 6 7 5 0 1 3 2 4")  # d = 30
-    u1 = Board.from_string("6 1 7 4 5 2 3 8 0")  # d = infinity
-    for s in (s1, s2, u1):
-        print(f"computing path from {s} to {GOAL}")
-        d, path = solver.solve(s)
-        print(f"found {d=} {path=} in {time.time() - begin} seconds")
+    problems = []
+    problems.append((Board.from_string("1 2 3 4 5 6 0 7 8"), 2))
+    problems.append((Board.from_string("8 6 7 5 0 1 3 2 4"), 30))
+    problems.append((Board.from_string("6 1 7 4 5 2 3 8 0"), float('inf')))
+    for (s, ed) in problems:
+        for method in [solver.solve, solver.a_star]:
+            begin = time.time()
+            print(f"----> {method.__name__}:"
+                  f" from {s} to {GOAL}")
+            d, path = method(s)
+            # path contains both ends
+            if ed == float('inf'):
+                ok = "OK" if len(path) == 0 else "KO"
+            else:
+                ok = "OK" if len(path) == (ed+1) else "KO"
+            print(f"<-{ok}- {method.__name__}:"
+                  f" found {d=} {ed=} {len(path)=} in {time.time() - begin:.2f} seconds")
 
 if __name__ == '__main__':
     main()
