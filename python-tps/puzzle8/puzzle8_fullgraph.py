@@ -98,9 +98,11 @@ class Board:
 
 class Solver:
     """
-    computes the full graph with boards as nodes
-    and uses a shortest-path algorithm to find the
-    optimal path from a given board to the goal
+    provides miscellaneous methods to solve the puzzle8 game
+
+    NOTE: the code for building the full graph is not completely
+    required; it does speed up the computation of the shortest path
+
     """
     def __init__(self):
         self.graph = None
@@ -176,7 +178,10 @@ class Solver:
             if current == goal:
                 break
 
-            for next in self.graph[current]:
+            # it appears that using self.graph[current] here improves
+            # computation speed, but as computing the graph itself is rather
+            # expensive, this is probably not worth the while
+            for next in current.iter_moves():
                 new_cost = cost_so_far[current] + 1
                 if next not in cost_so_far or new_cost < cost_so_far[next]:
                     cost_so_far[next] = new_cost
@@ -259,14 +264,17 @@ class Solver:
 
 
 def main():
-    import time
-    begin = time.time()
     solver = Solver()
-    solver.compute_full_graph()
-    print(f"computed graph in {time.time() - begin:.2f} seconds"
-          f" with {len(solver.graph)} nodes"
-          f" and {solver.nb_edges()} edges")
-    solver.double_check()
+
+    import time
+
+    # begin = time.time()
+    # solver.compute_full_graph()
+    # print(f"computed graph in {time.time() - begin:.2f} seconds"
+    #       f" with {len(solver.graph)} nodes"
+    #       f" and {solver.nb_edges()} edges")
+    # solver.double_check()
+
     begin = time.time()
     problems = []
     problems.append((Board.from_string("1 2 3 4 5 6 0 7 8"), 2))
@@ -283,7 +291,7 @@ def main():
             else:
                 ok = "OK" if len(path) == (ed+1) else "KO"
             print(f"<-{ok}- {method.__name__}:"
-                  f" found {d=} {ed=} {len(path)=} in {time.time() - begin:.2f} seconds")
+                  f" found {ed=} {len(path)=} in {time.time() - begin:.2f} seconds")
 
 if __name__ == '__main__':
     main()
