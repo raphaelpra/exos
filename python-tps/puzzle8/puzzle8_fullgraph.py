@@ -44,6 +44,8 @@ class Board:
         of the form "1 2 3 4 5 6 7 8 0"
         """
         return Board(map(int, s.split()))
+    def to_string(self):
+        return " ".join(map(str, self.internal))
 
     def __repr__(self):
         return repr(self.internal)
@@ -64,6 +66,48 @@ class Board:
             next[zero_index], next[neighbour_index] = (
                 next[neighbour_index], next[zero_index])
             yield Board(next)
+
+
+    def parity(self) -> bool:
+        """
+        computes the parity of the permutation
+        """
+        # copy as we're going to mess with it
+        C = list(self.internal)
+        N = len(C)
+        count = 0
+        for i in range(N):
+            for j in range(i+1, N):
+                if C[i] > C[j]:
+                    count += 1
+                    C[i], C[j] = C[j], C[i]
+        assert C == list(sorted(self.internal))
+        return count % 2 == 0
+        #
+        # WARNING: approaches based on this code are not correct !
+        # parity = 0
+        # for i in range(9):
+        #     for j in range(i):
+        #         if self.internal[j] > self.internal[i]:
+        #             parity += 1
+        # return parity % 2
+
+    def reachable(self, other) -> bool:
+        """
+        checks if the board is reachable from the other board
+        """
+        # for that we do not only compare their parity !
+        # because obviously, a board one move away
+        # is reachable but has a different parity...
+        # instead: the parities must be the same iff
+        # their holes are in the same chessboard color
+        # think black and white tiles on a chessboard
+
+        self_hole_parity = self.internal.index(0) % 2
+        other_hole_parity = other.internal.index(0) % 2
+        same_parity = self_hole_parity == other_hole_parity
+        same = other.parity() == self.parity()
+        return same if same_parity else not same
 
 
     def manhattan_distance(self, other) -> int:
@@ -106,6 +150,8 @@ class Solver:
     """
     def __init__(self):
         self.graph = None
+        self.came_from = None
+        self.cost_so_far = None
 
     def nb_nodes(self):
         return len(self.graph)
@@ -162,6 +208,11 @@ class Solver:
           component reachable from from_board from from_board
         """
 
+        # if we have already computed the shortest path from the standard goal
+        # we can just reuse the cached results
+        if from_board == Board() and self.came_from is not None:
+            return self.came_from, self.cost_so_far
+
         frontier = PriorityQueue()
         frontier.put(self.Item(0, from_board))
 
@@ -188,9 +239,21 @@ class Solver:
                     priority = new_cost
                     frontier.put(self.Item(priority, next))
                     came_from[next] = current
+        else:
+            # the goal is not reachable so we have scanned the whole connected
+            # component reachable from from_board
+            # so if from_board is the standard goal,
+            # we can cache the results for next time as it contains the shortest
+            # path for all nodes in the connected component
+            if from_board == Board():
+                self.came_from = came_from
+                self.cost_so_far = cost_so_far
+
         return came_from, cost_so_far
 
-    def reconstruct_path(self, came_from, from_board, goal) -> list[Board]:
+    def reconstruct_path(
+            self, came_from,
+            from_board, goal, reverse: bool) -> list[Board]:
         """
         returns the path from from_board to goal
         using the came_from dictionary
@@ -203,7 +266,8 @@ class Solver:
             path.append(current)
             current = came_from[current]
         path.append(from_board)
-        path.reverse()
+        if reverse:
+            path.reverse()
         return path
 
     def s_path(self, from_board, goal=None) -> list[Board]:
@@ -214,8 +278,8 @@ class Solver:
         if goal is None:
             goal = Board()
 
-        came_from, _ = self.s_path_details(from_board, goal)
-        return self.reconstruct_path(came_from, from_board, goal)
+        came_from, _ = self.s_path_details(goal, from_board)
+        return self.reconstruct_path(came_from, goal, from_board, False)
 
 
     def a_star_details(self, from_board, goal) -> tuple[
@@ -259,8 +323,12 @@ class Solver:
         if goal is None:
             goal = Board()
 
+        if not from_board.reachable(goal):
+            return []
+
         came_from, _ = self.a_star_details(from_board, goal)
-        return self.reconstruct_path(came_from, from_board, goal)
+        # reverse the reconstructed path
+        return self.reconstruct_path(came_from, from_board, goal, True)
 
 
 def main():
@@ -270,28 +338,45 @@ def main():
 
     # begin = time.time()
     # solver.compute_full_graph()
-    # print(f"computed graph in {time.time() - begin:.2f} seconds"
+    # print(f"computed graph in {time.time() - begin:.3f} seconds"
     #       f" with {len(solver.graph)} nodes"
     #       f" and {solver.nb_edges()} edges")
     # solver.double_check()
 
+    print(f"GOAL is {Board().to_string()}")
+
     begin = time.time()
     problems = []
-    problems.append((Board.from_string("1 2 3 4 5 6 0 7 8"), 2))
-    problems.append((Board.from_string("8 6 7 5 0 1 3 2 4"), 30))
-    problems.append((Board.from_string("6 1 7 4 5 2 3 8 0"), float('inf')))
+    problems.append(("1 2 3 4 5 6 7 0 8", 1))
+    problems.append(("1 2 3 4 5 6 0 7 8", 2))
+    problems.append(("2 0 3 1 5 6 4 7 8", 5))
+    problems.append(("5 0 2 1 8 3 4 7 6", 9))
+    problems.append(("6 1 3 2 0 8 4 7 5", 12))
+    problems.append(("6 1 8 0 3 2 4 7 5", 15))
+    problems.append(("6 1 7 2 0 3 5 4 8", 18))
+    problems.append(("6 1 8 3 4 5 7 0 2", 21))
+    problems.append(("6 1 5 7 0 8 4 2 3", 24))
+    problems.append(("6 1 4 5 3 0 8 2 7", 27))
+    problems.append(("8 6 7 5 0 1 3 2 4", 30))
+    # this one would cause to cache the whole graph
+    problems.append(("6 1 7 4 5 2 3 8 0", float('inf')))
+    # so that when reiterating, we have immediate results
+    problems.extend(problems.copy())
     for (s, ed) in problems:
-        print(f"----> solve {s} to {GOAL}")
-        for method in [solver.s_path, solver.a_star]:
+        print(f"----> solving {s}")
+        # for method in [solver.s_path, solver.a_star]:
+        for method in [solver.a_star]:
             begin = time.time()
-            path = method(s)
-            # path contains both ends
+            path = method(Board.from_string(s))
             if ed == float('inf'):
                 ok = "OK" if len(path) == 0 else "KO"
             else:
+                # path contains both ends, so it is one more
+                # than the number of moves
                 ok = "OK" if len(path) == (ed+1) else "KO"
             print(f"<-{ok}- {method.__name__}:"
-                  f" found {ed=} {len(path)=} in {time.time() - begin:.2f} seconds")
+                  f" {len(path):>20}  vs  {ed+1:<8}"
+                  f"in {time.time() - begin:.3f} s")
 
 if __name__ == '__main__':
     main()
