@@ -144,7 +144,7 @@ class Solver:
         priority: int
         board: Board = field(compare=False)
 
-    def solve_details(self, from_board, goal) -> tuple[
+    def s_path_details(self, from_board, goal) -> tuple[
                         dict[Board, Board],
                         dict[Board, int]]:
         """
@@ -201,7 +201,7 @@ class Solver:
         path.reverse()
         return path
 
-    def solve(self, from_board, goal=None) -> tuple[float, list[Board]]:
+    def s_path(self, from_board, goal=None) -> list[Board]:
         """
         computes the (one) shortest path in the graph from
         from_board to goal
@@ -209,10 +209,10 @@ class Solver:
         if goal is None:
             goal = Board()
 
-        came_from, cost_so_far = self.solve_details(from_board, goal)
         distance = cost_so_far.get(goal, float('inf'))
 
         return distance, self.reconstruct_path(came_from, from_board, goal)
+        came_from, cost_so_far = self.s_path_details(from_board, goal)
 
 
     def a_star_details(self, from_board, goal) -> tuple[
@@ -277,11 +277,10 @@ def main():
     problems.append((Board.from_string("8 6 7 5 0 1 3 2 4"), 30))
     problems.append((Board.from_string("6 1 7 4 5 2 3 8 0"), float('inf')))
     for (s, ed) in problems:
-        for method in [solver.solve, solver.a_star]:
+        print(f"----> solve {s} to {GOAL}")
+        for method in [solver.s_path, solver.a_star]:
             begin = time.time()
-            print(f"----> {method.__name__}:"
-                  f" from {s} to {GOAL}")
-            d, path = method(s)
+            path = method(s)
             # path contains both ends
             if ed == float('inf'):
                 ok = "OK" if len(path) == 0 else "KO"
