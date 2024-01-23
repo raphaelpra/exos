@@ -1,7 +1,13 @@
+"""
+This module implements a solver for the puzzle8 game
+"""
+
+from typing import Iterator
 from collections import defaultdict
 from math import factorial
 
-from typing import Iterator
+from queue import PriorityQueue
+from dataclasses import dataclass, field
 
 GOAL = [1, 2, 3, 4, 5, 6, 7, 8, 0]
 
@@ -17,7 +23,6 @@ NEIGHBOURS = {
     8: [5, 7],
 }
 
-GRAPH_FILENAME = 'puzzle8.pickle'
 
 class Board:
     """
@@ -30,16 +35,25 @@ class Board:
         self.internal = tuple(array)
         self.h = hash(self.internal)
 
+    @staticmethod
+    def from_string(s):
+        """
+        convenience method to create a Board from a string
+        of the form "1 2 3 4 5 6 7 8 0"
+        """
+        return Board(map(int, s.split()))
+
     def __repr__(self):
         return repr(self.internal)
 
+    # make Board hashable
     def __eq__(self, other):
         return self.internal == other.internal
 
     def __hash__(self):
         return self.h
 
-    def iter_moves(self):
+    def iter_moves(self) -> Iterator['Board']:
         zero_index = self.internal.index(0)
         neighbours_indices = NEIGHBOURS[zero_index]
         for neighbour_index in neighbours_indices:
@@ -48,14 +62,6 @@ class Board:
             next[zero_index], next[neighbour_index] = (
                 next[neighbour_index], next[zero_index])
             yield Board(next)
-
-    @staticmethod
-    def from_string(s):
-        """
-        convenience method to create a Board from a string
-        of the form "1 2 3 4 5 6 7 8 0"
-        """
-        return Board(map(int, s.split()))
 
 
 class Solver:
@@ -100,6 +106,74 @@ class Solver:
                 if next not in self.graph:
                     queue.append(next)
 
+    # for using in PriorityQueue
+    @dataclass(order=True)
+    class Item:
+        priority: int
+        board: Board = field(compare=False)
+
+    def solve_details(self, from_board, goal) -> tuple[
+                        dict[Board, Board],
+                        dict[Board, int]]:
+        """
+        computes the details of scanning for the shortest path
+        in the graph from from_board to goal
+
+        it outputs 2 dictionaries:
+        - came_from: a dictionary of the form {board: previous_board}
+          that allows to rebuild the path
+        - cost_so_far: a dictionary of the form {board: cost} which gives the
+          shortest path from from_board for all nodes encountered during the
+          search note that passing goal=None will scan the whole connected
+          component reachable from from_board from from_board
+        """
+
+        frontier = PriorityQueue()
+        frontier.put(self.Item(0, from_board))
+
+        came_from = {from_board: None}
+        cost_so_far = {from_board: 0}
+        came_from[from_board] = None
+        cost_so_far[from_board] = 0
+
+        while not frontier.empty():
+            current = frontier.get().board
+
+            # passsing an unreachable goal (like e.g. None) will scan the whole
+            # connected component reachable from from_board
+            if current == goal:
+                break
+
+            for next in self.graph[current]:
+                new_cost = cost_so_far[current] + 1
+                if next not in cost_so_far or new_cost < cost_so_far[next]:
+                    cost_so_far[next] = new_cost
+                    priority = new_cost
+                    frontier.put(self.Item(priority, next))
+                    came_from[next] = current
+        return came_from, cost_so_far
+
+    def solve(self, from_board, goal=None) -> tuple[float, list[Board]]:
+        """
+        computes the (one) shortest path in the graph from
+        from_board to goal which defaults to
+        (1, 2, 3, 4, 5, 6, 7, 8, 0)
+        """
+        if goal is None:
+            goal = Board()
+
+        came_from, cost_so_far = self.solve_details(from_board, goal)
+        current = goal
+        path = []
+        if goal not in came_from:
+            return float("inf"), path
+        while current != from_board:
+            path.append(current)
+            current = came_from[current]
+        path.append(from_board)
+        path.reverse()
+        return cost_so_far[goal], path
+
 
 def main():
     import time
@@ -110,6 +184,14 @@ def main():
           f" with {len(solver.graph)} nodes"
           f" and {solver.nb_edges()} edges")
     solver.double_check()
+    begin = time.time()
+    s1 = Board.from_string("1 2 3 4 5 6 0 7 8")  # d = 2
+    s2 = Board.from_string("8 6 7 5 0 1 3 2 4")  # d = 30
+    u1 = Board.from_string("6 1 7 4 5 2 3 8 0")  # d = infinity
+    for s in (s1, s2, u1):
+        print(f"computing path from {s} to {GOAL}")
+        d, path = solver.solve(s)
+        print(f"found {d=} {path=} in {time.time() - begin} seconds")
 
 if __name__ == '__main__':
     main()
