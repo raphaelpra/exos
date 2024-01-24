@@ -1,7 +1,21 @@
 """
 This module implements a solver for the puzzle8 game
+
+NOTE: the code still contains sequels of alternative approaches
+
+- the full graph is computed, but not used in either of the two algorithms
+- the code supports the A* algorithm; this is how we could assess that in this
+  particular instance, given the size of the problem, A* performs slightly
+  better as compared to Dijkstra, but at the cost of aslitghly more complex
+  implementation however it would still be interesting to compare both
+  algorithms on larger sizes
+
+so if we were to keep only the useful code for the Dijkstra algorithm, we would
+likely end up with a much shorter code
 """
 
+import time
+import random
 from typing import Iterator
 from collections import defaultdict
 from math import factorial
@@ -22,6 +36,7 @@ NEIGHBOURS = {
     7: [4, 6, 8],
     8: [5, 7],
 }
+
 
 class Board:
     """
@@ -44,44 +59,60 @@ class Board:
         of the form "1 2 3 4 5 6 7 8 0"
         """
         return Board(map(int, s.split()))
+
     def to_string(self):
+        """
+        opposite of from_string
+        """
         return " ".join(map(str, self.internal))
+
+    @staticmethod
+    def random():
+        """
+        returns a random board
+        """
+        return Board(random.sample(range(9), 9))
 
     def __repr__(self):
         return repr(self.internal)
 
     # make Board hashable
+    # this is crucial for using it as a key in a dictionary
     def __eq__(self, other):
-        return self.internal == other.internal
+        return self.h == other.h
 
     def __hash__(self):
         return self.h
 
+    #
     def iter_moves(self) -> Iterator['Board']:
+        """
+        yields all boards that can be reached in one move
+        """
         zero_index = self.internal.index(0)
         neighbours_indices = NEIGHBOURS[zero_index]
         for neighbour_index in neighbours_indices:
             # use a list so we can alter it
-            next = list(self.internal)
-            next[zero_index], next[neighbour_index] = (
-                next[neighbour_index], next[zero_index])
-            yield Board(next)
+            tmp = list(self.internal)
+            tmp[zero_index], tmp[neighbour_index] = (
+                tmp[neighbour_index], tmp[zero_index])
+            yield Board(tmp)
 
-
+    #
     def parity(self) -> bool:
         """
         computes the parity of the permutation
         """
         # copy as we're going to mess with it
-        C = list(self.internal)
-        N = len(C)
+        tmp = list(self.internal)
+        n = len(tmp)
         count = 0
-        for i in range(N):
-            for j in range(i+1, N):
-                if C[i] > C[j]:
+        for i in range(n):
+            for j in range(i+1, n):
+                if tmp[i] > tmp[j]:
                     count += 1
-                    C[i], C[j] = C[j], C[i]
-        assert C == list(sorted(self.internal))
+                    tmp[i], tmp[j] = tmp[j], tmp[i]
+        assert tmp == list(sorted(self.internal))
         return count % 2 == 0
         #
         # WARNING: approaches based on this code are not correct !
@@ -109,7 +140,7 @@ class Board:
         same = other.parity() == self.parity()
         return same if same_parity else not same
 
-
+    #
     def manhattan_distance(self, other) -> int:
         """
         computes the manhattan distance between two boards
@@ -124,12 +155,12 @@ class Board:
                     xj, yj = coords(j)
                     self.manhattan_distance_cache[(i, j)] = (
                         abs(xi - xj) + abs(yi - yj))
-        sum = 0
+        count = 0
         for i in range(9):
             self_i = self.internal.index(i)
             other_i = other.internal.index(i)
-            sum += self.manhattan_distance_cache[(self_i, other_i)]
-        return sum
+            count += self.manhattan_distance_cache[(self_i, other_i)]
+        return count
 
     def hamming_distance(self, other) -> int:
         """
@@ -137,15 +168,15 @@ class Board:
         """
         return sum(
             slot_i != slot_other
-            for slot_i ,slot_other in zip(self.internal, other.internal))
+            for slot_i, slot_other in zip(self.internal, other.internal))
 
 
 class Solver:
     """
     provides miscellaneous methods to solve the puzzle8 game
 
-    NOTE: the code for building the full graph is not completely
-    required; it does speed up the computation of the shortest path
+    NOTE: the code for building the full graph is not completely required; it
+    did seem to speed up the computation of the shortest path
 
     """
     def __init__(self):
@@ -154,19 +185,30 @@ class Solver:
         self.cost_so_far = None
 
     def nb_nodes(self):
+        """
+        returns the number of nodes in the graph
+        """
         return len(self.graph)
+
     def nb_edges(self):
+        """
+        returns the number of edges in the graph
+        """
         return sum(len(v) for v in self.graph.values())
 
     def double_check(self):
         """
         compare graph with calculated number of nodes and edges
         """
-        N, E = factorial(9)/2, factorial(8)*12
-        assert self.nb_nodes() == N
-        assert self.nb_edges() == E
+        nodes, edges = factorial(9)/2, factorial(8)*12
+        assert self.nb_nodes() == nodes
+        assert self.nb_edges() == edges
 
     def compute_full_graph(self, starting_board=None):
+        """
+        computes the full graph of the puzzle8 game
+        note that this is no longer used in the rest of the code
+        """
         if starting_board is None:
             starting_board = Board()
 
@@ -181,14 +223,17 @@ class Solver:
             # an unexplored node may be added twice or more
             if scan in self.graph:
                 continue
-            for next in scan.iter_moves():
-                self.graph[scan].append(next)
-                if next not in self.graph:
-                    queue.append(next)
+            for neighbour in scan.iter_moves():
+                self.graph[scan].append(neighbour)
+                if neighbour not in self.graph:
+                    queue.append(neighbour)
 
     # for using in PriorityQueue
     @dataclass(order=True)
     class Item:
+        """
+        used to store items in the priority queue
+        """
         priority: int
         board: Board = field(compare=False)
 
@@ -198,6 +243,11 @@ class Solver:
         """
         computes the details of scanning for the shortest path
         in the graph from from_board to goal
+
+        NOTE: the rest of the code actually calls this with
+        reversed parameters, i.e. with the standard goal as from_board
+        and the starting point as goal; this is on purpose to allow caching
+        the results for the standard goal
 
         it outputs 2 dictionaries:
         - came_from: a dictionary of the form {board: previous_board}
@@ -232,19 +282,20 @@ class Solver:
             # it appears that using self.graph[current] here improves
             # computation speed, but as computing the graph itself is rather
             # expensive, this is probably not worth the while
-            for next in current.iter_moves():
+            for neighbour in current.iter_moves():
                 new_cost = cost_so_far[current] + 1
-                if next not in cost_so_far or new_cost < cost_so_far[next]:
-                    cost_so_far[next] = new_cost
+                if (neighbour not in cost_so_far
+                        or new_cost < cost_so_far[neighbour]):
                     priority = new_cost
-                    frontier.put(self.Item(priority, next))
-                    came_from[next] = current
+                    frontier.put(self.Item(priority, neighbour))
+                    cost_so_far[neighbour] = new_cost
+                    came_from[neighbour] = current
         else:
             # the goal is not reachable so we have scanned the whole connected
             # component reachable from from_board
             # so if from_board is the standard goal,
-            # we can cache the results for next time as it contains the shortest
-            # path for all nodes in the connected component
+            # we can cache the results for next time as it contains
+            # the shortest path for all nodes in the connected component
             if from_board == Board():
                 self.came_from = came_from
                 self.cost_so_far = cost_so_far
@@ -278,10 +329,33 @@ class Solver:
         if goal is None:
             goal = Board()
 
+        # passing parameters in that order is on purpose
+        # to allow caching the results for the standard goal
+        # pylint: disable=arguments-out-of-order
         came_from, _ = self.s_path_details(goal, from_board)
         return self.reconstruct_path(came_from, goal, from_board, False)
 
+    def s_path_cache(self):
+        """
+        dry run of s_path on an unreachable board
+        so the results get cached
 
+        returns nothing, but after that all computations
+        will return almost instantly
+
+        NOTE: the same result is achived when calling s_path
+        with an unreachable goal
+        """
+        # create a fake unreachable configuration
+        # this is to ensure we scan the whole graph
+        # when caching the results
+        unreachable = GOAL.copy()
+        # assumes the hole is neither in the first nor second position
+        unreachable[0], unreachable[1] = unreachable[1], unreachable[0]
+        # this will scan the whole graph and cache the results
+        self.s_path_details(Board(), Board(unreachable))
+
+    # A* algorithm
     def a_star_details(self, from_board, goal) -> tuple[
                         dict[Board, Board],
                         dict[Board, int]]:
@@ -302,13 +376,15 @@ class Solver:
             if current == goal:
                 break
 
-            for next in current.iter_moves():
-                new_cost = cost_so_far[current] + current.manhattan_distance(next)
-                if next not in cost_so_far or new_cost < cost_so_far[next]:
-                    cost_so_far[next] = new_cost
-                    priority = new_cost + next.manhattan_distance(goal)
-                    frontier.put(self.Item(priority, next))
-                    came_from[next] = current
+            for neighbour in current.iter_moves():
+                new_cost = (cost_so_far[current]
+                            + current.manhattan_distance(neighbour))
+                if (neighbour not in cost_so_far
+                        or new_cost < cost_so_far[neighbour]):
+                    cost_so_far[neighbour] = new_cost
+                    priority = new_cost + neighbour.manhattan_distance(goal)
+                    frontier.put(self.Item(priority, neighbour))
+                    came_from[neighbour] = current
         return came_from, cost_so_far
 
     def a_star(self, from_board, goal=None) -> list[Board]:
@@ -331,10 +407,11 @@ class Solver:
         return self.reconstruct_path(came_from, from_board, goal, True)
 
 
-def main():
+def test_solver():
+    """
+    a minimal test suite
+    """
     solver = Solver()
-
-    import time
 
     # begin = time.time()
     # solver.compute_full_graph()
@@ -349,6 +426,7 @@ def main():
     problems = []
     problems.append(("1 2 3 4 5 6 7 0 8", 1))
     problems.append(("1 2 3 4 5 6 0 7 8", 2))
+    problems.append(("1 2 3 0 5 6 4 7 8", 3))
     problems.append(("2 0 3 1 5 6 4 7 8", 5))
     problems.append(("5 0 2 1 8 3 4 7 6", 9))
     problems.append(("6 1 3 2 0 8 4 7 5", 12))
@@ -363,9 +441,8 @@ def main():
     # so that when reiterating, we have immediate results
     problems.extend(problems.copy())
     for (s, ed) in problems:
-        print(f"----> solving {s}")
-        # for method in [solver.s_path, solver.a_star]:
-        for method in [solver.a_star]:
+        print(f"----> {s}")
+        for method in [solver.s_path, solver.a_star]:
             begin = time.time()
             path = method(Board.from_string(s))
             if ed == float('inf'):
@@ -375,8 +452,9 @@ def main():
                 # than the number of moves
                 ok = "OK" if len(path) == (ed+1) else "KO"
             print(f"<-{ok}- {method.__name__}:"
-                  f" {len(path):>20}  vs  {ed+1:<8}"
+                  f" {len(path):>12}  vs  {ed+1:<8}"
                   f"in {time.time() - begin:.3f} s")
 
+
 if __name__ == '__main__':
-    main()
+    test_solver()
