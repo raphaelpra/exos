@@ -53,17 +53,17 @@ tree
 # %% [markdown] cell_style="split"
 # DF browsing **from `v`** would scan
 # ```
-# v v1 v11 v111 v112 
-# v12 v121 v122 
-# v2 v21 v211 v212 
+# v v1 v11 v111 v112
+# v12 v121 v122
+# v2 v21 v211 v212
 # v22 v221 v222
 # ```
 
 # %% [markdown] cell_style="split"
 # BF browsing **from `v`** would scan
 # ```
-# v 
-# v1 v2 
+# v
+# v1 v2
 # v11 v12 v21 v22
 # v111 v112 v121 v122 v211 v212 v221 v222
 # ```
@@ -127,7 +127,7 @@ class Filo:
         if self.line:
             return self.line.pop()
     def __len__(self):
-        return len(self.line)        
+        return len(self.line)
 
 
 # %% cell_style="split" trusted=true
@@ -150,23 +150,18 @@ while filo:
 
 
 # %% trusted=true
-# assumptions:
-# 
-# * 
-# 
-
 def scan(start, storage):
     """
     performs a scan of all the vertices reachable from start vertex
-    
-    in an order that is DF or BF, depending on the 
+
+    in an order that is DF or BF, depending on the
     storage policy (fifo or filo)
-    
+
     assumptions:
-    
-    * vertices reachable from a vertex are 
+
+    * vertices reachable from a vertex are
       stored in a 'neighbours' attribute
-    
+
     * storage should have store() and retrieve() methods
       and be testable for emptiness (if storage: ...)
     * also it should be empty when entering the scan
@@ -175,7 +170,7 @@ def scan(start, storage):
     storage.store(start)
     # keep track of what we've seen
     scanned = set()
-    
+
     while storage:
         current = storage.retrieve()
         # skip vertices already seen
@@ -192,10 +187,10 @@ class Vertex:
     def __init__(self, name):
         self.name = name
         self.neighbours = set()
-        
+
     def __repr__(self):
         return self.name
-    
+
     def add_neighbour(self, other):
         self.neighbours.add(other)
 
