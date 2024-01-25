@@ -65,6 +65,7 @@ tracks:
     - "python-tps/graph-shortest-path/README*.md"
     - "python-tps/metro/README-metro-nb.md"
     - "python-tps/pagerank-thrones/README*.py"
+    - "python-tps/puzzle8/README-*.md"
   - name: 'TPs visu & games'
     notebooks:
     - "python-tps/snake/README*.md"

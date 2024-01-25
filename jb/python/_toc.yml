@@ -35,6 +35,7 @@ parts:
   - glob: python-tps/graph-shortest-path/README*
   - file: python-tps/metro/README-metro-nb
   - glob: python-tps/pagerank-thrones/README*
+  - glob: python-tps/puzzle8/README-*
 - caption: TPs visu & games
   chapters:
   - glob: python-tps/snake/README*
