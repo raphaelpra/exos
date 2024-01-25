@@ -88,4 +88,7 @@ book:
 	@echo make book-python
 	@echo or
 	@echo make book-ds
-.PHONY: book-python book-ds book
+
+book-clean:
+	rm -rf book-ds book-python
+.PHONY: book-python book-ds book book-clean
