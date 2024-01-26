@@ -14,7 +14,6 @@ so if we were to keep only the useful code for the Dijkstra algorithm, we would
 likely end up with a much shorter code
 """
 
-import time
 import random
 from typing import Iterator
 from collections import defaultdict
@@ -405,56 +404,3 @@ class Solver:
         came_from, _ = self.a_star_details(from_board, goal)
         # reverse the reconstructed path
         return self.reconstruct_path(came_from, from_board, goal, True)
-
-
-def test_solver():
-    """
-    a minimal test suite
-    """
-    solver = Solver()
-
-    # begin = time.time()
-    # solver.compute_full_graph()
-    # print(f"computed graph in {time.time() - begin:.3f} seconds"
-    #       f" with {len(solver.graph)} nodes"
-    #       f" and {solver.nb_edges()} edges")
-    # solver.double_check()
-
-    print(f"GOAL is {Board().to_string()}")
-
-    begin = time.time()
-    problems = []
-    problems.append(("1 2 3 4 5 6 7 0 8", 1))
-    problems.append(("1 2 3 4 5 6 0 7 8", 2))
-    problems.append(("1 2 3 0 5 6 4 7 8", 3))
-    problems.append(("2 0 3 1 5 6 4 7 8", 5))
-    problems.append(("5 0 2 1 8 3 4 7 6", 9))
-    problems.append(("6 1 3 2 0 8 4 7 5", 12))
-    problems.append(("6 1 8 0 3 2 4 7 5", 15))
-    problems.append(("6 1 7 2 0 3 5 4 8", 18))
-    problems.append(("6 1 8 3 4 5 7 0 2", 21))
-    problems.append(("6 1 5 7 0 8 4 2 3", 24))
-    problems.append(("6 1 4 5 3 0 8 2 7", 27))
-    problems.append(("8 6 7 5 0 1 3 2 4", 30))
-    # this one would cause to cache the whole graph
-    problems.append(("6 1 7 4 5 2 3 8 0", float('inf')))
-    # so that when reiterating, we have immediate results
-    problems.extend(problems.copy())
-    for (s, ed) in problems:
-        print(f"----> {s}")
-        for method in [solver.s_path, solver.a_star]:
-            begin = time.time()
-            path = method(Board.from_string(s))
-            if ed == float('inf'):
-                ok = "OK" if len(path) == 0 else "KO"
-            else:
-                # path contains both ends, so it is one more
-                # than the number of moves
-                ok = "OK" if len(path) == (ed+1) else "KO"
-            print(f"<-{ok}- {method.__name__}:"
-                  f" {len(path):>12}  vs  {ed+1:<8}"
-                  f"in {time.time() - begin:.3f} s")
-
-
-if __name__ == '__main__':
-    test_solver()
