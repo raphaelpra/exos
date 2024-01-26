@@ -16,7 +16,6 @@ likely end up with a much shorter code
 
 import random
 from typing import Iterator
-from collections import defaultdict
 from math import factorial
 
 from queue import PriorityQueue
@@ -202,30 +201,6 @@ class Solver:
         nodes, edges = factorial(9)/2, factorial(8)*12
         assert self.nb_nodes() == nodes
         assert self.nb_edges() == edges
-
-    def compute_full_graph(self, starting_board=None):
-        """
-        computes the full graph of the puzzle8 game
-        note that this is no longer used in the rest of the code
-        """
-        if starting_board is None:
-            starting_board = Board()
-
-        queue = list()
-        queue.append(starting_board)
-
-        # just to be clean
-        self.graph = defaultdict(list)
-
-        while queue:
-            scan = queue.pop()
-            # an unexplored node may be added twice or more
-            if scan in self.graph:
-                continue
-            for neighbour in scan.iter_moves():
-                self.graph[scan].append(neighbour)
-                if neighbour not in self.graph:
-                    queue.append(neighbour)
 
     # for using in PriorityQueue
     @dataclass(order=True)
