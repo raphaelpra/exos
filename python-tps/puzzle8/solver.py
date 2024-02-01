@@ -6,8 +6,8 @@ NOTE: the code still contains sequels of alternative approaches
 - the full graph is computed, but not used in either of the two algorithms
 - the code supports the A* algorithm; this is how we could assess that in this
   particular instance, given the size of the problem, A* performs slightly
-  better as compared to Dijkstra, but at the cost of aslitghly more complex
-  implementation however it would still be interesting to compare both
+  better as compared to Dijkstra, but at the cost of a slightly more complex
+  implementation; however it can still be interesting to compare both
   algorithms on larger sizes
 
 so if we were to keep only the useful code for the Dijkstra algorithm, we would
@@ -139,6 +139,7 @@ class Board:
         return same if same_parity else not same
 
     #
+    # for A* only
     def manhattan_distance(self, other) -> int:
         """
         computes the manhattan distance between two boards
