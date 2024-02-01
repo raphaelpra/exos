@@ -178,29 +178,10 @@ class Solver:
 
     """
     def __init__(self):
-        self.graph = None
+        # the shortest path from the standard goal
+        # will be cached once a full scan is performed
         self.came_from = None
         self.cost_so_far = None
-
-    def nb_nodes(self):
-        """
-        returns the number of nodes in the graph
-        """
-        return len(self.graph)
-
-    def nb_edges(self):
-        """
-        returns the number of edges in the graph
-        """
-        return sum(len(v) for v in self.graph.values())
-
-    def double_check(self):
-        """
-        compare graph with calculated number of nodes and edges
-        """
-        nodes, edges = factorial(9)/2, factorial(8)*12
-        assert self.nb_nodes() == nodes
-        assert self.nb_edges() == edges
 
     # for using in PriorityQueue
     @dataclass(order=True)
