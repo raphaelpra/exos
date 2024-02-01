@@ -356,7 +356,7 @@ le premier algorithme que nous allons voir consiste à calculer l'ensemble des s
 
 commençons par voir un exemple
 
-<div class=note>
+<div class=mynote>
     
 quelques précisions
 
