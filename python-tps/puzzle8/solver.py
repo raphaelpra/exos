@@ -242,8 +242,6 @@ class Solver:
 
         came_from = {from_board: None}
         cost_so_far = {from_board: 0}
-        came_from[from_board] = None
-        cost_so_far[from_board] = 0
 
         while not frontier.empty():
             current = frontier.get().board
