@@ -107,18 +107,6 @@ several problems in a row and want to speed up the whole process; this is a
 totally optional observation though
 ```
 
-### other algorithms
-
-as mentioned ealier, Dijkstra is one of many graph browsing algorithms; another
-famous one is the A\* algorithm, which is a variant of Dijkstra that uses a
-heuristic to guide the search
-
-in terms of coding, the A\* algorithm tends to be a little more complex, as
-there is a need to choose and implement a good heuristic; this is why we advise
-to start with Dijkstra, and then move to A\* if you have time; as outlined
-below, both algorithms are very similar in their structure if you use a priority
-queue
-
 ### implementation hints
 
 focusing on the Dijkstra algorithm and Python, here are a few hints that may
@@ -174,6 +162,8 @@ you can simply iterate over the neighbors of a given board on the fly;
 
 ### further details on these algorithms
 
+#### useful link
+
 you will find many resources on the web about this problem, which is
 ultra-classical and very well known;  
 I'd like to outline in particular this one, where you will find useful hints as
@@ -195,6 +185,24 @@ algorithm in the most efficient way
 if this is the case, please refer to [the appendix on
 profiling](appendix-profiling) for some hints on how to improve the performance
 of your code
+
+### you're done early ? other algorithms
+
+Dijkstra is just one of many graph browsing algorithms; another famous one is
+the A\* algorithm, which is a variant of Dijkstra that uses a heuristic to guide
+the search
+
+in terms of coding, the A\* algorithm tends to be a little more complex, as
+there is a need to choose and implement a good heuristic; this is why we advise
+to start with Dijkstra, and then move to A\* if you have time; as outlined in
+the linked page above, both algorithms are very similar in their structure if
+you use a priority queue
+
+if you are done early, or want to pursue your work after the hackathon, you can
+
+- alter your code so it works on any dimension, not just 3x3
+- write a variant of the solver that uses the A\* algorithm,
+- and then compare both implementations on larger board sizes
 
 ## GUI
 
