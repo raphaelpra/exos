@@ -1,4 +1,25 @@
+---
+jupytext:
+  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
+  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,-language_info.version,
+    -language_info.codemirror_mode.version, -language_info.codemirror_mode,-language_info.file_extension,
+    -language_info.mimetype, -toc, -rise, -version
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
+---
+
 # puzzle 8 : a.k.a. "taquin"
+
++++
 
 ## problem statement
 
@@ -18,6 +39,8 @@ note that **the goal** is to bring the board into the configuration depicted **i
 start                                                goal
 ```
 ````
+
++++
 
 ### objectives
 
@@ -45,6 +68,8 @@ are vastly independent, so a **team can typically be split in two**, with one
 team working on the solver, and the other on the GUI - provided that you can
 agree on some common interface.
 
++++
+
 ### vocabulary
 
 - a ***board*** is the state of the puzzle at a given time;  
@@ -64,7 +89,11 @@ agree on some common interface.
   more on this later, but in our case, we may want, for example, to maintain a
   collection of boards sorted by their distance from some node;
 
++++
+
 ## solver
+
++++
 
 ### the Dijkstra algorithm
 
@@ -107,10 +136,14 @@ several problems in a row and want to speed up the whole process; this is a
 totally optional observation though
 ```
 
++++
+
 ### implementation hints
 
 focusing on the Dijkstra algorithm and Python, here are a few hints that may
 help you out if you are unsure how to proceed
+
++++
 
 #### board representation (1)
 
@@ -130,6 +163,8 @@ help you out if you are unsure how to proceed
   also please be aware that my early attempts at using a numpy array tended to
   be rather slow, so you may want to avoid that
 
++++
+
 #### board representation (2)
 
 along the same lines, you need to decide on whether to handle board as native
@@ -147,12 +182,16 @@ you just need to implement the following methods:
   that is to say, if for example you choose to represent a board as a string
   `self.internal`, then the `__hash__` method will return `hash(self.internal)`
 
++++
+
 #### board and priority queue
 
 similarly, when inserting a board in the priority queue, what is actually
 inserted in the queue is a bundle of 2 elements: the board and its priority; see
-[the appendix on using `PriorityQueue`](board-and-priority-queue) on how to do
+[the appendix on using `PriorityQueue`](priority-queue) on how to do
 that
+
++++
 
 #### graph representation
 
@@ -160,7 +199,9 @@ also note that, although all the explanations refer to "the graph", there is no
 need to actually build the graph in memory beforehand;  
 you can simply iterate over the neighbors of a given board on the fly;
 
-### further details on these algorithms
++++
+
+### further details on this algorithm
 
 #### useful link
 
@@ -171,6 +212,8 @@ to how to implement the Dijkstra algorithm in Python; other algorithms and
 languages are also discussed in other sections of the page
 
 <https://www.redblobgames.com/pathfinding/a-star/implementation.html#python-search>
+
++++
 
 #### performance
 
@@ -183,8 +226,10 @@ picked the best data structures, or because you have not implemented the
 algorithm in the most efficient way
 
 if this is the case, please refer to [the appendix on
-profiling](appendix-profiling) for some hints on how to improve the performance
+profiling](profiling) for some hints on how to improve the performance
 of your code
+
++++
 
 ### you're done early ? other algorithms
 
@@ -204,6 +249,8 @@ if you are done early, or want to pursue your work after the hackathon, you can
 - write a variant of the solver that uses the A\* algorithm,
 - and then compare both implementations on larger board sizes
 
++++
+
 ## GUI
 
 as for the GUI, you can use any library you want; here we're going to quickly
@@ -211,7 +258,9 @@ describe [the `flet library`](https://flet.dev/) which is a simple Python
 library that allows to create a GUI in a few lines of code; the resulting app
 can then be run a standalone app, or in a browser
 
-### widgets
++++
+
+### flet widgets
 
 the basic idea is that the library gives you a `Page` object, that you can
 populate with widgets as Python objects, that your code can then interact with
@@ -224,10 +273,9 @@ and capabilities):
 :width: 300px
 ```
 
-you would build a widget tree like this:
+you would build a widget tree like this (but don't copy this code yet, read also further):
 
 ```python
-page.add(
     ft.Column([
       ### header
       ft.Row([
@@ -236,14 +284,13 @@ page.add(
       ]),
       ft.GridView(
         # the 9 digits
-        [ ft.Button(...), ..., ft.Button(...)]),
+        [ ft.TextField(...), ..., ft.TextField(...)]),
       # footer
       ft.Row([
          # the 4 buttons
          ft.IconButton(...), ..., ft.IconButton(...)]),
       )
     ]
-  )
 ```
 
 and from then, your job is to
@@ -254,14 +301,126 @@ and from then, your job is to
 - define the callbacks that will be called when the user interacts with the
   widgets
 
+below are further hints and considerations, particularly for first-timers
+
++++
+
+### create widgets vs change widgets
+
+you must understand that each time you call, e.g. `ft.TextField()`, you are **creating** a widget
+
+one common mistake by first-timers is to
+
+- write a function that takes as argument a board, and **build** - i.e. create the widgets, the UI from that
+- there's nothing wrong so far, but then if the same function is called each time the board changes (e.g. when you want to animate a solution found by the solver), then **everything is broken* because you keep on adding widgets in the UI and nothing is going to work as expected
+- so instead, you need to make sure that
+  - you create the widgets once when starting the UI
+  - and your code only **changes** the widgets, by doing something like e.g.:
+    
+    ```python
+    
+    # do this once
+    squares = [ft.TextField(...) for i in range(9)]
+    
+    # then you can write e.g.
+    def update(board):
+        for i, square in zip(board, squares):
+            square.value = i
+
+    def main(page):
+        page.add(
+            # here comes the structure seen above
+            ft.Column(
+                ...                   # the message area
+                ft.GridView(squares, ...),   # main area
+                ft.Row(
+                    ...               # the icons below
+                ),
+            )
+        )
+    ```
+
+    dont' forget to add `page.update()` whenever necessary
+
++++
+
+### using globals or not
+
+now, with the code above, it's easy to "retrieve" the widgets, because they are now stored in the **global variable `squares`**; this is considered a poor practice though, (mainly because global variables mean no reusability), so once you get this working, you could optionnally try to be a little smarter, and avoid the global  
+however that's an easy first step to get something working, if again you have never written anything like this before
+   
+
++++
+
 ### using classes or not
 
 here again you can choose to use classes or not; if you're not comfortable with
-object-oriented programming, you can just use functions and global variables;
+object-oriented programming, you can just use functions and global variables like above;
 however like most of the time, using classes will lead to a cleaner code, which
-is easier to maintain and get right
+is easier to maintain and to get right
+
+consider e.g. this new structure:
+
+```python
+class Board:
+    def __init__(self, page):
+         self.page = page
+    def create_squares:
+        self.squares = [ft.TextField(...) for i in range(9)]
+        return self.squares
+    def update(board):
+        for i, square in zip(board, squares):
+            square.value = i
+        self.page.update()
+
+def main(page):
+    board = Board()
+    page.add(
+        ft.Column(
+            ...                                  # the message area
+            ft.GridView(board.create_squares(), ...),   # main area
+            ft.Row(
+                ...                               # the icons below
+            ),
+        )
+    )
+```
+
++++
+
+### callbacks and references to the data model
+
+finally, one trick that is very common with UI's is that you often need a way to navigate from the UI to the data model; to this end, you can use the `data` attribute in every widget
+
+this means, in the example above, you could think of creating the `ft.TextField` instances with `data=self`  
+this way you can write a callback that looks like this
+
+```python
+class Board:
+    ...
+    def create_squares(self):
+        self.squares = [
+            ft.TextField(..., onclick=lambda e: self.click(e))
+            ...
+        ]
+    
+    def click(event):
+        # event.control is the widget that triggered the callback
+        # so a TextField instance 
+        print(f"you have clicked on {event.control.value}")
+        # and now
+        # event.control.data is .. the Board instance !
+        board = event.control.data
+        # and then you can call all the methods in the Board class
+```
+
+of course all this is only a suggestion, there are an infinite number of ways to design the whole thing, obviously...     
+
++++
 
 ## appendix
+
++++
 
 ### some test data
 
@@ -288,28 +447,30 @@ problems.append(("8 6 7 5 0 1 3 2 4", 30))
 problems.append(("6 1 7 4 5 2 3 8 0", float('inf')))
 ```
 
++++
+
 ### priority queue
 
 in Python for keeping a collection of objects sorted, in an efficient manner,
 there is a dedicated data structure, the `PriorityQueue` class from the `queue`
 module (fyi, there's also `heapq` which is a little lower level)
 
++++
+
 #### the basics: sorting numbers
 
 first with simple, atomic, objects:
 
-```python
+```{code-cell} ipython3
 # how to use a PriorityQueue
 from queue import PriorityQueue
 Q = PriorityQueue()
 Q.put(50)
 Q.put(0)
 Q.put(100)
+# will print the items in the "right" order i.e. 0 50 100
 while not Q.empty():
     print(Q.get())
-0
-50
-100
 ```
 
 #### sorting objects
@@ -318,12 +479,13 @@ in our case though, the items that we need to store in the queue are not simple
 numbers like here, but boards sorted by some sort of priority; so we need to use
 a trick to make this work
 
-```python
+```{code-cell} ipython3
 # imagine now the items in the queue are boards
 # (or any other class instances) with a related priority
 
 # some class - imagine this is a Board
-class Stuff: pass
+class Stuff: 
+    pass
 
 # we define an accessory class
 from dataclasses import dataclass, field
@@ -338,17 +500,16 @@ Q = PriorityQueue()
 Q.put(Item(50, Stuff()))
 Q.put(Item(0, Stuff()))
 Q.put(Item(100, Stuff()))
+# will print the items in the "right" order i.e. 0 50 100
 while not Q.empty():
     print(Q.get())
-Item(priority=0, item=<__main__.Stuff object at 0x1225f9e10>)
-Item(priority=50, item=<__main__.Stuff object at 0x1225f9dd0>)
-Item(priority=100, item=<__main__.Stuff object at 0x1225f9290>)
 ```
 
 ### profiling
 
 finally, if you need to improve your code performance, your best friend is the
-profiler; the full documentation is here:
+profiler;  
+the full documentation is here:
 <https://docs.python.org/3/library/profile.html>, but here's a quick summary
 
 - profiling is more adapted than simply measuring the time spent in a function,
