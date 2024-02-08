@@ -45,7 +45,7 @@ tracks:
     notebooks:
     # ascii, utf8, binary, as well as various file formats
     # like pickle, json, yaml, csv
-    - "python-tps/files-formats/README-files-formats-mp.md"
+    - "python-tps/files-formats/README-files-formats-nb.md"
     - "python-tps/watson/README-watson-nb.md"
     # using dicts for indexing and sets for creating groups
     - "python-tps/students-groups/README-students-groups-nb.md"

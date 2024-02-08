@@ -1,83 +1,72 @@
 ---
-marp: true
-markdown.marp.enableHtml: true
-theme: default
-class: invert
-# backgroundImage: url('https://marp.app/assets/hero-background.svg')
-# color: #44f
-header: un TP sur les fichiers
-#footer: 'cours Python ![height:40px](media/logo-python.svg)'
-footer: 'cours Python'
-paginate: true
+jupyter:
+  jupytext:
+    cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
+    notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
+      -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
+      -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
+      -toc, -rise, -version
+    text_representation:
+      extension: .md
+      format_name: markdown
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3
+  language_info:
+    name: python
+    nbconvert_exporter: python
+    pygments_lexer: ipython3
 ---
 
-<style>
-@import url('https://fonts.googleapis.com/css?family=Patrick+Hand|Patrick+Hand+SC');
+# fichiers et formats
 
-section {
-    font-family: "Patrick Hand", Verdana;
-    font-size: xxx-large;
-}
+{download}`Commencez par télécharger le zip<./ARTEFACTS-files-formats.zip>`
 
-section::after {
-  content: 'Slide ' attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
-}
 
-.small {
-  font-size: 70%;
-}
-
-</style>
-
-# <!-- fit -->fichiers et formats
-
-<!-- _backgroundImage: url("pexels-mike-1181772.jpg") -->
-<!-- _color: #229 -->
-
----
 ## on va faire quoi ?
-<!-- fontSize: smaller -->
 
 - les fichiers et l'OS; comment ouvrir, pourquoi fermer ?
-- différents formats de fichier
+- différents formats de fichier *standard8
   - pickle (ouille ça pique, c'est du binaire)
   - json (on se sent un peu mieux)
   - csv (ah là on parle)
   - yaml (de plus en plus populaire)
-- parser un nouveau format de fichier
+- parser un format de fichier *custom*
 
----
-# modalités du cours
+
+### modalités du TP
 
 - on ouvre vs-code
 - on participe
 
----
-# <!--fit --> les fichiers et l'OS
 
-<!-- _backgroundImage: url("pexels-pixabay-270572.jpg") -->
-<!-- # _color: #eee -->
+## les fichiers et l'OS
 
----
-# c'est quoi l'OS ? ![height:150px](operating_system_placement.png)
+c'est quoi l'OS ? 
 
+```{image} operating_system_placement.png
+:align: center
+:width: 200px
+```
 
 - votre code ne cause jamais directement au harware
 - mais au travers d'abstractions
 - dont la notion de "fichier"
 
----
-# questions préliminaires
+
+### questions préliminaires
 
 - qu'est-ce qu'un fichier ?
 - que contient un fichier ?
 - quelles sont les étapes pour y accéder ?
 
----
-# <!-- fit--> Lire un fichier simple
 
----
-# ouverture d'un fichier
+## lire un fichier simple
+
+(le fichier `hello.txt` fait partie du zip)
+
+### ouverture d'un fichier
 
 ```
 f = open("hello.txt")
@@ -88,14 +77,12 @@ f = open("hello.txt")
   (comment on la trouve ?)
 - que peut-on faire de `f` ?
 
----
-# ouverture d'un fichier (2)
+### ouverture d'un fichier (2)
 
 - analyser les types des différents objets
 - avancer étape par étape
 
----
-# ouverture d'un fichier (3)
+### ouverture d'un fichier (3)
 
 que se passe-t-il si on oublie de fermer le fichier ?
 
@@ -104,23 +91,37 @@ que se passe-t-il si on oublie de fermer le fichier ?
 
 pouvez-vous prédire ce qui va passer ?
 
----
-# les context managers
+<!-- #region -->
+## les context managers
 
 l'idiome à **toujours utiliser** pour lire un fichier texte
 
 ```python
+# TOUJOURS lire ou écrire un fichier avec un with !
+
 with open("hello.txt") as f:
     for line in f:
-        print(line.strip())
+        print(line, end="")
 ```
-
-ou encore `print(line, end="")`
 
 quelles autres formules connaissiez-vous pour faire ça ?
 
----
-# fichiers texte - contenu
+
+````{admonition} pourquoi le end="" ?
+:class: admonition-small
+
+à chaque itération, vous allez trouver dans la variable `line`, eh bien la ligne suivante évidemment,  
+sauf que ceci **contient un caractère de fin de ligne** - qu'on appelle aussi *newline*  
+du coup si vous faites un `print(line)` (essayez..) vous allez avoir une ligne blanche sur deux !
+
+une autre approche consisterait à utiliser `line.rstrip("\n")` qui enlève l'éventuel *newline*;  
+je dis éventuel car la dernière ligne ne contient pas toujours ce fameux *newline*; le monde est compliqué parfois...
+````
+<!-- #endregion -->
+
+## fichiers texte - contenu
+
+### ASCII
 
 - installez l'extension vscode *Hex Editor*
 - regarder le contenu de `hello.txt` avec vscode
@@ -128,16 +129,17 @@ quelles autres formules connaissiez-vous pour faire ça ?
 - comparez avec  
   <https://www.rapidtables.com/code/text/ascii-table.html>
 
----
-# fichiers texte - contenu (2)
+
+### Unicode
 
 - pareil avec `bonjour.txt`
 - que constatez-vous ?
-- voyez aussi  
-  <https://www.utf8-chartable.de/>
+- voyez aussi <https://www.utf8-chartable.de/>  
 
----
-# fichiers binaires
+
+## fichiers binaires
+
+### pickle
 
 - pareil avec `tiny.pickle`  
 - ouvrez-le "normalement"
@@ -145,42 +147,44 @@ quelles autres formules connaissiez-vous pour faire ça ?
 - comment faut-il adapter le code ?
 - que constatez-vous ? (indice: les types !)
 
----
-# à retenir
+````{admonition} à retenir
+:class: important
 
 - toujours ouvrir un fichier avec `with`
 - un fichier peut
   - contenir du texte (qu'il faut alors décoder)
     pour obtenir un `str`
   - ou pas - on obtient alors des `bytes`
+````
 
----
-# <!-- fit --> les différents <br>formats de fichier
 
-<!-- _backgroundImage: url("pexels-pixabay-162553.jpg") -->
-<!-- #_color: yellow -->
+## les différents formats de fichier
 
----
-Tout le monde ne crée pas sa propre structure de fichier !
+Tout le monde ne crée pas sa propre structure de fichier !  
 Il existe des formats ***standard*** qui permettent une interaction entre les programmes et même différents langages de programmation
 
----
-# <!-- fit --> le format pickle
 
-<!-- _backgroundImage: url("pexels-eva-bronzini-5503189.jpg") -->
-<!-- #_color: yellow -->
+## le format pickle
 
----
-c'est le format *intégré* de Python
+c'est le format *intégré* de Python  
+il permet de lire/écrire non seulement   
 
 - format binaire (s'ouvre avec `open(name, 'rb')`)
-- pour sérialiser notamment les *types de base*
+- pour sérialiser notamment les types de base,
+  c-a-d non seulement des atomes (nombres, chaines...)  
+  mais aussi des **structures plus complexes**, avec des containers etc...
 - lisez la documentation du module `pickle`
 - essayez de lire le fichier `tiny.pickle`
 - inspectez les types des objets dans la donnée
 
----
-# écriture
+````{admonition} b pour binaire
+:class: note
+
+dans `open(name, 'rb')` le `r` est pour *read* et le `b` pour *binary*
+````
+
+
+### écriture
 
 - partez de ce que vous venez de lire
 - modifiez certaines des données
@@ -188,34 +192,27 @@ c'est le format *intégré* de Python
   `tiny-changed.pickle`
 - et relisez-le pour vérifier que "ça marche"
 
----
-# <!-- fit --> autre format: json
 
----
-## à vous de jouer
+## autre format: json
+
+à vous de jouer
 
 - on va refaire pareil à partir de `tiny.json`
 - lisez-la doc et écrivez le code qui lit ce fichier
 - modifiez la donnée lue, et sauvez-la
-- est-ce qu'on peut y mettre un ensemble ?
+- est-ce qu'on peut y mettre un ensemble ? ou un tuple ?
 
----
-# <!-- fit --> encore un: yaml
 
----
-## yet again
+## encore un: yaml
 
 - trouvez la doc de PyYAML
 - lisez le fichier `tiny.yaml`
 - comment peut-on comparer avec JSON ?
 
----
-# <!-- fit --> et aussi: les csv
 
-(les mêmes que ceux qu'on a vus dans le cours pandas)
+## et aussi: les csv
 
----
-# on recommence
+on recommence:
 
 - lisez la documentation du module csv  
   google `python module csv`
@@ -223,10 +220,9 @@ c'est le format *intégré* de Python
 - sauriez-vous créer une dataframe ?  
   (sans utiliser `pd.read_csv` évidemment)
 
----
-# <!-- fit --> formats custom
 
----
+## formats custom
+
 * comment peut-on lire (on dit *parse*) des formats de fichiers inconnus ?
 * pour cela, 2 armes
   * le type `str` fournit plein de méthodes  
@@ -234,25 +230,24 @@ c'est le format *intégré* de Python
   * le module `re` (pour *regular expressions*)  
     peut également être utile
 
----
-# exercice
+
+### exercice
 
 * sans importer de module additionnel,
 * lisez le fichier `notes.txt`
 * créez et affichez un dictionnaire  
   *nom élève* → note
 
----
-# un mot sur `print()`
+````{admonition} un mot sur print()
 
 * l'opération la plus simple pour sauver un résultat
 * mais pas très utile en réalité
 * car le plus souvent limitée à un lecteur humain
 * on peut écrire dans un fichier `f` (ouvert en écriture)  
   avec `print(des, trucs, file=f)`
+````
 
----
-# les redirections de `bash` (pour info)
+````{admonition} les redirections de bash (pour info)
 
 * quand il est lancé, votre programme a un `stdin` et un `stdout` (et un `stderr` mais c'est plus anecdotique)
 * qui sont créés par bash (et sont branchés sur le terminal)
@@ -260,9 +255,10 @@ c'est le format *intégré* de Python
   ```bash
   python myhack.py < the-input > the-output
   ```
+````
 
----
-# exercice: écrivez un programme
+
+## exercice: écrivez un programme
 
 * qui lit sans fin le texte entré dans le terminal
 * regarde si le texte commence par un `q`
@@ -270,22 +266,24 @@ c'est le format *intégré* de Python
 * sinon affiche le nombre de mots dans la ligne  
   et recommence
 
-voir consigne et indices slide suivant
-
----
-## consigne
+````{admonition} consigne
 
 ne pas utiliser `input()`, mais plutôt `sys.stdin`
+````
 
-## indices
+````{admonition} indices
+:class: tip
 
 * de quel type est `sys.stdin` ?
 * si vous voulez ajouter un *prompt*  
   (un peu comme les `>>>` de python)  
   lancez votre programme avec `python -u mycode.py`
+````
 
----
-# regexps, en deux mots
+
+## regexps, en deux mots
+
+sans transition..
 
 * l'idée est de décrire une *famille* de chaines
 * à partir d'une autre chaine (la *regexp*)
@@ -293,8 +291,8 @@ ne pas utiliser `input()`, mais plutôt `sys.stdin`
   * comme p.e. `*`
   * pour indiquer 'un nombre quelconque de fois' telle ou telle autre *regexp*
 
----
-# regexp exemple
+
+### regexp exemple
 
 `ab((cd)|(ef))*` décrit un ensemble qui
 
@@ -303,11 +301,10 @@ ne pas utiliser `input()`, mais plutôt `sys.stdin`
 * ou encore `abcdcdefcd`
 * mais pas `abce` ni `abcde`
 
----
-# avertissement
+````{admonition} avertissement
 
 > Some people, when confronted with a problem, think
 “I know, I'll use regular expressions.”   Now they have two problems.
 
-
 <http://regex.info/blog/2006-09-15/247>
+````
