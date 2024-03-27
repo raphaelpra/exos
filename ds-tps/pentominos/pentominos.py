@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 a rustic way to map pentomino-like problems
 onto exact_cover, and back
@@ -106,7 +108,7 @@ def all_exact_cover_lines(board, pieces):
     return result[:, indices_to_keep]
 
 
-def solve(board, pieces):
+def solve(board, pieces, name="anonymous"):
     """
     given a board definition and a list of pieces,
     computes 'lines' as the input to exact_cover
@@ -122,7 +124,7 @@ def solve(board, pieces):
         # save input matrix as csv
         import pandas as pd
         df = pd.DataFrame(lines, dtype=np.uint8)
-        df.to_csv("matrix.csv", index=False)
+        df.to_csv(f"{name}.csv", index=False)
     try:
         solution = exact_cover.get_exact_cover(lines)
         DEBUG and print(f"solution is of {type(solution)=})")
@@ -198,7 +200,7 @@ def enable_full_print():
 
 def full_monty(name, board, pieces):
     print(40*'=', name)
-    lines, solution = solve(board, pieces)
+    lines, solution = solve(board, pieces, name)
     if solution is None:
         print(f"no solution for", board)
     else:
