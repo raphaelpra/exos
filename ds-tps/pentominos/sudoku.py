@@ -29,19 +29,21 @@ def exact_cover_input(sudoku):
         see section 7.2.2.1 p. 11 of D. Knuth's TAOCP for the full example of BOARD_29a
     """
     # there are a total of 4*9*9 = 324 constraints
-    # for easying arithmentic, k will be in [0,8] instead of [1,9]
+    # i j mean row and column as usual
+    # k is the number in that cell; for easying arithmentic
+    # it will be in [0,8] instead of [1,9]
+    # x is a box index, in [0,8] too, and computed as x = 3*(i//3) + j//3
     # pij means that cell (i,j) is covered exactly once
     # rik means that row i contains digit k
     # cjk means that column j contains digit k
     # bxk means that box x contains digit k
-    #  and x is in [0,8] too, and computed as x = 3*(i//3) + j//3
     #
     # so for example, the option of putting number 5 in cell (3,7)
     # will be encoded as:
     # k = 5
     # x = 3*(3//3) + 7//3 = 3*1 + 2 = 5
     # p34, r35, c75, b55
-    # so this option will contain 4 rows numbered
+    # so this option will contain 4 columns numbered
     # 3*9+4, 81+9*3+5, 162+7*9+5, 243+5*9+5
 
     def p_r_c_b(i, j, k):
@@ -80,13 +82,18 @@ def exact_cover_input(sudoku):
                 if (ocx, ocy) != (cx, cy):
                     possible[bx+ocx, by+ocy] -= {k}
 
-    # all the (i, j) that have only one possible digit
+    # all the (i, j) that correspond to a given in the problem
     # are removed from the equation
+    # NOTE that as far as solving is concerned, we could also remove
+    # the (i, j) that have only one possible digit (naked singles)
+    # however this would make the decoder/pretty-printer more complex
+    # and keeping columns with one single option does not imped the solver
+    # thanks to the MRV heuristic
     # so: initialize the result array with 4*9*9 columns
-    # and this number of rows
+    # and this number of rows:
     nb_rows = sum(len(possible[i, j])
                       for i, j in product(range(9), repeat=2)
-                      if len(possible[i, j]) > 1)
+                      if sudoku[i, j] == 0)
 
     result = np.zeros((nb_rows, 4*9*9), dtype=bool)
     # the decoder maps the row index to the (i, j, k) tuple
@@ -97,7 +104,7 @@ def exact_cover_input(sudoku):
 
     row = 0
     for (i, j), digits in possible.items():
-        if len(digits) > 1:
+        if sudoku[i, j] == 0:
             for k in digits:
                 p, r, c, b = p_r_c_b(i, j, k)
                 result[row, [p, r, c, b]] = True
@@ -131,8 +138,22 @@ def pretty_print(problem, solutions, decoder):
         if problem[i, j] != 0:
             raise ValueError(f"cell ({i}, {j}) already filled !")
         problem[i, j] = k + 1
-    # xxx: cells that are not in the initial problem BUT have only one possible digit
-    # are not filled in the solutions
     if np.any(problem == 0):
         raise ValueError("not all cells filled")
     return problem
+
+def make_data():
+
+    def iterate_data():
+        import sudoku_data
+        for name in dir(sudoku_data):
+            if name.startswith("BOARD_"):
+                sudoku = getattr(sudoku_data, name)
+                yield name, sudoku
+
+    import pandas as pd
+    for name, sudoku in iterate_data():
+        name = name.lower().replace("_", "-")
+        problem, decoder = exact_cover_input(sudoku)
+        df = pd.DataFrame(problem)
+        df.to_csv(f"sudoku-{name}.csv", index=False, header=False)

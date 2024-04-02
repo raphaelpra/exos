@@ -8,7 +8,7 @@ def np_from_text(text):
     return np.array([[int(c) if c != "." else 0 for c in line] for line in text.split("\n") if line.strip()])
 
 
-# from D. Knuth to acp section 7.2.2.1
+# from D. Knuth taocp section 7.2.2.1 figure (29)
 BOARD_29a = np_from_text("""
 ..3.1....
 415....9.
@@ -44,4 +44,3 @@ BOARD_29c = np_from_text("""
 .......5.
 .9.......
 """)
-
