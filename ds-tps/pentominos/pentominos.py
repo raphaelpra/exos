@@ -42,9 +42,8 @@ def find_all_translations(board, piece):
     """
     given a board and an individual piece, find all possible locations
     by translation
-    result is provided as
-        a list of locations
-        each location is a flat array of size board.size, where 1 indicates the piece is present
+    result is provided as a list of locations
+    each location is a flat array of size board.size, where 1 indicates the piece is present
     """
     locations = []
     bh, bw = board.shape
