@@ -7,11 +7,11 @@ onto exact_cover, and back
 
 import numpy as np
 import exact_cover
-from data import *
+from pentominos_data import PENTOMINOS
 
 
-# convenience: all boards defined in data.py
-import data
+# convenience: all boards defined in pentominos_data.py
+import pentominos_data as data
 glob = dir(data)
 ALL_BOARDS = {x: getattr(data, x) for x in data.__dict__ if x.startswith('BOARD')}
 
