@@ -6,7 +6,7 @@ onto exact_cover, and back
 """
 
 import numpy as np
-import exact_cover
+import exact_cover_py
 from pentominos_data import PENTOMINOS
 
 
@@ -110,14 +110,14 @@ def all_exact_cover_lines(board, pieces):
 def solve(board, pieces, name="anonymous"):
     """
     given a board definition and a list of pieces,
-    computes 'lines' as the input to exact_cover
-    and the solution provided by exact_cover
+    computes 'lines' as the input to exact_cover_py
+    and the solution provided by exact_cover_py
     both are returned
     """
     lines = all_exact_cover_lines(board, pieces)
     if DEBUG:
         print(
-            f"sending to exact_cover lines with {lines.shape=} and {lines.dtype=}"
+            f"sending to exact_cover_py lines with {lines.shape=} and {lines.dtype=}"
         )
         # print(lines)
         # save input matrix as csv
@@ -125,7 +125,8 @@ def solve(board, pieces, name="anonymous"):
         df = pd.DataFrame(lines, dtype=np.uint8)
         df.to_csv(f"{name}.csv", index=False)
     try:
-        solution = exact_cover.get_exact_cover(lines)
+        solutions_gen = exact_cover_py.exact_covers(lines)
+        solution = next(solutions_gen)
         DEBUG and print(f"solution is of {type(solution)=})")
         DEBUG and print(f"and in details", solution)
         # for index, i in enumerate(solution):
@@ -138,9 +139,13 @@ def solve(board, pieces, name="anonymous"):
 
 def pretty_solution(board, pieces, lines, solution):
     """
-    given a board definition, a list of pieces and the solution
-    provided by exact_cover, returns a board with the pieces
-    numbered according to the solution
+    Parameters:
+      - board: the shape to be filled 
+      - pieces: the pieces to fill the board
+      - lines: the full data as passed to exact_cover
+      - solution: one solution, as a list of indices within lines
+    Returns:
+      - a board with the pieces numbered according to the solution
 
     NOTE: in the incoming board, obstacles are 1 and free space is 0
     however in the outcome of this function, obstacles are 0 and then

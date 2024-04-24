@@ -25,7 +25,7 @@ nbhosting:
   title: TP - un peu de musique
 ---
 
-+++ {"editable": true, "slideshow": {"slide_type": ""}, "tags": []}
++++ {"slideshow": {"slide_type": ""}, "tags": []}
 
 Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
@@ -137,7 +137,7 @@ la_1seconde = ...
 ***
 ***
 
-+++ {"editable": true, "slideshow": {"slide_type": ""}, "tags": []}
++++ {"slideshow": {"slide_type": ""}, "tags": []}
 
 #### prune-cell
 
@@ -154,7 +154,6 @@ la_1seconde = ...
 
 ```{code-cell} ipython3
 ---
-editable: true
 slideshow:
   slide_type: ''
 tags: [raises-exception]
@@ -171,7 +170,6 @@ la_1seconde = np.sin(2*np.pi*LA*t)
 
 ```{code-cell} ipython3
 ---
-editable: true
 slideshow:
   slide_type: ''
 tags: [raises-exception]
@@ -195,7 +193,6 @@ def MyAudio(what, **kwds):
 ```{code-cell} ipython3
 ---
 cell_style: split
-editable: true
 slideshow:
   slide_type: ''
 tags: [raises-exception]
@@ -206,7 +203,6 @@ MyAudio(la_1seconde)
 ```{code-cell} ipython3
 ---
 cell_style: split
-editable: true
 slideshow:
   slide_type: ''
 tags: [raises-exception]

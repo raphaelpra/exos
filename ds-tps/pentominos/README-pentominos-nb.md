@@ -1,7 +1,7 @@
 ---
 jupyter:
   jupytext:
-    cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+    cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
@@ -53,7 +53,7 @@ you feed the algorithm with a set of vectors that all have the same length, and 
 13: (0 1 0 0 0 1 1 1)
 ```
 
-and the goal is to find a subset of the input vectors, such that **each column of the input is covered exactly once**  
+and the goal is to find **a subset** of the input vectors, such that **each column of the input is covered exactly once**  
 (of course there is the accessory question about whether there are several
 solutions, but let's not dwelve into that, for now at least..)  
 so in the above example, there would be 2 solutions, namely
@@ -72,7 +72,7 @@ and
 ### the algorithm and its implementation in Python
 
 one possible way to solve this problem has been the subject of a famous article by Donald Knuth - one of
-the fathers of Computer Science - in 2000, and is known as Knuth's Algorithm X
+the fathers of Computer Science - and is known as Knuth's Algorithm X - interested students can find more details in the reference section.
 
 we're not going to go into the details of the algorithm either, but rather focus
 on the application to solving pentominoes (see next section)
@@ -81,34 +81,13 @@ let us just outline that
 
 - Algorithm X, also known as dancing links, is an extremely efficient
   implementation for solving the exact cover problem
-- and fortunately for us, there is a Python implementation of it, in the `exact_cover` package
+- and fortunately for us, there are several Python implementations of it (see pypi.org for details):
+  - `xcover`
+  - `exact-cover`
+  - `exact-cover-py`
 
-So your first task is to search for that package, install it, and read the basics about how to use it
-
-````{admonition} Make sure to use exact_cover >= 1.3.0
-:class: dropdown danger
-
-**this is now fixed in version 1.3.0**, so you probably don't care; 
-see <https://github.com/jwg4/exact_cover/pull/65> for the full story
-
-during my own attempt at this exercise, I ran into a nasty bug in this library  
-that was stubbornly returning 'no solution' whereas there obviously was one..
-
-in order to work around that, I simply had to save and reload my numpy array before
-I fed it into `get_exact_cover()`, like so:
-```python
-def workaround_sanitize(array):
-    """
-    save and reload to work around a sneaky bug
-    in exact_cover
-    """
-    filename = ".sanitizing-array.txt"
-    exact_cover.io.save_problem(filename, array)
-    return exact_cover.io.load_problem(filename)
-```
-
-see also <https://github.com/jwg4/exact_cover/pull/65>
-````
+So your first task is to search for one of these packages (`xcover` seems the most efficient one),
+install it, and read the basics about how to use it
 
 
 ## application to pentominoes
@@ -147,8 +126,8 @@ as well as this one within a 8x8 square
 ### how to solve such a problem
 
 the trick is to transform the puzzle problem into an exact cover problem  
-there are many resources on the Internet that explain how to do that - and feel free to use them  
-on our end, let's consider a smaller problem as depicted below
+there are many resources on the Internet that explain how to do that - and feel free to use them too  
+on our end, let's consider a smaller problem as depicted ; note that the white squares are of course not part of the problem
 
 
 #### our small example
@@ -158,7 +137,7 @@ on our end, let's consider a smaller problem as depicted below
 :align: center
 ```
 
-it turns out this problem can be mapped to the sample input quoted above, i.e.
+it turns out this problem can be mapped to the sample input quoted above in the introduction, i.e.
 
 ```
 0:  (1 0   0 1 1 0 1 0)
@@ -187,14 +166,15 @@ this line will contain:
 - the first 2 columns (we have 2 pieces) correspond to the piece number  
   we set exactly one 1 to indicate which piece we're talking about  
   so for example the first 7 rows correspond to the 7 positions where we can place piece#0
-- the next 6 columns correspond to the slots that the piece in that position would occupy  
+- because there are 6 squares to be filled, the next 6 columns correspond to the slots that the piece in that position would occupy  
   (1 means the slot is occupied)  
   and since the 2 pieces are identical, the 7 last rows carry the same information, but for piece#1
 
 ````{admonition} note
 :class: attention
 
-obstacles in the board **must not** be given a column: there would be only 0's in that column, and `exact_cover` would find no solution
+obstacles (the white squares) in the board **must not** be given a column:
+there would be only 0's in that column, and `exact_cover` would find no solution
 ````
 
 and so for example with our small problem, the first line means:
@@ -208,12 +188,21 @@ x 0 x
 x 1 0
 ```
 
-which, once you remove the obstacles, and flatten, reads `0 1 1 0 1 0`: the second half of first line
+which, once you remove the obstacles, and flatten, reads `0 1 1 0 1 0`: the right-hand-side of first line
 
 
 #### how to read a solution ?
 
-the output of `exact_cover` in this case could be 
+if you pick `xcover` as a solver engine, it will expose a generator over solutions; this means that you can wrote something like
+
+```
+solutions = covers_bool(problem)
+first = next(solutions)
+print(first)
+-> [5, 13]
+```
+
+which maps to the following rows into the input problem:
 
 ```
 5:  (1 0   1 1 1 0 0 0)
@@ -255,7 +244,7 @@ decide how to represent the board and pieces:
 * using nd-arrays, so rectangular spaces
 * use only **booleans** to model **obstacles** in the board and the actual **contour** of pieces
 
-you will find some helper code in `data.py` if you wish to use it  
+you will find some helper code in `pentominos_data.py` if you wish to use it  
 in particular, note the presence of `SMALL_BOARD` and `SMALL_PIECE`
 that correspond to the following solution, and that may turn up useful for debugging your code
 
@@ -283,7 +272,7 @@ given a board and a set of pieces, compute the input to `get_exact_cover()`
 
 ### pretty-print a solution
 
-`get_exact_cover()` will then compute one solution (if there's one, of course)  
+your solver will then compute one solution (if there's one, of course)  
 from this solution, your job is to compute a 'pretty' view of the solution, something like e.g.
   ```
   (( 3  3  6  7  7  5  5  5 11 11 11 11)
@@ -318,8 +307,7 @@ if time permits, you could also transform this rough numpy solution into a nicer
 
 to produce this we have
 - used some predefined colormaps in matplotlib - see `matplotlib.pyplot.colormaps()` - you could consider accepting an argument that specifies one if them
-- made the (color corresponding to) obstables transparent
-- using the so-called alpha channel (fourth if you count first the red, green and blue channels)
+- made the (color corresponding to) obstables transparent, by using the so-called alpha channel (fourth if you count first the red, green and blue channels)
 ````
 
 ```python
@@ -349,7 +337,6 @@ you can use `exact_cover` to solve a whole range of other problems, like for exa
 
 ### links
 
-finally, here are some links to more information about `exact_cover` and Donald Knuth's implementation; note that you really need a low-level compiled language like C or C++ or Rust to get all the benefits of his idea
-
 * <https://en.wikipedia.org/wiki/Exact_cover>
 * <https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X>
+* if you plan on implementing a solver yourself, make sure to read this step-by-step description of the algorithm (you need several hours/days to get through this ;):["The art of computer programming", section 7.2.2.1](https://www.inf.ufrgs.br/~mrpritt/lib/exe/fetch.php?media=inf5504:7.2.2.1-dancing_links.pdf)

@@ -25,7 +25,7 @@ nbhosting:
   title: TP - un peu de musique
 ---
 
-+++ {"editable": true, "slideshow": {"slide_type": ""}, "tags": []}
++++ {"slideshow": {"slide_type": ""}, "tags": []}
 
 Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
@@ -33,8 +33,6 @@ Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 from IPython.display import HTML
 HTML(url="https://raw.githubusercontent.com/ue12-p23/numerique/main/notebooks/_static/style.html")
 ```
-
-pour réaliser ce TP localement sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-sounds.zip>`
 
 # TP - un peu de musique
 
@@ -141,7 +139,6 @@ la_1seconde = ...
 
 ```{code-cell} ipython3
 ---
-editable: true
 slideshow:
   slide_type: ''
 tags: [raises-exception]
@@ -165,7 +162,6 @@ def MyAudio(what, **kwds):
 ```{code-cell} ipython3
 ---
 cell_style: split
-editable: true
 slideshow:
   slide_type: ''
 tags: [raises-exception]
@@ -176,7 +172,6 @@ MyAudio(la_1seconde)
 ```{code-cell} ipython3
 ---
 cell_style: split
-editable: true
 slideshow:
   slide_type: ''
 tags: [raises-exception]
