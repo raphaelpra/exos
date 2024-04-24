@@ -356,15 +356,11 @@ le premier algorithme que nous allons voir consiste à calculer l'ensemble des s
 
 commençons par voir un exemple
 
-<div class=mynote>
-    
-quelques précisions
+````{admonition} quelques précisions
 
 * dans le contexte de l'étudiant, le module `graphs.py` n'existe pas encore, c'est à vous de l'écrire évidemment !
-    
 * **attention** la deuxième cellule (qui appelle `to_graphviz`) peut ne pas fonctionner si vous utilisez votre ordi perso et que vous n'avez pas installé le module `graphviz`
-
-</div>
+````
 
 ```{code-cell} ipython3
 :cell_style: center

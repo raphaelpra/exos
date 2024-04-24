@@ -58,11 +58,11 @@ les codes de couleur sont donc
 * jaune: lettre mal placée
 * bleu (ou blanc, selon les supports): lettre absente
 
-<div class=mynote>
+````{admonition} en fait..
+:class: admonition-small
 
 **note:** en fait au tout début on vous montre la première lettre, en rouge; mais bon ça ne change pas grand-chose à notre TP
-    
-</div>
+````
 
 +++
 
