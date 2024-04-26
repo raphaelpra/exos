@@ -6,13 +6,20 @@
     .bd-page-width {
         max-width: initial !important;
     }
+    .navbar-brand.logo>img {
+        max-width: 170px
+    }
 }
+
+#bd-toc-nav {
+    background-color: rgb(0 0 0 / 0);
+}
+
 
 :is(.bd-container, .myst) :is(p, ul) {
     margin-bottom: 0.5em !important;
     margin-top: 0.5em !important;
 }
-
 .myst :where(:is(p, ul)):not(:where([class~=not-prose], [class~=not-prose] *)) {
     margin-bottom: 0.5em !important;
     margin-top: 0.5em !important;
@@ -23,9 +30,16 @@
 :is(.bd-container, .myst) p:has(+ :is(ol, ul) {
     margin-bottom: initial !important;
 }
+:is(.bd-container, .myst) li>ul {
+    margin-top: 0.1em !important;
+}
+
 
 div.cell div.cell_output .output pre {
     background-color: #f8fff8;
+}
+div.prompt.input_prompt, div.prompt.output_prompt {
+    opacity: 0.6;
 }
 
 
@@ -61,32 +75,5 @@ div.cell div.cell_output .output pre {
 .admonition-x-small {
     font-size: x-small;
     line-height: 1.2;
-}
-
-
-.column {
-    display: flex;
-    flex-direction: column;
-}
-.column.center {
-    align-items: center;
-}
-.row {
-    display: flex;
-    flex-direction: row;
-}
-
-
-.grey {
-    background-color: #eee;
-}
-.blue {
-    background-color: rgb(223, 235, 251);
-}
-.red {
-    background-color: rgb(234, 125, 110);
-}
-.pink {
-    background-color: pink;
 }
 </style>
