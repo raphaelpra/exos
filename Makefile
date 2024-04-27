@@ -59,9 +59,9 @@ exec-clean:
 # table of contents: inject the contents from nbhosting into jb
 jb/python/_toc.yml: .nbhosting/nbhosting.yaml
 	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t python
-
 jb/ds/_toc.yml: .nbhosting/nbhosting.yaml
 	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t data-science
+
 toc: jb/python/_toc.yml jb/ds/_toc.yml
 .PHONY: toc
 
@@ -76,7 +76,11 @@ book:
 	@echo make book-python
 	@echo or
 	@echo make book-ds
+.PHONY: book-python book-ds book 
 
-book-clean:
-	rm -rf book-ds book-python
-.PHONY: book-python book-ds book book-clean
+book-python-clean:
+	rm -rf book-python
+book-ds-clean:
+	rm -rf book-ds
+book-clean: book-python-clean book-ds-clean
+.PHONY: book-python-clean book-ds-clean book-clean
