@@ -6,6 +6,8 @@ build:
     python: "3.12"
   jobs:
     pre_build:
+      # needed in a notebook to produce graphviz representations
+      - apt-get install graphviz
       - jupyter-book config sphinx --toc $(pwd)/jb/python/_toc.yml --config $(pwd)/jb/_config.yml .
       # ideally we'd just like to have jupyter-book store its config in ./conf.py
       # for that purpose I have opened https://github.com/executablebooks/jupyter-book/pull/2074
