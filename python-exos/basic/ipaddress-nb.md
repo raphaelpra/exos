@@ -70,7 +70,7 @@ ip_v0(IP_2) == [138, 96, 19, 1]
 
 Même analyse, mais le retour est un entier dans l'espace $[0..2^{32}-1]$
 
-So j'appelle $b_0$, $b_1$, $b_2$, $b_3$ les 4 valeurs retournées par `ip_v0`, le résultat ici sera obtenu avec la formule
+Si j'appelle $b_0$, $b_1$, $b_2$, $b_3$ les 4 valeurs retournées par `ip_v0`, le résultat ici sera obtenu avec la formule
 
 $I = b_0.2^{24} + b_1*2^{16} + b_2*2^8 + b_3$
 

@@ -786,7 +786,7 @@ map
 c'est sans doute un bon moment pour sauver tout ce qu'on a fait:
 
 - sauvez la geo-dataframe dans un fichier `addresses-small-extended.csv`
-- sauvez la carte au format html (même nom sinon) pour une utilisation en *standalone* (par exemple pour la publier sur un site weeb indépendant des notebooks et de jupyter et tout ça)
+- sauvez la carte au format html (même nom sinon) pour une utilisation en *standalone* (par exemple pour la publier sur un site web indépendant des notebooks et de jupyter et tout ça)
 
 ```{code-cell} ipython3
 :tags: [level_basic]
