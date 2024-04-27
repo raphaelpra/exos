@@ -24,7 +24,7 @@ streamlit
 gradio
 
 # tooling
-jupyter
+jupyterlab
 jupytext
 jupyterlab-myst
 ipywidgets
