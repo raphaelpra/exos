@@ -15,7 +15,8 @@ autograd
 k3d
 graphviz
 geopandas
-keplergl
+# problematic
+# keplergl
 scikit-learn
 folium
 vega_datasets
