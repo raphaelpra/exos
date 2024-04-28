@@ -29,10 +29,7 @@ tracks:
     - python-exos/basic/agenda-readme-nb.md
     # basic counts, requires dicts
     - python-exos/basic/adnpercents-readme-nb.md
-    # filesystem
-    - python-exos/basic/files-scanext-nb.md
-    # filesystem too, requires files_sortby.py
-    # probably a duplicate of the previous one
+    # filesystem / pathlib
     - python-exos/basic/files-sortby-nb.md
     - python-exos/advanced/randomdate-readme-nb.md
   - name: exercices classes

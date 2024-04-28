@@ -16,40 +16,31 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: 'trier tous les fichiers dans un dossier'
+  title: trier tous les fichiers dans un dossier
 ---
 
 <div class="licence">
 <span>Licence CC BY-NC-ND</span>
-<span>Thierry Parmentelat &amp; Arnaud Legout</span>
+<span>Thierry Parmentelat</span>
 </div>
 
 +++
 
-# la librairie `pathlib`
+# parcours de dossier
+
+en 2024 tous les calculs/parcours sur le contenu du disque, dossiers, fichiers, et métadonnées telles que tailles, dates, etc... se font avec le couteau suisse `pathlib`
+
+**lisez-bien tout le notebook, et surtout les indices, avant de commencer**
 
 ```{code-cell} ipython3
 from pathlib import Path
 ```
 
-## commodité
-
-```{code-cell} ipython3
-# à quoi ça sert ce truc ?
-
-# eh bien si par hasard vous changez un module importé
-# APRÉS l'avoir déjà chargé dans ce notebook
-# avec cette formule magique le notebook sera capabale
-# de RECHARGER la nouvelle version
-# bref c'est plus pratique; mais ce n'est pas obligatoire du tout hein...
-
-%load_ext autoreload
-%autoreload 2
-```
-
-## initialisation
+(et non plus avec `os.path` et autres `glob` comme on aurait pu le faire dans le passé)
 
 +++
+
+## initialisation
 
 on va partir d'un dossier avec un peu de contenu; c'est pour simuler par exemple un dossier avec des logs
 
@@ -63,74 +54,195 @@ from files_sortby import init
 init()
 ```
 
-## il faut faire quoi ?
+````{admonition} pour faire la même chose sur votre ordi:
+:class: dropdown
+
+```{literalinclude} files_sortby.py
+:end-before: prune-end-init
+```
+````
 
 +++
 
-Il s'agit d'écrire une fonction qui
+## pb1: parcours de dossier
 
-* construit un chemin à partir d'une variable `root` de type `str`  (qui va désigner la racine de tout ceci)
-  * et dedans on va isoler un dossier particulier (dont le nom est fourni par une variable `course`)
-  * et dedans on se concentre sur le dossier `logs`
+on veut parcourir tout un dossier, c'est-à-dire calculer la liste des fichiers qui se trouvent dans un dossier;
+et cela récursivement ou pas (en parcourant ou non les sous-dossiers)
 
-* dans ce dossier `logs`, on va chercher tous les fichiers qui sont présents; 2 modes
-  * `deep=False` : les fichiers présents dans ce dossier exactement
-  * `deep=True` ou à n'importe quel niveau de profondeur sous ce dossier
+on vous demande d'écrire une fonction `scan_dir` qui prend en paramètres:
 
-* puis tous les fichiers trouvés sont triés selon `criteria`
-  1. `name` soit par le (dernier) nom du fichier
-  1. `namelen` soit par longueur du (dernier) nom du fichier
-  1. `size` soit sur la taille du fichier
+- `root` (le nom d')un dossier racine
+- `relative`: un chemin relatif (en dessous de cette racine; peut être vide ou '.') 
+- un booléen `recursive`
+
+et qui renvoie une liste d'objets de type `Path`, qui correspondent aux fichiers (pas les dossiers) qui se situent en dessous de `root`/`relative`
+
+
+````{admonition} paramètres keyword-only
+
+dans la correction, nous allons utiliser un trait qui s'appelle les paramètres *keyword-only*  
+car autant le premier paramètre a un rôle parfaitement clair, autant les deux autres sont relativement accessoires; aussi pour être sûr de ne pas se tromper, on va **imposer à l'appelant de les nommer**  
+cela signifie qu'on ne pourra pas appeler
+
+  ```python
+  # ceci ne sera pas légal
+  scan_dir("/Users/Jean Mineur", "git", True)
+
+  # il faudra toujours nommer comme ceci
+  scan_dir("/Users/Jean Mineur", relative="git", recursive=True)
+  ```
+````
+
+````{admonition} générateur ?
+:class: admonition-small seealso
+
+pour les avancés, plutôt que de renvoyer une liste vous pouvez sans souci écrire un générateur
+````
+
++++
+
+### exemples
 
 ```{code-cell} ipython3
-from files_sortby import sort_files
-help(sort_files)
+from files_sortby import scan_dir
+
+for p in scan_dir("pathlib-foo/", relative="logs/dir1", recursive=False):
+    print(p)
 ```
 
-### Exemples
+```{code-cell} ipython3
+for p in scan_dir("pathlib-foo/", relative="logs", recursive=True):
+    print(p)
+```
+
+## pb2: idem mais en triant
+
+on veut maintenant pouvoir trier cette information  
+
+on veut écrire une fonction `sort_dir` qui prend les **mêmes paramètres**, et **en plus**
+- un paramètre `by` (une chaine) qui vaut
+  1. `name` pour trier selon le nom du fichier
+  1. `namelen` pour trier par la longueur du nom du fichier
+  1. `size` pour trier selon la taille du fichier
+  1. `mtime` pour trier selon la date de modification du fichier
+
++++
+
+### exemples
 
 ```{code-cell} ipython3
-here = Path.cwd()
-here
+from files_sortby import sort_dir
+
+sort_dir("pathlib-foo", relative="logs", recursive=True, by='size')
 ```
 
 ```{code-cell} ipython3
-sort_files(here, "pathlib-foo", deep=True, criteria='name')
-```
+from files_sortby import sort_dir
 
-```{code-cell} ipython3
-sort_files(here, "pathlib-foo", deep=True, criteria='namelen')
-```
-
-```{code-cell} ipython3
-sort_files(here, "pathlib-foo", deep=True, criteria='size')
+sort_dir("pathlib-foo", relative="logs", recursive=True, by='namelen')
 ```
 
 ## Indices
 
 ```{code-cell} ipython3
+# on utilise ici quelques traits de `pathlib.Path`
+
 from pathlib import Path
 
-x = Path("pathlib-foo", "logs", "dir100", "filecxx")
-x
+# pour construire un Path
+root = Path("pathlib-foo")
+root
 ```
 
 ```{code-cell} ipython3
-list(x.parts)
+# on peut utiliser l'opérateur `/` pour construire des chemins
+# mais ça ne marche pas (évidemment) entre deux chaines
+# par contre dès qu'un des deux opérandes est un Path:
+
+path = root / "logs/dir100/filecxx"
+path
+```
+
+```{code-cell} ipython3
+# ou encore, donne le même résultat
+
+path = root / "logs" / "dir100" / "filecxx"
 ```
 
 ```{code-cell} ipython3
 # pour avoir la taille
-x.stat().st_size
+path.stat().st_size
 ```
 
 ```{code-cell} ipython3
-y = Path("pathlib-foo", "logs")
-list(y.glob("*"))
+# pour chercher les fichiers on peut utiliser la méthode glob
+# 2 remarques:
+# - ici j'appelle list(), c'est juste pour avoir un affichage correct (essayez de l'enlever...)
+
+logs = root / "logs"
+
+list(logs.glob("*"))
 ```
 
 ```{code-cell} ipython3
-list(y.glob("**/*"))
+# et pour les recherches récursives on fait comme ceci
+# le **/ va matcher tous les dossiers en dessous de 'logs'
+
+list(logs.glob("**"))
 ```
 
-***
+```{code-cell} ipython3
+# du coup pour trouver tous les fichiers on fait
+
+list(logs.glob("**/*"))
+```
+
+```{code-cell} ipython3
+# pas utilisé dans cet exercice, mais on peut facilement
+# faire des calculs du genre de:
+
+path = root / "logs" / "dir100" / "filecxx"
+
+path.parts
+```
+
+```{code-cell} ipython3
+# ou encore 
+
+list(path.parents)
+```
+
+```{code-cell} ipython3
+# ou encore
+
+path.absolute()
+```
+
+```{code-cell} ipython3
+path.relative_to(root)
+```
+
+```{code-cell} ipython3
+# etc etc..
+```
+
+## solution
+
+````{admonition} ouvrez-moi
+:class: dropdown
+```{literalinclude} files_sortby.py
+:start-after: prune-end-init
+```
+````
+
++++
+
+## variantes possibles
+
+- passer en paramètre les extensions de fichier qui sont intéressantes; par exemple on pourrait accepter pour ce paramètre
+  - `None`: le défaut, comme on vient de faire
+  - une chaine unique, e.g. `"py"` pour ne regarder que les `*.py`
+  - une liste d'extensions
+- afficher la première ligne de chaque fichier - pour cela il est sans doute idoine de se définir une nouvelle fonction
+- en faire un script qui puisse se lancer depuis le terminal
+- etc...
