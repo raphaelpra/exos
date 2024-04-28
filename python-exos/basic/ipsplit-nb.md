@@ -97,7 +97,7 @@ hex(192), hex(168), hex(0), hex(9)
 0xc0a80009
 ```
 
-### solutions
+###solution
 
 +++
 
