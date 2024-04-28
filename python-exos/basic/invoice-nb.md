@@ -55,24 +55,14 @@ items = [
 
 +++
 
-### v0 : une fonction
+## v0 : une fonction
 
 +++
 
 l'API la plus simple évidemment ce serait tout simplement ceci
 
-+++
-
-```python
-invoice = generate_invoice(
-    items, company_address, thanks=thanks_message, currency='$', items)
-print(invoice)
-```
-
 ```{code-cell} ipython3
-# à vous d'écrire cette fonction
-def generate_invoice():
-    pass
+from invoice import generate_invoice
 ```
 
 ```{code-cell} ipython3
@@ -81,11 +71,11 @@ invoice = generate_invoice(
 print(invoice)
 ```
 
-#### suggestions / indices
+### suggestions / indices
 
 * dans un premier temps, affichez le contenu de `company_address` tel quel
   * ensuite définissez une fontion - par exemple `center_address` qui se charge seulement de centrer l'adresse dans une certaine largeur
-* les formats de f-string ont un trait très pratique ici
+* les formats de f-string sont un trait très pratique ici
 
 ```{code-cell} ipython3
 texte = "tutu"
@@ -105,56 +95,55 @@ f"X{texte:>{largeur}}X"
 f"X{texte:^{largeur}}X"
 ```
 
-#### variante
-
-est-ce que ça ne serait pas pratique que les deux derniers paramètres soient optionnels ?
+## v1 : une classe
 
 +++
 
-### v1 : une classe
+maintenant on peut aussi imaginer une autre façon d'implémenter ceci, en passant par une classe, comme par exemple
 
-+++
+```{code-cell} ipython3
+from invoice import InvoiceGenerator
+```
 
-mais on peut aussi imaginer ceci par exemple
+```{code-cell} ipython3
+generator = InvoiceGenerator(
+    address=company_address, 
+    thanks=thanks_message,
+    currency='$')
 
-+++
-
-```python
-generator = InvoiceGenerator(address=company_address, 
-                             thanks=thanks_message,
-                            currency='$')
 print(generator.invoice(items))
 ```
 
-+++
+## solution
 
-### exemple de résultat
-
-+++
-
-ce qui dans les deux cas produirait une sortie dans le genre de la suivante
+Comme toujours, les annotations *type hints* sont totalement optionnelles
 
 +++
 
-```
-**************************************************
-                  Tribeca Inc.,                   
-            Somerset House – New Wing             
-                 Lancaster Place                  
-                 London WC2R 1LA                  
-++++++++++++++++++++++++++++++++++++++++++++++++++
-     Product Name     #  Item Price       
-            Books     2  25.0             
-          Monitor     1  250.0            
-         Computer     1  500.0            
---------------------------------------------------
-            Total        800.00$
-++++++++++++++++++++++++++++++++++++++++++++++++++
-        Thanks for shopping with us today!        
-**************************************************
+### une solution v0
 
-```
+Dans une toute première version, on pourrait penser à faire des `print()` dans la fonction.
+
+Toutefois cette approche **n'est pas recommandée**; il vaut beaucoup mieux construire et renvoyer une chaine; de cette façon l'appelant pourra toujours choisir d'utiliser `print()` de son coté
+
+
+`````{admonition} ouvrez-moi
+:class: dropdown
+
+````{literalinclude} invoice.py
+:start-after: v0-start
+:end-before: v1-start
+````
+`````
 
 +++
 
----
+### une solution v1
+
+`````{admonition} ouvrez-moi
+:class: dropdown
+
+````{literalinclude} invoice.py
+:start-after: v1-start
+````
+`````
