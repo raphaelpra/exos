@@ -20,7 +20,7 @@ tracks:
   - name: exercices basiques
     notebooks:
     # str, ints, binary computations
-    - python-exos/basic/ipaddress-nb.md
+    - python-exos/basic/ipsplit-nb.md
     # lists, side effects
     - python-exos/basic/skimlist-readme-nb.md
     # strs and formatting

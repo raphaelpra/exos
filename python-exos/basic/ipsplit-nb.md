@@ -36,31 +36,28 @@ IP_1 = "192.168.0.9"
 IP_2 = "138.96.19.1"
 ```
 
+```{code-cell} ipython3
+from ipsplit import ip_v0, ip_v1
+```
+
 ## v0
 
 +++
 
 On vous demande d'écrire une fonction qui transforme cette donnée (une chaine donc) en une liste de 4 entiers
 
-```
+```{code-cell} ipython3
 # remarquez bien l'absence de quotes (') dans le résultat
->>> ip_v0(IP_1)
-[192, 168, 0, 9]
+ip_v0(IP_1)
 ```
 
 ```{code-cell} ipython3
-# à vous
-def ip_v0():
-    pass
-```
-
-```{code-cell} ipython3
-# devrait retourner True
+# doit retourner True
 ip_v0(IP_1) == [192, 168, 0, 9]
 ```
 
 ```{code-cell} ipython3
-# devrait retourner True
+# doit retourner True
 ip_v0(IP_2) == [138, 96, 19, 1]
 ```
 
@@ -75,18 +72,12 @@ Si j'appelle $b_0$, $b_1$, $b_2$, $b_3$ les 4 valeurs retournées par `ip_v0`, l
 $I = b_0.2^{24} + b_1*2^{16} + b_2*2^8 + b_3$
 
 ```{code-cell} ipython3
-# à vous
-def ip_v1():
-    pass
-```
-
-```{code-cell} ipython3
-# devrait retourner True
+# doit retourner True
 ip_v1(IP_1) == 0xc0a80009
 ```
 
 ```{code-cell} ipython3
-# devrait retourner True
+# doit retourner True
 ip_v1(IP_2) == 0x8a601301
 ```
 
@@ -105,5 +96,18 @@ hex(192), hex(168), hex(0), hex(9)
 # ça veut dire que le résultat final doit être ceci
 0xc0a80009
 ```
+
+### solutions
+
++++
+
+````{admonition} ouvrez-moi
+:class: dropdown
+
+```{literalinclude} ipsplit.py
+```
+````
+
++++
 
 ---

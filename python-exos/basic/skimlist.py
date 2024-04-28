@@ -3,6 +3,7 @@ def all_integers(iterable):
     retourne la liste des éléments entiers de iterable
     iterable n'est pas modifié
     """
+    # la compréhension fabrique une nouvelle liste
     return [x for x in iterable if isinstance(x, int)]
 
 

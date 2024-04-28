@@ -2,7 +2,7 @@ format: jb-book
 parts:
 - caption: exercices basiques
   chapters:
-  - file: python-exos/basic/ipaddress-nb
+  - file: python-exos/basic/ipsplit-nb
   - file: python-exos/basic/skimlist-readme-nb
   - file: python-exos/basic/invoice-nb
   - file: python-exos/basic/agenda-readme-nb
