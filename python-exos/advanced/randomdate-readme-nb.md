@@ -193,7 +193,7 @@ with open("randomdate.txt", 'w') as output:
 ### indices
 
 * regardez la valeur de `string.ascii_lowercase`
-* regardez les fonctions `random.choice()` et `random.choices()`  
+* regardez les fonctions `random.choice()` et `random.choices()`
 
 ```{code-cell} ipython3
 :tags: [level_basic]

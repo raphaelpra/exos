@@ -1,19 +1,19 @@
 """
-generate a date inside a fixed interval
+generate a random date inside a fixed interval
 """
+
 import random
 from datetime import datetime as DateTime, timedelta as TimeDelta
 
 
 FORMAT="%d/%m/%Y"
 
-def generate_random_date(start="01/01/2017", end="15/06/2017"):
-    """
+def generate_random_date(start="01/01/2024", end="15/06/2024"):
+    f"""
     generate a random date with a uniform distribution
     between two given dates, inclusive
 
-    by default 2017 January 1st and 2017 June 15
-
+    all dates use format {FORMAT}
 
     Parameters:
         start: str
@@ -26,7 +26,7 @@ def generate_random_date(start="01/01/2017", end="15/06/2017"):
         like e.g. "23/02/2023"
 
     Examples:
-        generate_random_date() 
+        generate_random_date()
             -> "30/04/2017"
         generate_random_date("20/02/2020", "31/12/2021")
             -> "14/06/2020"
