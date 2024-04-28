@@ -5,6 +5,7 @@ def all_integers(iterable):
     """
     return [x for x in iterable if isinstance(x, int)]
 
+
 def keep_only_integers(liste):
     """
     cette fois on suppose que l'entrée est une liste

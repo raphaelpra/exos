@@ -16,7 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: filtrer les éléments d'une liste
+  title: "filtrer les \xE9l\xE9ments d'une liste"
 ---
 
 <div class="licence">
@@ -46,19 +46,19 @@ from skimlist import all_integers
 ```
 
 ```{code-cell} ipython3
-inputs = [
+incomings = [
     [1, 2, 3, 4, 'spam', 5, [4, 5]],
     [(1, 2), 3, 4, 'spam', 5, 3.],
 ]
 ```
 
 ```{code-cell} ipython3
-# remarquez bien que les objets 'input' ne sont pas modifiés
-for input in inputs:
+# remarquez bien que les objets 'incoming' ne sont pas modifiés
+for incoming in incomings:
    print(10*'=')
-   print(f"input(avant0) = {input}")
-   print(f"integers = {all_integers(input)}")
-   print(f"input(après) = {input}")
+   print(f"incoming(avant) = {incoming}")
+   print(f"integers trouvés = {all_integers(incoming)}")
+   print(f"incoming(après) = {incoming} doit être intact")
 ```
 
 ## filtrage par effet de bord
@@ -75,18 +75,27 @@ from skimlist import keep_only_integers
 ```
 
 ```{code-cell} ipython3
-inputs = [
+incomings = [
     [1, 2, 3, 4, 'spam', 5, 'beans'],
     [(1, 2), 3, 4, 'spam', 5, 'beans'],
 ]
 ```
 
 ```{code-cell} ipython3
-for input in inputs:
+for incoming in incomings:
    print(10*'=')
-   print(f"input(avant) = {input}")
-   print(f"all_integers = {all_integers(input)}")
-   print(f"input(après - intact) = {input}")
-   keep_only_integers(input)
-   print(f"input(modifié par keep_only_integers) = {input}")
+   print(f"incoming(avant) = {incoming}")
+   print(f"all_integers = {all_integers(incoming)}")
+   print(f"incoming(après - intact) = {incoming}")
+   keep_only_integers(incoming)
+   print(f"incoming(modifié par keep_only_integers) = {incoming}")
 ```
+
+### solutions
+
+````{admonition} ouvrez-moi
+:class: dropdown
+
+```{literalinclude} skimlist.py
+```
+````
