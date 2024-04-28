@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 """
-un exercice très basique pour approfondir
-la méthode str.format()
+un exercice très basique pour approfondir les formats de chaines
+et notamment la méthode str.format()
 """
+
 
 def percents_at_cg(dna):
     total = len(dna)
@@ -14,13 +14,14 @@ def percents_at_cg(dna):
             cg += 1
     return at/total, cg/total
 
+
 def nice_format(dna):
     print(f"Pourcentages pour le brin {dna}")
     at, cg = percents_at_cg(dna)
     print(f"AT = {at:.2%}")
     print(f"CG = {cg:.2%}")
 
-##############################
+
 def format_dna(dna, user_format):
     at, cg = percents_at_cg(dna)
     at, cg = [f"{x:.2%}" for x in (at, cg)]
@@ -28,9 +29,8 @@ def format_dna(dna, user_format):
     # dna, at et cg
     return user_format.format(**locals())
 
-##############################
-# remarque
-# pour le décompte on ferait plutôt
+
+# dans la vraie vie, pour le décompte on utiliserait plutôt ceci
 from collections import Counter
 
 def percents_at_cg_bis(dna):

@@ -30,6 +30,8 @@ nbhosting:
 
 +++
 
+## problème (simple)
+
 En partant d'un string qui représente un brin d'ADN
 
 ```{code-cell} ipython3
@@ -41,42 +43,36 @@ Calculer les deux pourcentages de nucleotides
  * les `C` ou `G`
  * les `A` ou `T`
 
-+++
-
-Imprimez le résultat comme ceci
+et imprimez le résultat comme ceci
 
 ```{code-cell} ipython3
 from adnpercents import nice_format
-```
 
-```{code-cell} ipython3
 nice_format(dna)
 ```
 
-* Indices
-  * `"{:2f}"` pour écrire un flottant avec deux chiffres significatifs
-  * il existe aussi un format `%` ou lieu de `f` qui peut être utile dans ce cas également
+### * Indices
 
-+++
-
-## variantes
-
-+++
-
-Entraînez-vous à utiliser les f-strings lorsque c'est possible
+* Entraînez-vous à utiliser les f-strings lorsque c'est possible
+* `"{:2f}"` pour écrire un flottant avec deux chiffres significatifs
+* il existe aussi un format `%` ou lieu de `f` qui peut être utile dans ce cas également
 
 ```{code-cell} ipython3
+# remember to use f-strings
+
 f"le brin {dna}"
 ```
 
-# plus compliqué
+```{code-cell} ipython3
+# for formatting numbers
 
-+++
+pi = 3.1415916
+f"pi={pi:.2f}"
+```
 
-#### À faire peu plus tard (cf. aussi f-strings)
+## un peu plus compliqué
 
-+++
-
+À faire peu plus tard (cf. aussi f-strings):  
 Écrire une fonction `format_dna` qui permet à son appelant de spécifier le format de présentation
 
 ```{code-cell} ipython3
@@ -87,14 +83,19 @@ from adnpercents import format_dna
 format_dna(dna, "la chaine {dna} a\n {at} de (A ou T)")
 ```
 
-# à noter aussi
+### indices
+
+voyez la méthode `str.format()`
 
 +++
 
-Dans la solution, voir l'utilisation de `collections.Counter` pour faire les calculs
+### solution
 
-```{code-cell} ipython3
-from adnpercents import percents_at_cg_bis
+à noter: dans `percents_at_cg_bis`, l'utilisation de `collections.Counter` pour faire les calculs
 
-percents_at_cg_bis(dna)
+````{admonition} ouvrez-moi
+:class: dropdown
+
+```{literalinclude} adnpercents.py
 ```
+````
