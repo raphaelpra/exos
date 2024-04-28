@@ -131,8 +131,8 @@ Toutefois cette approche **n'est pas recommandée**; il vaut beaucoup mieux cons
 :class: dropdown
 
 ````{literalinclude} invoice.py
-:start-after: v0-start
-:end-before: v1-start
+:start-after: prune-v0-start
+:end-before: prune-v1-start
 ````
 `````
 
@@ -144,6 +144,6 @@ Toutefois cette approche **n'est pas recommandée**; il vaut beaucoup mieux cons
 :class: dropdown
 
 ````{literalinclude} invoice.py
-:start-after: v1-start
+:start-after: prune-v1-start
 ````
 `````
