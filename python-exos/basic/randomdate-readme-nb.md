@@ -148,17 +148,18 @@ f"{day_after:%d %m %Y}"
 DateTime.strftime(day_after, "%Y/%m/%d")
 ```
 
-```{code-cell} ipython3
-:tags: [level_basic]
+### solution
 
-# your code
+
+````{admonition} ouvrez-moi
+:class: dropdown
+```{literalinclude} randomdate.py
+:start-after: prune-start-step1
+:end-before: prune-start-step2
 ```
+````
 
-```{code-cell} ipython3
-:tags: [level_basic]
-
-# test it
-```
++++
 
 *****
 
@@ -166,48 +167,46 @@ DateTime.strftime(day_after, "%Y/%m/%d")
 
 ## étape 2: écrire *n* échantillons dans un fichier
 
-+++
-
 mêmes modalités, récrivez la fonction suivante
 
 ```{code-cell} ipython3
 from randomdate import write_random_data
-```
 
-```{code-cell} ipython3
 help(write_random_data)
 ```
 
 ```{code-cell} ipython3
 with open("randomdate.txt", 'w') as output:
-    write_random_data(output, 3)
+    write_random_data(output, 5)
 ```
 
 ```{code-cell} ipython3
 # this is just to see what is in the generated file
 # if on Windows, it will likely not work, use vs-code instead..
 
-!cat randomdate.txt
+%cat randomdate.txt
 ```
 
 ### indices
 
+* le type `TextIO` représente un **fichier déjà ouvert** (et non pas un nom de fichier)
 * regardez la valeur de `string.ascii_lowercase`
 * regardez les fonctions `random.choice()` et `random.choices()`
 
-```{code-cell} ipython3
-:tags: [level_basic]
++++
 
-# your code
+### solution
+
+
+````{admonition} ouvrez-moi
+:class: dropdown
+```{literalinclude} randomdate.py
+:start-after: prune-start-step2
+:end-before: prune-start-step3
 ```
+````
 
-```{code-cell} ipython3
-:tags: [level_basic]
-
-# test it
-with open("randomdate.txt", 'w') as output:
-    write_random_data(output, 20)
-```
++++
 
 ## étape 3: relire le fichier et le trier
 
@@ -228,7 +227,7 @@ sort_data("randomdate.txt", "randomdate-sorted.txt")
 ```
 
 ```{code-cell} ipython3
-!cat randomdate.txt.sort
+!cat randomdate-sorted.txt
 ```
 
 ### indices
@@ -241,22 +240,19 @@ sort_data("randomdate.txt", "randomdate-sorted.txt")
 * ces fonctions pour trier acceptent un paramètre `key=`, regardez bien comment ça marche ce truc-là
 * pas la peine d'essayer de finasser et de lire le fichier ligne par ligne, on n'a pas d'autre choix que de lire l'entrée en entier avant de trier
 
-```{code-cell} ipython3
-:tags: [level_basic]
++++
 
-# your code
+### solution
+
+
+````{admonition} ouvrez-moi
+:class: dropdown
+```{literalinclude} randomdate.py
+:start-after: prune-start-step3
 ```
+````
 
-```{code-cell} ipython3
-:tags: [level_basic]
-
-# test it
-sort_data("randomdate.txt", "randomdate-sorted.txt")
-```
-
-```{code-cell} ipython3
-!cat randomdate-sorted.txt
-```
++++
 
 ## variantes
 

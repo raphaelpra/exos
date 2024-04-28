@@ -31,7 +31,7 @@ tracks:
     - python-exos/basic/adnpercents-readme-nb.md
     # filesystem / pathlib
     - python-exos/basic/files-sortby-nb.md
-    - python-exos/advanced/randomdate-readme-nb.md
+    - python-exos/basic/randomdate-readme-nb.md
   - name: exercices classes
     notebooks:
     - python-exos/classes/wordcounts-readme-nb.md

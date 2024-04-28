@@ -8,40 +8,33 @@ from datetime import datetime as DateTime, timedelta as TimeDelta
 
 FORMAT="%d/%m/%Y"
 
+# prune-start-step1
+
 def generate_random_date(start="01/01/2024", end="15/06/2024"):
-    f"""
+    """
     generate a random date with a uniform distribution
     between two given dates, inclusive
-
-    all dates use format {FORMAT}
+    all dates use format dd/mm/yyyy
 
     Parameters:
-        start: str
-            start date
-        end: str
-            end date
-
-    Returns: str
-        generated date, formatted day/month/year,
-        like e.g. "23/02/2023"
-
+        start: str - start date
+        end: str - end date
+    Returns: str - generated date
     Examples:
         generate_random_date()
-            -> "30/04/2017"
-        generate_random_date("20/02/2020", "31/12/2021")
-            -> "14/06/2020"
+            -> "30/04/2024"
     """
 
     start_date = DateTime.strptime(start, FORMAT)
     end_date = DateTime.strptime(end, FORMAT)
+
     one_day = TimeDelta(days=1)
+    nb_days = (end_date - start_date) // one_day
 
-    nb_days = (end_date - start_date) / one_day
     random_days = random.randint(0, nb_days)
-
     return DateTime.strftime(start_date + random_days * one_day, FORMAT)
 
-
+# prune-start-step2
 
 from typing import TextIO
 import string
@@ -70,7 +63,7 @@ def write_random_data(output: TextIO, nb_lines=1000):
         print(f"{i+1} {generate_random_date()} {random_token()}",
               file=output)
 
-
+# prune-start-step3
 
 def sort_data(input_filename, output_filename):
     """
