@@ -10,7 +10,11 @@ et de définir une fonction qui lit une entrée de l'agenda et retourne
 sur le terminal le contenu de cette entrée.
 """
 
+
+# on utilise une globale (de module) pour ranger les données
+# évidemment ça a des avantages et des inconvénients
 agenda = {}
+
 champs_valides = {'tel', 'adresse'}
 
 
@@ -68,24 +72,3 @@ def trouver_entree(nom, prenom, champ=None):
         print(f"Agenda pour {' '.join(key)}")
         for k, v in agenda[key].items():
             print(f"  - {k} : {v}")
-
-if __name__ == '__main__':
-
-    nouvelle_entree('jean', 'dupond')
-    nouvelle_entree('jean', 'dupond', 'tel', '04040404040')
-    nouvelle_entree('jean', 'dupond', 'adresse', '6 rue de la gare')
-
-    nouvelle_entree('jean', 'francois', 'tel', '060606060')
-    nouvelle_entree('jean', 'francois', 'fax', '060606061')
-
-    nouvelle_entree('eric', 'dupont', 'mail', 'eric.dupont@google.com')
-
-    trouver_entree('jean', 'dupond')
-    trouver_entree('jean', 'dupond', 'tel')
-
-    trouver_entree('jean', 'francois')
-
-    try:
-        trouver_entree('eric', 'françois')
-    except KeyError as e:
-        print("OOPS pas trouvé", e, type(e))

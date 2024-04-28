@@ -16,7 +16,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: 'un agenda tout simple'
+  title: un agenda tout simple
 ---
 
 <div class="licence">
@@ -29,6 +29,8 @@ nbhosting:
 # agenda
 
 +++
+
+## problème
 
 Il s'agit d'écrire
 
@@ -99,3 +101,12 @@ try:
 except KeyError as e:
     print("OOPS pas trouvé", e, type(e))
 ```
+
+## solutions
+
+````{admonition} ouvrez-moi
+:class: dropdown
+
+```{literalinclude} agenda.py
+```
+````
