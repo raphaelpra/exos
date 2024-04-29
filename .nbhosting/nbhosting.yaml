@@ -53,8 +53,8 @@ tracks:
   - name: TPs classes
     notebooks:
     - "python-tps/students-grades/README*.md"
-    - "python-tps/unicode-boxes/README*.md"
     - "python-tps/auctions/README*.md"
+    - "python-tps/unicode-boxes/README*.md"
     - "python-tps/expressions-lang/README*.md"
   - name: TPs graphes
     notebooks:

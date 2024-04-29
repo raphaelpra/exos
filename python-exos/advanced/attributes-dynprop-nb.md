@@ -26,11 +26,11 @@ nbhosting:
 
 +++
 
-# Création de propriétés à la volée
+# création de propriétés à la volée
 
 +++
 
-## En s'inspirant du code:
+## en s'inspirant du code:
 
 ```{code-cell} ipython3
 class Person(object):
@@ -62,7 +62,7 @@ except AttributeError as e:
     print("OOPS", e)
 ```
 
-## Écrivez 
+## écrivez 
 
 * une nouvelle version `DynamicPerson` de cette classe 
 * qui ne possède plus les 2 méthodes `fget/fset`
@@ -89,7 +89,7 @@ Getting: name
 
 +++
 
-## Hints
+## indices
 
 * pour cet exercice il semble plus naturel 
   * d'utiliser la *builtin* `property`
@@ -132,7 +132,7 @@ user.name
 user.__dict__
 ```
 
-## Si vous avez fini
+## pour les rapides
 
 * ajoutez du code de sorte que
   * `addProperty()`

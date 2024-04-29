@@ -16,10 +16,10 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: "TP: des boites en Unicode"
+  title: 'TP: des boites en Unicode'
 ---
 
-# Unicode characters for grid-like objects on a terminal
+# Unicode boxes on a terminal
 
 +++
 

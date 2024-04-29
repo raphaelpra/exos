@@ -26,7 +26,7 @@ nbhosting:
 
 +++
 
-# Aller chercher une donnée simple sur Internet
+# aller chercher une donnée sur Internet
 
 +++
 

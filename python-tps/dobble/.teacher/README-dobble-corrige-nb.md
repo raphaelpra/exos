@@ -13,7 +13,7 @@ language_info:
   pygments_lexer: ipython3
 ---
 
-# Le jeu de dobble
+# le jeu de dobble
 
 +++ {"cell_style": "split"}
 

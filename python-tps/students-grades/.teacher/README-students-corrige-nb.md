@@ -21,7 +21,7 @@ nbhosting:
   title: TP - classes simples
 ---
 
-# TP : Student et Class
+# classes `Student` et `Class`
 
 +++
 

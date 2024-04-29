@@ -25,8 +25,8 @@ parts:
 - caption: TPs classes
   chapters:
   - glob: python-tps/students-grades/README*
-  - glob: python-tps/unicode-boxes/README*
   - glob: python-tps/auctions/README*
+  - glob: python-tps/unicode-boxes/README*
   - glob: python-tps/expressions-lang/README*
 - caption: TPs graphes
   chapters:

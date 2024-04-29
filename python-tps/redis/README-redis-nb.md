@@ -26,18 +26,19 @@ nbhosting:
 
 on se propose de réaliser un petit jeu multi joueur, et pour cela nous aurons besoin de
 
-* [redis](https://redis.io/), un système de base de données *light* et rapide, où les données sont stockées en mémoire; il ne s'agit pas d'un système traditionnel, ici pas de SQL ni de stockage sur le disque
+* [redis](https://redis.io/), un système de base de données *light* et rapide, où les données sont stockées en mémoire
+  il ne s'agit pas d'un système traditionnel, ici pas de SQL ni de stockage sur le disque  
   **attendez avant de l'installer**, les modalités ne sont pas les mêmes sur tous les OS
 
 * [pygame](www.pygame.org), pour le graphisme et autres interactions avec le jeu
 
 +++
 
-# architecture
+## architecture
 
 +++
 
-## *process* et isolation
+### *process* et isolation
 
 un jeu multi-joueur pose des défis qui vont au-delà de ce qu'on apprend dans un cours de programmation de base
 
@@ -47,7 +48,7 @@ typiquement quand vous écrivez un programme Python et que vous le lancez avec `
 
 +++
 
-## comment partager
+### comment partager
 
 du coup lorsqu'on veut faire jouer ensemble, disons deux personnes, on aurait en théorie le choix entre
 
@@ -60,21 +61,17 @@ on va voir comment on peut s'y prendre
 
 +++
 
-## une solution centralisée
-
-+++
+### une solution centralisée
 
 l'architecture la plus simple pour établir la communication entre tous les joueurs consiste à créer un **processus serveur**, auquel les joueurs sont connectés, selon un diagramme dit en étoile (terme qui prend tout son sens avec plusieurs joueurs: le serveur est au centre du diagramme) :
 
-+++
-
-![](processes.svg)
-
-+++
-
-# prototype
+```{image} processes.svg
+:align: center
+```
 
 +++
+
+## prototype
 
 ici se trouve un **prototype** hyper simple; il est multi-joueur mais sur un seul ordinateur (car il manque la possibilité d'indiquer où trouver le serveur central)
 
@@ -82,7 +79,7 @@ pour le mettre en oeuvre :
 
 +++
 
-## serveur
+### serveur
 
 il faut pour commencer lancer un serveur redis
 (après avoir installé [l'outil redis](https://redis.io/), bien entendu)
@@ -141,7 +138,7 @@ bien sûr ce prototype a des zillions de défauts :
 
 +++
 
-# le code
+## le code
 
 +++
 
@@ -151,7 +148,7 @@ n'oubliez pas de lancer le serveur *redis* **d'abord**, ça ne va pas fonctionne
 
 +++
 
-# plusieurs ordinateurs
+## plusieurs ordinateurs
 
 +++
 
@@ -159,13 +156,15 @@ jusqu'ici on a fait tourner tous les processus dans le même ordinateur
 
 en vraie grandeur bien sûr, on veut faire tourner ça sur plusieurs ordinateurs
 
-![](ip-address.svg)
+```{image} ip-address.svg
+:align: center
+```
 
 pour que ça puisse fonctionner dans ce type de configuration il faut que Jacques lance le jeu en lui indiquant sur quel ordinateur se trouve le serveur redis
 
 +++
 
-## trouver son IP address
+### trouver son IP address
 
 +++
 
@@ -178,11 +177,12 @@ et cherchez une adresse parmi les intervalles réservés aux adresses privées
 
 +++
 
-![](private-ranges.png)
+```{image} private-ranges.png
+```
 
 +++
 
-## pour lancer le jeu
+### pour lancer le jeu
 
 dans notre configuration, si Pierre est sur l'adresse disons `192.168.200.20`, il suffit aux autres joueurs qui veulent le rejoindre de lancer par exemple
 
@@ -192,21 +192,21 @@ multi-game.py --server 192.168.200.20 Jacques
 
 +++
 
-# Notes
+## Notes
 
-## scope
+### scope
 
 faut-il simplifier le jeu ?
 
-## Précisions multi-OS
+### Précisions multi-OS
 
-### general
+#### general
 
 * lancer redis-server --protected-mode no
 * lancer redis-server --bind 0.0.0.0
 * ouvrir le firewall
 
-### Windows
+#### Windows
 
 * pas supporté par le site principal, installer redis avec `conda install redis`
 * firewall : compliqué
@@ -214,7 +214,7 @@ faut-il simplifier le jeu ?
 * autre option: memurai
 * dont l'installation se charge de créer un service microsoft
 
-### linux / fedora
+#### linux / fedora
 
 * dnf install redis
 * si firewalld: sudo firewall-cmd --zone=public --permanent --add-port=6379/tcp
