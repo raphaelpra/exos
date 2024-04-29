@@ -74,7 +74,7 @@ tracks:
   - name: howtos
     notebooks:
       - python-howtos/requests-howto-nb.md
-      - python-exos/advanced/encodings-howto-nb.md
+      - python-howtos/encodings-howto-nb.md
   - name: lecture de code
     notebooks:
       - python-reading/snake/snake.py

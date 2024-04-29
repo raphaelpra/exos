@@ -45,7 +45,7 @@ parts:
 - caption: howtos
   chapters:
   - file: python-howtos/requests-howto-nb
-  - file: python-exos/advanced/encodings-howto-nb
+  - file: python-howtos/encodings-howto-nb
 - caption: lecture de code
   chapters:
   - file: python-reading/snake/snake
