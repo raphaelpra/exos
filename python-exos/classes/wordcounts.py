@@ -3,8 +3,8 @@ playing with word frequencies
 """
 
 from collections import Counter
-
 from string import punctuation
+
 # the text has unicode quotes in it
 punctuation +=  "“”"
 
@@ -31,7 +31,9 @@ class WordCounts:
 
     def __repr__(self) -> str:
         result = ""
-        result += f"{self.filename}: {self.size()} words {len(self.vocabulary())} different words\n"
+        result += f"{self.filename}:"
+        result += f" {self.size()} total words"
+        result += f"{len(self.vocabulary())} different words"
         result += "\n".join(f"  {w:>5} : {c}" for w, c in self.counter.most_common(5))
         return result
 
@@ -49,3 +51,7 @@ class WordCounts:
         return the set of words used in the text
         """
         return set(self.counter.elements())
+
+    # pour la variante
+    def __getitem__(self, word: str) -> int:
+        return self.counter[word]
