@@ -102,7 +102,7 @@ except KeyError as e:
     print("OOPS pas trouvé", e, type(e))
 ```
 
-##solution
+## solution
 
 ````{admonition} ouvrez-moi
 :class: dropdown

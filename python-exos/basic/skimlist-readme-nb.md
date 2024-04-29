@@ -91,7 +91,7 @@ for incoming in incomings:
    print(f"incoming(modifié par keep_only_integers) = {incoming}")
 ```
 
-###solution
+## solution
 
 ````{admonition} ouvrez-moi
 :class: dropdown

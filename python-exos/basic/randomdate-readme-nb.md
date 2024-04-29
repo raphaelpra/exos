@@ -148,7 +148,7 @@ f"{day_after:%d %m %Y}"
 DateTime.strftime(day_after, "%Y/%m/%d")
 ```
 
-### solution
+## solution
 
 
 ````{admonition} ouvrez-moi
@@ -195,7 +195,7 @@ with open("randomdate.txt", 'w') as output:
 
 +++
 
-### solution
+## solution
 
 
 ````{admonition} ouvrez-moi
@@ -242,7 +242,7 @@ sort_data("randomdate.txt", "randomdate-sorted.txt")
 
 +++
 
-### solution
+## solution
 
 
 ````{admonition} ouvrez-moi

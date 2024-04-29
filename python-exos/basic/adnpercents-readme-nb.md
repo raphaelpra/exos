@@ -89,7 +89,7 @@ voyez la méthode `str.format()`
 
 +++
 
-### solution
+## solution
 
 à noter: dans `percents_at_cg_bis`, l'utilisation de `collections.Counter` pour faire les calculs
 

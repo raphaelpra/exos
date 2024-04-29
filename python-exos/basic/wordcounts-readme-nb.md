@@ -76,7 +76,7 @@ for word in ['arthur', 'people']:
     print(f"word {word} was found {wc[word]} times")
 ```
 
-### solution
+## solution
 
 ````{admonition} la classe
 :class: dropdown
