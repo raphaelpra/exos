@@ -26,7 +26,7 @@ nbhosting:
 
 +++
 
-# Première partie
+# attributs et `__getattr__`
 
 * On vous demande d'écrire une classe `Echo`
 * qui répond à toutes les méthodes dont le nom  fait 3 lettres

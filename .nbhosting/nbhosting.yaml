@@ -74,12 +74,12 @@ tracks:
   - name: howtos
     notebooks:
       - python-howtos/requests-howto-nb.md
+      - python-exos/advanced/encodings-howto-nb.md
   - name: lecture de code
     notebooks:
       - python-reading/snake/snake.py
   - name: avancés
     notebooks:
-    - python-exos/advanced/encodings-howto-nb.md
     - python-exos/advanced/attributes-proxy-nb.md
     - python-exos/advanced/attributes-dynprop-nb.md
   - name: sample code
