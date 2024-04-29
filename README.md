@@ -20,7 +20,9 @@ expected to have acquired the skills for installing and managing a decent
 software stack (typically bash + vscode + python + ipython + jupyter)  
 the fact that most of the material is written as a notebook is mostly a
 convenience, both for authoring (outputs are up-to-date), and of course in cases
-where the starting material is a notebook itself
+where the starting material is a notebook itself  
+if you can really not install anything on your laptop, you can in last resort
+use [the emergency resources at the bottom of this page](label-lite-tools)
 
 ## contents
 
@@ -114,3 +116,57 @@ c.InteractiveShellApp.exec_lines.append('%load_ext autoreload')
 c.InteractiveShellApp.exec_lines.append('%autoreload 2')
 EOF
 ```
+
+(label-lite-tools)=
+## last resort computing resources
+
+if you really cannot install anything on your laptop, you can use this instead  
+this is a best effort, not everything works exactly like on a laptop  
+
+you should first check whether you can effectively save your work; in
+particular, keep in mind that the only place where your work is likely to be
+saved is .. in the brower itself; so for example using another browser, or *a
+fortiori* another computer, will likely make you lose your work
+
+### a browser-based REPL
+
+
+`````{admonition} browser-hosted IPython console
+:class: seealso dropdown
+
+````{div}
+```{replite}
+:kernel: python
+:theme: JupyterLab Light
+:width: 100%
+:height: 90vh
+:prompt: click to start a console
+:prompt_color: yellow
+
+# please be patient ...
+print("welcome to Python in the browser")
+
+```
+````
+`````
+
+### a browser-based JupyterLab
+
+`````{admonition} browser-hosted Jupyter Lab
+:class: seealso dropdown
+
+````{div}
+```{jupyterlite}
+:kernel: python
+:theme: JupyterLab Light
+:width: 100%
+:height: 90vh
+:prompt: click to start a JuptyerLab
+:prompt_color: pink
+
+# please be patient ...
+print("welcome to Python in the browser")
+
+```
+````
+`````

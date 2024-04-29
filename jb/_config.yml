@@ -47,4 +47,9 @@ sphinx:
         - fmt: py:percent
     html_show_copyright: false
     # not quite convincing but...
-    html_extra_path: ['media']
+    html_extra_path:
+      - media
+      - lite
+    jupyterlite_dir: .
+  extra_extensions:
+    - jupyterlite_sphinx

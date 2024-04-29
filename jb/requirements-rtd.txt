@@ -2,3 +2,7 @@
 sphinx
 sphinx-rtd-theme
 jupyter-book
+
+#
+jupyterlite-pyodide-kernel
+jupyterlite-sphinx >= 0.13
