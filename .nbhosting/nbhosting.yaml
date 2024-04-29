@@ -32,14 +32,13 @@ tracks:
     # filesystem / pathlib
     - python-exos/basic/files-sortby-nb.md
     - python-exos/basic/randomdate-readme-nb.md
-  - name: exercices classes
-    notebooks:
-    - python-exos/classes/wordcounts-readme-nb.md
+    - python-exos/basic/wordcounts-readme-nb.md
   - name: howtos
     notebooks:
-    - python-howtos/encodings-howto-nb.md
-    - python-howtos/requests-howto-nb.md
-    - python-exos/visu/adnwalk-howto-nb.md
+    - python-howtos/encodings/encodings-howto-nb.md
+    - python-howtos/requests/requests-howto-nb.md
+    - python-howtos/adnwalk/adnwalk-howto-nb.md
+    - python-howtos/subprocesses/subprocesses-howto-nb.md
   - name: TPs basiques
     notebooks:
     # ascii, utf8, binary, as well as various file formats

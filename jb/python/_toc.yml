@@ -9,14 +9,13 @@ parts:
   - file: python-exos/basic/adnpercents-readme-nb
   - file: python-exos/basic/files-sortby-nb
   - file: python-exos/basic/randomdate-readme-nb
-- caption: exercices classes
-  chapters:
-  - file: python-exos/classes/wordcounts-readme-nb
+  - file: python-exos/basic/wordcounts-readme-nb
 - caption: howtos
   chapters:
-  - file: python-howtos/encodings-howto-nb
-  - file: python-howtos/requests-howto-nb
-  - file: python-exos/visu/adnwalk-howto-nb
+  - file: python-howtos/encodings/encodings-howto-nb
+  - file: python-howtos/requests/requests-howto-nb
+  - file: python-howtos/adnwalk/adnwalk-howto-nb
+  - file: python-howtos/subprocesses/subprocesses-howto-nb
 - caption: TPs basiques
   chapters:
   - file: python-tps/files-formats/README-files-formats-nb
