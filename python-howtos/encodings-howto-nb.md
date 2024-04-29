@@ -19,7 +19,7 @@ nbhosting:
   title: encoding howto
 ---
 
-# howto: character encodings
+# character encodings
 
 +++
 

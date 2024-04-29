@@ -35,8 +35,10 @@ tracks:
   - name: exercices classes
     notebooks:
     - python-exos/classes/wordcounts-readme-nb.md
-  - name: exercices visu
+  - name: howtos
     notebooks:
+    - python-howtos/encodings-howto-nb.md
+    - python-howtos/requests-howto-nb.md
     - python-exos/visu/adnwalk-howto-nb.md
   - name: TPs basiques
     notebooks:
@@ -71,10 +73,6 @@ tracks:
     - "python-tps/redis/README*.md"
     - "python-tps/motus/README*.md"
     - "python-tps/dobble/README*.md"
-  - name: howtos
-    notebooks:
-      - python-howtos/requests-howto-nb.md
-      - python-howtos/encodings-howto-nb.md
   - name: lecture de code
     notebooks:
       - python-reading/snake/snake.py

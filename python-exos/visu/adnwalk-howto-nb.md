@@ -23,31 +23,26 @@ Licence CC BY-NC-ND - Thierry Parmentelat
 
 +++
 
-# Promenade le long de l'ADN
+# visu: DNA Walking
 
-+++
-
-Nous allons voir dans ce complément une version exécutable de l'algorithme dit de *ADN Walking* pour représenter un brin d'ADN en 2 dimensions.
-
-+++
+Nous allons voir dans ce complément une version exécutable de l'algorithme dit de *DNA Walking* pour représenter un brin de DNA en 2 dimensions.
 
 Il s'agit donc de dessiner le parcours d'une séquence d'ADN, en décidant que chaque nucléotide `C`,  `A`, `G`, et `T` correspond à une direction dans le plan:
 
-+++
-
-![Extrait du transparent](../media/adnwalk-directions.png)
+```{image} media/adnwalk-directions.png
+:align: center
+```
 
 +++
 
 ### La librairie `matplotlib`
 
-+++
-
 La librairie que nous allons utiliser pour dessiner le chemin s'appelle `matplotlib`, principalement parce qu'elle est d'un usage très répandu pour mettre en forme des résultats de calcul.
 
 ```{code-cell} ipython3
-# pour que les graphiques apparaissent dans le notebook
-%matplotlib notebook
+# pour des graphiques interactifs - version notebook seulement
+# les affichages sont statiques dans la sortie HTML
+%matplotlib ipympl
 
 # importation de la librairie
 import matplotlib.pyplot as plt
@@ -83,15 +78,9 @@ plt.show()
 
 ### Des fonctions qui renvoient deux valeurs
 
-+++
-
 Donc pour dessiner un fragment d'ADN, le problème revient simplement à calculer les coordonnées des points du chemin, sous la forme d'une liste d'abscisses et une liste d'ordonnées.
 
-+++
-
 Nous sommes donc confrontés au besoin d'écrire une fonction, mais qui doit renvoyer deux choses (la liste des abscisses et la liste des ordonnées), et idéalement en une seule passe pour être aussi efficace que possible.
-
-+++
 
 Il est très facile en python de renvoyer plusieurs valeurs dans une fonction. Voyons ça sur un premier exemple très simple&nbsp;: une fonction qui calcule le carré et le cube d'un nombre.
 
@@ -114,14 +103,10 @@ print("b =", b)
 
 ### Utiliser un dictionnaire
 
-+++
-
 Avant de voir le parcours de l'ADN à proprement parler, il nous reste à décider comment représenter l'association 
 
 * entre d'une part les 4 lettres de notre alphabet `C`, `A`, `G` et `T`,
 * et de l'autre les déplacements correspondants dans le plan.
-
-+++
 
 Pour cela, il est naturel en Python d'utiliser un dictionnaire, qui d'associer des valeurs à des clés comme ceci&nbsp;:
 
@@ -144,8 +129,6 @@ Ce qui signifie pour nous que lorsqu'on rencontre un `C`, il faut&nbsp;:
  * faire `+1` en x, 
  * et ne rien faire (ajouter `0`) en y.
 
-+++
-
 Que l'on peut écrire, en utilisant la même syntaxe que tout à l'heure&nbsp;:
 
 ```{code-cell} ipython3
@@ -155,8 +138,6 @@ print("à ajouter en y: ", delta_y)
 ```
 
 ### Le parcours à proprement parler
-
-+++
 
 Nous avons à présent tous les éléments pour écrire une fonction, qui
 * prend en entrée un fragment d'ADN codé comme une chaine de caractères contenant les 4 abbréviations,
@@ -205,8 +186,6 @@ plt.show()
 
 ### Un raccourci
 
-+++
-
 Si on veut tout mettre ensemble dans une seule fonction plus pratique à appeler&nbsp;:
 
 ```{code-cell} ipython3
@@ -224,8 +203,6 @@ walk(small_adn)
 
 ### Des données plus grosses
 
-+++
-
 Si on prend par exemple le brin d'ADN qui est illustré dans le transparent de la séquence 7&nbsp;:
 
 ```{code-cell} ipython3
@@ -241,15 +218,9 @@ walk(sample_week1_sequence7)
 
 ### Le résultat sur de vraies séquences
 
-+++
-
 Si vous allez vous promener sur http://www.ebi.ac.uk/ena, vous pouvez faire toutes sortes de recherches pour travailler sur des données réalistes.
 
-+++
-
 ##### Un point de rebroussement très visible : Borrelia
-
-+++
 
 Pour le premier exemple nous allons regarder le résultat de notre visualisation avec *Borrelia*, que vous [pouvez consulter ici](http://www.ebi.ac.uk/ena/data/view/CP000013), ou retrouver en entrant dans [http://ebi.ac.uk/ena]() et en cherchant la clé `CP000013`. Nous l'avons chargé pour vous (voir plus loin comment vous pouvez charger d'autres spécimens à partir d'une autre clé)&nbsp;:
 
@@ -266,8 +237,6 @@ walk(borrelia)
 
 ##### Un contrexemple : Synechosystis
 
-+++
-
 A contrario, voici ce qu'on obtient avec *Synechosystis* (clé `BA000022`). Soyez patient car ce brin contient environ 3.5 millions de bases.
 
 ```{code-cell} ipython3
@@ -277,15 +246,9 @@ walk(synechosystis)
 
 ### Des données réelles
 
-+++
-
 Pour illustrer ce qu'il est possible de faire très simplement aujourd'hui, je suis allé [sur le site du Eureopan Nucleotide Archive](http://www.ebi.ac.uk/ena) j'ai cherché "Borrelia burgdorferi B31" et je suis arrivé à cette page&nbsp;:
 
-+++
-
 [http://www.ebi.ac.uk/ena/data/view/AE000783]()
-
-+++
 
 Nous vous fournissons un petit utilitaire (très sommaire) qui permet d'aller chercher de telles séquences pour les manipuler directement dans ce notebook&nbsp;:
 
@@ -307,9 +270,7 @@ walk(burgdorferi)
 
 ### Explorer le chemin de manière interactive
 
-+++
-
-remarquez sur la vue les boutons pour la navigation interactive
+(version notebook seulement: si vous avez activé `%notebook ipympl`): remarquez sur la vue les boutons pour la navigation interactive
 
 * la maison: pour retourner à la vue initiale
 * le carré: pour zoomer
