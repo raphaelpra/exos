@@ -19,7 +19,7 @@ def init_watson(config_filename):
         for line in f:
             # we remove the \n char is if it is at the end of the line
             # it might not be the case at the end of the file
-            line = line.rstrip("\n")
+            line = line.rstrip()
             if not line:
                 continue
             kind, *words = line.split()

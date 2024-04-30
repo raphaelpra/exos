@@ -130,7 +130,7 @@ quelles autres formules connaissiez-vous pour faire ça ?
 sauf que ceci **contient un caractère de fin de ligne** - qu'on appelle aussi *newline*  
 du coup si vous faites un `print(line)` (essayez..) vous allez avoir une ligne blanche sur deux !
 
-une autre approche consisterait à utiliser `line.rstrip("\n")` qui enlève l'éventuel *newline*;  
+une autre approche consisterait à utiliser `line.rstrip()` qui enlève l'éventuel *newline*;  
 je dis éventuel car la dernière ligne ne contient pas toujours ce fameux *newline*; le monde est compliqué parfois...
 ````
 

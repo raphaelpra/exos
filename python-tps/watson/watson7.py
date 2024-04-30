@@ -67,7 +67,7 @@ class Watson:
         self.feelings = dict()
         with open(config_filename, "r", encoding="utf8") as f:
             for line in f:
-                line = line.rstrip("\n")
+                line = line.rstrip()
                 if not line:
                     continue
                 name, *words = line.split()
