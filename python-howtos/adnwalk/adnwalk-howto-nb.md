@@ -270,7 +270,7 @@ walk(burgdorferi)
 
 ### Explorer le chemin de manière interactive
 
-(version notebook seulement: si vous avez activé `%notebook ipympl`): remarquez sur la vue les boutons pour la navigation interactive
+(version notebook seulement: si vous avez activé `%matplotlib ipympl`): remarquez sur la vue les boutons pour la navigation interactive
 
 * la maison: pour retourner à la vue initiale
 * le carré: pour zoomer

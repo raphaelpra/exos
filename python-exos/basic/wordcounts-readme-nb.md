@@ -97,7 +97,3 @@ for word in ['arthur', 'people']:
 
 ```
 ````
-
-```{code-cell} ipython3
-
-```

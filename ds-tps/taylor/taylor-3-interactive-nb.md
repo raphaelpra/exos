@@ -48,7 +48,7 @@ avec par exemple les fonctions sinus, cosinus, et exponentielle
 **modes disponibles**
 la solution à cet exercice est reliativement différente selon le mode de restitution choisi pour `matplotlib`; notamment il y a 
 * `%matplotlib inline` qui est le mode par défaut, **très ancien** et pas du tout interactif (on ne peut pas agrandir, zoomer, etc... dans la figure); c'est plutôt plus simple à coder, mais le résultat est vraiment rustique du coup, bref c'est plutôt déconseillé d'inverstir dans cette voie
-* `%matplotlib notebook` qui est déjà plus moderne; avec ce mode on peut agrandir / zoomer
+* `%matplotlib ipympl` qui est déjà plus moderne; avec ce mode on peut agrandir / zoomer
 * `%matplotlib ipympl` qui semble, en 2022, être le successeur du précédent - notamment si vous voulez visualiser vos rendus interactifs sous vs-code par exemple; ce mode nécessite une installation supplémentaire
 ```shell
 pip install ipympl

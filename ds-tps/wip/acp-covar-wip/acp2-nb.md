@@ -18,7 +18,8 @@ language_info:
 ---
 
 ```{code-cell} ipython3
-%matplotlib notebook
+%matplotlib ipympl
+
 from matplotlib import pyplot as plt
 import numpy as np
 
@@ -79,8 +80,4 @@ plt.axis('equal')
 plt.plot( (0, r1[0]), (0, r1[1]), 'r-')
 plt.plot( (0, r2[0]), (0, r2[1]), 'g-')
 plt.show()
-```
-
-```{code-cell} ipython3
-
 ```

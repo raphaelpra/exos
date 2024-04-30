@@ -43,7 +43,7 @@ from math import factorial
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 
-%matplotlib notebook
+%matplotlib ipympl
 ```
 
 ## exo v1

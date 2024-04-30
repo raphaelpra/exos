@@ -126,10 +126,10 @@ la première amélioration vient au prix d'une ligne qu'on mentionne généralem
 
 +++
 
-### `%matplotlib notebook`
+### `%matplotlib ipympl`
 
 ```{code-cell} ipython3
-%matplotlib notebook
+%matplotlib ipympl
 ```
 
 ```{code-cell} ipython3

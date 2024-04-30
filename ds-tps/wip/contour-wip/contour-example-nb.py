@@ -20,7 +20,7 @@ import numpy as np
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 
-# %matplotlib notebook
+# %matplotlib ipympl
 
 delta = 0.025
 x = np.arange(-3.0, 3.0, delta)

@@ -96,7 +96,7 @@ E.g.
 would cause a line of angle $\pi/3$ and length 10 to be drawn from the center of gravity of the points
 
 ```{code-cell} ipython3
-%matplotlib notebook
+%matplotlib ipympl
 import matplotlib.pyplot as plt
 
 from math import pi, cos, sin

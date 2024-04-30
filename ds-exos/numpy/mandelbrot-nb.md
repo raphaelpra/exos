@@ -39,7 +39,7 @@ trusted: true
 ---
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib notebook
+%matplotlib ipympl
 ```
 
 +++ {"run_control": {"frozen": false, "read_only": false}}

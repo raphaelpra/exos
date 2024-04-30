@@ -168,7 +168,7 @@ s = s.resample('m').max()
 # %%
 # then plot
 
-# %matplotlib notebook
+# %matplotlib ipympl
 
 s.plot.bar()
 plt.xlabel('month')

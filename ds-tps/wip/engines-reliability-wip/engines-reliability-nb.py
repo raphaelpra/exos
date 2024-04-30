@@ -79,7 +79,7 @@ import numpy as np
 
 # %% {"trusted": true}
 import matplotlib.pyplot as plt
-# %matplotlib notebook
+# %matplotlib ipympl
 
 # %% {"trusted": true}
 # install with - unsurprisingly (from the terminal)

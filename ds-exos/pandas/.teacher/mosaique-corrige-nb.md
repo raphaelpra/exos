@@ -54,7 +54,7 @@ Importer `pyplot` de `matplotlib` et  mettez les plots en mode `notebook`
 
 # prune-cell
 import matplotlib.pyplot as plt
-%matplotlib notebook
+%matplotlib ipympl
 ```
 
 **[note importante]**  

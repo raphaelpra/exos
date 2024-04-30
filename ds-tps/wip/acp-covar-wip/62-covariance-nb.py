@@ -94,7 +94,7 @@ el3 = ellipse(3, 1, 100)
 # would cause a line of angle $\pi/3$ and length 10 to be drawn from the center of gravity of the points
 
 # %%
-# %matplotlib notebook
+# %matplotlib ipympl
 import matplotlib.pyplot as plt
 
 from math import pi, cos, sin

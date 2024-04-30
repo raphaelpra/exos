@@ -158,7 +158,7 @@ Y == Y2
 # prune-cell
 
 import matplotlib.pyplot as plt
-%matplotlib notebook
+%matplotlib ipympl
 
 fig, (top, bottom) = plt.subplots(nrows=2)
 top.plot(X, Y)

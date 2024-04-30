@@ -64,7 +64,7 @@ np_ellipsoid = random_points(10, 5, 2, 5000)
 ```
 
 ```{code-cell} ipython3
-%matplotlib notebook
+%matplotlib ipympl
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 ```

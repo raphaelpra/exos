@@ -245,7 +245,7 @@ import matplotlib.pyplot as plt
 ```
 
 ```{code-cell} ipython3
-%matplotlib notebook
+%matplotlib ipympl
 ```
 
 ```{code-cell} ipython3
