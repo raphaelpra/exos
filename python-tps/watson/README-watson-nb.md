@@ -24,24 +24,38 @@ nbhosting:
 
 # Dr Watson
 
-Indice: voyez la fonction `input()` pour poser une question et lire la réponse dans le terminal
+si nécessaire: {download}`télécharger le zip<./ARTEFACTS-watson.zip>`
 
-```{code-cell} ipython3
++++
+
+## préparatifs
+
+### `input()`
+voyez la fonction `input()` pour poser une question et lire la réponse dans le terminal  
+essayez vous-même
+
+```python
+# pour poser la question et avoir la réponse
 reponse = input("une question: ")
+
+# le retour de input(), c'est directement la chaine qu'on a tapée, sans newline ni rien
+print(reponse)
 ```
 
-```{code-cell} ipython3
-# et le retour de input() c'est la chaine qu'on a tapée - sans newline ni rien
-reponse
-```
+### notebooks
+
+si vous envisagez de faire ce TP dans un notebook, [assurez-vous de bien lire cette section](label-autoreload)
+
++++
 
 ## v1: un coup, les mots-clé en dur
 
 on veut écrire un programme qui
+
 * pose une question, du genre `bonjour, à vous: `
 * attend la réponse tapée par l'utilisateur
 * puis:
-  * selon que la réponse contient le mot `bien` ou `mal`  
+  * selon que la réponse contient **le mot `bien`** ou **le mot `mal`**  
     on affiche un message positif ou négatif (par exemple `C'est super!` et `Ohhhh, c'est triste.`)
   * si la phrase est vide par contre, on affiche `Tu n'es pas bavard.`
   * enfin si rien de tout cela, on affiche `Je ne comprends pas`
@@ -58,18 +72,32 @@ C'est fini, au revoir !
 >>>
 ```
 
-Pour travailler vous pouvez éditer ce code
-
 ```{code-cell} ipython3
+# pour ceux qui travaillent dans un notebook
+
 def watson():
     ...
 
 watson()
 ```
 
+### solution v1
+
+````{admonition} ouvrez-moi
+:class: dropdown
+
+une façon de faire la v1
+
+```{literalinclude} watson1.py
+```
+````
+
++++
+
 ## v2 - les mots-clé dans une liste
 
 on change un peu le code; on veut reconnaitre les phrases positives ou négatives sur la base de plusieurs mots; par exemple
+
 ```
 NEGATIVE_WORDS = ["mal", "triste", "marre"]
 POSITIVE_WORDS = ["bien", "super", "content", "contente"]
@@ -77,7 +105,14 @@ POSITIVE_WORDS = ["bien", "super", "content", "contente"]
 
 +++
 
-*Indice*: faites descendre votre cellule de code pour qu'elle soit toujours près de la consigne; pour cela sélectionner la cellule, assurez-vous d'être en mode 'commande' (la bordure à gauche doit être bleue; tapez `Escape` si nécessaire) et tapez le caractère `'D'` pour *down* ou `'U'` pour *Up*
+````{admonition} indice
+:class: tip admonition-small
+
+toujours pour ceux qui travaillent dans un notebook:  
+faites descendre votre cellule de code pour qu'elle soit toujours près de la consigne;  
+pour cela sélectionner la cellule, assurez-vous d'être en mode 'commande' et tapez `Ctrl-Shift-↓`  
+ou encore click-drag avec la souris, dans la zone à gauche de la cellule
+````
 
 +++
 
@@ -120,7 +155,7 @@ et si un des mots de la phrase est contenu dans la nouvelle catégorie on arrêt
 >>> watson()
 bonjour, à vous: j'ai bien dormi
 C'est super, mais encore...
-j'i mal au dents
+j'ai mal au dents
 Ohhhh, c'est triste, mais encore...
 c'est fini
 je ne comprends pas...
@@ -131,42 +166,26 @@ C'est fini, au revoir !
 
 +++
 
-## v6 - on ajoute des *magics*
+### solution v5
 
-+++
+````{admonition} ouvrez-moi
+:class: dropdown
 
-maintenant si la réponse commence par des mots magiques (qui commencent tous par un `!`), on les traite:
-* `!somme` considère que tous les mots de la réponse sont des nombres, on les ajoute et on affiche la sommme
-* `!unique` on affiche tous les mots de la réponse mais une seule fois par mot
+une façon de faire la v5
 
-c'est-à-dire qu'une session pourrait être:
+```{literalinclude} watson5.py
 ```
->>> watson()
-bonjour
-!somme skdjf skdjf skfjs kjsf kjkdfj skdjf
-voici la somme : 0
-Mais encore...
-!somme 123 45 678
-voici la somme : 846
-Mais encore...
-!unique abc def abc def ghi abc
-voici les mots uniques : {'abc', 'ghi', 'def'}
-Mais encore...
-exit
-C'est fini, au revoir !
->>>
-```
+````
 
 +++
 
-## v7 - rendre la fonction réglable
+## v6 - rendre la fonction réglable
 
 +++
 
-* on veut pouvoir passer le fichier de config en paramètre à la fonction `watson()`
-* on veut aussi pouvoir lui passer des paramètres
-  * un paramètre config (qui par défaut vaut `"watson-config.txt"`)
-  un paramètre `debug` (qui par défaut est `False`) et dans ce cas on affiche un message qui montre où on a trouvé le mot
+* on veut pouvoir passerà la fonction `watson()`
+  * un paramètre `config` (qui par défaut vaut `"watson-config.txt"`)
+  * un paramètre `debug` (qui par défaut est `False`), et s'il est mis, on affiche un message qui montre où on a trouvé le mot
 
 +++
 
@@ -187,17 +206,36 @@ C'est fini, au revoir !
 
 +++
 
-## v9 - refactoring
+## v7 - refactoring
 
 +++
 
 on décide de refactorer le code en créant des classes; par exemple
-* une classe `Phrase` qui sera crée pour chaque réponse
 * une classe `Feeling` correspondant à chacun des deux ensembles de mots
+* une classe `Sentence` qui sera crée pour chaque réponse
+* une classe `Watson` qui est l'application elle-même
 * ... 
 
-en option on peut aussi en faire un vrai programme Python qui se lance depuis la ligne de commande (voir pour ça la librairie `argparse`)
+en option, on peut aussi en faire un vrai programme Python qui se lance depuis la ligne de commande (voir pour ça la librairie `argparse`)
 
 +++
 
-***
+### solution v7
+
+````{admonition} ouvrez-moi
+:class: dropdown
+
+une façon de faire la v7
+
+```{literalinclude} watson7.py
+```
+````
+
++++
+
+## etc..
+
+c'est toujours améliorable... par exemple:
+* on pourrait imaginer mettre les réponses aussi dans le fichier de config
+  dans ce cas un autre format serait sans doute mieux adapté; que pensez-vous de yaml dans ce contexte ?
+* ...

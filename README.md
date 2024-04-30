@@ -45,7 +45,7 @@ as well as, less interesting probably:
 * `reading`: the idea was to gather full-length projects, that students could
   read; may disappear on the long run, and merged with `samples`
 
-## formats
+## formats & jupytext
 
 as noted above, most of the contents is written as notebooks; all notebooks are
 jupytext-encoded using either `py:percent` or `md:myst` formats  
@@ -53,14 +53,7 @@ you will **need to `pip install jupytext`** to be able to read those as notebook
 also all notebooks have their filename prefix ending in `-nb` to help the
 distinction between notebooks and pure Python or pure markdown
 
-## online
-
-these 2 categories are available online here (login required), with an attempt to organize each
-content into meaningful sections:
-
-* [pure Python: start here](https://nbhosting.inria.fr/builds/python-exos/python/latest/README.html)
-* [data science: start here](https://nbhosting.inria.fr/builds/ds-exos/data-science/latest/README.html)
-
+(label-autoreload)=
 ## note on autoreload in ipython or notebooks
 
 please read this through if you use IPython or Jupyter on your laptop

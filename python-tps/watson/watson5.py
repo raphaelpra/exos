@@ -1,88 +1,82 @@
 # ameliore watson4 en ajoutant a 'while True' pour faire une boucle infinie
 # bien penser à ajouter une condition de sortie avec des exit_words
 
-def init_watson(config_file_name):
+def init_watson(config_filename):
     """
-    load the config_file_name and returns set of 
+    load the config_file_name and returns set of
     sentiment words in a tuple
-    
+
     parameter
     ---------
     config_file_name: the name of the file to load
-    
+
     return
     ------
     the tuple of sets (positive_words, negative_words, exit_words)
     """
-    with open(config_file_name, "r", encoding="utf8") as f:
+    positive_words, negative_words, exit_words = set(), set(), set()
+    with open(config_filename, "r", encoding="utf8") as f:
         for line in f:
             # we remove the \n char is if it is at the end of the line
             # it might not be the case at the end of the file
-            if line[-1] == "\n":
-                line = line[:-1]
-            if line:
-                line = line.split()
-                start = line[0]
-                if start == "POSITIVE":
-                    positive_words = set(line[1:])
-                elif start == "NEGATIVE":
-                    negative_words = set(line[1:])
-                elif start == "EXIT":
-                    exit_words = set(line[1:])
+            line = line.rstrip("\n")
+            if not line:
+                continue
+            kind, *words = line.split()
+            match kind:
+                case "POSITIVE":
+                    positive_words.update(set(words))
+                case "NEGATIVE":
+                    negative_words.update(set(words))
+                case "EXIT":
+                    exit_words.update(set(words))
 
     return positive_words, negative_words, exit_words
 
 
-def test_phrase_sentiment(phrase, sentiment):
+def test_phrase_sentiment(sentence, sentiment):
     """
     take a sentence and return True if any words
     in sentiment is in phrase
-    
+
     parameter
     ---------
     phrase: a set of str
     sentiment: a set of str containing sentiment words
-    
+
     return
     ------
     the interection between the words in the sentence and the words
     in the sentiment set
     """
-    return phrase.intersection(sentiment)
+    return sentence.intersection(sentiment)
 
 
-def start():
+def watson():
     """
-    demarre le docteur watson
-
-    parametre
-    ---------
-    aucun
-
-    return
-    ------
-    None
+    start doctor watson
     """
     positive_words, negative_words, exit_words = init_watson(
         "watson-config.txt"
     )
-    
-    message = 'bonjour, à vous: '
+
+    prompt = 'bonjour, à vous: '
     while True:
-        phrase = set(input(message).lower().split())
+        phrase = set(input(prompt).lower().split())
 
         if test_phrase_sentiment(phrase, negative_words):
-            message = "Ohhhh, c'est triste, mais encore...\n"
+            prompt = "Ohhhh, c'est triste, mais encore...\n"
         elif test_phrase_sentiment(phrase, positive_words):
-            message = "C'est super, mais encore...\n"
+            prompt = "C'est super, mais encore...\n"
         elif test_phrase_sentiment(phrase, exit_words):
             break
         elif not phrase:
-            message = "Tu n'es pas bavard. Que peux-tu me dire...\n"
+            prompt = "Tu n'es pas bavard. Que peux-tu me dire...\n"
         else:
-            message = "je ne comprends pas...\n"
+            prompt = "je ne comprends pas...\n"
 
     print("C'est fini, au revoir !")
 
 
-start()
+if __name__ == "__main__":
+    watson()

@@ -3,7 +3,7 @@
 # un message negatif si la phrase contient 'mal', et un message
 # "tu n'est pas bavard" si elle est vide
 
-def start():
+def watson():
     """
     demarre le docteur watson
 
@@ -28,5 +28,5 @@ def start():
 
     print("C'est fini, au revoir !")
 
-
-start()
+if __name__ == "__main__":
+    watson()
