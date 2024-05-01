@@ -20,14 +20,14 @@ nbhosting:
   title: un index de structs
 ---
 
-# les dicts comme struct ou comme index
-
-+++
+# le dict: struct ou index
 
 dans ce petit exercice on va utiliser
 * le dict pour gérer des enregistrements (en C on dirait des *structs*)
 * le dict pour indexer un grand nombre de données pour accélérer les recherches
 * et l'ensemble pour détecter les collisions et calculer le nombre d'entrées uniques dans une collection
+
+pour faire cet exercice, {download}`commencez par télécharger le zip<./ARTEFACTS-indexing-structs.zip>`
 
 ***disclaimer***: gardez à l'esprit le caractère pédagogique de l'exercice,  
 car pour ce genre de choses, dans la vraie vie, on pourrait aussi utiliser une dataframe pandas...
@@ -36,11 +36,8 @@ car pour ce genre de choses, dans la vraie vie, on pourrait aussi utiliser une d
 
 ## parsing
 
-on veut pouvoir lire des fichiers texte qui ressemblent à celui-ci
-```
-Marie Durand 25 Décembre 2002
-Jean Dupont 12 Novembre 2001
-Camille Saint-Nazaire 15 Avril 2000
+on veut pouvoir lire des fichiers texte qui ressemblent à celui-ci (`data-small.txt`)
+```{literalinclude} data-small.txt
 ```
 
 on suppose dans tout ce TP qu'il y a **unicité du (nom x prénom)**  
@@ -61,6 +58,8 @@ i.e. on n'est pas confronté au cas où deux personnes ont le même nom et le m�
   (dérivé de <https://fr.wikipedia.org/wiki/Liste_des_noms_de_famille_les_plus_courants_en_France>)
 * `first_names.txt`  
   (dérivé de <https://fr.wikipedia.org/wiki/Liste_des_pr%C3%A9noms_les_plus_donn%C3%A9s_en_France>)
+
+ce qu'il faut faire:
 
 * fabriquez un jeu de données aléatoires contenant 10000 personnes  
   avec la contrainte qu'il y ait en sortie **unicité du nom x prénom**  
