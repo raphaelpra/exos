@@ -49,7 +49,7 @@ sphinx:
     # not quite convincing but...
     html_extra_path:
       - media
-      - lite
+      # - lite
     jupyterlite_dir: .
   extra_extensions:
     - jupyterlite_sphinx
