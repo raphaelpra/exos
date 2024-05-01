@@ -1128,9 +1128,9 @@ def makedata(filename, N, groups_requirements=None):
                     print(f" {g_name}", file=f, end="")
             print(file=f)
 
-makedata("data-simple-10", 10)
+makedata("people-simple-10", 10)
 
-makedata("data-groups-10", 10,
+makedata("people-groups-10", 10,
          [{'exclusive': False, 'specs': {'maths': 6, 'french': 6}}])
 
-makedata("data-groups-120", 120, groups_requirements)
+makedata("people-groups-120", 120, groups_requirements)

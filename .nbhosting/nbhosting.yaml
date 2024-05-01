@@ -46,7 +46,7 @@ tracks:
     - "python-tps/files-formats/README-files-formats-nb.md"
     - "python-tps/watson/README-watson-nb.md"
     # using dicts for indexing and sets for creating groups
-    - "python-tps/students-groups/README-students-groups-nb.md"
+    - "python-tps/parse-people/README-parse-people-nb.md"
     # using dicts for structs and for indexing
     - python-tps/indexing-structs/README-indexing-structs-nb.md
     # itertools
