@@ -59,10 +59,10 @@ imaginons que vous voulez pouvoir modifier interactivemement une variable de vot
 si votre programme en pur Python est
 
 ```python
-the temperature
+# the temperature
 T = 10
 
-# ... on fait des trucs où A intervient
+# ... on fait des trucs où T intervient
 ```
 
 vous remplacez ça en streamlit par
@@ -73,7 +73,7 @@ import streamlit as st
 # the temperature
 T = st.slider("temperature", value=1, min_value=1, max_value=10, step=1)
 
-# ... ici A vaut ce que vous avez réglé avec le curseur
+# ... ici T vaut ce que vous avez réglé avec le curseur
 ```
 
 qui va créer un curseur graphique pour pouvoir régler T entre 1 et 10 (en commençant à 1)
