@@ -1,4 +1,7 @@
+# this is the source for the table of contents 
+# of the flotpython-exos-ds book
 format: jb-book
+root: README
 parts:
 - caption: exercices numpy
   chapters:
@@ -56,4 +59,3 @@ parts:
 - caption: quizzes pandas
   chapters:
   - glob: ds-quizzes/[0-9]*-nb
-root: README

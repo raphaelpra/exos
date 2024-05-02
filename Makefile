@@ -55,15 +55,14 @@ exec-clean:
 	./execute-all-notebooks.sh -x -c -v
 .PHONY: exec exec-clean
 
-
-# table of contents: inject the contents from nbhosting into jb
-jb/python/_toc.yml: .nbhosting/nbhosting.yaml
-	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t python
-jb/ds/_toc.yml: .nbhosting/nbhosting.yaml
-	$$HOME/git/nbhosting/scripts/nbh-to-jb-toc.py $< $@ -t data-science
-
-toc: jb/python/_toc.yml jb/ds/_toc.yml
+# TOC
+# table of contents: inject the contents from both jb tocs into nbhosting
+toc: .nbhosting/nbhosting.yaml
 .PHONY: toc
+
+.nbhosting/nbhosting.yaml: jb/python/_toc.yml jb/ds/_toc.yml
+	$$HOME/git/nbhosting/scripts/jb-to-nbh-toc.py -t data-science jb/ds/_toc.yml "$@"
+	$$HOME/git/nbhosting/scripts/jb-to-nbh-toc.py -t python jb/python/_toc.yml "$@"
 
 
 # BOOKS

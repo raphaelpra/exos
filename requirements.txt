@@ -39,3 +39,6 @@ jupyterlab-gridwidth
 
 # for vs-code
 ipykernel
+
+# for updating nbhosting toc from jupyter book
+ruamel.yaml

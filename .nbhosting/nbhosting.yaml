@@ -1,4 +1,3 @@
----
 # you may want to redefine locally either
 # - the list of tracks as tracks-filter
 # - and the list of builds as builds-filter
@@ -10,8 +9,7 @@
 # builds-filter: [ data-science ]
 
 # we define 2 tracks - python and data-science
-# in terms of jupyter-book outputs,
-# this will result in 2 books being built
+# each corresponding to one jupyter-book
 tracks:
 - description: Python - activités
   id: python
@@ -19,150 +17,135 @@ tracks:
   sections:
   - name: exercices basiques
     notebooks:
-    # str, ints, binary computations
-    - python-exos/basic/ipsplit-nb.md
-    # lists, side effects
-    - python-exos/basic/skimlist-readme-nb.md
-    # strs and formatting
-    - python-exos/basic/invoice-nb.md
-    # dicts
-    - python-exos/basic/agenda-readme-nb.md
-    # basic counts, requires dicts
-    - python-exos/basic/adnpercents-readme-nb.md
-    # filesystem / pathlib
-    - python-exos/basic/files-sortby-nb.md
-    - python-exos/basic/randomdate-readme-nb.md
-    - python-exos/basic/wordcounts-readme-nb.md
+    - python-exos/basic/ipsplit-nb
+    - python-exos/basic/skimlist-readme-nb
+    - python-exos/basic/invoice-nb
+    - python-exos/basic/agenda-readme-nb
+    - python-exos/basic/adnpercents-readme-nb
+    - python-exos/basic/files-sortby-nb
+    - python-exos/basic/randomdate-readme-nb
+    - python-exos/basic/wordcounts-readme-nb
   - name: howtos
     notebooks:
-    - python-howtos/encodings/encodings-howto-nb.md
-    - python-howtos/requests/requests-howto-nb.md
-    - python-howtos/adnwalk/adnwalk-howto-nb.md
-    - python-howtos/subprocesses/subprocesses-howto-nb.md
+    - python-howtos/encodings/encodings-howto-nb
+    - python-howtos/requests/requests-howto-nb
+    - python-howtos/adnwalk/adnwalk-howto-nb
+    - python-howtos/subprocesses/subprocesses-howto-nb
   - name: TPs basiques
     notebooks:
-    # ascii, utf8, binary, as well as various file formats
-    # like pickle, json, yaml, csv
-    - "python-tps/files-formats/README-files-formats-nb.md"
-    - "python-tps/watson/README-watson-nb.md"
-    # using dicts for indexing and sets for creating groups
-    - "python-tps/parse-people/README-parse-people-nb.md"
-    # using dicts for structs and for indexing
-    - python-tps/indexing-structs/README-indexing-structs-nb.md
-    # itertools
-    - "python-tps/queens/README-queens-nb.md"
+    - python-tps/files-formats/README-files-formats-nb
+    - python-tps/watson/README-watson-nb
+    - python-tps/parse-people/README-parse-people-nb
+    - python-tps/indexing-structs/README-indexing-structs-nb
+    - python-tps/queens/README-queens-nb
   - name: TPs classes
     notebooks:
-    - "python-tps/students-grades/README*.md"
-    - "python-tps/auctions/README*.md"
-    - "python-tps/unicode-boxes/README*.md"
-    - "python-tps/expressions-lang/README*.md"
+    - python-tps/students-grades/README*
+    - python-tps/auctions/README*
+    - python-tps/unicode-boxes/README*
+    - python-tps/expressions-lang/README*
   - name: TPs graphes
     notebooks:
-    - "python-tps/graph-bfs-dfs/README*.py"
-    - "python-tps/graph-shortest-path/README*.md"
-    - "python-tps/metro/README-metro-nb.md"
-    - "python-tps/pagerank-thrones/README*.py"
-    - "python-tps/puzzle8/README-*.md"
-  - name: 'TPs visu & games'
+    - python-tps/graph-bfs-dfs/README*
+    - python-tps/graph-shortest-path/README*
+    - python-tps/metro/README-metro-nb
+    - python-tps/pagerank-thrones/README*
+    - python-tps/puzzle8/README-*
+  - name: TPs visu & games
     notebooks:
-    - "python-tps/snake/README*.md"
-#    - "python-tps/flappybird-wip/README*.md"
-    - "python-tps/boids/README*.md"
-    - "python-tps/redis/README*.md"
-    - "python-tps/motus/README*.md"
-    - "python-tps/dobble/README*.md"
+    - python-tps/snake/README*
+    - python-tps/boids/README*
+    - python-tps/redis/README*
+    - python-tps/motus/README*
+    - python-tps/dobble/README*
   - name: lecture de code
     notebooks:
-      - python-reading/snake/snake.py
+    - python-reading/snake/snake
   - name: avancés
     notebooks:
-    - python-exos/advanced/attributes-proxy-nb.md
-    - python-exos/advanced/attributes-dynprop-nb.md
+    - python-exos/advanced/attributes-proxy-nb
+    - python-exos/advanced/attributes-dynprop-nb
   - name: sample code
     notebooks:
-    - "python-samples/*.py"
+    - python-samples/*
   - name: WIP
     notebooks:
-    - "python-tps/subprocesses-howto.md"
-    - "python-tps/webscraper-wip/README*.md"
-
-
+    - python-tps/subprocesses-howto
+    - python-tps/webscraper-wip/README*
 - description: DataScience - activités
   id: data-science
   name: Data Science
   sections:
   - name: exercices numpy
     notebooks:
-    - ds-exos/numpy/indices-nb.md
-    - ds-exos/numpy/mandelbrot-nb.md
-    - ds-howtos/numpy-meshgrid-howto-nb.md
+    - ds-exos/numpy/indices-nb
+    - ds-exos/numpy/mandelbrot-nb
+    - ds-howtos/numpy-meshgrid-howto-nb
   - name: TP numpy sounds
     notebooks:
-    - ds-tps/sounds/README-sounds-nb.md
+    - ds-tps/sounds/README-sounds-nb
   - name: TP numpy images
     notebooks:
-    - ds-tps/images/README-images1-nb.md
-    - ds-tps/images/README-images2-nb.md
+    - ds-tps/images/README-images1-nb
+    - ds-tps/images/README-images2-nb
   - name: howto opencv - yolo
     notebooks:
-    - ds-howtos/opencv-yolo-howto/opencv-yolo-howto-nb.py
+    - ds-howtos/opencv-yolo-howto/opencv-yolo-howto-nb
   - name: TP numpy Taylor
     notebooks:
-    - ds-tps/taylor/taylor-*.md
+    - ds-tps/taylor/taylor-*
   - name: TP pentominos
     notebooks:
-    - ds-tps/pentominos/README-pentominos-nb.md
+    - ds-tps/pentominos/README-pentominos-nb
   - name: exercices pandas
     notebooks:
-    - ds-exos/pandas/mosaique-nb.md
-    - ds-exos/pandas/titanic-nb.md
-    - ds-exos/pandas/bornes-nb.md
-    - ds-exos/pandas/stack-simple-nb.md
-    - ds-exos/pandas/stack-multicol-nb.md
+    - ds-exos/pandas/mosaique-nb
+    - ds-exos/pandas/titanic-nb
+    - ds-exos/pandas/bornes-nb
+    - ds-exos/pandas/stack-simple-nb
+    - ds-exos/pandas/stack-multicol-nb
   - name: TP pandas
     notebooks:
-    - ds-tps/television/README-television-nb.md
-    - ds-tps/marathon/README-marathon-nb.md
-    - ds-tps/collages/README-collages-nb.md
-    - ds-tps/groupby-draw/README-groupby-draw-nb.md
+    - ds-tps/television/README-television-nb
+    - ds-tps/marathon/README-marathon-nb
+    - ds-tps/collages/README-collages-nb
+    - ds-tps/groupby-draw/README-groupby-draw-nb
   - name: geo data
     notebooks:
-    - ds-geo/folium/README-folium-nb.md
-    - ds-geo/tp-addresses/README-addresses-nb.md
+    - ds-geo/folium/README-folium-nb
+    - ds-geo/tp-addresses/README-addresses-nb
   - name: howtos pandas
     notebooks:
-    - ds-howtos/split-count-into-columns-howto-nb.md
-    - ds-howtos/pivot-vs-stack-unstack-howto-nb.md
-    - ds-howtos/timeseries-clean-smooth-howto-nb.md
-    - ds-howtos/groupby-ratings-howto-nb.md
-    - ds-howtos/coronavirus-howto-nb.md
-    - ds-howtos/fremont-bridge-howto-nb.md
+    - ds-howtos/split-count-into-columns-howto-nb
+    - ds-howtos/pivot-vs-stack-unstack-howto-nb
+    - ds-howtos/timeseries-clean-smooth-howto-nb
+    - ds-howtos/groupby-ratings-howto-nb
+    - ds-howtos/coronavirus-howto-nb
+    - ds-howtos/fremont-bridge-howto-nb
   - name: dashboards
     notebooks:
-    - ds-dashboards/streamlit/README-streamlit-nb.md
-    - ds-dashboards/streamlit/streamlit-sinus.py
-    - ds-dashboards/streamlit/streamlit-taylor.py
-    - ds-dashboards/dashboard-with-dash-nb.py
+    - ds-dashboards/streamlit/README-streamlit-nb
+    - ds-dashboards/streamlit/streamlit-sinus
+    - ds-dashboards/streamlit/streamlit-taylor
+    - ds-dashboards/dashboard-with-dash-nb
   - name: quizzes pandas
     notebooks:
-    - ds-quizzes/[0-9]*-nb.py
-
+    - ds-quizzes/[0-9]*-nb
 builds:
-  - id: python
-    name: Python
-    description: core Python
-    external_url: https://flotpython-exos-python.readthedocs.io/
-    directory: .
-    script: |
-      pip install jupyter-book
-      jupyter-book build --toc jb/python/_toc.yml --config jb/_config.yml .
-  - id: data-science
-    name: Data Science
-    description: numpy, pandas, dataviz
-    external_url: https://flotpython-exos-ds.readthedocs.io/
-    directory: .
-    script: |
-      pip install jupyter-book
-      pip install sphinx-exercise
-      jupyter-book build --toc jb/ds/_toc.yml --config jb/_config.yml .
+- id: python
+  name: Python
+  description: core Python
+  external_url: https://flotpython-exos-python.readthedocs.io/
+  directory: .
+  script: |
+    pip install jupyter-book
+    jupyter-book build --toc jb/python/_toc.yml --config jb/_config.yml .
+- id: data-science
+  name: Data Science
+  description: numpy, pandas, dataviz
+  external_url: https://flotpython-exos-ds.readthedocs.io/
+  directory: .
+  script: |
+    pip install jupyter-book
+    pip install sphinx-exercise
+    jupyter-book build --toc jb/ds/_toc.yml --config jb/_config.yml .
