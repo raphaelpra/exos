@@ -78,9 +78,8 @@ mais bien sûr d'ici là, n'hésitez pas à lancer votre code interactivement et
 il y a toutefois une précaution à prendre si vous travaillez comme ceci  
 en effet l'import d'un module est **caché** par Python, ce qui fait que par défaut, les changements que vous faites dans fichier `rooks_and_queens.py` ne sont plus rechargés après le premier import
 
-pour vous installer confortablement, voyez ce lien:
-
-<https://nbhosting.inria.fr/builds/python-exos/python/latest/README.html#note-on-autoreload-in-ipython-or-notebooks>
+pour vous installer confortablement, voyez ce lien:  
+<https://flotpython-exos-python.readthedocs.io/en/main/README.html#note-on-autoreload-in-ipython-or-notebooks>
 
 +++
 
