@@ -32,7 +32,6 @@ vous êtes censé travailler en local sur votre ordi; commencez par {download}`t
 
 * ce notebook
 * un dossier `media/` avec les figures
-* un dossier `data/` le cas échéant
 * un fichier de test `test_rooks_and_queens.py`
 
 +++
