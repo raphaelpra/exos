@@ -175,7 +175,9 @@ du coup il est opportun d'indiquer à vs-code qu'il faut utiliser `snake` -
 plutôt que `base`
 pour cela cliquer dans la bannière du bas la zone qui indique le Python courant
 
-![](media/vscode-which-python.png)
+```{image} media/vscode-which-python.png
+:align: center
+```
 
 **Astuce #3** : une fois que c'est fait, pour lancer le programme directement
 depuis vs-code :
@@ -190,7 +192,9 @@ depuis vs-code :
 **Astuce #4** : si vous voulez avoir en permanence une indication
 sur la qualité de votre code, regardez la zone en bas à gauche
 
-![](media/vscode-problems.png)
+```{image} media/vscode-problems.png
+:align: center
+```
 
 ## Un petit détail
 
@@ -263,7 +267,9 @@ Nous allons commencer par construire notre plateau de jeu ainsi:
 Pour valider le bon fonctionnement de ce plateau de jeu, écrivez un programme
 qui dessine un grille (vous pouvez ben sûr choisir d'autres couleurs):
 
-![](media/damier.png)
+```{image} media/damier.png
+:align: center
+```
 
 pour cela, vous pouvez utiliser la méthode
 [`pg.draw.rect()`](https://www.pygame.org/docs/ref/draw.html#pygame.draw.rect)
@@ -304,7 +310,9 @@ pour obtenir un schéma comme suit; disons pour fixer les idées que dans ce cas
 de figure `(10,15)` est la queue, et `(12, 15)` est la tête (mais c'est
 totalement arbitraire et pas du tout imposé) :
 
-![](media/serpent.png)
+```{image} media/serpent.png
+:align: center
+```
 
 ## Un serpent qui bouge
 
@@ -325,7 +333,9 @@ Aussi on peut commencer à envisager d'accélérer un peu le jeu à ce stade...
 
 **BONUS** faites en sorte que le serpent ne puisse pas faire "demi tour"
 
-  ![](media/serpent-bouge.gif)
+```{image} media/serpent-bouge.gif
+:align: center
+```
 
 ## Le fruit
 
@@ -341,7 +351,9 @@ On va procéder comme suit:
 - quand la tête du serpent mange le fruit, on place un nouveau fruit à une
   position aléatoire et on allonge le serpent d'une case
 
-![](media/manger.gif)
+```{image} media/manger.gif
+:align: center
+```
 
 ## Épilogue
 
@@ -356,7 +368,9 @@ Il nous reste deux petits changements pour avoir un serpent complètement foncti
   pg.display.set_caption(f"Score: {score}")
   ```
 
-![](media/score.png)
+```{image} media/score.png
+:align: center
+```
 
 ***
 ***

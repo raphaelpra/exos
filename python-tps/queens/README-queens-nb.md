@@ -102,7 +102,9 @@ aussi, pour se simplifier la vie
 * on va **se contenter d'un tuple** - ou d'une liste, peu importe - **de coordonnées Y**
 
 c'est ainsi qu'on va représenter une position, comme par exemple celle-ci
-![](media/coordinates.svg)
+```{image} media/coordinates.svg
+:align: center
+```
 
 par le tuple `(0, 4, 1, 2, 3)` qui donne les coordonnées en Y dans les colonnes successives (ici le dessin est fait avec matplotlib, du coup les Y sont descendants, l'orientation n'a pas d'importance)
 

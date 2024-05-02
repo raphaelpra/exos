@@ -29,7 +29,9 @@ le fichier excel `data/groupby-draw.xlsx` contient ici plusieurs feuillets
 
 +++
 
-![](media/groupby-draw-excel.png)
+```{image} media/groupby-draw-excel.png
+:align: center
+```
 
 +++
 

@@ -375,7 +375,9 @@ regardez maintenant les fichiers suivants
 
 en partant du premier de ces fichiers, on a produit le diagramme suivant
 
-![](media/cards05.svg)
+```{image} media/cards05.svg
+:align: center
+```
 
 +++
 
@@ -534,7 +536,9 @@ Deck("data/cards06.txt").draw_map()
 
 +++
 
-![](media/cards04.svg)
+```{image} media/cards04.svg
+:align: center
+```
 
 ```{code-cell} ipython3
 # la liste des symboles, un peu mise en forme

@@ -39,7 +39,9 @@ pour plus de détails sur ce jeu, voyez <https://fr.wikipedia.org/wiki/Motus_(je
 
 voici un exemple de session, le mot à deviner était `CITRON`
 
-![](media/motus-example.png)
+```{image} media/motus-example.png
+:align: center
+```
 
 ici on a 
 * d'abord essayé `CASTOR`; la 'correction' nous a appris que
@@ -76,14 +78,18 @@ puis on donne ensuite autant de jaunes que possible, et à chaque fois les lettr
 +++
 
 c'est  ainsi que par exemple, avec le mot caché `addition` on obtient la correction suivante (la dernière ligne est uniquement explicative)  
-![](media/example-addition.svg)
+```{image} media/example-addition.svg
+:align: center
+```
 
 vous remarquez que la réponse contient un `d` bleu, alors qu'il y a deux `d` dans le mot à deviner, mais comme ils ont déjà été 'consommés' pour les deux `d` rouges, le troisième `d` est considéré comme absent.
 
 +++
 
 autre exemple, le mot caché est `escarcelle`  
-![](media/example-escarcelle.svg)
+```{image} media/example-escarcelle.svg
+:align: center
+```
 
 vous remarquez que la réponse contient
 

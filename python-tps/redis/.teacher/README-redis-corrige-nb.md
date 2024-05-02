@@ -68,7 +68,9 @@ l'architecture la plus simple pour établir la communication entre tous les joue
 
 +++
 
-![](processes.svg)
+```{image} processes.svg
+:align: center
+```
 
 +++
 
@@ -159,7 +161,9 @@ jusqu'ici on a fait tourner tous les processus dans le même ordinateur
 
 en vraie grandeur bien sûr, on veut faire tourner ça sur plusieurs ordinateurs
 
-![](ip-address.svg)
+```{image} ip-address.svg
+:align: center
+```
 
 pour que ça puisse fonctionner dans ce type de configuration il faut que Jacques lance le jeu en lui indiquant sur quel ordinateur se trouve le serveur redis
 
@@ -178,7 +182,9 @@ et cherchez une adresse parmi les intervalles réservés aux adresses privées
 
 +++
 
-![](private-ranges.png)
+```{image} private-ranges.png
+:align: center
+```
 
 +++
 

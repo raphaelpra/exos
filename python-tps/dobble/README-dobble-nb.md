@@ -157,7 +157,9 @@ regardez maintenant les fichiers suivants
 
 en partant du premier de ces fichiers, on a produit le diagramme suivant
 
-![](media/cards05.svg)
+```{image} media/cards05.svg
+:align: center
+```
 
 +++
 

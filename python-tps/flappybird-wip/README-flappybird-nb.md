@@ -86,7 +86,9 @@ https://github.com/ue12-p21/python-advanced/tree/main/tps/games/images
 
 vous devriez avoir un rendu semblable à celui-ci:
 
-![](media/oiseau.png)
+```{image} media/oiseau.png
+:align: center
+```
 
 Il faut maintenant faire bouger notre oiseau.
 Contrairement à l'exemple précédent, nous allons devoir utilisé un mouvement "continu", c'est à dire caractérisé par:
@@ -107,7 +109,9 @@ du coup l'algorithme a réaliser est le suivant:
 
 Vous devriez obtenir quelque chose comme:
 
-![](media/tombe.gif)
+```{image} media/tombe.gif
+:align: center
+```
 
 _il vous revient d'adapter les différentes constantes pour avoir une "sensation" de jeu agréable_
 
@@ -119,7 +123,9 @@ L'étape suivant est de définir une interraction avec l'oiseau. Le fonctionneme
 
 Le résultat doit être semblable à:
 
-![](media/hophop.gif)
+```{image} media/hophop.gif
+:align: center
+```
 
 +++
 

@@ -204,4 +204,6 @@ plt.savefig("mandelbrot.svg", format="svg")
 
 included as svg
 
-![](mandelbrot.svg)
+```{image} mandelbrot.svg
+:align: center
+```

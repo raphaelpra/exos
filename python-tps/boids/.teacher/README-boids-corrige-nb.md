@@ -318,7 +318,9 @@ on peut la résumer comme ceci:
 
 +++
 
-![](media/separation.png)
+```{image} media/separation.png
+:align: center
+```
 
 +++
 
@@ -398,7 +400,9 @@ vous pouvez ensuite améliorer dans les directions suivantes :
 
 +++
 
-![](media/boids-rules.png)
+```{image} media/boids-rules.png
+:align: center
+```
 
 +++
 

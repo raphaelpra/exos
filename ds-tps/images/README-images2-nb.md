@@ -158,7 +158,9 @@ et sauver ce patchwork dans le fichier `patchwork.png` avec `plt.imsave`
 
 vous devriez obtenir quelque chose comme ceci
 
-![](media/patchwork-all.jpg)
+```{image} media/patchwork-all.jpg
+:align: center
+```
 
 ```{code-cell} ipython3
 # votre code

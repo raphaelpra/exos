@@ -69,7 +69,9 @@ nous nous intéressons aux graphes **valués**, qu'on peut définir formellement
 * $E$ est une partie de $V\times V$; les couples $(v_1, v_2)$ dans $E$ s'appellent les arêtes (*edges*) du graphe
 * $W$ est une fonction $E\rightarrow\mathbb{N}$, qui attache à chaque arête une valeur entière, un poids (*weight*), qui peut être interprété aussi selon les usages comme une distance entre les sommets concernés; ou tout autre chose d'ailleurs, par exemple une durée…
 
-![](media/graph.png)
+```{image} media/graph.png
+:align: center
+```
 
 +++
 

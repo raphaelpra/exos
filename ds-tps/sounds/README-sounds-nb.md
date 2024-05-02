@@ -885,7 +885,9 @@ sauf que si on s'y prend comme cela:
 
 +++ {"tags": ["level_advanced"]}
 
-![](media/sounds-offsets.png)
+```{image} media/sounds-offsets.png
+:align: center
+```
 
 c'est ce qu'on essaie d'illustrer ici
 
@@ -1000,7 +1002,9 @@ pourquoi ? de cette façon on va artificiellement
 
 +++ {"hide_input": false}
 
-![](media/sounds-sample-2-1.png)
+```{image} media/sounds-sample-2-1.png
+:align: center
+```
 
 +++
 
@@ -1043,7 +1047,9 @@ plt.plot(data2, linewidth=0.05);
 
 pour transposer d'une quinte, il nous faut multiplier la fréquence par 3/2; on peut utiliser une approche voisine
 
-![](media/sounds-sample-3-2.png)
+```{image} media/sounds-sample-3-2.png
+:align: center
+```
 
 +++
 

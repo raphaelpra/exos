@@ -26,7 +26,9 @@ version: '1.0'
 
 +++
 
-![](media/metro-map.png)
+```{image} media/metro-map.png
+:align: center
+```
 
 +++
 
@@ -115,7 +117,9 @@ Il y a deux algorithmes standard pour parcourir un graphe à partir de l'un de s
 
 intuitivement, en partant de cet échantillon (ici un simple arbre) :
 
-![](example.svg)
+```{image} example.svg
+:align: center
+```
 
 +++ {"cell_style": "split"}
 
@@ -173,7 +177,9 @@ on va représenter le graphe avec plusieurs classes d'objet :
 
 +++
 
-![](media/data-structures.png)
+```{image} media/data-structures.png
+:align: center
+```
 
 +++
 

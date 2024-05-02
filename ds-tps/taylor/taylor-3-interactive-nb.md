@@ -39,28 +39,21 @@ from math import factorial
 
 +++
 
-en application de ce qu'on a vu sur les notebooks interactifs, on peut s'amuser à fabriquer un dashboard qui permet
-- d'afficher l'approximation de Taylor pour une fonction f passée en paramètre  
-- et le dashboard permet de choisir le degré de l'approximation  
-- avec le choix entre plusieurs fonctions, par exemple sinus, cosinus, et exponentielle...
+en application de ce qu'on a vu sur les notebooks interactifs, on peut s'amuser à fabriquer un dashboard qui permet d'afficher l'approximation de Taylor pour une fonction f passée en paramètre
 
-````{admonition} modes disponibles
+et le dashboard permet de choisir le degré de l'approximation
 
-la solution à cet exercice est relativement différente, selon le mode de restitution choisi pour `matplotlib`; notamment il y a 
+avec par exemple les fonctions sinus, cosinus, et exponentielle
 
+**modes disponibles**
+la solution à cet exercice est reliativement différente selon le mode de restitution choisi pour `matplotlib`; notamment il y a 
 * `%matplotlib inline` qui est le mode par défaut, **très ancien** et pas du tout interactif (on ne peut pas agrandir, zoomer, etc... dans la figure); c'est plutôt plus simple à coder, mais le résultat est vraiment rustique du coup, bref c'est plutôt déconseillé d'inverstir dans cette voie
-
-* `%matplotlib ipympl` qui semble, en 2022, être le mode à choisir pour des visus interactives, i.e. qui permettent d'agrandir la figure, et de zoomer dedans;  
-c'est un synonyme de `%matplotlib widget`, mais je vous recommande plutôt `ipympl` parce que:
-  * ce mode nécessite une installation supplémentaire, d'un module qui s'appelle, justement:
-     ```shell
-     pip install ipympl
-     ```
-  * et aussi si vous voulez visualiser vos rendus interactifs sous vs-code (à retester tout de même)
-  * mnémotechnique: **IPY**thon **M**at**P**lot**L**ib
-
-par contre, c'est dommage mais le mode interactif ne survit pas au passage à HTML... i.e. sur `readthedocs.io` les rendus restent statiques..
-````
+* `%matplotlib ipympl` qui est déjà plus moderne; avec ce mode on peut agrandir / zoomer
+* `%matplotlib ipympl` qui semble, en 2022, être le successeur du précédent - notamment si vous voulez visualiser vos rendus interactifs sous vs-code par exemple; ce mode nécessite une installation supplémentaire
+```shell
+pip install ipympl
+```
+et il se peut que vous ayez besoin de relancer votre serveur jupyter après cette installation  
 
 notre solution utilise ce dernier mode, pour quelques exemples voir <https://matplotlib.org/ipympl/examples/full-example.html>; cette page peut être utile aussi <https://kapernikov.com/ipywidgets-with-matplotlib/>
 
@@ -76,7 +69,9 @@ ici par exemple notre figure c'est principalement deux courbes (la fonction, et 
 
 le but du jeu est d'obtenir un matplotlib interactif de ce genre
 
-![](taylor-3-example.png)
+```{image} taylor-3-example.png
+:align: center
+```
 
 +++
 

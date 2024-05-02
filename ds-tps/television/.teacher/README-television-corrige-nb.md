@@ -485,7 +485,9 @@ je vous laisse éventuellement vérifier votre code en rechargeant sous excel le
 
 +++
 
-![](media/television.png)
+```{image} media/television.png
+:align: center
+```
 
 +++
 
