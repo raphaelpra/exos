@@ -49,8 +49,9 @@ parts:
 - caption: dashboards
   chapters:
   - file: ds-dashboards/streamlit/README-streamlit-nb
-  - file: ds-dashboards/streamlit/streamlit-sinus
-  - file: ds-dashboards/streamlit/streamlit-taylor
+    sections:
+      - file: ds-dashboards/streamlit/streamlit-sinus
+      - file: ds-dashboards/streamlit/streamlit-taylor
   - file: ds-dashboards/dashboard-with-dash-nb
 - caption: quizzes pandas
   chapters:
