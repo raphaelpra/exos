@@ -14,6 +14,8 @@ exclude_patterns:
   - "**/teacher/*"
   - "**/.ipynb_checkpoints"
   - "**/.pytest_cache"
+  - "**/book-python"
+  - "**/book-ds"
 
 execute:
   execute_notebooks: cache
@@ -22,6 +24,8 @@ execute:
     - "**/.teacher/*"
     - "**/teacher/*"
     - "**/snake*.py"
+    - "**/book-python"
+    - "**/book-ds"
 
 parse:
   myst_enable_extensions:
