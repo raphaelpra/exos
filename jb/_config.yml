@@ -49,6 +49,7 @@ sphinx:
       home_page_in_toc: false
       toc_title: "TOC"
 
+    html_favicon: media/flotpython-favicon.svg
     html_show_copyright: false
     html_extra_path:
       - media
