@@ -2,7 +2,8 @@
 
 title: Python Exercices
 author: Thierry Parmentelat
-logo: media/logo-python.svg
+# this is tweaked by a sed command in ds/.readthedocs.yaml
+logo: media/logo-exos-python.svg
 
 only_build_toc_files: true
 
