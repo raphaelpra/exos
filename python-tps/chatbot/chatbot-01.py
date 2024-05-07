@@ -39,12 +39,14 @@ def main(page: ft.Page):
     # but unlike with JavaScript, we need to define it
     # NOTE that we can use the variables that are local to 'main'
     # i.e. model, server, streaming...
+
     def show_current_settings(_event):
         print("Your current settings :")
         print(f"{streaming.value=}")
         print(f"{model.value=}")
         print(f"{server.value=}")
 
+    # the visual pieces
     streaming = ft.Checkbox(label="streaming", value=False)
     model = ft.Dropdown(
         options=[ft.dropdown.Option(model) for model in ("llama2", "mistral", "gemma")],
@@ -59,12 +61,14 @@ def main(page: ft.Page):
 
     submit = ft.ElevatedButton("Send", on_click=show_current_settings)
 
+    # arrange them in a row
     page.add(
         ft.Row(
             [streaming, model, server, submit],
+            # for a row: main axis is horizontal
+            # and cross axis is vertical
             alignment=ft.MainAxisAlignment.CENTER,
         )
     )
-
 
 ft.app(main)

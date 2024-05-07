@@ -56,6 +56,7 @@ parts:
   # unfinished business
   # - "python-tps/flappybird-wip/README*.md"
   - glob: python-tps/boids/README*
+  - glob: python-tps/chatbot/README*
   - glob: python-tps/redis/README*
   - glob: python-tps/motus/README*
   - glob: python-tps/dobble/README*

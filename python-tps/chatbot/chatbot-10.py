@@ -92,7 +92,7 @@ class ChatbotApp(ft.Column):
             options=[
                 ft.dropdown.Option(model) for model in ("llama2", "mistral", "gemma")
             ],
-            width=200,
+            width=300,
         )
 
         servernames = [s['name'] for s in SERVERS]
