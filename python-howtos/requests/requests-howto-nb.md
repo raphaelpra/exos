@@ -175,7 +175,7 @@ population['France']
 ## CSV
 
 Vous trouverez à cette URL un accès aux données de population par pays 
-https://github.com/datasets/population/blob/main/data/population.csv>  
+<https://github.com/datasets/population/blob/main/data/population.csv>  
 
 ````{admonition} Attention
 ce ne sont pas les mêmes données exactement, celles-ci sont beaucoup plus détaillées...
