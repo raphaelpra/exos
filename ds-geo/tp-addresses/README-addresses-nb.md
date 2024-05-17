@@ -18,7 +18,7 @@ language_info:
   pygments_lexer: ipython3
 ---
 
-# TP addresses
+# TP géoloc addresses
 
 ce TP vise à vous faire découvrir quelques possibilités de manipulation et d'affichage de données géographiques
 
