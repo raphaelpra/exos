@@ -19,51 +19,69 @@
 #     pygments_lexer: ipython3
 # ---
 
-# +
-# the name of the pypi package is odd, but life is odd, so..
-# # %pip install opencv-python
-# -
-
-# numpy
-import numpy as np
-
-# open cv
-import cv2
-from IPython.display import Image
-
-# our own utilities
-from utils_image import show_image
-
 # # `opencv` & `yolo` use cases
 #
 # let's see some basic code samples that involve
 #
 # * basic features of `opencv` and `yolo`
 # * pre-trained machine-learning models
-# * these reworked samples were inspired by this MOOC in French
+# * these reworked samples were inspired by this MOOC in French  
 #   <https://www.linkedin.com/learning/l-essentiel-d-opencv-avec-python-pour-le-deep-learning/solution-suivre-les-positions-des-epaules-et-des-genoux>
 #
-# ````{admonition} warning: the HTML output is poor
+# ````{admonition} warning: run this code locally !
 # :class: warning
 #
 # the techniques used for viewing images and videos in this notebook cannot easily work in an HTML environment  
-# for this reason if you are reading this in HTML format, you are much better off running the notebook locally ! 
+# for this reason, the HTML output is poor and you will be much better off **running the notebook locally !**
+#
+# and for that, {download}`your first step will be to download the zip<./ARTEFACTS-opencv-yolo-howto.zip>`
+#
 # ````
+
+# +
+# numpy
+
+import numpy as np
+
+# +
+# a utility to display images in the notebook
+
+from IPython.display import Image
+
+# +
+# the name of the pypi package is odd, but life is odd, so..
+# here's the name to use with pip
+# # %pip install opencv-python
+
+import cv2
+
+# +
+# finally, our own utilities
+
+from utils_image import show_image
+
+# +
+# ...
+# beware that there are a few other more exotic dependencies
+# that you will have to pip-install as we go
+# -
 
 # ## images
 #
-# in a first part, we'll deal with images
+# the first part of this notebook is about dealing with images
 
 # ### reading and displaying an image
 #
 # openCV comes with its own API for displaying and interacting with an image
 #
-# ````{admonition} warning
+# ````{admonition} how we display images in this notebook
+# :class: important
 #
-# we use our own function `show_image` - and actually we will use it all the time (see its code in `utils_image.py`); here's what it does:
+# we use our own function `show_image` - and actually we will use it all the time (see its code in `utils_image.py`)  
+# here's what it does:
 #
 # * it displays an image in a separate window
-# * and waits for you to close the window; for that you can either
+# * and **waits for you** to close the window; for that you can either
 #     - type a character - any character
 #     - left-click
 #     - or use the system shortcut to close a window (Alt-F4 or Command-w)
@@ -748,10 +766,8 @@ display_video_highlight_faces(
 #
 # this time the original video is in `./media/player-man.mov`
 
-# +
 # if needed:
-# # %pip install mediapipe
-# -
+# %pip install mediapipe
 
 import cv2
 from IPython.display import Image
@@ -871,9 +887,8 @@ cv2.waitKey(1);
 
 # ### detecting objects on an image
 
-# +
-# pip install ultralytics
-# pip install supervision
+# %pip install ultralytics
+# %pip install supervision
 
 # +
 import cv2
