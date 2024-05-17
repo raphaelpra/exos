@@ -21,7 +21,7 @@
 
 # # `opencv` & `yolo` use cases
 #
-# let's see some basic code samples that involve
+# let's see some basic code samples that involve:
 #
 # * basic features of `opencv` and `yolo`
 # * pre-trained machine-learning models
@@ -887,8 +887,11 @@ cv2.waitKey(1);
 
 # ### detecting objects on an image
 
-# %pip install ultralytics
-# %pip install supervision
+# +
+# make sure to install these if needed
+
+# # %pip install ultralytics
+# # %pip install supervision
 
 # +
 import cv2
@@ -896,9 +899,16 @@ from ultralytics import YOLO
 import supervision as sv
 
 from utils_image import show_image
-# -
 
-model = YOLO("yolov8l.pt")
+# +
+# model = YOLO("yolov8l.pt")
+
+# +
+# we go fetch the model from the Internet
+# it seems like the file will be automatically cached locally by YOLO
+
+model = YOLO("https://github.com/ultralytics/assets/releases/download/v8.1.0/yolov8n.pt")
+# -
 
 img = cv2.imread('./media/cars-city.png', 1)
 
@@ -909,19 +919,37 @@ img = cv2.imread('./media/cars-city.png', 1)
 # res = model.predict(img)[0]
 
 res = model(img)[0]
+# -
 
-# +
 # from_yolov8 is deprecated and replace by from_ultralytics
 detections = sv.Detections.from_ultralytics(res)
 
-# here's what the model has found
+# +
+# let us inspect what the model has found
+# as of ultralytics verion 8.2
+# each detection object can be unpacked with 6 fields
+
+first_detection = next(iter(detections))
+a,b,c,d,e,f = first_detection
+
+a,b,c,d,e,f
+
+
+# +
+# so the ones that we are interested in are these 2:
+
+_, _, confidence, _, _, details = first_detection
+confidence, details
+
+# +
+# so here is how to produce one label per detection
 
 labels = [
-    f"{model.model.names[class_id]} - {confidence:0.2f}"
-    for _, _, confidence, class_id, _  in detections
+    f"{details['class_name']} - {confidence:0.2f}"
+    for _, _, confidence, _, _, details in detections
 ]
 
-labels
+labels[:4]
 
 # +
 # rendering the result as an annotated image
