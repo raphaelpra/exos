@@ -29,17 +29,11 @@ nbhosting:
 
 Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-```{code-cell} ipython3
-from IPython.display import HTML
-HTML(filename="_static/style.html")
-```
++++
 
 # TP - un peu de musique
 
-```{code-cell} ipython3
-from IPython.display import HTML
-HTML('<link rel="stylesheet" href="slides-notebook.css" />')
-```
++++
 
 ## avertissement
 
