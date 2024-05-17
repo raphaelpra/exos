@@ -11,12 +11,6 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
-livereveal:
-  height: 1024
-  start_slideshow_at: selected
-  theme: simple
-  transition: cube
-  width: 1280
 notebookname: Mandelbrot
 version: '1.0'
 ---
