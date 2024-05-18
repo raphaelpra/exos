@@ -56,6 +56,10 @@ sphinx:
       - media
       # would  be needed if we were to expose contents to jupyterlite
       # - lite
+    html_static_path:
+      - _static
+    html_js_files:
+      - my-book.js
     jupyterlite_dir: .
     # required as of 2024 May to get %matplotlib ipympl
     # to show up (at all, not even interactive) in the book output
