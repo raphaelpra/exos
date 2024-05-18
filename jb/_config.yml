@@ -5,28 +5,30 @@ author: Thierry Parmentelat
 # this is tweaked by a sed command in ds/.readthedocs.yaml
 logo: media/logo-exos-python.svg
 
-only_build_toc_files: true
+# we want the corriges to build as well
+# only_build_toc_files: true
 
 exclude_patterns:
   # required to prevent endless deepening
-  # of the build tree
-  - "**/_build"
-  - "**/.teacher/*"
+  - "book-python/**/*"
+  - "book-ds/**/*"
+  # convenience for authors
   - "**/teacher/*"
-  - "**/.ipynb_checkpoints"
-  - "**/.pytest_cache"
-  - "**/book-python"
-  - "**/book-ds"
+  # of the build tree
+  # - "**/_build"
+  # - "**/teacher/*"
+  # - "**/.ipynb_checkpoints"
+  # - "**/.pytest_cache/*"
 
 execute:
   execute_notebooks: cache
-  exclude_patterns:
-    - "**/*-corrige*"
-    - "**/.teacher/*"
-    - "**/teacher/*"
-    - "**/snake*.py"
-    - "**/book-python"
-    - "**/book-ds"
+  # exclude_patterns:
+    # - "**/*-corrige*"
+    # - "**/.teacher/*"
+    # - "**/teacher/*"
+    # - "**/snake*.py"
+    # - "**/book-python"
+    # - "**/book-ds"
 
 parse:
   myst_enable_extensions:
