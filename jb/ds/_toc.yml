@@ -37,6 +37,7 @@ parts:
   - file: ds-tps/marathon/README-marathon-nb
   - file: ds-tps/collages/README-collages-nb
   - file: ds-tps/groupby-draw/README-groupby-draw-nb
+  - file: ds-tps/covid/README-covid-nb
 - caption: geo data
   chapters:
   - file: ds-geo/folium/README-folium-nb
