@@ -23,13 +23,8 @@ exclude_patterns:
   - "**/.ipynb_checkpoints/*"
   - "**/.pytest_cache/*"
   # specific exclusions
-  - "**/boids-[0-9]*.py"
-  - "**/chatbot-[0-9]*.py"
-  - "**/snake/.teacher/v[0-9]*.py"
-  - "**/motus/.teacher/[a-z]*.py"
-  - "**/chatbot/chatbot-[0-9]*.py"
-  - "**/watson/watson[0-9]*.py"
-
+  - "**/[a-z]*"
+  
 execute:
   execute_notebooks: cache
   exclude_patterns:
