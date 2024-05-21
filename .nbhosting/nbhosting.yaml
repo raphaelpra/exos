@@ -17,20 +17,20 @@ tracks:
   sections:
   - name: exercices basiques
     notebooks:
-    - python-exos/basic/ipsplit-nb
-    - python-exos/basic/skimlist-readme-nb
-    - python-exos/basic/invoice-nb
-    - python-exos/basic/agenda-readme-nb
-    - python-exos/basic/adnpercents-readme-nb
-    - python-exos/basic/files-sortby-nb
-    - python-exos/basic/randomdate-readme-nb
-    - python-exos/basic/wordcounts-readme-nb
+    - python-exos/basic/EXO-ipsplit-nb
+    - python-exos/basic/EXO-skimlist-readme-nb
+    - python-exos/basic/EXO-invoice-nb
+    - python-exos/basic/README-agenda-nb
+    - python-exos/basic/README-adnpercents-nb
+    - python-exos/basic/EXO-files-sortby-nb
+    - python-exos/basic/EXO-randomdate-readme-nb
+    - python-exos/basic/EXO-wordcounts-readme-nb
   - name: howtos
     notebooks:
-    - python-howtos/encodings/encodings-howto-nb
-    - python-howtos/requests/requests-howto-nb
-    - python-howtos/adnwalk/adnwalk-howto-nb
-    - python-howtos/subprocesses/subprocesses-howto-nb
+    - python-howtos/encodings/HOWTO-encodings-nb
+    - python-howtos/requests/HOWTO-requests-nb
+    - python-howtos/adnwalk/HOWTO-adnwalk-nb
+    - python-howtos/subprocesses/HOWTO-subprocesses-nb
   - name: TPs basiques
     notebooks:
     - python-tps/files-formats/README-files-formats-nb
@@ -91,7 +91,7 @@ tracks:
     - ds-tps/images/README-images2-nb
   - name: howto opencv - yolo
     notebooks:
-    - ds-howtos/opencv-yolo-howto/opencv-yolo-howto-nb
+    - ds-howtos/opencv-yolo-howto/HOWTO-opencv-yolo-nb
   - name: TP numpy Taylor
     notebooks:
     - ds-tps/taylor/taylor-*
@@ -118,9 +118,9 @@ tracks:
     - ds-geo/tp-addresses/README-addresses-nb
   - name: howtos pandas
     notebooks:
-    - ds-howtos/split-count-into-columns-howto-nb
-    - ds-howtos/pivot-vs-stack-unstack-howto-nb
-    - ds-howtos/timeseries-clean-smooth-howto-nb
+    - ds-howtos/HOWTO-split-count-into-columns-nb
+    - ds-howtos/HOWTO-pivot-vs-stack-unstack-nb
+    - ds-howtos/HOWTO-timeseries-clean-smooth-nb
     - ds-howtos/HOWTO-groupby-ratings-nb
     - ds-howtos/HOWTO-coronavirus-nb
     - ds-howtos/HOWTO-fremont-bridge-nb

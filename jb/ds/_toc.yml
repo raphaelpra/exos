@@ -17,7 +17,7 @@ parts:
   - file: ds-tps/images/README-images2-nb
 - caption: howto opencv - yolo
   chapters:
-  - file: ds-howtos/opencv-yolo-howto/opencv-yolo-howto-nb
+  - file: ds-howtos/opencv-yolo-howto/HOWTO-opencv-yolo-nb
 - caption: TP numpy Taylor
   chapters:
   - glob: ds-tps/taylor/taylor-*
@@ -44,9 +44,9 @@ parts:
   - file: ds-geo/tp-addresses/README-addresses-nb
 - caption: howtos pandas
   chapters:
-  - file: ds-howtos/split-count-into-columns-howto-nb
-  - file: ds-howtos/pivot-vs-stack-unstack-howto-nb
-  - file: ds-howtos/timeseries-clean-smooth-howto-nb
+  - file: ds-howtos/HOWTO-split-count-into-columns-nb
+  - file: ds-howtos/HOWTO-pivot-vs-stack-unstack-nb
+  - file: ds-howtos/HOWTO-timeseries-clean-smooth-nb
   - file: ds-howtos/HOWTO-groupby-ratings-nb
   - file: ds-howtos/HOWTO-coronavirus-nb
   - file: ds-howtos/HOWTO-fremont-bridge-nb

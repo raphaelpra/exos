@@ -6,25 +6,25 @@ parts:
 - caption: exercices basiques
   chapters:
   # str, ints, binary computations
-  - file: python-exos/basic/ipsplit-nb
+  - file: python-exos/basic/EXO-ipsplit-nb
   # lists, side effects
-  - file: python-exos/basic/skimlist-readme-nb
+  - file: python-exos/basic/EXO-skimlist-readme-nb
   # strs and formatting
-  - file: python-exos/basic/invoice-nb
+  - file: python-exos/basic/EXO-invoice-nb
   # dicts
-  - file: python-exos/basic/agenda-readme-nb
+  - file: python-exos/basic/README-agenda-nb
   # basic counts, requires dicts
-  - file: python-exos/basic/adnpercents-readme-nb
+  - file: python-exos/basic/README-adnpercents-nb
   # filesystem / pathlib
-  - file: python-exos/basic/files-sortby-nb
-  - file: python-exos/basic/randomdate-readme-nb
-  - file: python-exos/basic/wordcounts-readme-nb
+  - file: python-exos/basic/EXO-files-sortby-nb
+  - file: python-exos/basic/EXO-randomdate-readme-nb
+  - file: python-exos/basic/EXO-wordcounts-readme-nb
 - caption: howtos
   chapters:
-  - file: python-howtos/encodings/encodings-howto-nb
-  - file: python-howtos/requests/requests-howto-nb
-  - file: python-howtos/adnwalk/adnwalk-howto-nb
-  - file: python-howtos/subprocesses/subprocesses-howto-nb
+  - file: python-howtos/encodings/HOWTO-encodings-nb
+  - file: python-howtos/requests/HOWTO-requests-nb
+  - file: python-howtos/adnwalk/HOWTO-adnwalk-nb
+  - file: python-howtos/subprocesses/HOWTO-subprocesses-nb
 - caption: TPs basiques
   chapters:
   # ascii, utf8, binary, as well as various file formats
