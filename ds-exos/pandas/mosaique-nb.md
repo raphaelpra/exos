@@ -355,7 +355,7 @@ df.head()
 # votre code ici n'hésitez pas à recharger le fichier
 # pour partir d'un truc propre
 
-df = ...
+# df = ...
 ```
 
 ```{code-cell} ipython3

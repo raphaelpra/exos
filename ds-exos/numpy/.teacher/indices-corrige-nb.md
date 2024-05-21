@@ -423,6 +423,7 @@ def stairs(taille):
 # prune-cell 
 
 # ce qui donne avec imshow
+S2 = stairs(2)
 plt.imshow(S2);
 ```
 

@@ -573,7 +573,7 @@ df.head()
 # votre code ici n'hésitez pas à recharger le fichier
 # pour partir d'un truc propre
 
-df = ...
+# df = ...
 ```
 
 +++ {"tags": ["level_basic"]}
@@ -589,8 +589,8 @@ on transforme `Gender` en une catégorie; plusieurs variantes sont possibles
 
 # prune-cell
 
-# je repars d'un truc propre
-df = pd.read_csv("data/weight_height.csv")
+# si nécessaire, repartez d'un truc propre
+# df = pd.read_csv("data/weight_height.csv")
 
 # le plus immédiat
 df['Gender-cat'] = df.Gender.astype('category')
@@ -747,7 +747,6 @@ women.plot('Height', 'Weight', kind='scatter',
 
 ```{code-cell} ipython3
 :hide_input: false
-:scrolled: false
 :tags: [level_basic]
 
 # prune-cell
