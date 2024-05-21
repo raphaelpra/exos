@@ -200,7 +200,9 @@ data[data.isna().any(axis=1)].shape
 ```{code-cell} ipython3
 %matplotlib inline
 
-plt.style.use('seaborn')
+# no longer working ?
+# plt.style.use('seaborn')
+
 sns.set(rc={'figure.figsize': (12, 4)})
 #plt.rcParams["figure.figsize"] = (12, 4)
 ```
