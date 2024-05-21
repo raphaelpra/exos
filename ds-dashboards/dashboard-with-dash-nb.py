@@ -1,7 +1,7 @@
 # ---
 # jupyter:
 #   jupytext:
-#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
@@ -38,26 +38,36 @@ import plotly.express as px
 from dash import Dash, dcc, html, callback
 from dash.dependencies import Input, Output
 
+# +
 # Load Data
+
 df = px.data.tips()
 
+# +
 # Build App
+# __name__ is a global auto-defined by Python
+# from the current filename
+
 app = Dash(__name__)
+# -
 
 # create html content
 app.layout = html.Div([
-    html.H1("Dash Demo"),
+    html.H1("Dash Demo: a minimal dashboard"),
     # the graph
     dcc.Graph(id='graph'),
     # the colorscale picker (dropdown)
     html.Label([
         "colorscale",
         dcc.Dropdown(
-            id='colorscale-dropdown', clearable=False,
-            value='plasma', options=[
+            id='colorscale-dropdown', 
+            clearable=False,
+            value='plasma', 
+            options=[
                 {'label': c, 'value': c}
                 for c in px.colors.named_colorscales()
-            ])
+            ],
+        )
     ]),
 ])
 
@@ -70,11 +80,15 @@ app.layout = html.Div([
 
 
 def update_figure(colorscale):
+    print(f"{colorscale=}")
     return px.scatter(
-        df, x="total_bill", y="tip", # color="size",
-        # color_continuous_scale=colorscale,
-        # render_mode="webgl", title="Tips"
+        df, x="total_bill", y="tip", 
+        color="size",
+        color_continuous_scale=colorscale,
+        render_mode="webgl", 
+        title="Tips"
     )
+
 
 
 # Run app: this kicks off a http server
