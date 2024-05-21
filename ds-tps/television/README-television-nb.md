@@ -45,8 +45,12 @@ import pandas as pd
 ```{code-cell} ipython3
 # juste un utilitaire pour regarder le début d'un fichier
 
-from head import head
-help(head)
+def head(filename, nb_lines=5):
+    with open(filename) as f:
+        for lineno, line in enumerate(f, 1):
+            print(f"{lineno:02d}", line, end="")
+            if lineno >= nb_lines:
+                break
 ```
 
 ## la source
@@ -362,7 +366,7 @@ option 2: il y a plein d'autres façons de faire, on peut aussi utiliser tout si
 
 ```{code-cell} ipython3
 # à vous
-df = ...
+# df = ...
 ```
 
 ```{code-cell} ipython3
