@@ -17,14 +17,14 @@ tracks:
   sections:
   - name: exercices basiques
     notebooks:
-    - python-exos/basic/EXO-ipsplit-nb
-    - python-exos/basic/EXO-skimlist-readme-nb
-    - python-exos/basic/EXO-invoice-nb
+    - python-exos/basic/EXO-EXO-ipsplit-nb
+    - python-exos/basic/EXO-EXO-skimlist-readme-nb
+    - python-exos/basic/EXO-EXO-invoice-nb
     - python-exos/basic/README-agenda-nb
     - python-exos/basic/README-adnpercents-nb
-    - python-exos/basic/EXO-files-sortby-nb
-    - python-exos/basic/EXO-randomdate-readme-nb
-    - python-exos/basic/EXO-wordcounts-readme-nb
+    - python-exos/basic/EXO-EXO-files-sortby-nb
+    - python-exos/basic/EXO-EXO-randomdate-readme-nb
+    - python-exos/basic/EXO-EXO-wordcounts-readme-nb
   - name: howtos
     notebooks:
     - python-howtos/encodings/HOWTO-encodings-nb
@@ -64,8 +64,8 @@ tracks:
     - python-reading/snake/snake
   - name: avancés
     notebooks:
-    - python-exos/advanced/attributes-proxy-nb
-    - python-exos/advanced/attributes-dynprop-nb
+    - python-exos/advanced/EXO-attributes-proxy-nb
+    - python-exos/advanced/EXO-attributes-dynprop-nb
   - name: sample code
     notebooks:
     - python-samples/*

@@ -6,19 +6,19 @@ parts:
 - caption: exercices basiques
   chapters:
   # str, ints, binary computations
-  - file: python-exos/basic/EXO-ipsplit-nb
+  - file: python-exos/basic/EXO-EXO-ipsplit-nb
   # lists, side effects
-  - file: python-exos/basic/EXO-skimlist-readme-nb
+  - file: python-exos/basic/EXO-EXO-skimlist-readme-nb
   # strs and formatting
-  - file: python-exos/basic/EXO-invoice-nb
+  - file: python-exos/basic/EXO-EXO-invoice-nb
   # dicts
   - file: python-exos/basic/README-agenda-nb
   # basic counts, requires dicts
   - file: python-exos/basic/README-adnpercents-nb
   # filesystem / pathlib
-  - file: python-exos/basic/EXO-files-sortby-nb
-  - file: python-exos/basic/EXO-randomdate-readme-nb
-  - file: python-exos/basic/EXO-wordcounts-readme-nb
+  - file: python-exos/basic/EXO-EXO-files-sortby-nb
+  - file: python-exos/basic/EXO-EXO-randomdate-readme-nb
+  - file: python-exos/basic/EXO-EXO-wordcounts-readme-nb
 - caption: howtos
   chapters:
   - file: python-howtos/encodings/HOWTO-encodings-nb
@@ -65,8 +65,8 @@ parts:
   - file: python-reading/snake/snake
 - caption: "avanc\xE9s"
   chapters:
-  - file: python-exos/advanced/attributes-proxy-nb
-  - file: python-exos/advanced/attributes-dynprop-nb
+  - file: python-exos/advanced/EXO-attributes-proxy-nb
+  - file: python-exos/advanced/EXO-attributes-dynprop-nb
 - caption: sample code
   chapters:
   - glob: python-samples/*
