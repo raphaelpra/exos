@@ -20,7 +20,7 @@ parts:
   - file: ds-howtos/opencv-yolo/HOWTO-opencv-yolo-nb
 - caption: TP numpy Taylor
   chapters:
-  - glob: ds-tps/taylor/taylor-*
+  - glob: ds-tps/taylor/README-*-nb
 - caption: TP pentominos
   chapters:
   - file: ds-tps/pentominos/README-pentominos-nb
