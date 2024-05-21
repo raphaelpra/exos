@@ -57,6 +57,7 @@ parts:
       - file: ds-dashboards/streamlit/streamlit-sinus
       - file: ds-dashboards/streamlit/streamlit-taylor
   - file: ds-dashboards/dashboard-with-dash-nb
-- caption: quizzes pandas
-  chapters:
-  - glob: ds-quizzes/[0-9]*-nb
+# not ready to be published
+# - caption: quizzes pandas
+#   chapters:
+#   - glob: ds-quizzes/[0-9]*-nb

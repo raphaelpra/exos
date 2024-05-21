@@ -12,6 +12,8 @@ exclude_patterns:
   # required to prevent endless deepening
   - "book-python/**/*"
   - "book-ds/**/*"
+  # not ready to be published
+  - "ds-quizzes/**/*"
   # convenience for authors - but DO NOT exclude .teacher
   # so the corrections can be built
   - "**/teacher/*"
@@ -23,6 +25,7 @@ exclude_patterns:
   - "**/motus/.teacher/[a-z]*.py"
   - "**/chatbot/chatbot-[0-9]*.py"
   - "**/watson/watson[0-9]*.py"
+  - "**/trash/**/*"
 
 execute:
   execute_notebooks: cache
