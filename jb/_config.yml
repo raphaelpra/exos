@@ -17,15 +17,18 @@ exclude_patterns:
   # convenience for authors - but DO NOT exclude .teacher
   # so the corrections can be built
   - "**/teacher/*"
+  # generic exclusions
+  - "**/trash/**/*"
+  - "**/wip/*"
   - "**/.ipynb_checkpoints/*"
   - "**/.pytest_cache/*"
+  # specific exclusions
   - "**/boids-[0-9]*.py"
   - "**/chatbot-[0-9]*.py"
   - "**/snake/.teacher/v[0-9]*.py"
   - "**/motus/.teacher/[a-z]*.py"
   - "**/chatbot/chatbot-[0-9]*.py"
   - "**/watson/watson[0-9]*.py"
-  - "**/trash/**/*"
 
 execute:
   execute_notebooks: cache
