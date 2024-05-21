@@ -12,17 +12,22 @@ exclude_patterns:
   # required to prevent endless deepening
   - "book-python/**/*"
   - "book-ds/**/*"
-  # convenience for authors
+  # convenience for authors - but DO NOT exclude .teacher
+  # so the corrections can be built
   - "**/teacher/*"
-  # of the build tree
-  # - "**/_build"
-  # - "**/teacher/*"
-  # - "**/.ipynb_checkpoints"
-  # - "**/.pytest_cache/*"
+  - "**/.ipynb_checkpoints/*"
+  - "**/.pytest_cache/*"
+  - "**/boids-[0-9]*.py"
+  - "**/chatbot-[0-9]*.py"
+  - "**/snake/.teacher/v[0-9]*.py"
+  - "**/motus/.teacher/[a-z]*.py"
+  - "**/chatbot/chatbot-[0-9]*.py"
+  - "**/watson/watson[0-9]*.py"
 
 execute:
   execute_notebooks: cache
-  # exclude_patterns:
+  exclude_patterns:
+    - 21-01-image-and-video.py
     # - "**/*-corrige*"
     # - "**/.teacher/*"
     # - "**/teacher/*"
