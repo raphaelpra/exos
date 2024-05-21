@@ -5,9 +5,9 @@ root: README
 parts:
 - caption: exercices numpy
   chapters:
-  - file: ds-exos/numpy/indices-nb
-  - file: ds-exos/numpy/mandelbrot-nb
-  - file: ds-howtos/numpy-meshgrid-howto-nb
+  - file: ds-exos/numpy/EXO-indices-nb
+  - file: ds-exos/numpy/EXO-mandelbrot-nb
+  - file: ds-howtos/HOWTO-numpy-meshgrid-nb
 - caption: TP numpy sounds
   chapters:
   - file: ds-tps/sounds/README-sounds-nb
@@ -26,11 +26,11 @@ parts:
   - file: ds-tps/pentominos/README-pentominos-nb
 - caption: exercices pandas
   chapters:
-  - file: ds-exos/pandas/mosaique-nb
-  - file: ds-exos/pandas/titanic-nb
-  - file: ds-exos/pandas/bornes-nb
-  - file: ds-exos/pandas/stack-simple-nb
-  - file: ds-exos/pandas/stack-multicol-nb
+  - file: ds-exos/pandas/EXO-mosaique-nb
+  - file: ds-exos/pandas/EXO-titanic-nb
+  - file: ds-exos/pandas/EXO-bornes-nb
+  - file: ds-exos/pandas/EXO-stack-simple-nb
+  - file: ds-exos/pandas/EXO-stack-multicol-nb
 - caption: TP pandas
   chapters:
   - file: ds-tps/television/README-television-nb
@@ -47,9 +47,9 @@ parts:
   - file: ds-howtos/split-count-into-columns-howto-nb
   - file: ds-howtos/pivot-vs-stack-unstack-howto-nb
   - file: ds-howtos/timeseries-clean-smooth-howto-nb
-  - file: ds-howtos/groupby-ratings-howto-nb
-  - file: ds-howtos/coronavirus-howto-nb
-  - file: ds-howtos/fremont-bridge-howto-nb
+  - file: ds-howtos/HOWTO-groupby-ratings-nb
+  - file: ds-howtos/HOWTO-coronavirus-nb
+  - file: ds-howtos/HOWTO-fremont-bridge-nb
 - caption: dashboards
   chapters:
   - file: ds-dashboards/streamlit/README-streamlit-nb

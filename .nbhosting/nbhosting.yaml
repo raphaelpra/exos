@@ -79,9 +79,9 @@ tracks:
   sections:
   - name: exercices numpy
     notebooks:
-    - ds-exos/numpy/indices-nb
-    - ds-exos/numpy/mandelbrot-nb
-    - ds-howtos/numpy-meshgrid-howto-nb
+    - ds-exos/numpy/EXO-indices-nb
+    - ds-exos/numpy/EXO-mandelbrot-nb
+    - ds-howtos/HOWTO-numpy-meshgrid-nb
   - name: TP numpy sounds
     notebooks:
     - ds-tps/sounds/README-sounds-nb
@@ -100,11 +100,11 @@ tracks:
     - ds-tps/pentominos/README-pentominos-nb
   - name: exercices pandas
     notebooks:
-    - ds-exos/pandas/mosaique-nb
-    - ds-exos/pandas/titanic-nb
-    - ds-exos/pandas/bornes-nb
-    - ds-exos/pandas/stack-simple-nb
-    - ds-exos/pandas/stack-multicol-nb
+    - ds-exos/pandas/EXO-mosaique-nb
+    - ds-exos/pandas/EXO-titanic-nb
+    - ds-exos/pandas/EXO-bornes-nb
+    - ds-exos/pandas/EXO-stack-simple-nb
+    - ds-exos/pandas/EXO-stack-multicol-nb
   - name: TP pandas
     notebooks:
     - ds-tps/television/README-television-nb
@@ -121,9 +121,9 @@ tracks:
     - ds-howtos/split-count-into-columns-howto-nb
     - ds-howtos/pivot-vs-stack-unstack-howto-nb
     - ds-howtos/timeseries-clean-smooth-howto-nb
-    - ds-howtos/groupby-ratings-howto-nb
-    - ds-howtos/coronavirus-howto-nb
-    - ds-howtos/fremont-bridge-howto-nb
+    - ds-howtos/HOWTO-groupby-ratings-nb
+    - ds-howtos/HOWTO-coronavirus-nb
+    - ds-howtos/HOWTO-fremont-bridge-nb
   - name: dashboards
     notebooks:
     - ds-dashboards/streamlit/README-streamlit-nb
