@@ -2,11 +2,11 @@
 # ---
 # jupyter:
 #   jupytext:
-#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
 #       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
 #       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -25,12 +25,15 @@
 # %% [markdown]
 # Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
-# %%
-from IPython.display import HTML
-HTML(filename="_static/style.html")
-
 # %% [markdown]
 # # TP sur les données coronavirus
+
+# %% [markdown]
+# ````{admonition} pour travailler localement sur votre PC
+#
+# {download}`commencez par télécharger les artefacts <ARTEFACTS-covid.zip>`
+#
+# ````
 
 # %%
 import matplotlib.pyplot as plt
@@ -38,7 +41,8 @@ import pandas as pd
 import numpy as np
 
 # %% [markdown]
-# ce sujet vise à acquérir et mettre en forme les données du COVID pour pouvoir produire facilement des diagrammes comme celui-ci, dans lequel on a choisi une liste de pays, une liste de mesures, et une plage de temps spécifique
+# ce sujet vise à acquérir et mettre en forme les données du COVID pour pouvoir produire facilement des diagrammes comme celui-ci  
+# comme vous le voyez on a choisi: une liste de pays, une liste de mesures, et une plage de temps spécifique
 
 # %% [markdown]
 # ![](media/covid-example.svg)
@@ -47,17 +51,14 @@ import numpy as np
 # ## les données de Johns Hopkins
 #
 # ````{admonition} →
-# les données sur le corona virus
-#
-# * sont publiées par le département *Center for Systems Science and Engineering* (CSSE)
-# * de l'Université Johns Hopkins
+# les données sur le corona virus sont publiées par le département *Center for Systems Science and Engineering* (CSSE), de l'Université Johns Hopkins
 # * sur le dépôt github <https://github.com/CSSEGISandData/COVID-19>
-# * dans un format brut, détaillé et touffu  
-#   (un peu trop compliqué pour l'utiliser ici)
+# * dans un format brut, détaillé et touffu - un peu trop compliqué pour l'utiliser ici
 # ````
 
 # %%
-# le repo github
+# le repo github - si vous êtes curieux
+
 official_url = "https://github.com/CSSEGISandData/COVID-19"
 
 # %% [markdown] tags=["framed_cell"]
@@ -66,48 +67,54 @@ official_url = "https://github.com/CSSEGISandData/COVID-19"
 # ````{admonition} →
 # un dépôt de *seconde main* <https://github.com/pomber/covid19>
 #
-# * consolide les données du CSSE
-# * en un unique fichier `timeseries.json`
+# * consolide les données du CSSE en un unique fichier `timeseries.json`
 # * mis à jour quotidiennement
-# * le fichier est en format `json`(JavaScript Object Notation)
+# * le fichier est en format JSON (JavaScript Object Notation)
 # ````
 
 # %%
-# le repo avec le fichier json
+# le repo qui va vraiment vous servir, avec le fichier json
+
 json_url = "https://pomber.github.io/covid19/timeseries.json"
 
 # %% [markdown] tags=["framed_cell"]
 # ## le format `json`
 #
 # ````{admonition} →
-# nous avons vu le `csv`
+# vous connaissez sans doute le `csv`:
 #
 # * un format de données très simple décrivant une table
 # * les éléments séparés par un caractère (`,` ou `;`...)
 # * pouvant contenir des identificateurs, des chaînes de caractères et des nombres
 #
-# `json` est un format de données bien plus structuré avec
+# `json` est un format de données bien plus structuré; avec lui on peut sauver les types suivants
 #
-# * object (`dict`), `list`, nombre, `str` (with " only), `false`,  `true`, `null`
-# * les `list` sont les tableaux python
+# * nombre, `str` (attention, utiliser seulement le `"`), `false`,  `true`, `null`
+# * mais aussi les listes, et les objets (en Python: un `dict`)
+#
+# ```{admonition} c'est quoi un dictionnaire ?
+#
+# pour ceux qui ne sont pas familiers:
+#
 # * les `dict` sont les dictionnaires `Python`  
-#   permettant de décrire des objets `{attribut1:valeur1, attribut2:valeur2,...}`
+#   permettant de décrire des objets `{attribut1: valeur1, attribut2: valeur2, ...}`
+# ```
 #
-# par exemple, la liste des animaux avec leur vitesse et leur longévité sera, en `json`
+# par exemple, la liste des animaux avec leur vitesse et leur longévité pourrait être représentée en `json` par le texte
 #
 # ```python
 # [
-#     {"name":"snail",    "speed":0.1,  "lifespan":2.0},
-#     {"name":"pig",      "speed":17.5, "lifespan":8.0},
-#     {"name":"elephant", "speed":40.0, "lifespan":70.0},
-#     {"name":"rabbit",   "speed":48.0, "lifespan":1.5},
-#     {"name":"giraffe",  "speed":52.0, "lifespan":25.0},
-#     {"name":"coyote",   "speed":69.0, "lifespan":12.0},
-#     {"name":"horse",    "speed":88.0, "lifespan":28.0}
+#     {"name": "snail",    "speed": 0.1,  "lifespan": 2.0},
+#     {"name": "pig",      "speed": 17.5, "lifespan": 8.0},
+#     {"name": "elephant", "speed": 40.0, "lifespan": 70.0},
+#     {"name": "rabbit",   "speed": 48.0, "lifespan": 1.5},
+#     {"name": "giraffe",  "speed": 52.0, "lifespan": 25.0},
+#     {"name": "coyote",   "speed": 69.0, "lifespan": 12.0},
+#     {"name": "horse",    "speed": 88.0, "lifespan": 28.0}
 #  ]
 # ```
 #
-# ou sous une autre forme, toujours en `json`
+# ou encore sous une autre forme, toujours en `json`
 #
 # ```python
 # {"speed":
@@ -137,7 +144,8 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # ## format `json` pour le covid
 #
 # ````{admonition} →
-# le fichier https://pomber.github.io/covid19/timeseries.json contient un objet `dict` dont
+# revenons au covid  
+# le fichier <https://pomber.github.io/covid19/timeseries.json> contient un objet `dict` dont
 #
 # * les clés sont les pays du monde
 # * chaque valeur est une liste de `dict`  
@@ -256,14 +264,14 @@ else:
     print('pas bonne connexion - pas grave...')
 
 # %% [markdown] tags=["framed_cell"]
-# ### chargement avec lib `json`
+# ### chargement avec la lib `json`
 #
 # ````{admonition} →
 # si l'accès Internet n'est pas possible, nous exposons une copie des données  
-# faite il y a quelque temps, dans le fichier `covid-frozen.json`
+# faite il y a quelque temps, dans le fichier `data/covid-frozen.json`
 #
 # le module `json` de la librairie standard permet de *lire* des fichiers en format json  
-# on l'importe
+# on l'importe comme d'habitude avec
 #
 # ```python
 # import json
@@ -273,7 +281,7 @@ else:
 # la fonction `json.load` lit le contenu dans un objet `python`
 #
 # ```python
-# json_file = 'covid-frozen.json'
+# json_file = 'data/covid-frozen.json'
 #
 # with open(json_file) as f:
 #     by_country = json.load(f)
@@ -296,7 +304,7 @@ if by_country is not None:
     print('on utilise les données déjà chargées')
 else:
     import json
-    json_file = 'covid-frozen.json'
+    json_file = 'data/covid-frozen.json'
 
     with open(json_file) as f:
         by_country = json.load(f)
