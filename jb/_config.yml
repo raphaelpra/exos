@@ -22,19 +22,12 @@ exclude_patterns:
   - "**/wip/*"
   - "**/.ipynb_checkpoints/*"
   - "**/.pytest_cache/*"
-  # specific exclusions
-  - "**/[a-z]*"
-  
+
 execute:
   execute_notebooks: cache
   exclude_patterns:
-    - 21-01-image-and-video.py
-    # - "**/*-corrige*"
-    # - "**/.teacher/*"
-    # - "**/teacher/*"
-    # - "**/snake*.py"
-    # - "**/book-python"
-    # - "**/book-ds"
+  # consider only filenames that start with an uppercase
+    - "**/[a-z]*"
 
 parse:
   myst_enable_extensions:
