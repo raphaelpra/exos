@@ -26,7 +26,7 @@
 # Licence CC BY-NC-ND, Valérie Roy & Thierry Parmentelat
 
 # %% [markdown]
-# # TP sur les données coronavirus
+# # les données covid
 
 # %% [markdown]
 # ````{admonition} pour travailler localement sur votre PC
@@ -42,7 +42,11 @@ import numpy as np
 
 # %% [markdown]
 # ce sujet vise à acquérir et mettre en forme les données du COVID pour pouvoir produire facilement des diagrammes comme celui-ci  
-# comme vous le voyez on a choisi: une liste de pays, une liste de mesures, et une plage de temps spécifique
+# comme vous le voyez on a choisi:
+#
+# - une liste de pays,
+# - une liste de mesures - ici: *deaths* & *confirmed*,
+# - et une plage de temps spécifique
 
 # %% [markdown]
 # ![](media/covid-example.svg)
@@ -67,9 +71,9 @@ official_url = "https://github.com/CSSEGISandData/COVID-19"
 # ````{admonition} →
 # un dépôt de *seconde main* <https://github.com/pomber/covid19>
 #
-# * consolide les données du CSSE en un unique fichier `timeseries.json`
+# * consolide les données du CSSE en une unique source
 # * mis à jour quotidiennement
-# * le fichier est en format JSON (JavaScript Object Notation)
+# * le fichier `timeseries.json` est en format JSON (JavaScript Object Notation)
 # ````
 
 # %%
@@ -78,27 +82,29 @@ official_url = "https://github.com/CSSEGISandData/COVID-19"
 json_url = "https://pomber.github.io/covid19/timeseries.json"
 
 # %% [markdown] tags=["framed_cell"]
-# ## le format `json`
+# ## le format `json` ?
 #
-# ````{admonition} →
+# ``````{admonition} →
 # vous connaissez sans doute le `csv`:
 #
 # * un format de données très simple décrivant une table
 # * les éléments séparés par un caractère (`,` ou `;`...)
 # * pouvant contenir des identificateurs, des chaînes de caractères et des nombres
 #
-# `json` est un format de données bien plus structuré; avec lui on peut sauver les types suivants
+# `json` est un format de données bien **plus structuré**; avec lui on peut sauver les types suivants
 #
 # * nombre, `str` (attention, utiliser seulement le `"`), `false`,  `true`, `null`
-# * mais aussi les listes, et les objets (en Python: un `dict`)
+# * mais aussi les listes, et les objets (en Python: un dictionnaire, de type `dict`)
 #
-# ```{admonition} c'est quoi un dictionnaire ?
+# `````{admonition} c'est quoi un dictionnaire ?
+# :class: dropdown
+#
+# ````{div}
 #
 # pour ceux qui ne sont pas familiers:
 #
 # * les `dict` sont les dictionnaires `Python`  
 #   permettant de décrire des objets `{attribut1: valeur1, attribut2: valeur2, ...}`
-# ```
 #
 # par exemple, la liste des animaux avec leur vitesse et leur longévité pourrait être représentée en `json` par le texte
 #
@@ -136,6 +142,8 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # }
 # ```
 # ````
+# `````
+# ``````
 
 # %% [markdown]
 # ***
@@ -176,12 +184,37 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # ````
 
 # %% [markdown]
-# ## récupération des données `json` du covid
+# ## acquisition des données `json`
 
-# %% [markdown] tags=["framed_cell"]
-# ### récupération avec `requests`
+# %% [markdown]
+# ### avec `pd.read_json`
 #
 # ````{admonition} →
+# on ne va pas faire comme ça ici, mais sachez que c'est la méthode la plus rapide (à écrire):
+#
+# ```python
+# data = pd.read_json(json_url)
+# ```
+#
+# par contre ça peut être franchement long, surtout si votre **connexion réseau** n'est pas au top  
+# c'est pourquoi on va voir aussi une autre méthode - que vous pouvez sauter si vous êtes pressés de voir le traitement des données *per se*
+# ````
+
+# %% [markdown] tags=["framed_cell"]
+# ### caching avec `requests`
+#
+# en utilisant la librairie `requests` on peut implémenter un *caching* pour nos données
+#
+# ````{admonition} caching ?
+# dans le cas présent le terme *caching* suggère que l'on sauverait le fichier sur disque après l'avoir *download* depuis Internet; de cette façon on n'attend qu'une seule fois la durée du *download*  
+# par contre, c'est bien d'être malin et de, par exemple, considérer que les fichiers qui ont plus de 1 jour ne sont plus valides et qu'il faut retourner les chercher; mais bon, *let's keep it simple*, on ne va pas aller jusque là...
+# ````
+
+# %% [markdown] tags=["framed_cell"]
+# `````{admonition} → requests.get pas à pas
+# :class: dropdown
+#
+# ````{div}
 # le module `requests` permet de *récupérer* des fichiers sur Internet  
 # utiliser cette approche permet de toujours avoir des **données récentes**  
 # **mais** demande une bonne connexion à Internet  
@@ -236,16 +269,19 @@ json_url = "https://pomber.github.io/covid19/timeseries.json"
 # si votre connexion ne vous permet pas la requête  
 # voir la prochaine cellule de cours
 # ````
+# `````
 
 # %%
 # pensez à bien installer le module requests
 
 import requests
+
 json_url = "https://pomber.github.io/covid19/timeseries.json"
 by_country = None
 
 # %%
 # mettez cette variable à True si vous avez une bonne connexion
+
 good_connection = False
 #good_connection = True
 
@@ -267,18 +303,18 @@ else:
 # ### chargement avec la lib `json`
 #
 # ````{admonition} →
-# si l'accès Internet n'est pas possible, nous exposons une copie des données  
+# si l'accès Internet n'est pas possible, sachez que nous exposons une copie des données  
 # faite il y a quelque temps, dans le fichier `data/covid-frozen.json`
 #
-# le module `json` de la librairie standard permet de *lire* des fichiers en format json  
+# le module `json` de la librairie standard permet de *lire* des fichiers en format JSON;  
 # on l'importe comme d'habitude avec
 #
 # ```python
 # import json
 # ```
 #
-# après avoir ouvert un fichier en lecture en `python`  
-# la fonction `json.load` lit le contenu dans un objet `python`
+# après avoir ouvert un fichier en lecture, 
+# la fonction `json.load` lit le contenu dans un objet Python
 #
 # ```python
 # json_file = 'data/covid-frozen.json'
@@ -287,7 +323,7 @@ else:
 #     by_country = json.load(f)
 # ```
 #
-# on a une structure Python de `dict` et de `list`
+# et on obtient une structure Python de `dict` et de `list`
 #
 # ```python
 # by_country
@@ -300,6 +336,8 @@ else:
 # ````
 
 # %%
+# le code
+
 if by_country is not None:
     print('on utilise les données déjà chargées')
 else:
@@ -319,7 +357,9 @@ else:
 list(by_country.keys())[:4]
 
 # %% [markdown]
-# ## dataframe globale - données covid *monde*
+# ## une dataframe globale
+#
+# qui consolide les données covid *monde*
 
 # %% [markdown] tags=["framed_cell"]
 # ### exercice (version avancé)
@@ -356,7 +396,7 @@ list(by_country.keys())[:4]
 # **indications**
 #
 # * les élèves avancés peuvent travailler sans indications supplémentaires
-# * pour les autres élèves, la cellule suivante vous propose une méthode pas-à-pas
+# * pour les autres élèves, on vous propose une méthode pas-à-pas
 # ````
 
 # %%
@@ -366,7 +406,9 @@ list(by_country.keys())[:4]
 # global_df = ...
 
 # %%
-# prune-cell
+# prune-begin
+
+# %%
 all_dfs = []
 for country, records in by_country.items():
     df = pd.DataFrame(records)
@@ -377,15 +419,12 @@ global_df = pd.concat(all_dfs)
 global_df.shape
 
 # %%
-# prune-cell
 global_df.head()
 
 # %%
-# prune-cell
 global_df.tail()
 
 # %%
-# prune-cell
 # on peut essayer de tirer profit de pd.concat(keys=)
 
 # on fabrique une df par pays et on met tout dans une liste
@@ -397,6 +436,9 @@ global_df1 = pd.concat(country_dfs, keys=by_country.keys())
 # plus exactement pareil
 
 global_df1.head()
+
+# %%
+# prune-end
 
 # %% [markdown] tags=["framed_cell"]
 # ### exercice (méthode pas-à-pas)
@@ -415,45 +457,73 @@ global_df1.head()
 # * chaque observation est un objet exprimé sous la forme d'un `dict`  
 #   avec 4 mesures indiquées par les attributs `'date'`, `'confirmed'`, `'deaths'` et `'recovered'`  
 #   en `2021-8-31` au `Zimbabwe` on a `124773` cas confirmés, `4419` morts et `0` guéris
+# ````
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+#
 # 1. prenez la clé `'France'`  
 # construisez la dataframe à partie de la valeur de cette clé  
 # (la liste des enregistrements temporels de cas de covid)
-#
-# 1. quelles sont les colonnes de cette dataframe ?  
-# combien y-a-t-il d'entrées (de mesures différentes)
-#
-# 1. vous remarquez que cette dataframe ne contient plus l'information sur le pays  
-# ajoutez à cette dataframe une colonne de nom `'country'` contenant `'France'` à chaque ligne
-#
-# 1. faites de même avec la clé `'Italy'`  
-# et utilisez la fonction `pandas.concat` pour concaténer les deux dataframes
-#
-# 1. généralisez et construisez une dataframe avec tous les pays  
-# vous devez utiliser un `for` python
 # ````
 
 # %%
 # votre code
 
 # %%
-# prune-cell France et Italy
+# prune-cell
 
 country_dfs = []
 
-# 1.
 country = 'France'
 df = pd.DataFrame(by_country[country])
 
-# 2.
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+#
+# 2. quelles sont les colonnes de cette dataframe ?  
+# combien y-a-t-il d'entrées (de mesures différentes)
+# ````
+
+# %%
+# votre code
+
+# %%
+# prune-cell
+
 print('columns (1)', df.columns)
 
-# 3.
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+#
+# 3. vous remarquez que cette dataframe ne contient plus l'information sur le pays  
+# ajoutez à cette dataframe une colonne de nom `'country'` contenant `'France'` à chaque ligne
+# ````
+
+# %%
+# votre code
+
+# %%
+# prune-cell
+
 df['country'] = country
 print('columns (2)', df.columns)
 print('shape for France', df.shape)
 country_dfs.append(df)
 
-# 4.
+# %% [markdown] tags=["framed_cell"] slideshow={"slide_type": ""}
+# ````{admonition} exo
+#
+# 4. faites de même avec la clé `'Italy'`  
+# et utilisez la fonction `pandas.concat` pour concaténer les deux dataframes
+# ````
+
+# %%
+# votre code
+
+# %%
+# prune-cell
+
 country = 'Italy'
 df = pd.DataFrame(by_country[country])
 df['country'] = country
@@ -462,7 +532,18 @@ country_dfs.append(df)
 df_fr_it = pd.concat(country_dfs)
 print('shape for france+italy', df_fr_it.shape)
 
-# 5.
+# %% [markdown] tags=["framed_cell"] slideshow={"slide_type": ""}
+# ````{admonition} exo
+# 5. généralisez et construisez une dataframe avec tous les pays  
+# vous aurez sans doute besoin d'utiliser un `for` python
+# ````
+
+# %%
+# votre code
+
+# %%
+# prune-cell
+
 country_dfs = []
 
 for country, records in by_country.items():
@@ -474,7 +555,9 @@ global_df2 = pd.concat(country_dfs)
 print('global shape', global_df2.shape)
 
 # %%
-# prune-cell où on vérifie l'égalité des deux méthodes
+# prune-cell 
+
+# où on vérifie l'égalité des deux méthodes
 np.all(global_df == global_df2) # si True, les 2 dataframes sont identiques
 
 # %% [markdown]
@@ -486,8 +569,7 @@ np.all(global_df == global_df2) # si True, les 2 dataframes sont identiques
 # %% [markdown]
 # ### les index ne sont pas forcément uniques
 #
-# si vous avez appelé `pd.concat()` sans paramètre particulier  
-# vous pouvez sans doute observer ceci:
+# si vous avez appelé `pd.concat()` sans paramètre particulier, vous pouvez sans doute observer ceci:
 
 # %% tags=["raises-exception"]
 # si on essaie d'accéder à la ligne d'index 0
@@ -495,9 +577,8 @@ np.all(global_df == global_df2) # si True, les 2 dataframes sont identiques
 global_df.loc[0]
 
 # %% [markdown] tags=["framed_cell"]
-# **les index ne sont pas toujours uniques**
+# ````{admonition} → les index ne sont pas toujours uniques
 #
-# ````{admonition} →
 # ce qui s'est passé c'est que :  
 # chacune de nos dataframe par pays a été construite à partir d'un index **séquentiel**  
 # i.e. un `RangeIndex` qui commence à chaque fois à 0  
@@ -554,11 +635,9 @@ print(d.year,  # 2020
 #
 # ````{admonition} →
 # sans indications précises, `pandas` a inféré le format de la date  
-# `'2020-1-2'` sera-il ainsi le 2 janvier  
-# et non le premier février
+# ainsi `'2020-1-2'` sera-t-il compris comme le 2 janvier, et non le 1er février
 #
-# il est beaucoup plus sûr de passer à `pandas.to_datetime`  
-# le format de vos dates
+# il est beaucoup **plus sûr de passer** à `pandas.to_datetime` **le format de vos dates**
 #
 # en utilisant `'%Y'` pour l'année, `%m` pour le mois et `'%d'` pour le jour  
 # on exprime le format des dates dans une chaîne de caractères
@@ -574,42 +653,32 @@ print(d.year,  # 2020
 
 # %%
 # sans indication ça peut être ambigu
+
 pd.to_datetime('2020-1-2').day
 
 # %%
 # c'est parfois nécessaire de bien préciser le format
+
 pd.to_datetime('2020-1-2', format='%Y-%d-%m').day
 
 # %%
 # mais sinon c'est très flexible
-pd.to_datetime('15 july 2021'), pd.to_datetime('aug 2021'), pd.to_datetime('2021')
+
+pd.to_datetime('2021'), pd.to_datetime('aug 2021'), 
 
 # %%
-# mais c'est très flexible
-pd.to_datetime('15 july 2021 08:00')
+# .. très flexible
+
+pd.to_datetime('15 july 2021'), pd.to_datetime('15 july 2021 08:00')
 
 # %% [markdown] tags=["framed_cell"]
 # ### convertissons nos dates
 #
-# ````{admonition} →
 # reprenons à partir de la dataframe globale
-#
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
 # 1. quel est le type des colonnes ?
-# 1. que pensez-vous du type de la `'date'` ?  
-#    pensez-vous que ce soit adapté pour trier ?  
-#    même question pour calculer la durée entre 2 événements ?  
-#    comment pourrait-on s'y prendre pour améliorer ça ?
-#
-# 1. regardez la fonction `pandas.to_datetime`  
-#    sachant que l'année s'écrit `%Y`, le mois `%m` et le jour `%d`  
-#    écrivez le format qui décrirait une date comme `'2020-1-22'`
-#
-# 1. créez une nouvelle `Series` déduite de la colonne `date`  
-#    et qui utilise un type plus adapté aux calculs sur les dates
-#    quel est le type de la nouvelle colonne ?
-#
-# 1. remplacez dans la dataframe globale la colonne `date` par la précédente  
-#    (le mieux est sans doute de conserver le même nom, mais ce n'est pas indispensable)
 # ````
 
 # %%
@@ -618,36 +687,100 @@ pd.to_datetime('15 july 2021 08:00')
 # %%
 # prune-cell
 
-# 1. et 2.
-print(global_df.dtypes)
+global_df.dtypes
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+# 2. que pensez-vous du type de la `'date'` ?  
+#    pensez-vous que ce soit adapté pour trier ?  
+#    même question pour calculer la durée entre 2 événements ?  
+#    comment pourrait-on s'y prendre pour améliorer ça ?
+# ````
+
+# %%
+# votre code
+
+# %%
+# prune-cell
+# ce n'est pas bon, la date est un object, il nous faut la convertir en datetime
 
 global_df.date.dtype
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+# 3. regardez la fonction `pandas.to_datetime`  
+#    sachant que l'année s'écrit `%Y`, le mois `%m` et le jour `%d`  
+#    écrivez le format qui décrirait une date comme `'2020-1-22'`
+# ````
+
+# %%
+# votre code
 
 # %%
 # prune-cell
 
-# 3.
 format = '%Y-%m-%d'
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+# 4. créez une nouvelle `Series` déduite de la colonne `date`  
+#    et qui utilise un type plus adapté aux calculs sur les dates
+#    quel est le type de la nouvelle colonne ?
+# ````
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 
 # 4.
 proper_date = pd.to_datetime(df['date'], format=format)
-# le type est np.datetime64
+
+# maintenant le type est bien np.datetime64
 proper_date
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+# 5. remplacez dans la dataframe globale la colonne `date` par la précédente  
+#    (le mieux est sans doute de conserver le même nom, mais ce n'est pas indispensable)
+# ````
+
+# %%
+# votre code
 
 # %%
 # prune-cell 5.
+
 global_df['date'] = proper_date
 global_df.dtypes
 
 # %% [markdown] tags=["framed_cell"]
 # ## un index plus idoine
 #
-# ````{admonition} →
 # à présent on va pouvoir choisir un index un peu plus adapté à nos données
 #
+# ````{admonition} exo
 # 1. nous avons vu la notion de *MultiIndex*  
 #    quel serait d'aprés vous un bon choix pour indexer la dataframe globale ?
-# 1. voyez-vous un moyen d'utiliser `pivot_table()` pour construire une nouvelle  
+# ````
+
+# %%
+# votre réponse
+
+# %%
+# prune-cell
+
+# on veut utiliser comme index un couple
+# (country, date)
+# de cette façon on aura bien unicité de l'index
+# et les valeurs restant dans la dataframe (hors index)
+# sont les 3 grandeurs qui nous intéressent:
+# confirmed, deaths et recovered
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+# 2. voyez-vous un moyen d'utiliser `pivot_table()` pour construire une nouvelle  
 #    dataframe qui contienne essentiellement les mêmes informations  
 #    mais avec un multi-index qui soit pertinent dans le contexte  
 #    **variante** on peut aussi utiliser `set_index()`  
@@ -659,20 +792,9 @@ global_df.dtypes
 # %%
 # votre code
 
-clean_df = ...
-
 # %%
 # prune-cell
 
-# 1.
-# on veut utiliser comme index un couple
-# (country, date)
-# de cette façon on aura bien unicité de l'index
-# et les valeurs restant dans la dataframe (hors index)
-# sont les 3 grandeurs qui nous intéressent:
-# confirmed, deaths et recovered
-
-# 2.
 clean_df = global_df.pivot_table(
     values=['confirmed', 'deaths', 'recovered'],
     index=['country', 'date'],
@@ -685,33 +807,54 @@ clean_df = global_df.pivot_table(
 clean_df
 
 # %%
-# prune-cell 2. (avec set_index)
+# prune-cell 
+
+# variante avec set_index
+# NB qu'on pourrait aussi passer à set_index le paramètre inplace=True
+# (et sans affecter le résultat dans ce cas-là)
+
 clean_df = global_df.set_index(['country', 'date'])
-# NB qu'on aurait pu passer à set_index le paramètre inplace=True
 clean_df
 
 # %% [markdown] tags=["framed_cell"]
 # ### accéder via un *MultiIndex*
 #
-# ````{admonition} →
+# ````{admonition} exo
 # 1. extrayez de la dataframe la série des 3 mesures  
 #    faites en France le 1er Janvier 2021
-# 1. (avancé - pas vu en cours)  
-#    essayez de trouver/deviner comment extraire de
-#    cette dataframe toutes les données relatives à la France
-# 1. même question pour la France et l'Italie
 # ````
 
 # %%
-# prune-cell 1.
+# votre code
+
+# %%
+# prune-cell
 clean_df.loc[('France', '1 jan 2021')]
 
-# %%
-# prune-cell 2.
-clean_df.loc['France']
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+# 2. (avancé - pas vu en cours)  
+#    essayez de trouver/deviner comment extraire de
+#    cette dataframe toutes les données relatives à la France
+# ````
 
 # %%
-# prune-cell 3.
+# votre code
+
+# %%
+# prune-cell
+clean_df.loc['France']
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+# 3. même question pour la France et l'Italie
+# ````
+
+# %%
+# votre code
+
+# %%
+# prune-cell
 clean_df.loc[['France', 'Italy']]
 
 # %% [markdown] tags=["framed_cell", "level_intermediate"]
@@ -733,7 +876,7 @@ clean_df.loc[['France', 'Italy']]
 # * `countries`: une liste de pays - c'est facile
 # * `time_slice`: un slice sur le temps  
 #   qui en temps normal pourrait s'écrire `'july 2021' : '15 august 2021'`  
-#   (bornes inclusives puisque .loc[])
+#   (bornes inclusives puisque `.loc[]`)
 #
 # * un slice sur les colonnes  
 #   mais au fait on les veut toutes, on peut utiliser `:`
@@ -744,7 +887,7 @@ clean_df.loc[['France', 'Italy']]
 # clean_df.loc [ (countries, time_slice), :]
 # ```
 #
-# tout ça fonctionne très bien,  
+# tout ça fonctionne *presque* très bien,  
 # **sauf pour** la création de `time_slice` qui, pour de sombres raisons de syntaxe,  
 # ne **peut pas** se faire ici avec la notation `start:stop`  
 # (parce que pas dans des `[]`)  
@@ -780,20 +923,19 @@ clean_df.loc[
 # ### plot d'une dataframe
 #
 # ````{admonition} →
-# plutôt que d'utiliser directement la mécanique de `matplotlib.pyplot`  
-# ce qui a tendance à être fastidieux  
-# il est préférable d'utiliser les méthodes comme `plot()`  
-# mais **directement** sur la dataframe
+# plutôt que d'utiliser directement la mécanique de `matplotlib.pyplot` (tendance à être fastidieux)  
+# il est préférable d'utiliser les méthodes comme `plot()` mais **directement** sur la dataframe
 #
-# la logique est alors de dessiner autant de courbes que de colonnes  
-# et de plus pandas se charge de tous les labels  
-# bref c'est recommandé
+# la logique de `df.plot()` est de dessiner **autant de courbes que de colonnes**  
+# et de plus pandas se charge de tous les labels! bref c'est recommandé, car plus rapide
 # ````
 
 # %%
 # illustration
+
 # 3 colonnes donc 3 courbes
 # 4 lignes donc 4 points sur chaque courbe
+
 df = pd.DataFrame(
     {'a': [0, 10, 20, 30], 'b': [5, 10, 15, 25], 'c': [30, 15, 5, 0]},
     index = ['early', 'before', 'now', 'predicted'],
@@ -801,6 +943,9 @@ df = pd.DataFrame(
 df
 
 # %%
+# remarquez que pour toutes les courbes,
+# c'est toujours l'index qui sert d'abscisse
+
 df.plot();
 
 # %% [markdown] tags=["framed_cell"]
@@ -808,50 +953,70 @@ df.plot();
 #
 # ````{admonition} →
 # du coup on a souvent seulement besoin de **mettre en forme** les données pour  
-# qu'elles puissent être directement plottées par cet algorithme simple
+# qu'elles puissent être directement plottées par cette logique simple
 #
-# imaginons que dans notre cas on veuille comparer sur un graphique  
-# l'évolution d'une ou plusieurs des 3 mesures  
-# (`deaths`, `confirmed` et `recovered`) entre plusieurs pays  
+# imaginons que dans notre cas on veuille comparer sur un graphique l'évolution de
+# * 2 mesures : `deaths`, `confirmed`
+# * entre 3 pays: `France`, `Italy` et `Germany`  
 #
-# disons par exemple les mesures `deaths` et `confirmed`  
-# entre `France`, `Italy` et `Germany`  
-# il nous faut donc construire une dataframe qui a  
-# six colonnes - le produit cartésien des 2 mesures et 3 pays  
-# et autant de lignes que de dates - indexé par les dates  
+# il nous faut donc construire une dataframe qui a:
+# * six colonnes - le produit cartésien des 2 mesures et 3 pays  
+# * et autant de lignes que de dates - indexé par les dates  
 #
-# mais avant de réfléchir à comment faire ça,
-# commençons par le cas simple d'un seul pays, au moins  
-# pour valider l'idée générale
-#
+# mais avant de réfléchir à comment faire ça, commençons par le cas simple d'un seul pays, au moins pour valider l'idée générale
+# ````
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
 # 1. affichez sur un graphique les 3 mesures pour la France au cours du temps
-# 1. idem avec seulement 2 mesures `deaths` et `confirmed`
-#
 # ````
 
 # %%
 # votre code
 
 # %%
-# prune-cell 1.
+# prune-cell
+
 # pas forcément super pertinent de comparer
 # les 3 mesures sur un même graphique mais
 # l'idée générale semble fonctionner
 
 clean_df.loc['France'].plot();
 
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+# 2. idem avec seulement 2 mesures `deaths` et `confirmed`
+# ````
+
 # %%
-# prune-cell 2.
+# votre code
+
+# %%
+# prune-cell
 clean_df.loc['France', ['deaths', 'confirmed']].plot();
 
 # %% [markdown] tags=["framed_cell"]
 # ### plusieurs pays
 #
-# ````{admonition} →
 # il nous reste maintenant à traiter le cas de plusieurs pays
 #
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
 # 1. extrayez les données pour les 2 mesures et les 3 pays (appelons là `df3`)
-# 1. essayez de plotter la dataframe (je vous signale le paramètre `rot=45`  
+# ````
+
+# %%
+# votre code
+
+# %%
+# prune-cell
+
+df3 = clean_df.loc[['France', 'Italy', 'Germany'], ['deaths', 'confirmed']]
+
+# %% [markdown] tags=["framed_cell"]
+# ````{admonition} exo
+# 2. essayez de plotter la dataframe (je vous signale le paramètre `rot=45`  
 #    qu'on peut passer à `df.plot()` pour améliorer la lisibilité)  
 #     qu'est ce qui ne va pas malgré cela ?
 # ````
@@ -861,7 +1026,7 @@ clean_df.loc['France', ['deaths', 'confirmed']].plot();
 
 # %%
 # prune-cell
-df3 = clean_df.loc[['France', 'Italy', 'Germany'], ['deaths', 'confirmed']]
+
 df3.plot(rot=45);
 
 # %% [markdown] tags=["framed_cell"]
@@ -878,7 +1043,9 @@ df3.plot(rot=45);
 # pour obtenir cette forme (qui bien sûr contient toujours autant de données)  
 # on veut faire un découpage qui ressemble à ceci
 #
-# <img src="media/unstacking.png" width="400px">
+# ```{image} media/unstacking.png
+# :width: 400px
+# ```
 # ````
 
 # %% [markdown]
@@ -888,9 +1055,8 @@ df3.plot(rot=45);
 # ### `df.unstack()`
 #
 # ````{admonition} →
-# c'est justement le propos de la méthode `unstack()` sur la dataframe  
-# qui fonctionne en déplaçant un niveau d'index  
-# de l'index des lignes vers l'index des colonnes
+# c'est justement le propos de la méthode `unstack()` sur la dataframe, qui fonctionne
+# en **déplaçant un niveau** d'index **de l'index des lignes vers l'index des colonnes**
 #
 # dans notre cas précis nous avons  
 # . **en lignes** un multi-index à deux niveaux `country` et `date`  
@@ -913,7 +1079,14 @@ df3.plot(rot=45);
 # ````
 
 # %% tags=["raises-exception"]
-# le code
+# le code du unstack
+
+# df6 = df3.unstack(0)
+# df6
+
+
+# %% tags=["raises-exception"]
+# prune-cell
 
 df6 = df3.unstack(0)
 df6
@@ -924,6 +1097,12 @@ df6
 
 # %% tags=["raises-exception"]
 # que du coup il n'y a plus qu'à plotter
+# 
+# à vous
+
+# %% tags=["raises-exception"]
+# prune-cell
+
 df6.plot(figsize=(12, 5));
 
 

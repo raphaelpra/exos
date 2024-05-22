@@ -48,8 +48,11 @@ parts:
   - file: ds-howtos/HOWTO-pivot-vs-stack-unstack-nb
   - file: ds-howtos/HOWTO-timeseries-clean-smooth-nb
   - file: ds-howtos/HOWTO-groupby-ratings-nb
-  - file: ds-howtos/HOWTO-coronavirus-nb
   - file: ds-howtos/HOWTO-fremont-bridge-nb
+  # transformed into a TP (see above in the ds-tps area)
+  # kept for the interact part, although that seems 
+  # to no longer work very well, under jbook at least
+  # - file: ds-howtos/HOWTO-covid-interact-obsolete-nb.md
 - caption: dashboards
   chapters:
   - file: ds-dashboards/streamlit/README-streamlit-nb
