@@ -1,4 +1,4 @@
-# this is the source for the table of contents 
+# this is the source for the table of contents
 # of the flotpython-exos-ds book
 format: jb-book
 root: README
@@ -8,22 +8,19 @@ parts:
   - file: ds-exos/numpy/EXO-indices-nb
   - file: ds-exos/numpy/EXO-mandelbrot-nb
   - file: ds-howtos/HOWTO-numpy-meshgrid-nb
-- caption: TP numpy sounds
+- caption: TPs numpy
   chapters:
   - file: ds-tps/sounds/README-sounds-nb
-- caption: TP numpy images
-  chapters:
-  - file: ds-tps/images/README-images1-nb
-  - file: ds-tps/images/README-images2-nb
+  - file: ds-tps/images/README-images-toc-nb
+    sections:
+    - glob: ds-tps/images/README-images[0-9]-nb
+  - file: ds-tps/taylor/README-taylor-toc-nb.md
+    sections:
+    - glob: ds-tps/taylor/README-taylor-[0-9]*-nb
+  - file: ds-tps/pentominos/README-pentominos-nb
 - caption: howto opencv - yolo
   chapters:
   - file: ds-howtos/opencv-yolo/HOWTO-opencv-yolo-nb
-- caption: TP numpy Taylor
-  chapters:
-  - glob: ds-tps/taylor/README-*-nb
-- caption: TP pentominos
-  chapters:
-  - file: ds-tps/pentominos/README-pentominos-nb
 - caption: exercices pandas
   chapters:
   - file: ds-exos/pandas/EXO-mosaique-nb

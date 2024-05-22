@@ -19,7 +19,7 @@ nbhosting:
   title: Taylor et numpy
 ---
 
-# Taylor (2/3)
+# Taylor (2/3): convergence
 
 +++
 
