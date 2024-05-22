@@ -1,12 +1,12 @@
 # ---
 # jupyter:
 #   jupytext:
-#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
 #     formats: py:percent
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
+#       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -29,7 +29,7 @@ import pandas as pd
 import seaborn as sns
 
 # %% [markdown]
-# #### 1. Let's load a dataset
+# # pandas basics
 #
 # `california_cities.csv` contains the population and area in km2 for california cities
 
@@ -40,31 +40,31 @@ URL = "http://www-sop.inria.fr/members/Arnaud.Legout/formationPython/Exos/califo
 cities = pd.read_csv(URL)[["city", "area_total_km2", "population_total"]]
 
 # %% [markdown]
-# **Explore the dataset with `info()` and `describe()`**
+# ## Explore the dataset with `info()` and `describe()`
 
 # %%
 # your code
 
 # %% [markdown]
-# **How many cities with the 25% largest population ?**
+# ## How many cities with the 25% largest population ?
 
 # %%
 # your code
 
 # %% [markdown]
-# **Get the name of the cites with the 25% largest area**
+# ## Get the name of the cites with the 25% largest area
 
 # %%
 # your code
 
 # %% [markdown]
-# **What is the area and population of Berkeley?**
+# ## What is the area and population of Berkeley?
 
 # %%
 # your code
 
 # %% [markdown]
-# **Which cities have between 110k and 120k inhabitants?**
+# ## Which cities have between 110k and 120k inhabitants?
 
 # %%
 # your code

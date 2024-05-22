@@ -1,12 +1,12 @@
 # ---
 # jupyter:
 #   jupytext:
-#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
 #     formats: py:percent
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
+#       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -29,31 +29,37 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # %% [markdown]
-# #### 1. Let's load a dataset
+# # pandas visu
 
 # %%
 iris = sns.load_dataset("iris")
 
 # %% [markdown]
-# **Explore the dataset with `info()` and `head()`**
+# ## Explore the dataset with `info()` and `head()`
 
 # %%
 # your code
 
 # %% [markdown]
-# **Is there a correlation between any two metrics per species? (hint: `pairplot`)**
+# ## Is there a correlation between any two metrics per species?
+#
+# (hint: `pairplot`)
 
 # %%
 # your code
 
 # %% [markdown]
-# **Is there a correlation between `sepal_length` and `petal_length`** (hint: `relplot`, `lmplot`)
+# ## Is there a correlation between `sepal_length` and `petal_length`
+#
+# (hint: `relplot`, `lmplot`)
 
 # %%
 # your code
 
 # %% [markdown]
-# **What is the distribution of the `sepal_width`** (hint: `displot`, `catplot`)
+# ## What is the distribution of the `sepal_width`
+#
+# (hint: `displot`, `catplot`)
 
 # %%
 # your code

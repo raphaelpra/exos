@@ -1,12 +1,12 @@
 # ---
 # jupyter:
 #   jupytext:
-#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
 #     formats: py:percent
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
+#       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -23,7 +23,7 @@
 # ---
 
 # %% [markdown]
-# # Playing with timeseries
+# # timeseries
 
 # %%
 import numpy as np
@@ -67,32 +67,36 @@ except UnicodeDecodeError as e:
 hos.head(2)
 
 # %% [markdown]
-# **It works, but the csv file was not correctly parsed because the separator is a `;`**
+# ## It works, but the csv file was not correctly parsed because the separator is a `;`
 
 # %%
 # your code
 hos = ...
 
 # %% [markdown]
-# **What is the dtype of each columns?**
+# ## What is the dtype of each columns?
 
-# %% tags=["raises-exception"]
-hos.dtypes
+# %%
+# your code
+
 
 # %% [markdown]
-# **`jour` and `nomReg` are object. It will be better to have `jour` as a DatetimeIndex and `nomReg` as a category.**
+# ## Convert
+#
+# `jour` and `nomReg` are object. It will be better to have `jour` as a DatetimeIndex and `nomReg` as a category.
 
 # %%
 # your code
 
 # %% [markdown]
-# **Compute the sum of `incid_rea` weekly and plot using a bar plot (hint: use `resample`)**
+# ## Compute the sum of `incid_rea` weekly and plot using a bar plot (hint: use `resample`)
 
 # %%
 # your code
 
 # %% [markdown]
-# **It works, but the x-axis date representation is messy.**
+# ## It works, but the x-axis date representation is messy.
+#
 # It is an issue specific to the bar plot in pandas. With a regular line plot, the x-axis is automatically optimized.
 #
 # Let us see the solution together (found on stackoverflow...)
@@ -126,7 +130,9 @@ ax.bar(resampled_hos.index, resampled_hos, width=5)
 
 
 # %% [markdown]
-# **Compute now a rolling average on 14 days of `incid_rea` (hint: use `rolling`) and plot it using a line plot.**
+# ## Rolling
+#
+# Compute now a rolling average on 14 days of `incid_rea` (hint: use `rolling`) and plot it using a line plot.
 
 # %%
 # your code

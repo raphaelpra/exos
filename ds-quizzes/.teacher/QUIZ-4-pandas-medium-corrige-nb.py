@@ -1,12 +1,12 @@
 # ---
 # jupyter:
 #   jupytext:
-#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
 #     formats: py:percent
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
+#       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -23,7 +23,7 @@
 # ---
 
 # %% [markdown]
-# # basic pandas
+# # basic medium
 
 # %%
 import matplotlib.pyplot as plt
@@ -38,16 +38,13 @@ from vega_datasets import data
 # restart the kernel after installation
 
 # %% [markdown]
-# ## 1. let's load the cars dataset
+# ## let's load the cars dataset
 
 # %%
 cars = data.cars()
 
 # %% [markdown]
-# ## 3. Let's answer the following questions
-
-# %% [markdown]
-# **Explore the shape and first few lines of the dataset**
+# ## Explore the shape and first few lines of the dataset
 
 # %%
 # your code
@@ -63,7 +60,7 @@ cars.shape
 cars.head(2)
 
 # %% [markdown]
-# **Compute the mean and std for numeric columns**
+# ## Compute the mean and std for numeric columns
 
 # %%
 # your code
@@ -79,7 +76,7 @@ cars.loc[:, "Miles_per_Gallon":"Acceleration"].agg([np.mean, np.std])
 # cars.mean(numeric_only=True)
 
 # %% [markdown]
-# **Put the name of the columns labels in lower case**
+# ## Put the name of the columns labels in lower case
 
 # %%
 # your code
@@ -94,7 +91,7 @@ cars.columns = cars.columns.str.lower()
 cars.head(2)
 
 # %% [markdown]
-# **Create a column "consommation (l/km)", and remove the column miles_per_gallon** 
+# ## Create a column "consommation (l/km)", and remove the column miles_per_gallon
 #
 # Tip: miles_per_gallon/235.2 = litre_per_100km
 
@@ -112,7 +109,7 @@ cars = (
 cars.head()
 
 # %% [markdown]
-# **Create a columns "poids (kg)" and remove the column weight_in_lbs**
+# ## Create a columns "poids (kg)" and remove the column weight_in_lbs
 #
 # Tip: 1lb = 0.454 kg
 
@@ -129,7 +126,7 @@ cars = (
 )
 
 # %% [markdown]
-# **Count the number of different origin**
+# ## Count the number of different origin
 
 # %%
 # your code
@@ -141,7 +138,7 @@ unique_origin = cars.loc[:, "origin"].unique()
 print(unique_origin, len(unique_origin))
 
 # %% [markdown]
-# **Check the memory usage of the origin column, convert the column 'origin' to category, check the new memory usage**
+# ## Check the memory usage of the origin column, convert the column 'origin' to category, check the new memory usage*
 
 # %%
 # your code

@@ -1,12 +1,12 @@
 # ---
 # jupyter:
 #   jupytext:
-#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
+#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
 #     formats: py:percent
 #     notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-#       -jupytext.text_representation.format_version, -language_info.version, -language_info.codemirror_mode.version,
-#       -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-#       -toc
+#       -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
+#       -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
+#       -toc, -rise, -version
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -23,7 +23,7 @@
 # ---
 
 # %% [markdown]
-# # Merge
+# # merge (join)
 
 # %%
 import numpy as np
@@ -71,10 +71,9 @@ bssid_table = pd.DataFrame(
 print(f"**wifi_table**\n{wifi_table}\n**ssid_table**\n{ssid_table}\n**bssid_table**\n{bssid_table}")
 
 # %% [markdown]
-# ## Let's answer the following questions
-
-# %% [markdown]
-# **Let's start with a simple merge of `wifi_table` with `ssid_table` (on `SSID_ID` and `ID`), and with `bssid_table` (on `BSSID_ID` and `ID`). You must keep the index of `wifi_table`.**
+# ### merge
+#
+# Let's start with a simple merge of `wifi_table` with `ssid_table` (on `SSID_ID` and `ID`), and with `bssid_table` (on `BSSID_ID` and `ID`). You must keep the index of `wifi_table`.
 
 # %%
 # your code
@@ -107,7 +106,9 @@ df2 = pd.DataFrame({'name': ['Eric', 'Bob', 'Marc'],
                   index=[654, 123, 664])
 
 # %% [markdown]
-# **Let's outer merge the tables df1 and df2 on name and preserving both indexes. Name the index of df1 `ID_old` and the index of df2 `ID_new`.**
+# ### merge
+#
+# Let's outer merge the tables df1 and df2 on name and preserving both indexes. Name the index of df1 `ID_old` and the index of df2 `ID_new`.
 
 # %%
 # your code
