@@ -12,7 +12,6 @@ exclude_patterns:
   # required to prevent endless deepening
   - "book-python/**/*"
   - "book-ds/**/*"
-  - "ds-quizzes/**/*"
   # consider only filenames that start with an uppercase
   # there is something fishy here:
   # if we don't put the extension part, it will exclude things like ds-exos/numpy
