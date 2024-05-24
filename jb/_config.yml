@@ -16,7 +16,10 @@ exclude_patterns:
   # there is something fishy here:
   # if we don't put the extension part, it will exclude things like ds-exos/numpy
   # with everything below; so we make sure to target only files and not directories
-  - "**/[a-z]*.[a-z]*"
+  # also this turns out to suppress too much content, like e.g. stuff in _static
+  # and possibly other things that we don't want to exclude
+  # so we don't exclude these, can still be helpful for incremental runs though
+  # - "**/[a-z]*.[a-z]*"
   # convenience for authors - but DO NOT exclude .teacher
   # so the corrections can be built
   - "**/teacher/*"
