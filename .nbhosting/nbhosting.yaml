@@ -17,14 +17,14 @@ tracks:
   sections:
   - name: exercices basiques
     notebooks:
-    - python-exos/basic/EXO-EXO-ipsplit-nb
-    - python-exos/basic/EXO-EXO-skimlist-readme-nb
-    - python-exos/basic/EXO-EXO-invoice-nb
+    - python-exos/basic/EXO-ipsplit-nb
+    - python-exos/basic/EXO-skimlist-readme-nb
+    - python-exos/basic/EXO-invoice-nb
     - python-exos/basic/README-agenda-nb
     - python-exos/basic/README-adnpercents-nb
-    - python-exos/basic/EXO-EXO-files-sortby-nb
-    - python-exos/basic/EXO-EXO-randomdate-readme-nb
-    - python-exos/basic/EXO-EXO-wordcounts-readme-nb
+    - python-exos/basic/EXO-files-sortby-nb
+    - python-exos/basic/EXO-randomdate-readme-nb
+    - python-exos/basic/EXO-wordcounts-readme-nb
   - name: howtos
     notebooks:
     - python-howtos/encodings/HOWTO-encodings-nb
@@ -82,22 +82,17 @@ tracks:
     - ds-exos/numpy/EXO-indices-nb
     - ds-exos/numpy/EXO-mandelbrot-nb
     - ds-howtos/HOWTO-numpy-meshgrid-nb
-  - name: TP numpy sounds
+  - name: TPs numpy
     notebooks:
     - ds-tps/sounds/README-sounds-nb
-  - name: TP numpy images
-    notebooks:
-    - ds-tps/images/README-images1-nb
-    - ds-tps/images/README-images2-nb
+    - ds-tps/images/README-images-toc-nb
+    - ds-tps/images/README-images[0-9]-nb
+    - ds-tps/taylor/README-taylor-toc-nb
+    - ds-tps/taylor/README-taylor-[0-9]*-nb
+    - ds-tps/pentominos/README-pentominos-nb
   - name: howto opencv - yolo
     notebooks:
     - ds-howtos/opencv-yolo/HOWTO-opencv-yolo-nb
-  - name: TP numpy Taylor
-    notebooks:
-    - ds-tps/taylor/taylor-*
-  - name: TP pentominos
-    notebooks:
-    - ds-tps/pentominos/README-pentominos-nb
   - name: exercices pandas
     notebooks:
     - ds-exos/pandas/EXO-mosaique-nb
@@ -122,7 +117,6 @@ tracks:
     - ds-howtos/HOWTO-pivot-vs-stack-unstack-nb
     - ds-howtos/HOWTO-timeseries-clean-smooth-nb
     - ds-howtos/HOWTO-groupby-ratings-nb
-    - ds-howtos/HOWTO-coronavirus-nb
     - ds-howtos/HOWTO-fremont-bridge-nb
   - name: dashboards
     notebooks:
@@ -130,6 +124,9 @@ tracks:
     - ds-dashboards/streamlit/streamlit-sinus
     - ds-dashboards/streamlit/streamlit-taylor
     - ds-dashboards/dashboard-with-dash-nb
+  - name: quizzes pandas
+    notebooks:
+    - ds-quizzes/QUIZ*-nb
 builds:
 - id: python
   name: Python
