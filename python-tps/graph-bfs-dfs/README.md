@@ -142,25 +142,6 @@ print(len(g))
 
 ---
 
-### Étape 3 : Implémentation des Algorithmes de Parcours
-
-Implémentez une fonction `scan` pour explorer un graphe :
-
-```python
-def scan(start, storage):
-    storage.store(start)
-    scanned = set()
-
-    while storage:
-        current = storage.retrieve()
-        if current in scanned:
-            continue
-        yield current
-        scanned.add(current)
-        for neighbour in current.neighbours:
-            storage.store(neighbour)
-```
-
 #### Testez les parcours :
 
 ```python
